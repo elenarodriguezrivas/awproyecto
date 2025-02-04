@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <!--indicamos el idioma del texto con lang-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Página de registro para un nuevo usuario" />
+        <title>MercaSwapp</title>
+        <link id="estilo" rel="stylesheet" type="text/css" href="default.css"> <!--Enlace a otros archivos (generalmente hojas de estilo)-->
+        <!-- Estilo para visualizar en el navegador -->
+        <link rel="stylesheet" media="screen" href="default.css" />
+        <!-- Estilo para imprimir la pagina -->
+        <link rel="stylesheet" media="print" href="impresora.css" />
+        <script type="text/javascript" src="cambiarCSS.js"></script>
+    </head>
+    <body>
+        <h1>DATOS PERSONALES </h1>
+        <p>Email</p>
+        <p>Contraseña</p>
+        <p>Nombre</p>
+        <p>Apellidos</p>
+        Sexo <br/> <!--radiobutton para seleccionar el sexo del usuario-->
+        <input type="radio" name="sexo" value="hombre" checked/> Hombre
+        <input type="radio" name="sexo" value="mujer" /> Mujer
+        <p>Tlf</p>
+        <form>
+            <label>
+                <input type="checkbox" name="privacidad" required>
+                He podido leer y entiendo la Política de Privacidad y Cookies</a>
+            </label>
+        </form>
+        <a href="registro.html">
+            <button>CREAR CUENTA</button>
+        </a>
+    </body> 
+</html>
