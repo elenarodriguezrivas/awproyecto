@@ -1,0 +1,10 @@
+/*estilo de consola*/
+body{
+    background-color: #000;
+    color:#00CC00;
+
+}
+p{
+    font-family: monospace; 
+    font-size: 18px;
+}
