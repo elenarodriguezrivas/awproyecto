@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contacto</title>
+</head>
+
+<body>
+
+    <form action="" method="get">
+        <p>
+            Nombre: <input type="text" name="name_control" autofocus required />
+        </p>
+
+        <p>
+            Correo electrónico: <input type="email" name="email_control" required />
+        </p>
+
+        <p>
+            Motivo de la consulta: <br/>
+            <input type="radio" name="motivo" value="Evaluación" checked/> Evaluación
+            <br/>
+            <input type="radio" name="motivo" value="Sugerencias" /> Sugerencias
+            <br/>
+            <input type="radio" name="motivo" value="Críticas" /> Críticas
+        </p>
+
+        <p>
+            <input type="checkbox" value="Marque esta casilla para verificar que ha leído nuestros términos y condiciones de servicio" checked/>
+        </p>
+
+        <p>
+            Escriba su consulta: <br/>
+            <textarea name="consulta" rows="10" cols="50">
+            Texto...
+            </textarea>
+        </p>
+
+        <p>
+            <input type="submit" value="Enviar" />
+        </p>
+    </form>
+</body>
+
+</html>
