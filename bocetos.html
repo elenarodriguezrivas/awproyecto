@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bocetos - MercaSwapp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-links li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        .wireframe-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        .wireframe-img {
+            width: 100%;
+            max-width: 600px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="detalles.html">Detalles</a></li>
+        <li><a href="bocetos.html">Bocetos</a></li>
+        <li><a href="miembros.html">Miembros</a></li>
+        <li><a href="planificación.html">Planificación</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+
+    <h1>Bocetos de la Interfaz</h1>
+
+    <!-- Pantalla 1: Página Principal -->
+    <div class="wireframe-section">
+        <h2>1. Página Principal</h2>
+        <img src="img/home_wireframe.png" alt="Boceto página principal" class="wireframe-img">
+        <p><strong>Descripción:</strong> Muestra los productos destacados, subastas activas, apartado de pujas y botones de acceso rápido para "Comprar" al seleccionar el producto o "Vender".</p>
+        <p><strong>Navegación:</strong> 
+            <ol>
+                <li>Los usuarios pueden todas las secciones que ofrece la aplicación como mirar en "Subastas en vivo", "Trueques inteligentes", "Pujas"...</li>
+                <li>El boton de "Cuenta" nos lleva a iniciar seción o registrarse si aún no lo ha hecho </li>
+                <li>El botón "vender" lleva al formulario de venta</li>
+            </ol>
+        </p>
+    </div>
+
+    <!-- Pantalla 2: Iniciar seción -->
+    <div class="wireframe-section">
+        <h2>2. Login </h2>
+        <img src="img/login_wireframe.png" alt="Boceto login" class="wireframe-img">
+        <p><strong>Descripción:</strong> Lugar donde puedes elegir con que cuenta iniciar seción.</p>
+        <p><strong>Funcionalidad:</strong>
+            <ul>
+                <li>Los usuarios registrados pueden direcctamente iniciar seción</li>
+                <li>o si no puede elegir con qué cuenta registrase en nuestra página </li>
+            </ul>
+        </p>
+    </div>
+
+    <!-- Pantalla 3: Compra de productos de segunda mano  -->
+    <div class="wireframe-section">
+        <h2>3. Compra de productos de segunda mano </h2>
+        <img src="img/compra_wireframe.png" alt="Boceto Compra" class="wireframe-img">
+        <p><strong>Descripción:</strong> En esta pantalla se va a poder observar las fotos publicadas por el vendedor, la descripción, el estado y su información básica del producto .</p>
+        <p><strong>Funcionalidad:</strong>
+            <ul>
+                <li>Connocer mejor el producto buscado</li>
+                <li>Pulsar el botón "lo Quiero !!" para  poder entrar en una conversación con el vendedor</li>
+            </ul>
+        </p>
+    </div>
+
+
+    <!-- Sección de Navegación General -->
+    <div class="wireframe-section">
+        <h2>Flujo Principal</h2>
+        <p><strong>Desde la página principal:</strong></p>
+        <ul>
+            <li><em>Para comprar:</em> Búsqueda → Filtros → Selección → Pago</li>
+            <li><em>Para subastar:</em> Botón "Vender" → Formulario → Publicación</li>
+            <li><em>Para trueque:</em> Menú "Intercambiar" → Selección de productos → Confirmación</li>
+        </ul>
+    </div>
+
+</body>
+</html>
