@@ -28,7 +28,7 @@
             </ul>
         </nav>
         <main class="presentacion">
-    <h1>Diagrama de casos de uso</h1>
+    <h2>Diagrama de casos de uso</h2>
     <div class="wireframe-section">
         <img src="img/diagrama.png" alt="casos" class="wireframe-img">
         <p><strong>Comprar:</strong> Esta función permite a cualquier usuario comprar un artículo y pasar por la pasarela de pago.</p>
@@ -41,6 +41,68 @@
         <p><strong>Moderar interacciones:</strong> Esta función permite a cualquier administrador modificar, revisar o eliminar anuncios, usuarios o mensajes.</p>
         <p><strong>Subastar:</strong> Esta función permite a cualquier usuario crear una subasta y recibir la cuantía a través de distintos métodos bancarios.</p>
     </div>
+    <h2>Ejemplo de caso de uso</h2>
+    <center>
+        <table border = "1">
+        
+            <tr> 
+                <th>CU-03</th>
+                <th>Comprar producto</th>
+            </tr>
+            <tr>
+                <td>Precondiciones </td>
+                <td>El sistema de gestión de MercaSwapp debe estar operativo. Al menos un producto con suficiente stock debe estar registrado 
+                    en el catálogo </td>
+            </tr>
+            <tr>
+                <td>Descripción</td>
+                <td>Permite a los clientes realizar una compra desde el catálogo, pudiendo seleccionar entre los distintos productos disponibles, 
+                    variando el precio final.</td>
+            </tr>
+            <tr>
+                <td>Éxito</td>
+                <td>El cliente realiza la compra de los productos seleccionados con éxito y se muestra la confirmación de la transacción</td>
+            </tr>
+            <tr>
+                <td>Fallo</td>
+                <td>Se produce un error en el proceso de compra. La cantidad deseada de un producto no está y se produce una 
+                    incidencia </td>
+            </tr>
+            <tr>
+                <td>Actor principal</td>
+                <td>Cliente</td>
+            </tr>
+            <tr>
+                <td>Actor secundario</td>
+                <td>Sistema</td>
+            </tr>
+            <tr>
+                <td>Qué datos usa</td>
+                <td>Nombre y descripción del producto, así como el precio correspondiente dependiendo de la puja/subasta. </td>
+            </tr>
+            <tr>
+                <td>Secuencia normal</td>
+                <td>1. El cliente accede al sistema de MercaSwapp
+                    2. El usuario selecciona la sección de “Clientes”
+                    3. El usuario presiona en el botón de “Comprar producto
+                    4. El sistema muestra el catálogo de productos, es decir, cada producto disponible con su nombre y descripción.
+                    5. El usuario selecciona el producto deseado.
+                    6. Presiona en el botón de “Agregar al carrito” y seguidamente, al de “Confirmar compra”
+                    7. Si el producto o los productos seleccionados han sido correctamente añadidos al carrito, entonces la compra se confirma 
+                    y se añade a la base de datos correspondiente. En caso contrario, el sistema muestra un mensaje de que el carrito está vacío.
+                    8. Al confirmar la compra, el sistema registra la venta en la base de datos, en la tabla de ventas.
+                    </td>
+            </tr>
+            <tr>
+                <td>Excepciones </td>
+                <td>Cuando el carrito de la compra está vacío, se muestra un mensaje y no se registra la venta.</td>
+            </tr>
+            <tr>
+                <td>Postcondiciones</td>
+                <td>Se registra la venta y se actualiza el catalogo.</td>
+            </tr>
+        </table>
+    </center>
     <h2>Flujo de actividades</h2>
     <div class="wireframe-section">
         <img src="img/flujo.png" alt="casos" class="wireframe-img">
