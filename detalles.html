@@ -1,97 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="utf-8">
-        <meta name="description" content="Página de inicio de la página web de MercaSwapp" />
-        <title>MercaSwapp</title>
-        <link id="estilo" rel="stylesheet" type="text/css" href="estilos.css"> <!--Enlace a otros archivos (generalmente hojas de estilo)-->
-        <!-- Estilo para imprimir la pagina -->
-        <link rel="stylesheet" media="print" href="impresora.css" />
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Plataforma innovadora para compraventa sostenible de tecnología de segunda mano">
+        <title>MercaSwapp - Tecnología Sostenible</title>
+        <link id="estilo" rel="stylesheet" type="text/css" href="estilos.css?v=3"><!--Enlace a la hoja de estilos por defecto-->
+        <link rel="stylesheet" media="print" href="impresora.css"> <!--Enlace a la hoja de estilos para imprimir la pagina-->
+        <!--para probar la funcionalidad, cada vez que se quiera imprimir, la página saldrá con las letras en color berenjena-->
     </head>
     <body>
         <header>
-            <img src="img/logo-mercaswapp.png" 
-            alt="Logo MercaSwapp" 
-            style="width: 180px; height: auto; display: block; margin: 0 auto;">
             <h1>MercaSwapp</h1>
+            <p class="tagline">Tecnología Circular • Subastas Dinámicas • Trueque Inteligente</p>
+            <img src="img/logo-mercaswapp.png" alt="Logo MercaSwapp" class="logo">
         </header>
         <!-- Menú de navegación -->
-        <ul class="nav-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="detalles.html">Detalles</a></li>
-            <li><a href="bocetos.html">Bocetos</a></li>
-            <li><a href="miembros.html">Miembros</a></li>
-            <li><a href="planificacion.html">Planificación</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-        <p><em>MercaSwapp</em> es una plataforma innovadora para la compra, venta y subasta de productos tecnológicos de segunda mano. 
-            Nuestra misión es proporcionar a los usuarios un espacio seguro y confiable donde puedan intercambiar sus dispositivos electrónicos, 
-            dándoles una segunda vida y promoviendo la economía circular. 
-        </p>
-        <p>
-            En <strong>MercaSwapp</strong>, los usuarios pueden vender sus productos de manera rápida y sencilla, estableciendo un precio fijo 
-            o participando en emocionantes subastas que permiten obtener la mejor oferta posible. Al mismo tiempo, los compradores pueden explorar 
-            una amplia variedad de productos tecnológicos, desde teléfonos móviles y ordenadores portátiles hasta accesorios y periféricos, 
-            asegurándose de adquirir artículos revisados y garantizados. 
-        </p>
-        <p>
-            Nos diferenciamos de otros marketplaces en varios aspectos clave. En primer lugar, nuestra plataforma fomenta las subastas, 
-            ofreciendo a los compradores la oportunidad de encontrar precios competitivos y a los vendedores la posibilidad de maximizar sus ganancias. 
-            Además, estamos comprometidos con la sostenibilidad y la reducción de residuos electrónicos, promoviendo el reciclaje y la reutilización 
-            de dispositivos en buen estado. 
-        </p>
-        <p>
-            En cuanto a la seguridad, garantizamos transacciones protegidas mediante un sistema de verificación de identidad y autenticidad de productos. 
-            Tanto los compradores como los vendedores pueden confiar en que sus operaciones estarán respaldadas por nuestro equipo de soporte 
-            y por un sistema de valoraciones que fomenta la transparencia y la confianza dentro de la comunidad.
-        </p>
-
-        <h2>Usuarios y tareas</h2>
-        <h3>Usuarios No Registrados:</h3>
-        <ul>
-            <li>Navegar por los productos disponibles.</li>
-            <li>Ver subastas en curso.</li>
-            <li>Compartir productos en redes sociales.</li>
-        </ul>
-        <h3>Usuarios Registrados:</h3>
-        <ul>
-            <li>Comprar productos de segunda mano.</li>
-            <li>Participar en subastas en tiempo real.</li>
-            <li>Interacción entre usuarios.</li>
-            <li>Hacer "pujas ocultas" para ofertas privadas.</li>
-            <li>Ofrecer compra segura con garantía.</li>
-            <li>Realizar intercambios de productos mediante el sistema de trueque.</li>
-            <li>Publicar productos a la venta o en subasta.</li>
-            <li>Ajustar el tiempo de subasta.</li>
-            <li>Obtener verificación para vender artículos premium con garantía de autenticidad.</li>
-            <li>Acceder a herramientas avanzadas de gestión y estadísticas de ventas.</li>
-        </ul>
-        <h3>Administradores:</h3>
-        <ul>
-            <li>Modificar o eliminar publicaciones que incumplan las normas.</li>
-            <li>Gestionar pagos y devoluciones con sistema de retención.</li>
-            <li>Moderar las interacciones entre usuarios para garantizar seguridad.</li>
-        </ul>
-        <h3>Anunciantes:</h3>
-        <ul>
-            <li>Publicar anuncios en la plataforma para llegar a usuarios interesados.</li>
-            <li>Crear promociones en productos específicos.</li>
-        </ul>
-
-        <h2>Diferenciación e Innovación</h2>
-        <p>
-            MercaSwapp no es solo un marketplace más, sino que revoluciona la compraventa de segunda mano con:
-        </p>
-        <ul>
-            <li><strong>Subastas en vivo</strong>, para una experiencia dinámica y segura.</li>
-            <li><strong>Puja oculta</strong>, para generar competencia sin revelar el precio ofrecido.</li>
-            <li><strong>Sistema de trueque</strong>, permitiendo intercambios sin necesidad de dinero.</li>
-            <li><strong>Modo "Precio Justo"</strong>, donde compradores pueden hacer ofertas directas al vendedor.</li>
-            <li><strong>Subastas benéficas</strong>, permitiendo que una parte de las ganancias vaya a organizaciones solidarias.</li>
-            <li><strong>Programa de fidelización</strong>, premiando a los usuarios con puntos para descuentos y accesos exclusivos.</li>
-        </ul>
-        <p>
-            Con MercaSwapp, transformamos la compraventa de segunda mano en una experiencia más emocionante, segura y beneficiosa para todos. En el futuro, queremos garantizar el reembolso inteligente, para compras 100% seguras. ¡Es el momento de innovar en el mercado de subastas online!
-        </p>
+        <nav> 
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="detalles.html">Detalles</a></li>
+                <li><a href="bocetos.html">Bocetos</a></li>
+                <li><a href="miembros.html">Miembros</a></li>
+                <li><a href="planificacion.html">Planificacion</a></li>
+                <li><a href="casosuso.html">Funciones app</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <main class="presentacion">
+            <h2>¿Qué es MercaSwapp?</h2>
+            <p><em>MercaSwapp</em> es una plataforma innovadora para la compra, venta y subasta de productos tecnológicos de segunda mano. 
+                Nuestra misión es proporcionar a los usuarios un espacio seguro y confiable donde puedan intercambiar sus dispositivos electrónicos, 
+                dándoles una segunda vida y promoviendo la economía circular. </p>
+            <p> En <strong>MercaSwapp</strong>, los usuarios pueden vender sus productos de manera rápida y sencilla, estableciendo un precio fijo 
+                o participando en emocionantes subastas. Los compradores pueden explorar una amplia variedad de productos tecnológicos, 
+                asegurándose de adquirir artículos revisados y garantizados. </p>
+            <h2>Tipos de usuarios</h2>
+    
+            <section class="grupos">
+                <h3>Usuarios No Registrados</h3>
+                <ul>
+                    <li>Navegar por los productos disponibles.</li>
+                    <li>Ver subastas en curso.</li>
+                    <li>Compartir productos en redes sociales.</li>
+                </ul>
+            </section>
+    
+            <section class="grupos">
+                <h3>Usuarios Registrados</h3>
+                <ul>
+                    <li>Comprar productos de segunda mano.</li>
+                    <li>Participar en subastas en tiempo real.</li>
+                    <li>Interacción entre usuarios.</li>
+                    <li>Hacer "pujas ocultas" para ofertas privadas.</li>
+                    <li>Ofrecer compra segura con garantía.</li>
+                    <li>Publicar productos a la venta o en subasta.</li>
+                    <li>Ajustar el tiempo de subasta.</li>
+                    <li>Obtener verificación para vender artículos premium con garantía de autenticidad.</li>
+                </ul>
+            </section>
+    
+            <section class="grupos">
+                <h3>Administradores</h3>
+                <ul>
+                    <li>Modificar o eliminar publicaciones que incumplan las normas.</li>
+                    <li>Gestionar pagos y devoluciones con sistema de retención.</li>
+                    <li>Moderar las interacciones entre usuarios para garantizar seguridad.</li>
+                </ul>
+            </section>
+    
+            <section class="grupos">
+                <h3>Anunciantes</h3>
+                <ul>
+                    <li>Publicar anuncios en la plataforma para llegar a usuarios interesados.</li>
+                    <li>Crear promociones en productos específicos.</li>
+                </ul>
+            </section>
+    
+            <h2>Diferenciación e Innovación</h2>
+            <section class="destacado">
+                <p> MercaSwapp no es solo un marketplace más, sino que revoluciona la compraventa de segunda mano con: </p>
+                <ul>
+                    <li><strong>⚡Subastas en vivo</strong>, para una experiencia dinámica y segura.</li>
+                    <li><strong>⚡Puja oculta</strong>, para generar competencia sin revelar el precio ofrecido.</li>
+                    <li><strong>🔄 Sistema de trueque</strong>, permitiendo intercambios sin necesidad de dinero.</li>
+                    <li><strong>💰Modo "Precio Justo"</strong>, donde compradores pueden hacer ofertas directas al vendedor.</li>
+                    <li><strong>🔖Subastas benéficas</strong>, permitiendo que una parte de las ganancias vaya a organizaciones solidarias.</li>
+                    <li><strong>🌱 Programa de fidelización</strong>, premiando a los usuarios con puntos para descuentos y accesos exclusivos.</li>
+                </ul>
+            </section>
+            <p> Con MercaSwapp, transformamos la compraventa de segunda mano en una experiencia más emocionante, segura y beneficiosa para todos.</p>
+            <h2>Funciones app</h2>
+            <p>Para más información sobre las funcionalidades consideradas, pulse <a href="casosuso.html">aquí</a>
+        </main>
+        <footer>
+            <p>© 2025 MercaSwapp - Grupo 6</p>
+            <p><a href="contacto.html">Contacta con nosotros</a> | <a href="planificacion.html">Nuestra planificacion</a></p>
+        </footer>
     </body>
 </html>
