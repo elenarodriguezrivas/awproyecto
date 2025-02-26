@@ -40,8 +40,6 @@ class Anuncio {
         return $this->comprador;
     }
 
-    
-
     public function isSold() {
         return $this->comprador !== NULL;
     }
