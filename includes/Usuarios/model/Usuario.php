@@ -9,7 +9,7 @@ class Usuario {
     private $edad;
     private $rol;
 
-    public function __construct($userid, $contrasena, $correoElectronico, $nombre, $apellidos, $edad) {
+    public function __construct($userid, $contrasena, $email, $nombre, $apellidos, $edad, $rol) {
         $this->userid = $userid;
         $this->contrasena = $contrasena;
         $this->email = $email;
