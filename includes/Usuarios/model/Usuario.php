@@ -3,26 +3,28 @@
 class Usuario {
     private $userid;
     private $contrasena;
-    private $correoElectronico;
+    private $email;
     private $nombre;
     private $apellidos;
     private $edad;
+    private $rol;
 
     public function __construct($userid, $contrasena, $correoElectronico, $nombre, $apellidos, $edad) {
         $this->userid = $userid;
         $this->contrasena = $contrasena;
-        $this->correoElectronico = $correoElectronico;
+        $this->email = $email;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->edad = $edad;
+        $this->rol = $rol;
     }
 
     public function getUserid() {
         return $this->userid;
     }
 
-    public function getCorreoElectronico() {
-        return $this->correoElectronico;
+    public function getEmail() {
+        return $this->email;
     }
 
     public function getNombre() {
@@ -35,6 +37,9 @@ class Usuario {
 
     public function getEdad() {
         return $this->edad;
+    }
+    public function getRol() {
+        return $this->rol;
     }
 }
 ?>
