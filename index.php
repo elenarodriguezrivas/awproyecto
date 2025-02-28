@@ -1,7 +1,7 @@
 <?php
 
 $tituloPagina = 'Portada';
-		
+        
 $contenidoPrincipal=<<<EOS
    <section class="presentacion">
         <h2>Transformando el mercado de segunda mano</h2>
@@ -28,20 +28,36 @@ require("comun/plantilla.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios</title>
+    <title>Registrar Usuario</title>
     <link rel="stylesheet" href="./styles/estilos.css"> <!-- Asegúrate de que la ruta sea correcta -->
 </head>
 <body>
-    <h1>Lista de Usuarios</h1>
-    <div id="usuarios">
-        <?php 
-        require_once './includes/Usuarios/dao/listar.php'; 
-        $usuarioDAO = new UsuarioDAO();
-        $usuarios = $usuarioDAO->listarUsuarios();
-        foreach ($usuarios as $usuario) {
-            echo "<p>{$usuario->getNombre()} {$usuario->getApellidos()} ({$usuario->getEmail()})</p>";
-        }
-        ?>
+    <h1>Registrar Usuario</h1>
+    <div id="registro">
+        <form action="./includes/controller/registrarUsuario-controller.php" method="post">
+            <label for="userid">User ID:</label>
+            <input type="text" id="userid" name="userid" required><br>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required><br>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required><br>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required><br>
+
+            <label for="rol">Rol:</label>
+            <input type="text" id="rol" name="rol" required><br>
+
+            <input type="submit" value="Registrar">
+        </form>
     </div>
 </body>
 </html>

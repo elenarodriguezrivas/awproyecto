@@ -41,5 +41,8 @@ class Usuario {
     public function getRol() {
         return $this->rol;
     }
+    public function getContrasena() {
+        return $this->contrasena;
+    }
 }
 ?>
