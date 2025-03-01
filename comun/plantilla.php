@@ -8,6 +8,7 @@
     <link id="estilo" rel="stylesheet" type="text/css" href="estilos.css?v=3"><!--Enlace a la hoja de estilos por defecto-->
     <link rel="stylesheet" media="print" href="impresora.css"> <!--Enlace a la hoja de estilos para imprimir la pagina-->
     <!--para probar la funcionalidad, cada vez que se quiera imprimir, la página saldrá con las letras en color berenjena-->
+    <link rel="stylesheet" href="./styles/estilos.css"> <!-- Asegúrate de que la ruta sea correcta -->
 </head>
 
 	<body>

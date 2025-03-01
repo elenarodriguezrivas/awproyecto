@@ -25,12 +25,6 @@ require("comun/plantilla.php");
 ?>
 
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Usuario</title>
-    <link rel="stylesheet" href="./styles/estilos.css"> <!-- Asegúrate de que la ruta sea correcta -->
-</head>
 <body>
     <h1>Registrar Usuario</h1>
     <div id="registro">
