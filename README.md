@@ -6,7 +6,7 @@
 ## Elena Rivas
 ## Maria Victoria Magpali
 
-/mercaswapp
+/awproyecto
 │── /comun
 │   ├── cabecera.php
 │   ├── barUnderHeader.php

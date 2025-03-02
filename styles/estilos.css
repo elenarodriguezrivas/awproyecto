@@ -17,9 +17,10 @@ header {
 }
 /* Estilos para la imagen del logo */
 header img {
-    width: 150px; 
-    height: auto; /* Mantiene la proporción de la imagen */
-    margin-right: 10px; 
+    max-width: 100%;  /* Asegura que nunca supere el tamaño del header */
+    height: auto;      /* Mantiene la proporción */
+    max-height: 80px;  /* Ajusta la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se vea bien */
 }
 /* MENÚ DE NAVEGACIÓN */
 nav {
