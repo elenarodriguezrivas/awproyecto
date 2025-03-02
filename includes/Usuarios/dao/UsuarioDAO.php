@@ -78,5 +78,31 @@ class UsuarioDAO extends DB {
             return false;
         }
     }
+
+    public function obtenerUsuario(string $userid): ?Usuario {
+        try {
+            $sql = "SELECT * FROM usuarios WHERE userid = :userid";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row) {
+                return new Usuario(
+                    $row['userid'],
+                    $row['contrasena'],
+                    $row['email'],
+                    $row['nombre'],
+                    $row['apellidos'],
+                    (int)$row['edad'],
+                    $row['rol']
+                );
+            }
+            return null;
+        } catch (PDOException $e) {
+            error_log("Error al obtener usuario: " . $e->getMessage());
+            return null;
+        }
+    }
 }
 ?>

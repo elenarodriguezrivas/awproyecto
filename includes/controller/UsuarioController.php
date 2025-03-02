@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../sa/UsuarioSA.php';
 require_once __DIR__ . '/../model/Usuario.php';
 
@@ -35,4 +36,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'login') {
+    $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_STRING);
+    $contrasena = $_POST['contrasena']; // Se valida en UsuarioSA.php
+
+    if (!$userid || !$contrasena) {
+        header("Location: ../../view/login_pantalla.php?error=Datos inválidos.");
+        exit;
+    }
+
+    if ($usuarioSA->verificarCredenciales($userid, $contrasena)) {
+        $_SESSION['userid'] = $userid;
+        header("Location: ../../view/perfil_pantalla.php");
+        exit;
+    } else {
+        header("Location: ../../view/login_pantalla.php?error=Usuario o contraseña incorrectos.");
+        exit;
+    }
+}
+?>
 ?>
