@@ -3,7 +3,7 @@ $tituloPagina = "Registro de Usuario";
 
 $contenidoPrincipal = <<<EOS
     <h2>Regístrate en MercaSwapp</h2>
-    <form action="../includes/controller/UsuarioController.php" method="POST">
+    <form action="../includes/controller/registerUsuarioController.php" method="POST">
         <label for="userid">User ID:</label>
         <input type="text" id="userid" name="userid" required><br>
 
