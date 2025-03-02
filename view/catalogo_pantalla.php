@@ -1,14 +1,19 @@
 <?php
 
-$tituloPagina = 'Mi Catalogo de Productos';
+$tituloPagina = 'Catalogo de Productos';
 		
 $contenidoPrincipal=<<<EOS
     <section class="presentacion">
-    <h2>Mi Catalogo de Productos</h2>
+    <h2>Catalogo de Productos</h2>
             <div class="destacado">
                 <ul>
                     <div class="destacado">
                     <p>Producto1</p>
+                    <p>Producto2</p>
+                    <p>Producto3</p>
+                    <p>Producto4</p>
+                    <p>Producto5</p>
+                    <p>Producto6</p>
                 </ul>
             </div>
                             
@@ -18,5 +23,6 @@ $contenidoPrincipal=<<<EOS
     </section>
 EOS;
 
-require("comun/plantilla.php");
+require_once __DIR__ . '/../comun/plantilla.php';
+
 ?>

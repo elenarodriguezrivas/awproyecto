@@ -1,10 +1,10 @@
 <?php
 
-$tituloPagina = 'Subasta';
+$tituloPagina = 'Mi Catalogo de Productos';
 		
 $contenidoPrincipal=<<<EOS
     <section class="presentacion">
-    <h2>Subastas</h2>
+    <h2>Mi Catalogo de Productos</h2>
             <div class="destacado">
                 <ul>
                     <div class="destacado">
@@ -16,8 +16,8 @@ $contenidoPrincipal=<<<EOS
             Ofrecemos un espacio donde cada transacción contribuye a reducir residuos electrónicos mientras 
             disfrutas de experiencias de compra únicas. <strong>¡Únete a la revolución circular!</strong></p>
     </section>
-
 EOS;
 
-require("comun/plantilla.php");
+require_once __DIR__ . '/../comun/plantilla.php';
+
 ?>

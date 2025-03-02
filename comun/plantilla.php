@@ -1,35 +1,30 @@
 <!DOCTYPE html>
-<html lang="es"> <!--indicamos el lenguaje-->
+<html lang="es">
 <head>
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Plataforma innovadora para compraventa sostenible de tecnología de segunda mano">
     <title>MercaSwapp - Tecnología Sostenible</title>
-    <link id="estilo" rel="stylesheet" type="text/css" href="estilos.css?v=3"><!--Enlace a la hoja de estilos por defecto-->
-    <link rel="stylesheet" media="print" href="impresora.css"> <!--Enlace a la hoja de estilos para imprimir la pagina-->
-    <!--para probar la funcionalidad, cada vez que se quiera imprimir, la página saldrá con las letras en color berenjena-->
-    <link rel="stylesheet" href="./styles/estilos.css"> <!-- Asegúrate de que la ruta sea correcta -->
+    <link id="estilo" rel="stylesheet" type="text/css" href="../styles/estilos.css?v=3">
+    <link rel="stylesheet" media="print" href="../styles/impresora.css">
 </head>
 
-	<body>
-		<div id="contenedor">
+<body>
+    <div id="contenedor">
+        <?php
+            require_once __DIR__ . "/cabecera.php";
+            require_once __DIR__ . "/barUnderHeader.php";
+        ?>
 
-			<?php
-				require("comun/cabecera.php");
-				require("comun/barUnderHeader.php");
-			?>
+	<main>
+	  	<article>
+		  <?= $contenidoPrincipal ?? "Contenido no disponible." ?>
+		</article>
+	</main>
 
-			<main>
-				<article>
-					<?= $contenidoPrincipal ?>
-				</article>
-			</main>
-
-			<?php
-				require("comun/pie.php");
-			?>
-
-		</div> <!-- Fin del contenedor -->
-
-	</body>
+        <?php
+            require_once __DIR__ . "/pie.php";
+        ?>
+    </div>
+</body>
 </html>

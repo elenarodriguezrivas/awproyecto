@@ -25,5 +25,5 @@ $contenidoPrincipal=<<<EOS
     </section>
 EOS;
 
-require("comun/plantilla.php");
+require_once __DIR__ . '/../comun/plantilla.php';
 ?>

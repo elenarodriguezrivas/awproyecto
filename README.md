@@ -22,21 +22,19 @@
 │   ├── login_pantalla.php
 │   ├── logout_pantalla.php
 │   ├── register_pantalla.php
+│   ├── catalogo_pantalla.php
+│   ├── micatalogo_pantalla.php
+│   ├── subasta_pantalla.php
+│   ├── perfil_pantalla.php
+│   ├── modificacionperfil_pantalla.php
+│   ├── modificarperfil_pantalla.php
 │── /includes
 │   ├── /controller
 │   │   ├── UsuarioController.php
 │   │   ├── ProductoController.php
 │   ├── /database
 │   │   ├── Connection.php
-│   │   ├── database.db
-│   ├── /public
-│   │   ├── index.php
-│   │   ├── catalogo_pantalla.php
-│   │   ├── micatalogo_pantalla.php
-│   │   ├── subasta_pantalla.php
-│   │   ├── perfil_pantalla.php
-│   │   ├── modificacionperfil_pantalla.php
-│   │   ├── modificarperfil_pantalla.php
+│   │   ├── database.db 
 │   ├── /Producto
 │   ├── /dao
 │   │   ├── registroAnuncio_dao.php
@@ -51,6 +49,7 @@
 │   │   ├── Usuario.php
 │   ├── /sa
 │   │   ├── Usuario_SA.php
+├── index.php
 │── .htaccess
 │── README.md
 
