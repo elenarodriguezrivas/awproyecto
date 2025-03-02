@@ -28,6 +28,7 @@
 │   ├── perfil_pantalla.php
 │   ├── modificacionperfil_pantalla.php
 │   ├── modificarperfil_pantalla.php
+|   ├── index.php
 │── /includes
 │   ├── /controller
 │   │   ├── UsuarioController.php
@@ -49,7 +50,6 @@
 │   │   ├── Usuario.php
 │   ├── /sa
 │   │   ├── Usuario_SA.php
-├── index.php
 │── .htaccess
 │── README.md
 
