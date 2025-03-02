@@ -4,11 +4,6 @@ require_once __DIR__ . '/../model/Usuario.php';
 
 class UsuarioDAO extends DB {
 
-    /**
-     * Obtiene todos los usuarios de la base de datos.
-     *
-     * @return array<Usuario>
-     */
     public function listarUsuarios(): array {
         try {
             $sql = "SELECT * FROM usuarios";
@@ -33,12 +28,6 @@ class UsuarioDAO extends DB {
         }
     }
 
-    /**
-     * Verifica si un usuario ya existe en la base de datos.
-     *
-     * @param string $userid
-     * @return bool
-     */
     public function existeUsuario(string $userid): bool {
         try {
             $sql = "SELECT COUNT(*) as count FROM usuarios WHERE userid = :userid";
@@ -54,13 +43,6 @@ class UsuarioDAO extends DB {
         }
     }
 
-    /**
-     * Comprueba si la contraseña de un usuario es correcta.
-     *
-     * @param string $userid
-     * @param string $contrasena
-     * @return bool
-     */
     public function comprobarContrasena(string $userid, string $contrasena): bool {
         try {
             $sql = "SELECT contrasena FROM usuarios WHERE userid = :userid";
@@ -76,12 +58,6 @@ class UsuarioDAO extends DB {
         }
     }
 
-    /**
-     * Agrega un nuevo usuario a la base de datos.
-     *
-     * @param Usuario $usuario
-     * @return bool
-     */
     public function agregarUsuario(Usuario $usuario): bool {
         try {
             $sql = "INSERT INTO usuarios (userid, contrasena, email, nombre, apellidos, edad, rol) 
