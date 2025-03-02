@@ -11,7 +11,7 @@ class UsuarioSA {
 
     public function registrarUsuario(Usuario $usuario): bool {
         if ($this->usuarioDAO->existeUsuario($usuario->getUserid())) {
-            return false; // Usuario ya existe
+            return false; 
         }
         return $this->usuarioDAO->agregarUsuario($usuario);
     }
