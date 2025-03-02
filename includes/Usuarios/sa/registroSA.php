@@ -15,11 +15,7 @@ class UsuarioSA {
         }
         return $this->usuarioDAO->agregarUsuario($usuario);
     }
-
-    public function verificarCredenciales(string $userid, string $contrasena): bool {
-        $usuario = $this->usuarioDAO->obtenerUsuario($userid);
-        return $usuario && password_verify($contrasena, $usuario->getContrasena());
-    }
+    
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

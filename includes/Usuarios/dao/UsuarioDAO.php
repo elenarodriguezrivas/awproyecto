@@ -43,21 +43,6 @@ class UsuarioDAO extends DB {
         }
     }
 
-    public function comprobarContrasena(string $userid, string $contrasena): bool {
-        try {
-            $sql = "SELECT contrasena FROM Usuarios WHERE userid = :userid";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            return ($result && password_verify($contrasena, $result['contrasena']));
-        } catch (PDOException $e) {
-            error_log("Error al comprobar contraseña: " . $e->getMessage());
-            return false;
-        }
-    }
-
     public function agregarUsuario(Usuario $usuario): bool {
         try {
             $sql = "INSERT INTO Usuarios (userid, contrasena, email, nombre, apellidos, edad, rol) 

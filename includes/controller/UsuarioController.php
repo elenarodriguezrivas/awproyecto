@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../Usuarios/sa/UsuarioSA.php';
+require_once __DIR__ . '/../Usuarios/sa/registroSA.php';
 require_once __DIR__ . '/../Usuarios/model/Usuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
