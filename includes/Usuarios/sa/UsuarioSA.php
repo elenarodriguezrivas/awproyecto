@@ -38,11 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $usuario = new Usuario($userid, $contrasena, $email, $nombre, $apellidos, $edad, $rol);
     $usuarioSA = new UsuarioSA();
-
-    if ($usuarioSA->registrarUsuario($usuario)) {
-        echo "Usuario registrado con éxito.";
-    } else {
-        echo "El usuario ya existe.";
-    }
 }
 ?>

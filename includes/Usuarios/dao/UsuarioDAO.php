@@ -6,7 +6,7 @@ class UsuarioDAO extends DB {
 
     public function listarUsuarios(): array {
         try {
-            $sql = "SELECT * FROM usuarios";
+            $sql = "SELECT * FROM Usuarios";
             $stmt = $this->db->query($sql);
 
             $usuarios = [];
@@ -30,7 +30,7 @@ class UsuarioDAO extends DB {
 
     public function existeUsuario(string $userid): bool {
         try {
-            $sql = "SELECT COUNT(*) as count FROM usuarios WHERE userid = :userid";
+            $sql = "SELECT COUNT(*) as count FROM Usuarios WHERE userid = :userid";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
             $stmt->execute();
@@ -45,7 +45,7 @@ class UsuarioDAO extends DB {
 
     public function comprobarContrasena(string $userid, string $contrasena): bool {
         try {
-            $sql = "SELECT contrasena FROM usuarios WHERE userid = :userid";
+            $sql = "SELECT contrasena FROM Usuarios WHERE userid = :userid";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
             $stmt->execute();
@@ -60,7 +60,7 @@ class UsuarioDAO extends DB {
 
     public function agregarUsuario(Usuario $usuario): bool {
         try {
-            $sql = "INSERT INTO usuarios (userid, contrasena, email, nombre, apellidos, edad, rol) 
+            $sql = "INSERT INTO Usuarios (userid, contrasena, email, nombre, apellidos, edad, rol) 
                     VALUES (:userid, :contrasena, :email, :nombre, :apellidos, :edad, :rol)";
             
             $stmt = $this->db->prepare($sql);
@@ -70,10 +70,15 @@ class UsuarioDAO extends DB {
             $stmt->bindValue(':nombre', $usuario->getNombre(), PDO::PARAM_STR);
             $stmt->bindValue(':apellidos', $usuario->getApellidos(), PDO::PARAM_STR);
             $stmt->bindValue(':edad', (int)$usuario->getEdad(), PDO::PARAM_INT);
-            $stmt->bindValue(':rol', $usuario->getRol(), PDO::PARAM_STR);
+            $stmt->bindValue(':rol', $usuario->getRol(), PDO::PARAM_INT); // Cambiado a PDO::PARAM_STR
 
-            return $stmt->execute();
+            $result = $stmt->execute();
+            if (!$result) {
+                error_log("Error al ejecutar la consulta: " . implode(", ", $stmt->errorInfo()));
+            }
+            return $result;
         } catch (PDOException $e) {
+            echo $e->getMessage();
             error_log("Error al agregar usuario: " . $e->getMessage());
             return false;
         }
