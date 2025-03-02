@@ -2,7 +2,7 @@
 class DB {
     protected $db;
 
-    public function __construct($dbname = './includes/database/database.db') {
+    public function __construct($dbname = 'database.db') {
         try {
             $this->db = new PDO("sqlite:" . $dbname);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

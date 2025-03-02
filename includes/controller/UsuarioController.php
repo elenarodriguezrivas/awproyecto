@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/../sa/UsuarioSA.php';
-require_once __DIR__ . '/../model/Usuario.php';
+require_once __DIR__ . '/../Usuarios/sa/UsuarioSA.php';
+require_once __DIR__ . '/../Usuarios/model/Usuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Filtrar y validar entrada del usuario
