@@ -3,7 +3,7 @@ $tituloPagina = "Registro de Usuario";
 
 $contenidoPrincipal = <<<EOS
     <h2>Regístrate en MercaSwapp</h2>
-    <form action="../includes/controller/registerUsuarioController.php" method="POST">
+    <form id="registerForm" action="../includes/controller/registerUsuarioController.php" method="POST">
         <label for="userid">User ID:</label>
         <input type="text" id="userid" name="userid" required><br>
 
@@ -32,7 +32,35 @@ $contenidoPrincipal = <<<EOS
         <button type="submit">Registrarse</button>
     </form>
 
+    <div id="message"></div>
+
     <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch("../includes/controller/registerUsuarioController.php", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('message').innerHTML = 'Error al registrar el usuario: ' + error.message;
+            });
+        });
+    </script>
 
 EOS;
 

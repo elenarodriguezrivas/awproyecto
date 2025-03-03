@@ -27,33 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioSA = new UsuarioSA();
 
     // Intentar registrar al usuario
-    if ($usuarioSA->registrarUsuario($usuario)) {
-        http_response_code(201); // Código 201 - Created
-        echo "Usuario registrado con éxito.";
-    } else {
-        http_response_code(409); // Código 409 - Conflict (usuario ya existe)
-        echo "El usuario ya existe.";
+    try {
+        if ($usuarioSA->registrarUsuario($usuario)) {
+            http_response_code(201); // Código 201 - Created
+            echo "Usuario registrado con éxito.";
+        } else {
+            http_response_code(409); // Código 409 - Conflict (usuario ya existe)
+            echo "El usuario ya existe.";
+        }
+    } catch (Exception $e) {
+        http_response_code(500); // Código 500 - Internal Server Error
+        echo "Error al registrar el usuario: " . $e->getMessage();
     }
     exit;
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'login') {
-    $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_STRING);
-    $contrasena = $_POST['contrasena']; // Se valida en UsuarioSA.php
-
-    if (!$userid || !$contrasena) {
-        header("Location: ../../view/login_pantalla.php?error=Datos inválidos.");
-        exit;
-    }
-
-    if ($usuarioSA->verificarCredenciales($userid, $contrasena)) {
-        $_SESSION['userid'] = $userid;
-        header("Location: ../../view/perfil_pantalla.php");
-        exit;
-    } else {
-        header("Location: ../../view/login_pantalla.php?error=Usuario o contraseña incorrectos.");
-        exit;
-    }
-}
-?>
 ?>
