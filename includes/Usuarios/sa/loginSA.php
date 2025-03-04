@@ -10,9 +10,8 @@ class UsuarioSA {
     }
 
     public function loginUsuario(string $userid, string $contrasena): bool {
-        $usuario = $this->usuarioDAO->obtenerUsuario($userid);
-        if ($usuario && password_verify($contrasena, $usuario->getContrasena())) {
-            return true;
+        if ($this->usuarioDAO->existeUsuario($userid)) {
+            return $this->usuarioDAO->comprobarContrasena($userid, $contrasena);
         }
         return false;
     }

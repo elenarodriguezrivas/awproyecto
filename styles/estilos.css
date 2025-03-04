@@ -15,9 +15,30 @@ header {
     color: white; /* Texto en blanco */
     border-radius: 5px; /* Bordes redondeados */
 }
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    flex-grow: 1;
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
 /* Estilos para la imagen del logo */
 header img {
     max-width: 100%;  /* Asegura que nunca supere el tamaño del header */
+    height: auto;      /* Mantiene la proporción */
+    max-height: 80px;  /* Ajusta la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se vea bien */
+}
+.logo {
+    max-width: 100%;  /* Asegura que nunca supere el tamaño del contenedor */
     height: auto;      /* Mantiene la proporción */
     max-height: 80px;  /* Ajusta la altura máxima */
     object-fit: contain; /* Asegura que la imagen se vea bien */

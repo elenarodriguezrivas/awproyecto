@@ -11,7 +11,7 @@ class Usuario {
 
     public function __construct(string $userid, string $contrasena, string $email, string $nombre, string $apellidos, int $edad, string $rol) {
         $this->userid = $userid;
-        $this->contrasena = password_hash($contrasena, PASSWORD_BCRYPT); // Hash de la contraseña
+        $this->contrasena = $contrasena; // Hash de la contraseña
         $this->email = $email;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;

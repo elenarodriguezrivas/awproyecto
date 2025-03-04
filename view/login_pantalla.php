@@ -8,7 +8,7 @@ if (isset($_SESSION['userid'])) {
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Iniciar Sesión en MercaSwapp</h2>
-    <form id="loginForm" action="../includes/controller/UsuarioController.php" method="POST" class="form">
+    <form id="loginForm" action="../includes/controller/loginUsuarioController.php" method="POST" class="form">
         <div class="form-group">
             <label for="userid">Usuario:</label>
             <input type="text" id="userid" name="userid" required class="form-control"><br>
@@ -33,7 +33,7 @@ $contenidoPrincipal = <<<EOS
 
             var formData = new FormData(this);
 
-            fetch("../includes/controller/UsuarioController.php", {
+            fetch("../includes/controller/loginUsuarioController.php", {
                 method: 'POST',
                 body: formData
             })
@@ -47,6 +47,9 @@ $contenidoPrincipal = <<<EOS
                 document.getElementById('message').innerHTML = data;
                 document.getElementById('message').classList.add('success');
                 document.getElementById('message').classList.remove('error');
+                if (data.includes("Login exitoso")) {
+                    window.location.href = "perfil_pantalla.php";
+                }
             })
             .catch(error => {
                 console.error('Error:', error);

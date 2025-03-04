@@ -55,7 +55,7 @@ class UsuarioDAO extends DB {
             $stmt->bindValue(':nombre', $usuario->getNombre(), PDO::PARAM_STR);
             $stmt->bindValue(':apellidos', $usuario->getApellidos(), PDO::PARAM_STR);
             $stmt->bindValue(':edad', (int)$usuario->getEdad(), PDO::PARAM_INT);
-            $stmt->bindValue(':rol', $usuario->getRol(), PDO::PARAM_INT); // Cambiado a PDO::PARAM_STR
+            $stmt->bindValue(':rol', $usuario->getRol(), PDO::PARAM_STR);
 
             $result = $stmt->execute();
             if (!$result) {
@@ -71,7 +71,7 @@ class UsuarioDAO extends DB {
 
     public function obtenerUsuario(string $userid): ?Usuario {
         try {
-            $sql = "SELECT * FROM usuarios WHERE userid = :userid";
+            $sql = "SELECT * FROM Usuarios WHERE userid = :userid";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
             $stmt->execute();
@@ -92,6 +92,24 @@ class UsuarioDAO extends DB {
         } catch (PDOException $e) {
             error_log("Error al obtener usuario: " . $e->getMessage());
             return null;
+        }
+    }
+
+    public function comprobarContrasena(string $userid, string $contrasena): bool {
+        try {
+            $sql = "SELECT contrasena FROM Usuarios WHERE userid = :userid";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row && password_verify($contrasena, $row['contrasena'])) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            error_log("Error al comprobar contraseña: " . $e->getMessage());
+            return false;
         }
     }
 }
