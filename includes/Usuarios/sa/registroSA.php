@@ -18,21 +18,4 @@ class UsuarioSA {
     
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_STRING);
-    $contrasena = $_POST['contrasena']; // Se hashea en Usuario.php
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
-    $apellidos = filter_input(INPUT_POST, 'apellidos', FILTER_SANITIZE_STRING);
-    $edad = filter_input(INPUT_POST, 'edad', FILTER_VALIDATE_INT);
-    $rol = filter_input(INPUT_POST, 'rol', FILTER_SANITIZE_STRING);
-
-    if (!$userid || !$contrasena || !$email || !$nombre || !$apellidos || !$edad || !$rol) {
-        echo "Error: Datos inválidos.";
-        exit;
-    }
-
-    $usuario = new Usuario($userid, $contrasena, $email, $nombre, $apellidos, $edad, $rol);
-    $usuarioSA = new UsuarioSA();
-}
 ?>

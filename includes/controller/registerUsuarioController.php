@@ -11,14 +11,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
     $apellidos = filter_input(INPUT_POST, 'apellidos', FILTER_SANITIZE_STRING);
     $edad = filter_input(INPUT_POST, 'edad', FILTER_VALIDATE_INT);
-    $rol = filter_input(INPUT_POST, 'rol', FILTER_SANITIZE_STRING);
 
     // Verificar si los datos son válidos
-    if (!$userid || !$contrasena || !$email || !$nombre || !$apellidos || !$edad || !$rol) {
+    if (!$userid) {
         http_response_code(400); // Código de error 400 - Bad Request
-        echo "Error: Datos inválidos.";
+        echo "Error: User ID inválido.";
         exit;
     }
+    if (!$contrasena) {
+        http_response_code(400); // Código de error 400 - Bad Request
+        echo "Error: Contraseña inválida.";
+        exit;
+    }
+    if (!$email) {
+        http_response_code(400); // Código de error 400 - Bad Request
+        echo "Error: Email inválido.";
+        exit;
+    }
+    if (!$nombre) {
+        http_response_code(400); // Código de error 400 - Bad Request
+        echo "Error: Nombre inválido.";
+        exit;
+    }
+    if (!$apellidos) {
+        http_response_code(400); // Código de error 400 - Bad Request
+        echo "Error: Apellidos inválidos.";
+        exit;
+    }
+    if (!$edad) {
+        http_response_code(400); // Código de error 400 - Bad Request
+        echo "Error: Edad inválida.";
+        exit;
+    }
+
+    // Asignar rol por defecto
+    $rol = 'usuario';
 
     // Crear el objeto usuario
     $usuario = new Usuario($userid, $contrasena, $email, $nombre, $apellidos, $edad, $rol);

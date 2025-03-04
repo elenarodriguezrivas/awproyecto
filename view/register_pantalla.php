@@ -34,14 +34,6 @@ $contenidoPrincipal = <<<EOS
             <input type="number" id="edad" name="edad" required min="1" class="form-control"><br>
         </div>
 
-        <div class="form-group">
-            <label for="rol">Rol:</label>
-            <select id="rol" name="rol" required class="form-control">
-                <option value="usuario">Usuario</option>
-                <option value="admin">Administrador</option>
-            </select><br>
-        </div>
-
         <input type="hidden" name="action" value="register">
         <button type="submit" class="btn">Registrarse</button>
     </form>
