@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_SESSION['userid'])) {
     header("Location: perfil_pantalla.php");
     exit;
@@ -6,21 +7,57 @@ if (isset($_SESSION['userid'])) {
 
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
-    <h2>Iniciar Sesión</h2>
-    <form action="../includes/controller/UsuarioController.php" method="POST">
-        <label for="userid">Usuario:</label>
-        <input type="text" id="userid" name="userid" required><br>
+    <h2 class="form-title">Iniciar Sesión en MercaSwapp</h2>
+    <form id="loginForm" action="../includes/controller/UsuarioController.php" method="POST" class="form">
+        <div class="form-group">
+            <label for="userid">Usuario:</label>
+            <input type="text" id="userid" name="userid" required class="form-control"><br>
+        </div>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required><br>
+        <div class="form-group">
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required class="form-control"><br>
+        </div>
+
+        <div id="message" class="message"></div>
 
         <input type="hidden" name="action" value="login">
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit" class="btn">Iniciar Sesión</button>
     </form>
 
     <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
 
-    EOS;
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch("../includes/controller/UsuarioController.php", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('message').innerHTML = data;
+                document.getElementById('message').classList.add('success');
+                document.getElementById('message').classList.remove('error');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('message').innerHTML = 'Error al iniciar sesión: ' + error.message;
+                document.getElementById('message').classList.add('error');
+                document.getElementById('message').classList.remove('success');
+            });
+        });
+    </script>
+
+EOS;
 
 // Si hay un error, mostrarlo en la pantalla
 if (isset($_GET['error'])) {
