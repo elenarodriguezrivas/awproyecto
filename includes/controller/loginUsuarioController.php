@@ -20,6 +20,7 @@ class LoginUsuarioController {
 
             if ($this->usuarioSA->loginUsuario($userid, $contrasena)) {
                 session_start();
+                $_SESSION['login'] = true;
                 $_SESSION['userid'] = $userid;
                 echo "Login exitoso.";
             } else {
