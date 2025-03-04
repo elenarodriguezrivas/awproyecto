@@ -10,7 +10,7 @@ class LoginUsuarioController {
 
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_STRING);
+            $userid = htmlspecialchars($_POST['userid'], ENT_QUOTES, 'UTF-8');
             $contrasena = $_POST['contrasena'];
 
             if (!$userid || !$contrasena) {

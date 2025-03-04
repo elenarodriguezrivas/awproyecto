@@ -5,11 +5,11 @@ require_once __DIR__ . '/../Usuarios/model/Usuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Filtrar y validar entrada del usuario
-    $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_STRING);
+    $userid = htmlspecialchars($_POST['userid'], ENT_QUOTES, 'UTF-8');
     $contrasena = $_POST['contrasena']; // No sanitizar aquí, se hashea en Usuario.php
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
-    $apellidos = filter_input(INPUT_POST, 'apellidos', FILTER_SANITIZE_STRING);
+    $nombre = htmlspecialchars($_POST['nombre'], ENT_QUOTES, 'UTF-8');
+    $apellidos = htmlspecialchars($_POST['apellidos'], ENT_QUOTES, 'UTF-8');
     $edad = filter_input(INPUT_POST, 'edad', FILTER_VALIDATE_INT);
 
     // Verificar si los datos son válidos
