@@ -56,6 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Intentar registrar al usuario
     try {
         if ($usuarioSA->registrarUsuario($usuario)) {
+            // Iniciar sesión
+            $_SESSION['login'] = true;
+            $_SESSION['userid'] = $usuario->getUserid();
+            $_SESSION['nombre'] = $usuario->getNombre();
+            $_SESSION['rol'] = $usuario->getRol();
+
             http_response_code(201); // Código 201 - Created
             echo "Usuario registrado con éxito.";
         } else {
