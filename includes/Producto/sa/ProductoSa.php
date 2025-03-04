@@ -12,18 +12,6 @@ class ProductoSA {
     //Agrega un producto después de validarlo.
 
     public function agregarProducto(array $datos): string {
-        if (!$this->validarDatos($datos)) {
-            return "Datos inválidos.";
-        }
-
-        $producto = new Anuncio(
-            $datos['nombreProducto'],
-            $datos['descripcionProducto'],
-            $datos['precio'],
-            $datos['vendedor'],
-            $datos['comprador'] ?? null
-        );
-
         return $this->productoDAO->agregarProducto($producto) ? "Producto agregado con éxito." : "Error al agregar producto.";
     }
 

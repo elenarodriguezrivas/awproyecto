@@ -1,6 +1,4 @@
 <?php
-/*sacar las imagenes de la base de datos.*/
-$tituloPagina = 'Catálogo de Productos';
 $contenidoPrincipal=<<<EOS
     <section class="presentacion">
     <h2>Catalogo de Productos</h2>

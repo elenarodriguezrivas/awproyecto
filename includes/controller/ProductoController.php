@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../sa/ProductoSA.php';
+require_once __DIR__ . '/../Producto/sa/ProductoSA.php';
+require_once __DIR__ . '/../Producto/model/Anuncio.php';
 
 $productoSA = new ProductoSA();
 
