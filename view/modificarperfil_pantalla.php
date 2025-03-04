@@ -28,7 +28,7 @@ $contenidoPrincipal=<<<EOS
                     <label for="apellidos">1r Apellido:</label>
                     <input type="text" id="apellido1" name="apellidos" value="$apellido1"><br><br>
                     <label for="apellidos">2o Apellido:</label>
-                    <input type="text" id="apellido1" name="apellidos" value="$apellido1"><br><br>
+                    <input type="text" id="apellido2" name="apellidos" value="$apellido2"><br><br>
                     <label for="edad">Edad:</label>
                     <input type="text" id="edad" name="edad" value="$edad"><br><br>
                     <label for="correo">Correo:</label>
