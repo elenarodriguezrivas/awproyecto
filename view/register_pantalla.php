@@ -34,11 +34,11 @@ $contenidoPrincipal = <<<EOS
             <input type="number" id="edad" name="edad" required min="1" class="form-control"><br>
         </div>
 
+        <div id="message" class="message"></div>
+
         <input type="hidden" name="action" value="register">
         <button type="submit" class="btn">Registrarse</button>
     </form>
-
-    <div id="message"></div>
 
     <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
 
@@ -60,10 +60,14 @@ $contenidoPrincipal = <<<EOS
             })
             .then(data => {
                 document.getElementById('message').innerHTML = data;
+                document.getElementById('message').classList.add('success');
+                document.getElementById('message').classList.remove('error');
             })
             .catch(error => {
                 console.error('Error:', error);
                 document.getElementById('message').innerHTML = 'Error al registrar el usuario: ' + error.message;
+                document.getElementById('message').classList.add('error');
+                document.getElementById('message').classList.remove('success');
             });
         });
     </script>
