@@ -42,35 +42,8 @@ $contenidoPrincipal = <<<EOS
 
     <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
 
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+     <script src="JS/registerJS.js"></script>
 
-            var formData = new FormData(this);
-
-            fetch("../includes/controller/registerUsuarioController.php", {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('message').innerHTML = data;
-                document.getElementById('message').classList.add('success');
-                document.getElementById('message').classList.remove('error');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('message').innerHTML = 'Error al registrar el usuario: ' + error.message;
-                document.getElementById('message').classList.add('error');
-                document.getElementById('message').classList.remove('success');
-            });
-        });
-    </script>
 
 EOS;
 
