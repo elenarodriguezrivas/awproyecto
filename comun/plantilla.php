@@ -7,6 +7,7 @@
     <title>MercaSwapp - Tecnología Sostenible</title>
     <link id="estilo" rel="stylesheet" type="text/css" href="/awproyecto/styles/estilos.css?v=3">
     <link rel="stylesheet" media="print" href="/awproyecto/styles/estilos.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
