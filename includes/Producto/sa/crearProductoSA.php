@@ -9,7 +9,7 @@ class CrearProductoSA {
         $this->productoDAO = new ProductoDAO();
     }
 
-    public function registrarUsuario(Producto $producto): bool {
+    public function agregarProducto(Producto $producto): bool {
         return $this->productoDAO->agregarProducto($producto);
     }
     
