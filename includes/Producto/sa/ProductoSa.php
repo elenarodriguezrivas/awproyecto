@@ -11,7 +11,7 @@ class ProductoSA { //llama a ProductoDAO para que conecte con la base de datos
 
     public function agregarProducto(array $datos): string {
         if ($this->validarDatos($datos)) {
-            $producto = new Anuncio(
+            $producto = new Producto(
                 $datos['id'],
                 $datos['nombreProducto'],
                 $datos['descripcionProducto'],

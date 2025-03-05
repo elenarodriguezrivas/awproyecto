@@ -40,6 +40,7 @@ function pixelarCorreo($correo) {
 
 $correoPixelado = pixelarCorreo($user->getEmail());
 
+//se usará para las views, trabajamos con jsons
 echo json_encode([
     "nombre" => $user->getNombre(),
     "apellidos" => $user->getApellidos(),

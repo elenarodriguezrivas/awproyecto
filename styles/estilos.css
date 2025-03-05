@@ -179,7 +179,7 @@ catalogo {
 catalogo img {
     max-width: 100%;  /* Asegura que nunca supere el tamaño del espacio del catalogo */
     height: auto;      /* Mantiene la proporción */
-    max-height: 30px;  /* Ajusta la altura máxima */
+    max-height: 40px;  /* Ajusta la altura máxima */
     object-fit: contain; /* Asegura que la imagen se vea bien */
 }
 

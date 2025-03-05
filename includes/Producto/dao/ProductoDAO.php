@@ -53,6 +53,34 @@ class ProductoDAO extends DB { /*extiende de la base*/
         }
     }
 
+    public function listarMisProductos(): array {/*listar todos mis productos*/
+        try {
+            /*$sql = "SELECT * FROM productos";*/
+            $sql = "SELECT * FROM productos WHERE idVendedor = (SELECT userid FROM Usuarios)";
+            //queremos que solo nos muestre en el catálogo los que no aparecen en la tabla de ventas
+            //es decir no han sido vendidos
+
+            $stmt = $this->db->query($sql);
+
+            $productos = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $productos[] = new Anuncio(
+                    $row['id'],
+                    $row['nombreProducto'],
+                    $row['descripcionProducto'],
+                    $row['precio'],
+                    $row['categoriaProducto'],
+                    $row['fechaRegistroProducto'],
+                    $row['idVendedor']
+                );
+            }
+            return $productos;
+        } catch (PDOException $e) {
+            error_log("Error al listar mis productos: " . $e->getMessage());
+            return [];
+        }
+    }
+
     public function eliminarProducto(string $id, string $idVendedor): bool {//eliminamos el producto con el id indicado solo si lo elimina el vendedor
         try {
             $sql = "DELETE FROM productos WHERE id = :id AND idVendedor = :idVendedor";
