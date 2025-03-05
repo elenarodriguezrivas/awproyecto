@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../Productos/sa/crearProductoSA.php';
+require_once __DIR__ . '/../Producto/sa/registerProductoSA.php';
+require_once __DIR__ . '/../Producto/model/Producto.php';
 
 class registerProductoController
 {
@@ -11,7 +12,7 @@ class registerProductoController
         $this->subirProductoSA = new RegisterProductoSA();
     }
 
-    public function crearProducto(Producto $producto)
+    public function registerProducto(Producto $producto)
     {
         $producto = $this->subirProductoSA->agregarProducto($producto);
         if ($producto) {

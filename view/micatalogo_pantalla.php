@@ -9,7 +9,7 @@ $contenidoPrincipal=<<<EOS
                 <ul>
                     <div class="destacado">
                     <a href="registerProducto_pantalla.php"><button>Añadir producto nuevo</button></a>
-                    <a href="registerProducto_pantalla.php"><button>Añadir producto nuevo</button></a>
+                    <a href="eliminarProducto_pantalla.php"><button>Eliminar producto </button></a>
                 </ul>
             </div>
     </section>

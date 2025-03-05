@@ -5,11 +5,6 @@ $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Nuevo producto</h2>
     <form id="registerForm" action="../includes/controller/registerProducto_pantalla.php" method="POST" class="form">
         <div class="form-group">
-            <label for="id">Id:</label>
-            <input type="text" id="id" name="id" required class="form-control"><br>
-        </div>
-
-        <div class="form-group">
             <label for="nombreProducto">Nombre producto:</label>
             <input type="nombreProducto" id="nombreProducto" name="nombreProducto" required class="form-control"><br>
         </div>
@@ -26,22 +21,30 @@ $contenidoPrincipal = <<<EOS
 
         <div class="form-group">
             <label for="categoriaProducto">Categoría del Producto:</label>
-            <input type="categoriaProducto" id="categoriaProducto" name="categoriaProducto" required class="form-control"><br>
+            <select id="categoriaProducto" name="categoriaProducto" required class="form-control">
+                <option value="">Seleccione una categoría</option>
+                <option value="computadora">Computadora</option>
+                <option value="auriculares">Auriculares</option>
+                <option value="juegos">Juegos</option>
+                <option value="ratón">Ratón</option>
+                <option value="teclado">Teclado</option>
+                <option value="pantalla">Pantalla</option>
+                <option value="impresora">Impresora</option>
+                <option value="altavoces">Altavoces</option>                
+            </select><br>
         </div>
 
         <div class="form-group">
             <label for="fechaRegistroProducto">Fecha registro del producto (YYYYMMDD):</label>
-            <input type="number" id="fechaRegistroProducto" name="fechaRegistroProducto" class="form-control"><br>
+            <input type="text" id="fechaRegistroProducto" name="fechaRegistroProducto" class="form-control"><br>
         </div>
 
         <div id="message" class="message"></div>
 
         <input type="hidden" name="action" value="register">
-        <button type="submit" class="btn">Registrarse</button>
+        <button type="submit" class="btn">Registrar producto</button>
 
     </form>
-
-    <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
 
      <script src="JS/registerProductoJS.js"></script>
 

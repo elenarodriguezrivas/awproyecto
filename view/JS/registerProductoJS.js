@@ -3,7 +3,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
     var formData = new FormData(this);
 
-    fetch("../includes/controller/subirProductoController.php", {
+    fetch("../includes/controller/registerProductoController.php", {
         method: 'POST',
         body: formData
     })
