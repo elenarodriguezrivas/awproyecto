@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../dao/UsuarioDAO.php';
 require_once __DIR__ . '/../model/Usuario.php';
 
-class UsuarioSA {
+class RegistroSA {
     private UsuarioDAO $usuarioDAO;
 
     public function __construct() {

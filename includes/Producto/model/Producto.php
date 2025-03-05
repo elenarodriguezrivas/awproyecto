@@ -1,6 +1,6 @@
 <?php
 
-class Anuncio {
+class Producto {
     private $id;
     private $nombreProducto;
     private $descripcionProducto;

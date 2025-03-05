@@ -4,7 +4,7 @@ require_once __DIR__ . '/../model/Anuncio.php';
 
 class ProductoDAO extends DB {
     
-    public function agregarProducto(Anuncio $producto): bool {
+    public function agregarProducto(Producto $producto): bool {
         try {
             $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, vendedor, comprador) 
                     VALUES (:nombre, :descripcion, :precio, :vendedor, :comprador)";
@@ -30,7 +30,7 @@ class ProductoDAO extends DB {
 
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $productos[] = new Anuncio(
+                $productos[] = new Producto(
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
                     $row['precio'],
