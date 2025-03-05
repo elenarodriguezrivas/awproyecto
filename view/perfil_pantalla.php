@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start();
 if (!isset($_SESSION['userid'])) {
     header("Location: login_pantalla.php");
@@ -43,3 +42,4 @@ $contenidoPrincipal = <<<EOS
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';
+?>
