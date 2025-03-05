@@ -27,8 +27,8 @@ class ProductoDAO extends DB { /*extiende de la base*/
 
     public function listarProductos(): array {/*listar todos los productos*/
         try {
-            /*$sql = "SELECT * FROM productos";*/
-            $sql = "SELECT * FROM productos WHERE id NOT IN (SELECT producto_id FROM Ventas)";
+            $sql = "SELECT * FROM productos";
+            //$sql = "SELECT * FROM productos WHERE id NOT IN (SELECT producto_id FROM Ventas)";
             //queremos que solo nos muestre en el catálogo los que no aparecen en la tabla de ventas
             //es decir no han sido vendidos
 
