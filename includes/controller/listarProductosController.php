@@ -18,13 +18,10 @@ for($i = 0; count($arrayProductos); $i++){
     $producto = $arrayProductos[$i];
     $productos[] = [
         "nombre" => $ptoducto->getNombreProducto(),
-        "descripcion" => $producto->getDescripcionProducto()
-    ]
+        "descripcion" => $producto->getDescripcionProducto(),
+        "precio" =>$producto->getPrecioProducto()
+    ];
 }
-echo json_encode([
-    "nombre" => $user->getNombre(),
-    "apellidos" => $user->getApellidos(),
-    "edad" => $user->getEdad(),
-    "correo" => $correoPixelado
-]);
+
+echo json_encode($productos);
 ?>
