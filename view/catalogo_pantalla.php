@@ -5,6 +5,7 @@ $contenidoPrincipal=<<<EOS
             <div class="destacado">
                 <ul>
                     <catalogo>
+                        <a href="modificarperfil_pantalla.php"><button>Filtrar por categoria</button></a>
                         <p>Producto1. Impresora fotográfica Canon Selphy CP1500 Blanco</p>
                         <img src="https://static.fnac-static.com/multimedia/Images/ES/NR/4e/cd/7b/8113486/1505-1.jpg" alt="producto 1" class="catalogo img">
                         <p>Producto2. Monitor LG 27UL500P-W 27'' IPS 60Hz Ultra HD Blanco</p>
