@@ -11,17 +11,21 @@ class ListarProductosController {
 
     public function listarProductos() {
         $arrayProductos = $this->listarProductoSA->listarProductos();
+        $productos = [];
+
+        for ($i = 0; $i < count($arrayProductos); $i++) {
+            $producto = $arrayProductos[$i];
+            $productos[] = [
+                "nombre" => $producto->getNombreProducto(),
+                "descripcion" => $producto->getDescripcionProducto(),
+                "precio" => $producto->getPrecioProducto()
+            ];
+        }
+
+        echo json_encode($productos);
     }
 }
 
-for($i = 0; count($arrayProductos); $i++){
-    $producto = $arrayProductos[$i];
-    $productos[] = [
-        "nombre" => $ptoducto->getNombreProducto(),
-        "descripcion" => $producto->getDescripcionProducto(),
-        "precio" =>$producto->getPrecioProducto()
-    ];
-}
-
-echo json_encode($productos);
+$controller = new ListarProductosController();
+$controller->listarProductos();
 ?>

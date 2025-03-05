@@ -7,9 +7,15 @@ $(document).ready(function() {
             if (data.error) {
                 alert(data.error);
             } else {
-                $('#nombre').text(data.nombre);
-                $('#descripcion').text(data.descripción);
-                $('#precio').text(data.precio);
+                data.forEach(function(producto) {
+                    $('#productos').append(
+                        '<div class="producto">' +
+                        '<h3>' + producto.nombre + '</h3>' +
+                        '<p>' + producto.descripcion + '</p>' +
+                        '<p>' + producto.precio + '</p>' +
+                        '</div>'
+                    );
+                });
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
