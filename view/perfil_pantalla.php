@@ -17,28 +17,8 @@ $contenidoPrincipal = <<<EOS
         <p class="perfil-item">Correo: <span id="correo" class="perfil-dato"></span></p>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: '../includes/controller/obtenerPerfilController.php',
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    if (data.error) {
-                        alert(data.error);
-                    } else {
-                        $('#nombre').text(data.nombre);
-                        $('#apellidos').text(data.apellidos);
-                        $('#edad').text(data.edad);
-                        $('#correo').text(data.correo);
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error('Error al obtener el perfil:', textStatus, errorThrown);
-                }
-            });
-        });
-    </script>
+    <script src="JS/perfilJS.js"></script>
+
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';

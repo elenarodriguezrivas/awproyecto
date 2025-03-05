@@ -10,8 +10,8 @@ class ProductoDAO extends DB {
                     VALUES (:nombre, :descripcion, :precio, :vendedor, :comprador)";
 
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':nombre', $producto->getNombre(), PDO::PARAM_STR);
-            $stmt->bindParam(':descripcion', $producto->getDescripcion(), PDO::PARAM_STR);
+            $stmt->bindParam(':nombre', $producto->getNombreProducto(), PDO::PARAM_STR);
+            $stmt->bindParam(':descripcion', $producto->getDescripcionProducto(), PDO::PARAM_STR);
             $stmt->bindParam(':precio', $producto->getPrecio(), PDO::PARAM_STR);
             $stmt->bindParam(':vendedor', $producto->getVendedor(), PDO::PARAM_STR);
             $stmt->bindParam(':comprador', $producto->getComprador(), PDO::PARAM_STR);

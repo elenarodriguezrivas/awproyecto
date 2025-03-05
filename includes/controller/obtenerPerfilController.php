@@ -12,20 +12,18 @@ class ObtenerPerfilController {
     public function mostrarPerfil($idUsuario) {
         $usuario = $this->perfilSA->obtenerUsuarioPorId($idUsuario);
         if ($usuario) {
-            return $usuario; // Devolver datos para la vista
+            return $usuario;
         } else {
             return null;
         }
     }
 }
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['userid'])) {
     echo json_encode(["error" => "Usuario no autenticado."]);
     exit();
 }
 
-// Instanciar el controlador y obtener el perfil
 $controller = new ObtenerPerfilController();
 $user = $controller->mostrarPerfil($_SESSION['userid']);
 
@@ -34,7 +32,6 @@ if (!$user) {
     exit();
 }
 
-// Pixelar correo
 function pixelarCorreo($correo) {
     $partes = explode("@", $correo);
     $inicio = substr($partes[0], 0, 2) . str_repeat("*", max(0, strlen($partes[0]) - 2));
