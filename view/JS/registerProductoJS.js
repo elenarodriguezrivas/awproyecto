@@ -3,7 +3,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
     var formData = new FormData(this);
 
-    fetch("../includes/controller/registerProductoController.php", {
+    fetch("../includes/controller/registerProductoController.php", { //MODULARLO PARA UTILIZAR LA 
         method: 'POST',
         body: formData
     })
@@ -20,7 +20,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('message').innerHTML = 'Error al registrar el producto: ' + error.message;
+        document.getElementById('message').innerHTML = 'Error al registrar el usuario: ' + error.message;
         document.getElementById('message').classList.add('error');
         document.getElementById('message').classList.remove('success');
     });

@@ -9,18 +9,12 @@ class Producto { //Producto
     private $fechaRegistroProducto;
     private $idVendedor;
 
-    public function __construct($id, $nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $fechaRegistroProducto, $idVendedor) {
-        $this->id = $id;
+    public function __construct($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor) {
         $this->nombreProducto = $nombreProducto;
         $this->descripcionProducto = $descripcionProducto;
         $this->precio = $precio;
         $this->categoriaProducto = $categoriaProducto;
-        $this->fechaRegistroProducto = $fechaRegistroProducto;
         $this->idVendedor = $idVendedor;
-    }
-
-    public function getId() {
-        return $this->id;
     }
 
     public function getNombreProducto() {
@@ -37,10 +31,6 @@ class Producto { //Producto
 
     public function getcategoriaProducto() {
         return $this->categoriaProducto;
-    }
-
-    public function getfechaRegistroProducto() {
-        return $this->fechaRegistroProducto;
     }
 
     public function getIdVendedor(){

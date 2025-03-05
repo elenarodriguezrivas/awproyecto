@@ -3,20 +3,20 @@ $tituloPagina = 'Registro de un producto';
 
 $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Nuevo producto</h2>
-    <form id="registerForm" action="../includes/controller/registerProducto_pantalla.php" method="POST" class="form">
+    <form id="registerForm" class="form">
         <div class="form-group">
             <label for="nombreProducto">Nombre producto:</label>
-            <input type="nombreProducto" id="nombreProducto" name="nombreProducto" required class="form-control"><br>
+            <input type="text" id="nombreProducto" name="nombreProducto" required class="form-control"><br>
         </div>
 
         <div class="form-group">
             <label for="descripcionProducto">Descripción producto:</label>
-            <input type="descripcionProducto" id="descripcionProducto" name="descripcionProducto" required class="form-control"><br>
+            <input type="text" id="descripcionProducto" name="descripcionProducto" required class="form-control"><br>
         </div>
 
         <div class="form-group">
             <label for="precio">Precio:</label>
-            <input type="precio" id="precio" name="precio" required class="form-control"><br>
+            <input type="number" step="0.01" id="precio" name="precio" required class="form-control"><br>
         </div>
 
         <div class="form-group">
@@ -34,25 +34,12 @@ $contenidoPrincipal = <<<EOS
             </select><br>
         </div>
 
-        <div class="form-group">
-            <label for="fechaRegistroProducto">Fecha registro del producto (YYYYMMDD):</label>
-            <input type="text" id="fechaRegistroProducto" name="fechaRegistroProducto" class="form-control"><br>
-        </div>
-
-        <div class="form-group">
-            <label for="idVendedor">ID del vendedor:</label>
-            <input type="text" id="idVendedor" name="idVendedor" class="form-control"><br>
-
         <div id="message" class="message"></div>
 
-        <input type="hidden" name="action" value="register">
         <button type="submit" class="btn">Registrar producto</button>
-
     </form>
 
-     <script src="JS/registerProductoJS.js"></script>
-
-
+    <script src="JS/registerProductoJS.js"></script>
 EOS;
 
 require_once __DIR__ . "/../comun/plantilla.php";

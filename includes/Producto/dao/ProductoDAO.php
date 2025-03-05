@@ -4,20 +4,32 @@ require_once __DIR__ . '/../model/Producto.php';
 
 class ProductoDAO extends DB { /*extiende de la base*/
     
-    public function agregarProducto(Producto $producto): bool { /*Agregar un nuevo producto*/
+    public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, fechaRegistroProducto, idVendedor) 
-                    VALUES (:nombre, :descripcion, :precio, :categoria, :fecha, : idVendedor)";
+            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor) 
+                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor)";
 
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':nombre', $producto->getNombreProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':descripcion', $producto->getDescripcionProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':precio', $producto->getPrecio(), PDO::PARAM_STR);
-            $stmt->bindParam(':categoria', $producto->getcategoriaProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':fecha', $producto->getfechaRegistroProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':idVendedor', $producto->getIdVendedor(), PDO::PARAM_STR);
 
-            return $stmt->execute();
+            // Asignar los valores a variables
+            $nombre = $producto->getNombreProducto();
+            $descripcion = $producto->getDescripcionProducto();
+            $precio = $producto->getPrecio();
+            $categoria = $producto->getcategoriaProducto();
+            $idVendedor = $producto->getIdVendedor();
+
+            // Pasar las variables a bindParam
+            $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+            $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+            $stmt->bindParam(':precio', $precio, PDO::PARAM_INT);
+            $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
+            $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
+
+            $result = $stmt->execute();
+            if (!$result) {
+                error_log("Error al ejecutar la consulta: " . implode(", ", $stmt->errorInfo()));
+            }
+            return $result;
         } catch (PDOException $e) {
             error_log("Error al agregar producto: " . $e->getMessage());
             return false;
