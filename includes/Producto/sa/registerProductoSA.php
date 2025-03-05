@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../dao/ProductoDAO.php';
 require_once __DIR__ . '/../model/Producto.php';
 
-class RegisterProductoSA {
+class registerProductoSA {
     private $productoDAO;
 
     public function __construct() {

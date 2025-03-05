@@ -1,26 +1,4 @@
 <?php
-
-$tituloPagina = 'Añadir un nuevo producto';
-		
-$contenidoPrincipal=<<<EOS
-    <section class="presentacion">
-    <h2>Nuevo producto</h2>
-            <div class="destacado">
-                <ul>
-                    <div class="destacado">
-                    <p>Producto1</p>
-                    <a href="registerProducto_pantalla.php"><button>Añadir producto nuevo</button></a>
-                </ul>
-            </div>
-    </section>
-    <script src="JS/registerProductoJS.js"></script>
-EOS;
-
-require_once __DIR__ . '/../comun/plantilla.php';
-
-?>
-
-<?php
 $tituloPagina = 'Registro de un producto';
 
 $contenidoPrincipal = <<<EOS
@@ -60,6 +38,7 @@ $contenidoPrincipal = <<<EOS
 
         <input type="hidden" name="action" value="register">
         <button type="submit" class="btn">Registrarse</button>
+
     </form>
 
     <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
