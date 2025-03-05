@@ -39,6 +39,10 @@ $contenidoPrincipal = <<<EOS
             <input type="text" id="fechaRegistroProducto" name="fechaRegistroProducto" class="form-control"><br>
         </div>
 
+        <div class="form-group">
+            <label for="idVendedor">ID del vendedor:</label>
+            <input type="text" id="idVendedor" name="idVendedor" class="form-control"><br>
+
         <div id="message" class="message"></div>
 
         <input type="hidden" name="action" value="register">

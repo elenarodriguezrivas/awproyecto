@@ -6,11 +6,10 @@ class ProductoDAO extends DB { /*extiende de la base*/
     
     public function agregarProducto(Producto $producto): bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO productos (id, nombreProducto, descripcionProducto, precio, categoriaProducto, fechaRegistroProducto, idVendedor) 
-                    VALUES (:id, :nombre, :descripcion, :precio, :categoria, :fecha, : idVendedor)";
+            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, fechaRegistroProducto, idVendedor) 
+                    VALUES (:nombre, :descripcion, :precio, :categoria, :fecha, : idVendedor)";
 
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':id', $producto->getId(), PDO::PARAM_STR);
             $stmt->bindParam(':nombre', $producto->getNombreProducto(), PDO::PARAM_STR);
             $stmt->bindParam(':descripcion', $producto->getDescripcionProducto(), PDO::PARAM_STR);
             $stmt->bindParam(':precio', $producto->getPrecio(), PDO::PARAM_STR);
@@ -153,6 +152,18 @@ class ProductoDAO extends DB { /*extiende de la base*/
         }
 
         return $productosCat;
+    }
+
+    public function obtenerUltimoIdProducto(): ?int {
+        try {
+            $sql = "SELECT id FROM productos ORDER BY id DESC LIMIT 1";
+            $stmt = $this->db->query($sql);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? (int)$row['id'] : null;
+        } catch (PDOException $e) {
+            error_log("Error al obtener el último ID del producto: " . $e->getMessage());
+            return null;
+        }
     }
 }
 ?>
