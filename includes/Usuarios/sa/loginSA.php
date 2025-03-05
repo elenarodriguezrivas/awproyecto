@@ -3,7 +3,7 @@ require_once __DIR__ . '/../dao/UsuarioDAO.php';
 require_once __DIR__ . '/../model/Usuario.php';
 
 class UsuarioSA {
-    private UsuarioDAO $usuarioDAO;
+    private $usuarioDAO;
 
     public function __construct() {
         $this->usuarioDAO = new UsuarioDAO();
