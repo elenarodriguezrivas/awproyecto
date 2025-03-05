@@ -18,12 +18,6 @@ $contenidoPrincipal = <<<EOS
         <p class="descripcion-breve"><em>Plataforma segura</em> que combina innovación tecnológica con responsabilidad ambiental.</p>
         Ofrecemos un espacio donde cada transacción contribuye a reducir residuos electrónicos mientras 
         disfrutas de experiencias de compra únicas. <strong>¡Únete a la revolución circular!</strong></p>
-
-        <div class="botones">
-            <a href="./view/login_pantalla.php" class="boton">Iniciar Sesión</a>
-            <a href="./view/register_pantalla.php" class="boton">Registrarse</a>
-            <a href="./view/catalogo_pantalla.php" class="boton">Ver Catálogo</a>
-        </div>
     </section>
 EOS;
 
