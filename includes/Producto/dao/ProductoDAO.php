@@ -4,15 +4,15 @@ require_once __DIR__ . '/../model/Anuncio.php';
 
 class ProductoDAO extends DB { /*extiende de la base*/
     
-    public function agregarProducto(Anuncio $producto): bool { /*Agregar un nuevo producto*/
+    public function agregarProducto(Producto $producto): bool { /*Agregar un nuevo producto*/
         try {
             $sql = "INSERT INTO productos (id, nombreProducto, descripcionProducto, precio, categoriaProducto, fechaRegistroProducto, idVendedor) 
                     VALUES (:id, :nombre, :descripcion, :precio, :categoria, :fecha, : idVendedor)";
 
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $producto->getId(), PDO::PARAM_STR);
-            $stmt->bindParam(':nombre', $producto->getNombre(), PDO::PARAM_STR);
-            $stmt->bindParam(':descripcion', $producto->getDescripcion(), PDO::PARAM_STR);
+            $stmt->bindParam(':nombre', $producto->getNombreProducto(), PDO::PARAM_STR);
+            $stmt->bindParam(':descripcion', $producto->getDescripcionProducto(), PDO::PARAM_STR);
             $stmt->bindParam(':precio', $producto->getPrecio(), PDO::PARAM_STR);
             $stmt->bindParam(':categoria', $producto->getcategoriaProducto(), PDO::PARAM_STR);
             $stmt->bindParam(':fecha', $producto->getfechaRegistroProducto(), PDO::PARAM_STR);
@@ -36,7 +36,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
 
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $productos[] = new Anuncio(
+                $productos[] = new Producto(
                     $row['id'],
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
@@ -64,7 +64,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
 
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $productos[] = new Anuncio(
+                $productos[] = new Producto(
                     $row['id'],
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
@@ -94,7 +94,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
         }
     }
 
-    public function obtenerProductoPorId(string $id): ?Anuncio {/*buscar un producto en concreto por su id*/
+    public function obtenerProductoPorId(string $id): ?Producto {/*buscar un producto en concreto por su id*/
         try {
             $sql = "SELECT * FROM productos WHERE id = :id";
             $stmt = $this->db->prepare($sql);
@@ -105,7 +105,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($row) {
                 // Suponiendo que tienes una clase Producto que se puede instanciar con estos datos
-                return new Anuncio(
+                return new Producto(
                     $row['id'],
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
@@ -137,7 +137,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
                 $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($resultados as $row) {
-                    $productosCat[] = new Anuncio(
+                    $productosCat[] = new Producto(
                         $row['id'],
                         $row['nombreProducto'],
                         $row['descripcionProducto'],
