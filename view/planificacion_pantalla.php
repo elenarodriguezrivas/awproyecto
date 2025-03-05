@@ -1,7 +1,7 @@
 <?php
 $contenidoPrincipal=<<<EOS
     <section class="presentacion">
-    <h2>Catalogo de Productos</h2>
+    <h2>Nuestra planificación</h2>
             
     </section>
 EOS;
