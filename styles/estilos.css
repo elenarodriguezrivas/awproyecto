@@ -1,9 +1,14 @@
 /* ESTILO GENERAL */
 body {
     font-family: Arial, sans-serif; 
-    margin: 20px; 
-    background-color: #f4f4f4; /*color de fondo*/
+    margin: 0; 
+    padding: 0;
+    background-color: #f4f4f4; /* Color de fondo */
     color: #333; /* Color de texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 /* HEADER */
 header {
@@ -252,4 +257,32 @@ catalogo img {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+/* ESTILOS PARA EL PERFIL */
+.perfil-container {
+    width: 80%; /* Ancho del contenedor */
+    max-width: 600px; /* Ancho máximo */
+    margin: 20px auto; /* Centra el contenedor */
+    padding: 20px; /* Espaciado interno */
+    background: #fff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center; /* Centrar el texto */
+}
+
+.perfil-titulo {
+    margin-bottom: 15px; /* Espaciado inferior */
+    font-size: 2em; /* Tamaño del título */
+    color: #333; /* Color oscuro para resaltar */
+}
+
+.perfil-item {
+    font-size: 1.2em; /* Tamaño de letra */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+.perfil-dato {
+    font-weight: bold; /* Negrita para los datos */
+    color: #555; /* Color gris oscuro */
 }

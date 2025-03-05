@@ -11,10 +11,10 @@ $contenidoPrincipal = <<<EOS
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div id="perfil">
         <h1>Perfil de Usuario</h1>
-        <p>Nombre: <span id="nombre"></span></p>
-        <p>Apellidos: <span id="apellidos"></span></p>
-        <p>Edad: <span id="edad"></span></p>
-        <p>Correo: <span id="correo"></span></p>
+        <p class="perfil-item">Nombre: <span id="nombre" class="perfil-dato"></span></p>
+        <p class="perfil-item">Apellidos: <span id="apellidos" class="perfil-dato"></span></p>
+        <p class="perfil-item">Edad: <span id="edad" class="perfil-dato"></span></p>
+        <p class="perfil-item">Correo: <span id="correo" class="perfil-dato"></span></p>
     </div>
 
     <script>
