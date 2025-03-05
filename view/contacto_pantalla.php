@@ -15,7 +15,7 @@ ob_start(); // Iniciar buffer de salida
 
 <center>
     <table border="1">
-        <tr><th colspan="6"><h2>¿Necesitas ayuda? No dudes en escribirnos</h2></th></tr>
+        <tr><th colspan="6"><h2>Necesitas ayuda ? No dudes en escribirnos</h2></th></tr>
         <tr>
             <th>Detalles</th>
             <?php foreach ($miembros as $miembro) : ?>
