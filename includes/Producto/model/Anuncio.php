@@ -1,19 +1,22 @@
 <?php
 
-class Anuncio {
+class Anuncio { //Producto
     private $id;
     private $nombreProducto;
     private $descripcionProducto;
     private $precio;
-    private $vendedor;
-    private $comprador;
+    private $categoriaProducto;
+    private $fechaRegistroProducto;
+    private $idVendedor;
 
-    public function __construct($nombreProducto, $descripcionProducto, $precio, $vendedor, $comprador = NULL) {
+    public function __construct($id, $nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $fechaRegistroProducto, $idVendedor) {
+        $this->id = $id;
         $this->nombreProducto = $nombreProducto;
         $this->descripcionProducto = $descripcionProducto;
         $this->precio = $precio;
-        $this->vendedor = $vendedor;
-        $this->comprador = $comprador;
+        $this->categoriaProducto = $categoriaProducto;
+        $this->fechaRegistroProducto = $fechaRegistroProducto;
+        $this->idVendedor = $idVendedor;
     }
 
     public function getId() {
@@ -32,16 +35,16 @@ class Anuncio {
         return $this->precio;
     }
 
-    public function getVendedor() {
-        return $this->vendedor;
+    public function getcategoriaProducto() {
+        return $this->categoriaProducto;
     }
 
-    public function getComprador() {
-        return $this->comprador;
+    public function getfechaRegistroProducto() {
+        return $this->fechaRegistroProducto;
     }
 
-    public function isSold() {
-        return $this->comprador !== NULL;
+    public function getIdVendedor(){
+        return $this->idVendedor;
     }
 }
 ?>

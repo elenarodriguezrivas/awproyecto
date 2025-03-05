@@ -6,10 +6,11 @@ $productoSA = new ProductoSA();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datos = [
+        'id' => filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING),
         'nombreProducto' => filter_input(INPUT_POST, 'nombreProducto', FILTER_SANITIZE_STRING),
         'descripcionProducto' => filter_input(INPUT_POST, 'descripcionProducto', FILTER_SANITIZE_STRING),
         'precio' => filter_input(INPUT_POST, 'precio', FILTER_VALIDATE_FLOAT),
-        'vendedor' => filter_input(INPUT_POST, 'vendedor', FILTER_SANITIZE_STRING),
+        'vendedor' => filter_input(INPUT_POST, 'idVendedor', FILTER_SANITIZE_STRING),
         'comprador' => filter_input(INPUT_POST, 'comprador', FILTER_SANITIZE_STRING) ?? null,
     ];
 
