@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = new Usuario($userid, $contrasena, $email, $nombre, $apellidos, $edad, $rol);
     
     // Instanciar servicio de aplicación
-    $usuarioSA = new UsuarioSA();
+    $usuarioSA = new RegistroSA();
 
     // Intentar registrar al usuario
     try {
