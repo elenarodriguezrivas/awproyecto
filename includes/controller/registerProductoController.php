@@ -5,6 +5,7 @@ require_once __DIR__ . '/../Producto/model/Producto.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Filtrar y validar entrada del producto
+    //id del producto se autoincrementa
     $nombreProducto = htmlspecialchars($_POST['nombreProducto'], ENT_QUOTES, 'UTF-8');
     $descripcionProducto = htmlspecialchars($_POST['descripcionProducto'], ENT_QUOTES, 'UTF-8');
     $precio = filter_input(INPUT_POST, 'precio', FILTER_VALIDATE_FLOAT);
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idVendedor = htmlspecialchars($_POST['idVendedor'], ENT_QUOTES, 'UTF-8');
 
     // Verificar si los datos son válidos
-    /*if (!$nombreProducto) {
+    if (!$nombreProducto) {
         http_response_code(400); // Código de error 400 - Bad Request
         echo "Error: Contraseña inválida.";
         exit;
@@ -42,16 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(400); // Código de error 400 - Bad Request
         echo "Error: Edad inválida.";
         exit;
-    }*/
-
-    // Obtener el último ID de la tabla y asignar el siguiente
-    require_once __DIR__ . '/../Producto/dao/ProductoDAO.php';
-    $productoDAO = new ProductoDAO();
-    $ultimoId = $productoDAO->obtenerUltimoIdProducto();
-    $id = $ultimoId + 1;
+    }
 
     // Crear el objeto usuario
-    $producto = new Producto($id, $nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $fechaRegistroProducto, $idVendedor);
+    $producto = new Producto($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $fechaRegistroProducto, $idVendedor);
     
     // Instanciar servicio de aplicación
     $productoSA = new registerProductoSA();
@@ -59,8 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Intentar registrar al producto
     try {
         if ($productoSA->agregarProducto($producto)) {
-            //$_SESSION['login'] = true;
-            //$_SESSION['id'] = $producto->getId();
             $_SESSION['nombreProducto'] = $producto->getNombreProducto();
             $_SESSION['descripcionProducto'] = $producto->getDescripcionProducto();
             $_SESSION['precio'] = $producto->getPrecio();
