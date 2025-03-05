@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 if (!isset($_SESSION['userid'])) {
     header("Location: login_pantalla.php");
@@ -8,6 +9,7 @@ if (!isset($_SESSION['userid'])) {
 $tituloPagina = 'Perfil de Usuario';
 
 $contenidoPrincipal = <<<EOS
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div id="perfil">
         <h1>Perfil de Usuario</h1>
         <p>Nombre: <span id="nombre"></span></p>
@@ -41,4 +43,3 @@ $contenidoPrincipal = <<<EOS
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';
-?>
