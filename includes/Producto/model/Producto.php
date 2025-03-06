@@ -6,7 +6,7 @@ class Producto { //Producto
     private $descripcionProducto;
     private $precio;
     private $categoriaProducto;
-    private $fechaRegistroProducto;
+    //private $fechaRegistroProducto;
     private $idVendedor;
 
     public function __construct($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor) {

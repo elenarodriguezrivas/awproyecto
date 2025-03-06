@@ -53,7 +53,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    $row['fechaRegistroProducto'],
+                    //$row['fechaRegistroProducto'],
                     $row['idVendedor']
                 );
             }
@@ -81,7 +81,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    $row['fechaRegistroProducto'],
+                    //$row['fechaRegistroProducto'],
                     $row['idVendedor']
                 );
             }
