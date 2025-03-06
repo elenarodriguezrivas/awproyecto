@@ -6,7 +6,7 @@ class ListarProductosController {
     private $listarProductoSA;
 
     public function __construct() {
-        $this->listarProductoSA = new ListarProductosSA();
+        $this->listarProductoSA = new listarProductosSA();
     }
 
     public function listarProductos() {
