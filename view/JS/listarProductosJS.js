@@ -14,7 +14,7 @@ $(document).ready(function() {
                     productosHtml += '<p>' + producto.descripcionProducto + '</p>';
                     productosHtml += '<p>Precio: ' + producto.precio + '€</p>';
                     productosHtml += '<p>Categoría: ' + producto.categoriaProducto + '</p>';
-                    productosHtml += '<img src="../' + producto.rutaImagen + '" style="height: 200px;" />';
+                    productosHtml += '<img src="../' + producto.rutaImagen + '" style=" height: 200px;" />';
                     productosHtml += '</div>';
                 });
                 $('#productos').html(productosHtml);

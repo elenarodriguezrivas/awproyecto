@@ -253,3 +253,41 @@ catalogo img {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+/* Estilos para la cuadrícula de productos */
+#productos {
+    display: flex;
+    flex-wrap: nowrap; /* No permite que los elementos se envuelvan */
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto; /* Permite el desplazamiento horizontal */
+}
+
+.producto {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 0 0 200px; /* Ancho fijo de 200px */
+}
+
+.producto img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.producto h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.producto p {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #666;
+}
