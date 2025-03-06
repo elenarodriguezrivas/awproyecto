@@ -2,32 +2,15 @@
 require_once __DIR__ . '/../Usuarios/sa/perfilSA.php';
 session_start();
 
-class ObtenerPerfilController {
-    private $perfilSA;
-
-    public function __construct() {
-        $this->perfilSA = new PerfilSA();
-    }
-
-    public function mostrarPerfil($idUsuario) {
-        $usuario = $this->perfilSA->obtenerUsuarioPorId($idUsuario);
-        if ($usuario) {
-            return $usuario;
-        } else {
-            return null;
-        }
-    }
-}
-
 if (!isset($_SESSION['userid'])) {
     echo json_encode(["error" => "Usuario no autenticado."]);
     exit();
 }
 
-$controller = new ObtenerPerfilController();
-$user = $controller->mostrarPerfil($_SESSION['userid']);
+$perfilSA = new PerfilSA();
+$usuario = $perfilSA->obtenerUsuarioPorId($_SESSION['userid']);
 
-if (!$user) {
+if (!$usuario) {
     echo json_encode(["error" => "Usuario no encontrado."]);
     exit();
 }
@@ -38,13 +21,13 @@ function pixelarCorreo($correo) {
     return $inicio . "@" . $partes[1];
 }
 
-$correoPixelado = pixelarCorreo($user->getEmail());
+$correoPixelado = pixelarCorreo($usuario->getEmail());
 
 //se usará para las views, trabajamos con jsons
 echo json_encode([
-    "nombre" => $user->getNombre(),
-    "apellidos" => $user->getApellidos(),
-    "edad" => $user->getEdad(),
+    "nombre" => $usuario->getNombre(),
+    "apellidos" => $usuario->getApellidos(),
+    "edad" => $usuario->getEdad(),
     "correo" => $correoPixelado
 ]);
 ?>
