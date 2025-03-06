@@ -1,4 +1,14 @@
 <?php
+
+session_start();
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['userid'])) {
+    // Redirigir al usuario a la página de inicio de sesión
+    header("Location: login_pantalla.php?error=Debes iniciar sesión para registrar un producto.");
+    exit;
+}
+
 $tituloPagina = 'Registro de un producto';
 
 $contenidoPrincipal = <<<EOS
