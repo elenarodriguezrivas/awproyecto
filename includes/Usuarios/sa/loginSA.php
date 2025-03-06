@@ -29,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioSA = new UsuarioSA();
     if ($usuarioSA->loginUsuario($userid, $contrasena)) {
         echo "Login exitoso.";
-    } else {
-        echo "Error: Usuario o contraseña incorrectos.";
     }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 if (isset($_SESSION['userid'])) {
     header("Location: perfil_pantalla.php");
     exit;
@@ -28,7 +28,7 @@ $contenidoPrincipal = <<<EOS
     <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
 
     <script src="JS/loginJS.js"></script>
-
+    
 EOS;
 
 // Si hay un error, mostrarlo en la pantalla
