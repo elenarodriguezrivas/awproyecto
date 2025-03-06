@@ -36,24 +36,18 @@ class ProductoDAO extends DB { /*extiende de la base*/
         }
     }
 
-    public function listarProductos(): array {/*listar todos los productos*/
+    public function listarProductos(): array {
         try {
             $sql = "SELECT * FROM productos";
-            //$sql = "SELECT * FROM productos WHERE id NOT IN (SELECT producto_id FROM Ventas)";
-            //queremos que solo nos muestre en el catálogo los que no aparecen en la tabla de ventas
-            //es decir no han sido vendidos
-
             $stmt = $this->db->query($sql);
 
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $productos[] = new Producto(
-                    //$row['id'],
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    //$row['fechaRegistroProducto'],
                     $row['idVendedor']
                 );
             }
@@ -63,6 +57,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
             return [];
         }
     }
+
 
     public function listarMisProductos(): array {/*listar todos mis productos*/
         try {
