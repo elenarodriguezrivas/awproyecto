@@ -48,7 +48,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $productos[] = new Producto(
-                    $row['id'],
+                    //$row['id'],
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
                     $row['precio'],
