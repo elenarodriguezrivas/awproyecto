@@ -6,8 +6,8 @@ class ProductoDAO extends DB { /*extiende de la base*/
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor) 
-                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor)";
+            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen) 
+                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen)";
 
             $stmt = $this->db->prepare($sql);
 
@@ -15,8 +15,9 @@ class ProductoDAO extends DB { /*extiende de la base*/
             $nombre = $producto->getNombreProducto();
             $descripcion = $producto->getDescripcionProducto();
             $precio = $producto->getPrecio();
-            $categoria = $producto->getcategoriaProducto();
+            $categoria = $producto->getCategoriaProducto();
             $idVendedor = $producto->getIdVendedor();
+            $rutaImagen = $producto->getRutaImagen();
 
             // Pasar las variables a bindParam
             $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
@@ -24,6 +25,7 @@ class ProductoDAO extends DB { /*extiende de la base*/
             $stmt->bindParam(':precio', $precio, PDO::PARAM_INT);
             $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
             $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
+            $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
 
             $result = $stmt->execute();
             if (!$result) {
@@ -48,7 +50,8 @@ class ProductoDAO extends DB { /*extiende de la base*/
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    $row['idVendedor']
+                    $row['idVendedor'],
+                    $row['rutaImagen']
                 );
             }
             return $productos;

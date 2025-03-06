@@ -13,7 +13,7 @@ $tituloPagina = 'Registro de un producto';
 
 $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Nuevo producto</h2>
-    <form id="registerForm" class="form">
+    <form id="registerForm" class="form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nombreProducto">Nombre producto:</label>
             <input type="text" id="nombreProducto" name="nombreProducto" required class="form-control"><br>
@@ -42,6 +42,11 @@ $contenidoPrincipal = <<<EOS
                 <option value="impresora">Impresora</option>
                 <option value="altavoces">Altavoces</option>                
             </select><br>
+        </div>
+
+        <div class="form-group">
+            <label for="imagenProducto">Imagen del Producto:</label>
+            <input type="file" id="imagenProducto" name="imagenProducto" required class="form-control"><br>
         </div>
 
         <div id="message" class="message"></div>

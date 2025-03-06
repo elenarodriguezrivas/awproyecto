@@ -1,20 +1,21 @@
 <?php
 
-class Producto { //Producto
+class Producto {
     private $id;
     private $nombreProducto;
     private $descripcionProducto;
     private $precio;
     private $categoriaProducto;
-    //private $fechaRegistroProducto;
     private $idVendedor;
+    private $rutaImagen;
 
-    public function __construct($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor) {
+    public function __construct($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor, $rutaImagen) {
         $this->nombreProducto = $nombreProducto;
         $this->descripcionProducto = $descripcionProducto;
         $this->precio = $precio;
         $this->categoriaProducto = $categoriaProducto;
         $this->idVendedor = $idVendedor;
+        $this->rutaImagen = $rutaImagen;
     }
 
     public function getNombreProducto() {
@@ -29,12 +30,16 @@ class Producto { //Producto
         return $this->precio;
     }
 
-    public function getcategoriaProducto() {
+    public function getCategoriaProducto() {
         return $this->categoriaProducto;
     }
 
-    public function getIdVendedor(){
+    public function getIdVendedor() {
         return $this->idVendedor;
+    }
+
+    public function getRutaImagen() {
+        return $this->rutaImagen;
     }
 }
 ?>
