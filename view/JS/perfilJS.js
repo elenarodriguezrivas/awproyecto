@@ -5,7 +5,7 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(data) {
             if (data.error) {
-                alert(data.error);
+                window.location.href = 'login_pantalla.php';
             } else {
                 $('#nombre').text(data.nombre);
                 $('#apellidos').text(data.apellidos);
