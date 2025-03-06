@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 function mostrarSaludo() {
     if (isset($_SESSION['login'])) {
         echo "<div class='saludo'>Bienvenido, ". $_SESSION['nombre'] .". <a href='/awproyecto/view/logout_pantalla.php'>Cerrar sesión</a></div>";

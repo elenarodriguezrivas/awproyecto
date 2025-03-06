@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../Producto/sa/eliminarProductoSA.php';
 require_once __DIR__ . '/../Producto/model/Producto.php';
 

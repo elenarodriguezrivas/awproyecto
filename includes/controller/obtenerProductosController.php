@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../Producto/sa/listarProductosSA.php';
 
 $listarProductoSA = new listarProductosSA();
