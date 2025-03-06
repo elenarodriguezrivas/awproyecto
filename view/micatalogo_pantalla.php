@@ -7,7 +7,6 @@ $contenidoPrincipal=<<<EOS
     <h2>Mi Catálogo de Productos</h2>
             <div class="destacado">
                 <ul>
-                    <div class="destacado">
                     <a href="registerProducto_pantalla.php"><button>Añadir producto nuevo</button></a>
                     <a href="eliminarProducto_pantalla.php"><button>Eliminar producto </button></a>
                 </ul>

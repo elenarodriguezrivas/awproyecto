@@ -4,12 +4,14 @@ $tituloPagina = 'Catalogo';
 
 $contenidoPrincipal = <<<EOS
     <section class="presentacion">
-    <h2>Catálogo de Productos</h2>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <div id="perfil">
-        <!-- Aquí se mostrarán los productos -->
-        <div id="productos"></div>
-    </div>
+        <h2>Catálogo de Productos</h2>
+        <div class="destacado">
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <div id="perfil">
+                <!-- Aquí se mostrarán los productos -->
+                <div id="productos"></div>
+            </div>
+        </div>
     </section>
     <script src="JS/listarProductosJS.js"></script>
 EOS;
