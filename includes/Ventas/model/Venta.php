@@ -1,4 +1,4 @@
-<?php// Venta.php
+<?php // Venta.php
 class Venta {
     private $producto_id;
     private $user_id;
