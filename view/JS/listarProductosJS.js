@@ -14,7 +14,13 @@ $(document).ready(function() {
                     productosHtml += '<p>' + producto.descripcionProducto + '</p>';
                     productosHtml += '<p>Precio: ' + producto.precio + '€</p>';
                     productosHtml += '<p>Categoría: ' + producto.categoriaProducto + '</p>';
-                    productosHtml += '<img src="../' + producto.rutaImagen + '" style=" height: 200px;" />';
+                    productosHtml += '<img src="../' + producto.rutaImagen + '" style="height: 200px;" />';
+                    /*PARA LA PRACTICA 3 
+                    productosHtml += '<form action="../includes/controller/ComprarProductoController.php" method="POST">';
+                    productosHtml += '<input type="hidden" name="producto_id" value="' + producto.id + '">';
+                    productosHtml += '<input type="hidden" name="precio" value="' + producto.precio + '">';
+                    productosHtml += '<button type="submit" class="btn">Comprar</button>'; PARA LA PRACTICA 3*/
+                    productosHtml += '</form>';
                     productosHtml += '</div>';
                 });
                 $('#productos').html(productosHtml);
