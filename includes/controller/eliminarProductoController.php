@@ -24,12 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $resultado = $productoSA->eliminarProducto($nombreProducto, $_SESSION['userid']);
 
-        if ($resultado->getMessage() === "Producto eliminado correctamente") {
+        if ($resultado && $resultado->message === "Producto eliminado correctamente") {
             http_response_code(200); // OK
-            echo $resultado->getMessage();
+            echo $resultado->message;
         } else {
             http_response_code(409); // Conflict
-            echo "No se ha podido eliminar el producto.";
+            echo $resultado ? $resultado->message : "No se ha podido eliminar el producto.";
         }
     } catch (Exception $e) {
         http_response_code(500); // Internal Server Error

@@ -96,7 +96,12 @@ class ProductoDAO extends DB { /*extiende de la base*/
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
             $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
-            return $stmt->execute();
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return (object) ['message' => 'Producto eliminado correctamente'];
+            } else {
+                return (object) ['message' => 'No se ha encontrado el producto'];
+            }
         } catch (PDOException $e) {
             error_log("Error al eliminar producto: " . $e->getMessage());
             return $e;
