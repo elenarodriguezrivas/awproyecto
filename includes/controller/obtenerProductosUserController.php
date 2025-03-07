@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/../Producto/sa/listarProductosSA.php';
 
 $listarProductoSA = new listarProductosSA();
-$productos = $listarProductoSA->listarMisProductos();
+$productos = $listarProductoSA->listarProductosUser();
 
 $productosArray = [];
 foreach ($productos as $producto) {

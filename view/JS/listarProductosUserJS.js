@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: '../includes/controller/obtenerProductosController.php',
+        url: '../includes/controller/obtenerProductosUserController.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {

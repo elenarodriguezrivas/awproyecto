@@ -79,7 +79,6 @@ class ProductoDAO extends DB { /*extiende de la base*/
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    //$row['fechaRegistroProducto'],
                     $row['idVendedor']
                 );
             }
