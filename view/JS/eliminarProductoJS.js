@@ -1,27 +1,28 @@
-document.getElementById('registerForm').addEventListener('submit', function(event) {
+document.getElementById('deleteForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    var formData = new FormData(this);
+    let formData = new FormData(this);
 
-    fetch("../includes/controller/eliminarProductoController.php", {  
+    fetch("../includes/controller/eliminarProductoController.php", {
         method: 'POST',
         body: formData
     })
     .then(response => {
         if (!response.ok) {
-            return response.text().then(text => { throw new Error(text) });
+            throw new Error("Error en la respuesta");
         }
         return response.text();
     })
     .then(data => {
-        document.getElementById('message').innerHTML = data;
-        document.getElementById('message').classList.add('success');
-        document.getElementById('message').classList.remove('error');
+        let message = document.getElementById('message');
+        message.innerHTML = data;
+        message.classList.add('success');
+        message.classList.remove('error');
     })
     .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message').innerHTML = 'Error al eliminar el producto: ' + error.message;
-        document.getElementById('message').classList.add('error');
-        document.getElementById('message').classList.remove('success');
+        let message = document.getElementById('message');
+        message.innerHTML = "Error al eliminar el producto";
+        message.classList.add('error');
+        message.classList.remove('success');
     });
 });

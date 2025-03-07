@@ -2,31 +2,37 @@
 require_once __DIR__ . '/../Producto/sa/eliminarProductoSA.php';
 require_once __DIR__ . '/../Producto/model/Producto.php';
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //Solo cogemos el nombre
-    $nombreProducto = htmlspecialchars($_POST['nombreProducto'], ENT_QUOTES, 'UTF-8');
-    // Verificar si los datos son válidos
-    if (!$nombreProducto) {
-        http_response_code(400); // Código de error 400 - Bad Request
-        echo "Error: nombre inválido.";
+    if (!isset($_SESSION['userid'])) {
+        http_response_code(403); // No autorizado
+        echo "Debes iniciar sesión.";
         exit;
     }
 
-    // Instanciar servicio de aplicación
+    $nombreProducto = htmlspecialchars(trim($_POST['nombreProducto']), ENT_QUOTES, 'UTF-8');
+
+    if (empty($nombreProducto)) {
+        http_response_code(400); // Bad Request
+        echo "El nombre del producto no puede estar vacío.";
+        exit;
+    }
+
     $productoSA = new eliminarProductoSA();
 
-    // Intentar eliminar al producto
     try {
-        if ($productoSA->eliminarProductoSA($nombreProducto, $_SESSION['userid'])) {
+        $resultado = $productoSA->eliminarProducto($nombreProducto, $_SESSION['userid']);
 
-            http_response_code(201); // Código 201 - Created
-            echo "Producto eliminado con éxito.";
+        if ($resultado->getMessage() === "Producto eliminado correctamente") {
+            http_response_code(200); // OK
+            echo $resultado->getMessage();
         } else {
-            http_response_code(409); // Código 409 - Conflict (usuario ya existe)
-            echo "El producto no se ha podido eliminar";
+            http_response_code(409); // Conflict
+            echo "No se ha podido eliminar el producto.";
         }
     } catch (Exception $e) {
-        http_response_code(500); // Código 500 - Internal Server Error
+        http_response_code(500); // Internal Server Error
         echo "Error al eliminar el producto: " . $e->getMessage();
     }
     exit;

@@ -90,16 +90,16 @@ class ProductoDAO extends DB { /*extiende de la base*/
         }
     }
 
-    public function eliminarProducto(string $nombreProducto, string $idVendedor): bool {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
+    public function eliminarProducto(string $nombreProducto, string $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
         try {
             $sql = "DELETE FROM productos WHERE nombreProducto = :nombreProducto AND idVendedor = :idVendedor";
             $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(':nombreProducto', $id, PDO::PARAM_STR);
+            $stmt->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
             $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error al eliminar producto: " . $e->getMessage());
-            return false;
+            return $e;
         }
     }
 
