@@ -12,5 +12,9 @@ class listarProductosSA {
     public function listarProductos(): array {
         return $this->productoDAO->listarProductos();
     }
+
+    public function listarProductosUser(): array {
+        return $this->productoDAO->listarMisProductos();
+    }
 }
 ?>

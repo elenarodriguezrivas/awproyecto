@@ -166,7 +166,7 @@ footer {
 }
 
 /*CATÁLOGO DE PRODUCTOS*/
-catalogo {
+.catalogo {
     display: flex; /* flexbox para organizar los elementos, dice que así esta mejor estructurado segun internet*/
     justify-content: space-between; 
     align-items: center; 
@@ -176,7 +176,7 @@ catalogo {
     border-radius: 5px; /* Bordes redondeados */
 }
 /* Estilos para las imágenes del catalogo */
-catalogo img {
+.catalogo img {
     max-width: 100%;  /* Asegura que nunca supere el tamaño del espacio del catalogo */
     height: auto;      /* Mantiene la proporción */
     max-height: 40px;  /* Ajusta la altura máxima */
