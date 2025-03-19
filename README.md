@@ -6,6 +6,8 @@
 ## Elena Rivas
 ## Maria Victoria Magpali
 
+adios
+
 /awproyecto
 │── /comun
 │   ├── cabecera.php
