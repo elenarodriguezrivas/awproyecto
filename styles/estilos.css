@@ -1,0 +1,293 @@
+/* ESTILO GENERAL */
+body {
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+    background-color: #f4f4f4; /*color de fondo*/
+    color: #333; /* Color de texto */
+}
+/* HEADER */
+header {
+    display: flex; /* flexbox para organizar los elementos, dice que así esta mejor estructurado segun internet*/
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 30px; /* Espaciado entre medias*/
+    background: linear-gradient(90deg, #000000, #2c2c2c, #4f4f4f); /* Degradado negro a gris*/
+    color: white; /* Texto en blanco */
+    border-radius: 5px; /* Bordes redondeados */
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    flex-grow: 1;
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Estilos para la imagen del logo */
+header img {
+    max-width: 100%;  /* Asegura que nunca supere el tamaño del header */
+    height: auto;      /* Mantiene la proporción */
+    max-height: 80px;  /* Ajusta la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se vea bien */
+}
+.logo {
+    max-width: 100%;  /* Asegura que nunca supere el tamaño del contenedor */
+    height: auto;      /* Mantiene la proporción */
+    max-height: 80px;  /* Ajusta la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se vea bien */
+}
+/* MENÚ DE NAVEGACIÓN */
+nav {
+    background: #222; /* Fondo negro */
+    padding: 10px 0; /* Espaciado interno */
+    text-align: center; /* Alinea los elementos del menú al centro */
+    border-radius: 5px; /* Bordes redondeados */
+}
+.nav-links {
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding por defecto */
+    display: flex;
+    justify-content: space-between; /* Espacia los elementos */
+    position: relative; /* Necesario para el posicionamiento absoluto */
+    width: 100%; /* Asegura que la barra de navegación ocupe todo el ancho */
+}
+
+.nav-links .center {
+    display: flex;
+    justify-content: center; /* Centra los elementos */
+    flex-grow: 1; /* Permite que los elementos ocupen el espacio disponible */
+}
+
+.nav-links .right {
+    display: flex; /* Asegura que los elementos se alineen horizontalmente */
+    gap: 15px; /* Añade espacio entre los botones */
+}
+
+.nav-links li {
+    display: inline-block; /* Muestra los elementos en línea */
+    margin-right: 15px; /* Espaciado entre los enlaces */
+}
+.nav-links a {
+    text-decoration: none; /* Elimina subrayado */
+    color: white; /* Color del texto */
+    font-size: 18px; /* Tamaño de letra */
+    padding: 8px 12px; /* Espaciado dentro de cada enlace */
+    transition: 0.3s; /* Transición suave */
+}
+
+/* Cambio al pasar el mouse sobre los enlaces */
+.nav-links a:hover {
+    background: #555; /* Cambio de color de fondo */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* SECCIÓN PRINCIPAL */
+.presentacion {
+    width: 80%; /* Reduce el ancho para mejorar la estructura */
+    margin: 40px auto; /* Centra la sección */
+    padding: 20px; /* Espaciado interno */
+    background: #f9f9f9; /* Fondo gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra*/
+}
+.presentacion h2 {
+    text-align: center; /* Centra el título */
+    margin-bottom: 15px; /* Espaciado inferior */
+    font-size: 2em; /* Tamaño del título */
+    color: #333; /* Color oscuro para resaltar */
+}
+
+/* SECCIÓN DESTACADA */
+.destacado {
+    background: #eef; /* Fondo azul lila */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 20px;
+}
+.destacado ul {
+    list-style: none; /* Elimina los puntos de la lista */
+    padding-left: 20px; /* Añade espaciado interno */
+}
+.destacado ul li {
+    font-size: 1.1em; /* Tamaño de letra */
+    margin-bottom: 8px; /* Espaciado entre los elementos de la lista */
+}
+
+/* SECCIÓN GRUPOS*/
+.grupos {
+    background: #FFEE99; /* Fondo amarillo claro */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 20px;
+}
+.grupos ul {
+    list-style: disc; /* Elimina los puntos de la lista */
+    padding-left: 20px; /* Añade espaciado interno */
+}
+.grupos ul li {
+    font-size: 1.1em; /* Tamaño de letra */
+    margin-bottom: 8px; /* Espaciado entre los elementos de la lista */
+}
+
+/* SECCIÓN WIREFRAME */
+.wireframe-section {
+    margin: 30px 0; /* Espaciado superior e inferior */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde gris claro */
+    background: #fff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+}
+.wireframe-img {
+    width: 100%; /* La imagen ocupa todo el ancho disponible */
+    max-width: 600px; /* Tamaño máximo de la imagen */
+    margin: 10px 0; /* Espaciado superior e inferior */
+    display: block; /* Centra la imagen automáticamente */
+}
+.centrada_img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* PIE DE PÁGINA (FOOTER) */
+footer {
+    background: #222; /* Fondo negro */
+    color: white; /* Texto en blanco */
+    text-align: center; /* Centra el texto */
+    padding: 15px; /* Espaciado interno */
+    margin-top: 30px; /* Espaciado superior */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/*CATÁLOGO DE PRODUCTOS*/
+.catalogo {
+    display: flex; /* flexbox para organizar los elementos, dice que así esta mejor estructurado segun internet*/
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 30px; /* Espaciado entre medias*/
+    background-color: #f4f4f4; /*color de fondo*/
+    color: #333; /* Color de texto */
+    border-radius: 5px; /* Bordes redondeados */
+}
+/* Estilos para las imágenes del catalogo */
+.catalogo img {
+    max-width: 100%;  /* Asegura que nunca supere el tamaño del espacio del catalogo */
+    height: auto;      /* Mantiene la proporción */
+    max-height: 40px;  /* Ajusta la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se vea bien */
+}
+
+/* Estilos para el formulario */
+.form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+.message {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Estilos para la cuadrícula de productos */
+#productos {
+    display: flex;
+    flex-wrap: nowrap; /* No permite que los elementos se envuelvan */
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto; /* Permite el desplazamiento horizontal */
+}
+
+.producto {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 0 0 200px; /* Ancho fijo de 200px */
+}
+
+.producto img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.producto h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.producto p {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #666;
+}
