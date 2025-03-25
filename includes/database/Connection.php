@@ -16,4 +16,9 @@ class DB {
         $stmt->execute($params);
         return $stmt;
     }
+
+    protected function getBD(){
+        return $this->db;
+    }
+
 }
