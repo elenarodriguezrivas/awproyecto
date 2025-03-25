@@ -17,8 +17,9 @@ class DB {
         return $stmt;
     }
 
-    protected function getBD(){
-        return $this->db;
+    public static function getBD(){
+        $bbdd = new DB();
+        return $bbdd;
     }
 
 }
