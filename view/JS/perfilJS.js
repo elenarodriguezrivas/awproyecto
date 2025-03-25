@@ -1,20 +1,20 @@
-$(document).ready(function() {
-    $.ajax({
-        url: '../includes/controller/obtenerPerfilController.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('../includes/controller/obtenerPerfilController.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener el perfil');
+            }
+            return response.json();
+        })
+        .then(data => {
             if (data.error) {
                 window.location.href = 'login_pantalla.php';
             } else {
-                $('#nombre').text(data.nombre);
-                $('#apellidos').text(data.apellidos);
-                $('#edad').text(data.edad);
-                $('#correo').text(data.correo);
+                document.getElementById('nombre').textContent = data.nombre;
+                document.getElementById('apellidos').textContent = data.apellidos;
+                document.getElementById('edad').textContent = data.edad;
+                document.getElementById('correo').textContent = data.correo;
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error al obtener el perfil:', textStatus, errorThrown);
-        }
-    });
+        })
+        .catch(error => console.error('Error al obtener el perfil:', error));
 });
