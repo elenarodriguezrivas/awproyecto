@@ -3,7 +3,10 @@
 require_once __DIR__ . '/../../database/Connection.php';
 require_once __DIR__ . '/../model/Venta.php';
 
-class VentaDAO extends DB {
+class VentaDAO{
+
+    private $db = DB::getBD();
+
     public function registrarVenta(Venta $venta): bool {
         try {
             $sql = "INSERT INTO Ventas (producto_id, user_id, fechaVenta, comprador_id, precio) 

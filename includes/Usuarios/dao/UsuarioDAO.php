@@ -2,7 +2,9 @@
 require_once __DIR__ . '/../../database/Connection.php';
 require_once __DIR__ . '/../model/Usuario.php';
 
-class UsuarioDAO extends DB {
+class UsuarioDAO{
+
+    private $db = DB::getBD();
 
     public function listarUsuarios(): array {
         try {
