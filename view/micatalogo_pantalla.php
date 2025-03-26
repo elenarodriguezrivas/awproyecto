@@ -1,5 +1,7 @@
 <?php
 
+//hola
+
 $tituloPagina = 'Mi Catalogo de Productos';
 		
 $contenidoPrincipal=<<<EOS
