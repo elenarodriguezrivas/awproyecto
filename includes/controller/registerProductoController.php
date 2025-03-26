@@ -15,20 +15,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Manejar la subida de la imagen
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
-        $nombreArchivo = basename($_FILES['imagenProducto']['name']);
+        $extension = pathinfo($_FILES['imagenProducto']['name'], PATHINFO_EXTENSION);
+        $nombreArchivo = bin2hex(random_bytes(8)) . '.' . $extension;
         $directorioDestino = __DIR__ . '/../../fotos/';
         $rutaArchivo = $directorioDestino . $nombreArchivo;
-
+    
         // Crear el directorio si no existe
         if (!is_dir($directorioDestino)) {
             mkdir($directorioDestino, 0777, true);
         }
-
+    
         // Mover el archivo subido al directorio de destino
         if (move_uploaded_file($_FILES['imagenProducto']['tmp_name'], $rutaArchivo)) {
             $rutaImagen = '/fotos/' . $nombreArchivo;
+            echo "Imagen guardada en: " . $rutaImagen;
         } else {
             http_response_code(500);
             echo "Error al subir la imagen.";
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: Imagen no válida.";
         exit;
     }
+    
 
     $producto = new Producto($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $_SESSION['userid'], $rutaImagen);
     
