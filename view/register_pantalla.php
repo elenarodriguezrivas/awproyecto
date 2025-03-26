@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__.'/../includes/config.php';
+
 $tituloPagina = "Registro de Usuario";
 
 $contenidoPrincipal = <<<EOS

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../includes/config.php';
+
 $tituloPagina = 'Catalogo';
 
 $contenidoPrincipal = <<<EOS
@@ -8,7 +10,6 @@ $contenidoPrincipal = <<<EOS
         <p>¡Bienvenido a nuestro catálogo de productos! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles. ¡No te lo pierdas!</p>
         <div class="destacado">
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <div id="perfil">
                 <!-- Aquí se mostrarán los productos -->
                 <div id="productos"></div>

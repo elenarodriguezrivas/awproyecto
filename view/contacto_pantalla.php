@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../includes/config.php';
+
 $miembros = [
     ["nombre" => "Elena Rodríguez Rivas", "correo" => "elenro15@ucm.es", "imagen" => "/awproyecto/comun/img/elena.jpeg", "descripcion" => "Estudios: Ingeniería Informática y ADE, Hobbies: ir de compras"],
     ["nombre" => "María Victoria Magpali Pescador", "correo" => "mmagpali@ucm.es", "imagen" => "/awproyecto/comun/img/victoria.jpg", "descripcion" => "Estudios: Ingeniería Informática, Hobbies: voleibol"],

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../includes/config.php';
+
 session_start();
 
 // Verificar si el usuario ha iniciado sesión

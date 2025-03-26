@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__.'/../includes/config.php';
+
 $contenidoPrincipal = <<<EOS
     <section class="presentacion">
         <h2>Planificación del proyecto</h2>
