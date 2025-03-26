@@ -12,6 +12,8 @@ if (!isset($_SESSION['userid'])) {
 
 $tituloPagina = 'Eliminar un producto';
 
+$rutaJS = RUTA_JS . '/eliminarProductoJS.js';
+
 $contenidoPrincipal = <<<EOS
 <section class="presentacion">
     <h2 class="form-title">Eliminar un producto</h2>
@@ -25,7 +27,7 @@ $contenidoPrincipal = <<<EOS
         <div id="message"></div>
     </div>
 </section>
-<script src="JS/eliminarProductoJS.js"></script>
+<script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . "/../comun/plantilla.php";

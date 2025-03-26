@@ -8,6 +8,8 @@ if (isset($_SESSION['userid'])) {
     exit;
 }
 
+$rutaJS = RUTA_JS . '/loginJS.js';
+
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Iniciar Sesión en MercaSwapp</h2>
@@ -30,7 +32,7 @@ $contenidoPrincipal = <<<EOS
 
     <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
 
-    <script src="JS/loginJS.js"></script>
+    <script src="$rutaJS"></script>
     
 EOS;
 

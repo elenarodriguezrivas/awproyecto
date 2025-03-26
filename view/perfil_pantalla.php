@@ -4,8 +4,9 @@ require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Perfil de Usuario';
 
+$rutaJS = RUTA_JS . '/perfilJS.js';
+
 $contenidoPrincipal = <<<EOS
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div id="perfil">
         <h1>Perfil de Usuario</h1>
         <p class="perfil-item">Nombre: <span id="nombre" class="perfil-dato"></span></p>
@@ -16,7 +17,7 @@ $contenidoPrincipal = <<<EOS
 
     </div>
 
-    <script src="JS/perfilJS.js"></script>
+    <script src="$rutaJS"></script>
 
 EOS;
 

@@ -3,6 +3,7 @@
 require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Catalogo';
+$rutaJS = RUTA_JS . "/listarProductosJS.js";
 
 $contenidoPrincipal = <<<EOS
     <section class="presentacion">
@@ -16,7 +17,7 @@ $contenidoPrincipal = <<<EOS
             </div>
         </div>
     </section>
-    <script src="JS/listarProductosJS.js"></script>
+    <script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';

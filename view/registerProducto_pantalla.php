@@ -2,6 +2,8 @@
 
 require_once __DIR__.'/../includes/config.php';
 
+$rutaJS = RUTA_JS . '/registerProductoJS.js';
+
 session_start();
 
 // Verificar si el usuario ha iniciado sesión
@@ -56,7 +58,7 @@ $contenidoPrincipal = <<<EOS
         <button type="submit" class="btn">Registrar producto</button>
     </form>
 
-    <script src="JS/registerProductoJS.js"></script>
+    <script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . "/../comun/plantilla.php";

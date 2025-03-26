@@ -17,7 +17,7 @@ define('RAIZ_APP', __DIR__);
 define('RUTA_APP', '/awproyecto');
 define('RUTA_IMGS', RUTA_APP.'/comun/img');
 define('RUTA_CSS', RUTA_APP.'/view/styles');
-define('RUTA_JS', RUTA_APP.'/view/js');
+define('RUTA_JS', RUTA_APP.'/view/JS');
 
 /**
  * Configuración del soporte de UTF-8, localización (idioma y país) y zona horaria
