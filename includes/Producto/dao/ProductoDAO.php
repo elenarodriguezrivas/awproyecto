@@ -1,8 +1,15 @@
 <?php
 require_once __DIR__ . '/../../database/Connection.php';
 require_once __DIR__ . '/../model/Producto.php';
+require_once __DIR__ . '/../../application.php';
 
-class ProductoDAO extends DB { /*extiende de la base*/
+class ProductoDAO { /*extiende de la base*/
+
+    private $db;
+
+    public function __construct() {
+        $this->db = application::getInstance()->getConnection();
+    }
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
