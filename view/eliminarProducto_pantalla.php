@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__.'/../includes/config.php';
+
 session_start();
 
 // Verificar si el usuario ha iniciado sesión
@@ -8,6 +11,8 @@ if (!isset($_SESSION['userid'])) {
 }
 
 $tituloPagina = 'Eliminar un producto';
+
+$rutaJS = RUTA_JS . '/eliminarProductoJS.js';
 
 $contenidoPrincipal = <<<EOS
 <section class="presentacion">
@@ -22,7 +27,7 @@ $contenidoPrincipal = <<<EOS
         <div id="message"></div>
     </div>
 </section>
-<script src="JS/eliminarProductoJS.js"></script>
+<script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . "/../comun/plantilla.php";

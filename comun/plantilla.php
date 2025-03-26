@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Plataforma innovadora para compraventa sostenible de tecnología de segunda mano">
     <title>MercaSwapp - Tecnología Sostenible</title>
-    <link id="estilo" rel="stylesheet" type="text/css" href="/awproyecto/styles/estilos.css?v=3">
-    <link rel="stylesheet" media="print" href="/awproyecto/styles/estilos.css">
+    <link id="estilo" rel="stylesheet" type="text/css" href="<?= RUTA_CSS ?>/estilos.css?v=3">
+    <link rel="stylesheet" media="print" href="<?= RUTA_CSS ?>/estilos.css">
 </head>
 
 <body>
