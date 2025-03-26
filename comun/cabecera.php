@@ -17,7 +17,7 @@ function mostrarSaludo() {
 <header>
     <h1>MercaSwapp</h1>
     <p class="tagline">Tecnología Circular • Subastas Dinámicas • Trueque Inteligente</p>
-    <img src="/awproyecto/comun/img/logo-mercaswapp.png" alt="Logo MercaSwapp" class="logo">
+    <img src="<?= RUTA_IMGS ?>/logo-mercaswapp.png" alt="Logo MercaSwapp" class="logo">
     <nav id="barUnderHeader">
         <ul class="nav-links">
         </ul>
