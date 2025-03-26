@@ -1,9 +1,14 @@
 <?php
+
+require_once __DIR__.'/../includes/config.php';
+
 //session_start();
 if (isset($_SESSION['userid'])) {
     header("Location: perfil_pantalla.php");
     exit;
 }
+
+$rutaJS = RUTA_JS . '/loginJS.js';
 
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
@@ -27,7 +32,7 @@ $contenidoPrincipal = <<<EOS
 
     <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
 
-    <script src="JS/loginJS.js"></script>
+    <script src="$rutaJS"></script>
     
 EOS;
 

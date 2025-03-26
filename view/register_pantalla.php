@@ -1,5 +1,10 @@
 <?php
+
+require_once __DIR__.'/../includes/config.php';
+
 $tituloPagina = "Registro de Usuario";
+
+$rutaJS = RUTA_JS . '/registerJS.js';
 
 $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Regístrate en MercaSwapp</h2>
@@ -42,7 +47,7 @@ $contenidoPrincipal = <<<EOS
 
     <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
 
-     <script src="JS/registerJS.js"></script>
+     <script src="$rutaJS"></script>
 
 
 EOS;
