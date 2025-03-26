@@ -1,12 +1,15 @@
 <?php
+
+
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 function mostrarSaludo() {
     if (isset($_SESSION['login'])) {
-        echo "<div class='saludo'>Bienvenido, ". $_SESSION['nombre'] .". <a href='/awproyecto/view/logout_pantalla.php'>Cerrar sesión</a></div>";
+        echo "<div class='saludo'>Bienvenido, ". $_SESSION['nombre'] .". <a href='<?= RUTA_APP ?>/view/logout_pantalla.php'>Cerrar sesión</a></div>";
     } else {
-        echo "<div class='saludo'>Usuario desconocido. <a href='/awproyecto/view/login_pantalla.php'>Login</a></div>";
+        echo "<div class='saludo'>Usuario desconocido. <a href='<?= RUTA_APP ?>/view/login_pantalla.php'>Login</a></div>";
     }
 }
 ?>
