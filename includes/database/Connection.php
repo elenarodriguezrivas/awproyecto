@@ -1,8 +1,8 @@
 <?php
 class DB {
-    protected $db;
+    public $db;
 
-    public function __construct($dbname = '../database/database.db') {
+    public function __construct($dbname = 'C:\xampp\htdocs\awproyecto\includes\database\database.db') {
         try {
             $this->db = new PDO("sqlite:" . $dbname);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,4 +16,9 @@ class DB {
         $stmt->execute($params);
         return $stmt;
     }
+
+    public function getBD(){
+        return $this->db;
+    }
+
 }
