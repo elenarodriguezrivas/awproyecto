@@ -8,7 +8,7 @@ class ProductoDAO { /*extiende de la base*/
     private $db;
 
     public function __construct() {
-        $this->db = application::getInstance()->getConnection();
+        $this->db = application::getInstance()->getConexionBd();
     }
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/

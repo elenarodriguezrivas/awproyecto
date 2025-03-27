@@ -1,8 +1,15 @@
 <?php
 require_once __DIR__ . '/../../database/Connection.php';
 require_once __DIR__ . '/../model/Usuario.php';
+require_once __DIR__ . '/../../application.php';
 
-class UsuarioDAO extends DB {
+class UsuarioDAO{
+
+    private $db;
+
+    public function __construct() {
+        $this->db = application::getInstance()->getConexionBd();
+    }
 
     public function listarUsuarios(): array {
         try {
