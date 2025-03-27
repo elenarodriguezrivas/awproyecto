@@ -28,8 +28,6 @@ date_default_timezone_set('Europe/Madrid');
 
 // Inicializa la aplicación
 $app = application::getInstance();
-$bd = $app->getConexionBd();
-var_dump($bd);
 $app->init(['host'=>BD_HOST, 'bd'=>BD_NAME, 'user'=>BD_USER, 'pass'=>BD_PASS]);
 
 /**
