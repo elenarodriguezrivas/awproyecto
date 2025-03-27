@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/database/Connection.php';
+
 /**
  * Clase que mantiene el estado global de la aplicación.
  */
@@ -114,11 +116,10 @@ class application
 	 */
 	public function getConexionBd()
 	{
-        //$this->compruebaInstanciaInicializada();
-		if (! $this->conn ) {
-            $bd = new DB();
-            $this->conn = $bd;
-		}
-		return $bd;
+		if (!$this->conn) {
+			$bd = new DB();
+			$this->conn = $bd->getBD(); // Asegúrate de que DB está correctamente configurada
+        }
+        return $this->conn;
 	}
 }
