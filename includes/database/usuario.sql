@@ -1,4 +1,4 @@
-CREATE TABLE Usuario (
+CREATE TABLE Usuarios (
     userid VARCHAR(50) PRIMARY KEY,
     contrasena VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
