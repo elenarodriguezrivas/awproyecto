@@ -2,9 +2,10 @@
 class DB {
     public $db;
 
-    public function __construct($dbname = 'C:\xampp\htdocs\awproyecto\includes\database\database.db') {
+    public function __construct($host = '192.168.1.150', $dbname = 'awproyecto', $username = 'root', $password = 'awproyecto') {
         try {
-            $this->db = new PDO("sqlite:" . $dbname);
+            $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+            $this->db = new PDO($dsn, $username, $password);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die("Error de conexión: " . $e->getMessage());
@@ -20,5 +21,4 @@ class DB {
     public function getBD(){
         return $this->db;
     }
-
 }
