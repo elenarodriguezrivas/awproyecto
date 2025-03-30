@@ -1,14 +1,13 @@
 <?php
 require_once __DIR__ . '/../../database/Connection.php';
 require_once __DIR__ . '/../model/Usuario.php';
-require_once __DIR__ . '/../../application.php';
 
 class UsuarioDAO{
 
     private $db;
 
     public function __construct() {
-        $this->db = application::getInstance()->getConexionBd();
+        $this->db = DB::getInstance()->getBD();
     }
 
     public function listarUsuarios(): array {
@@ -83,7 +82,6 @@ class UsuarioDAO{
             $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
             if ($row) {
                 return new Usuario(
                     $row['userid'],
