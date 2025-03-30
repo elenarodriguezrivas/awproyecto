@@ -4,14 +4,16 @@ require_once __DIR__ . '/../config.php';
 
 class DB {
     private static ?DB $instance = null; // Almacena la única instancia de la clase
-    private PDO $db;
+    private ?PDO $db = null;
 
     // Constructor privado para evitar instanciación directa
     private function __construct() {
+        // Cargar configuración desde config.php
         $host = BD_HOST;
         $dbname = BD_NAME;
         $username = BD_USER;
         $password = BD_PASS;
+
         try {
             $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
             $this->db = new PDO($dsn, $username, $password);
@@ -19,6 +21,9 @@ class DB {
         } catch (PDOException $e) {
             die("Error de conexión: " . $e->getMessage());
         }
+
+        // Registrar el cierre de la conexión al finalizar el script
+        register_shutdown_function([$this, 'closeConnection']);
     }
 
     // Método estático para obtener la única instancia de la clase
@@ -41,7 +46,12 @@ class DB {
         return $this->db;
     }
 
+    // Método para cerrar la conexión
+    public function closeConnection() {
+        $this->db = null; // Cerrar la conexión estableciendo el objeto PDO a null
+    }
+
     // Evitar clonación de la instancia
     private function __clone() {}
-
+    
 }
