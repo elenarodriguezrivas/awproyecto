@@ -48,10 +48,10 @@ class DB {
 
     // Método para cerrar la conexión
     public function closeConnection() {
-        $this->db = null; // Cerrar la conexión estableciendo el objeto PDO a null
+        $this->db = null; // Cerrar la conexión estableciendo el objeto PDO a null (esto se debe a que en la documentacion de PDO al poner el puntero a null automaticamente se libera la conexion y es la ventaja con respecto a sqli)
     }
 
     // Evitar clonación de la instancia
     private function __clone() {}
-    
+
 }
