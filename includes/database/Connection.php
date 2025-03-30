@@ -1,8 +1,17 @@
 <?php
-class DB {
-    public $db;
 
-    public function __construct($host = '192.168.1.150', $dbname = 'awproyecto', $username = 'root', $password = 'awproyecto') {
+require_once __DIR__ . '/../config.php';
+
+class DB {
+    private static ?DB $instance = null; // Almacena la única instancia de la clase
+    private PDO $db;
+
+    // Constructor privado para evitar instanciación directa
+    private function __construct() {
+        $host = BD_HOST;
+        $dbname = BD_NAME;
+        $username = BD_USER;
+        $password = BD_PASS;
         try {
             $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
             $this->db = new PDO($dsn, $username, $password);
@@ -12,13 +21,27 @@ class DB {
         }
     }
 
+    // Método estático para obtener la única instancia de la clase
+    public static function getInstance(): DB {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    // Método para ejecutar consultas
     public function query($sql, $params = []) {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
         return $stmt;
     }
 
-    public function getBD(){
+    // Método para obtener la conexión PDO
+    public function getBD(): PDO {
         return $this->db;
     }
+
+    // Evitar clonación de la instancia
+    private function __clone() {}
+
 }

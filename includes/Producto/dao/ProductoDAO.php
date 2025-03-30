@@ -1,19 +1,18 @@
 <?php
-require_once __DIR__ . '/../../database/Connection.php';
 require_once __DIR__ . '/../model/Producto.php';
-require_once __DIR__ . '/../../application.php';
+require_once __DIR__ . '/../../database/Connection.php';
 
 class ProductoDAO { /*extiende de la base*/
 
     private $db;
 
     public function __construct() {
-        $this->db = application::getInstance()->getConexionBd();
+        $this->db = DB::getInstance()->getBD();
     }
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen) 
+            $sql = "INSERT INTO Productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen) 
                     VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen)";
 
             $stmt = $this->db->prepare($sql);
@@ -31,7 +30,7 @@ class ProductoDAO { /*extiende de la base*/
             $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
             $stmt->bindParam(':precio', $precio, PDO::PARAM_INT);
             $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
-            $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
+            $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_INT);
             $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
 
             $result = $stmt->execute();
@@ -47,7 +46,7 @@ class ProductoDAO { /*extiende de la base*/
 
     public function listarProductos(): array {
         try {
-            $sql = "SELECT * FROM productos";
+            $sql = "SELECT * FROM Productos";
             $stmt = $this->db->query($sql);
 
             $productos = [];
@@ -72,7 +71,7 @@ class ProductoDAO { /*extiende de la base*/
     public function listarMisProductos(): array {/*listar todos mis productos*/
         try {
             /*$sql = "SELECT * FROM productos";*/
-            $sql = "SELECT * FROM productos WHERE idVendedor = {$_SESSION['userid']}";
+            $sql = "SELECT * FROM Productos WHERE idVendedor = {$_SESSION['userid']}";
             //queremos que solo nos muestre en el catálogo los que no aparecen en la tabla de ventas
             //es decir no han sido vendidos
 
@@ -98,7 +97,7 @@ class ProductoDAO { /*extiende de la base*/
 
     public function eliminarProducto(string $nombreProducto, string $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
         try {
-            $sql = "DELETE FROM productos WHERE nombreProducto = :nombreProducto AND idVendedor = :idVendedor";
+            $sql = "DELETE FROM Productos WHERE nombreProducto = :nombreProducto AND idVendedor = :idVendedor";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
             $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
@@ -116,7 +115,7 @@ class ProductoDAO { /*extiende de la base*/
 
     public function obtenerProductoPorId(string $id): ?Producto {/*buscar un producto en concreto por su id*/
         try {
-            $sql = "SELECT * FROM productos WHERE id = :id";
+            $sql = "SELECT * FROM Productos WHERE id = :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':id', $id, PDO::PARAM_STR);
             $stmt->execute();
@@ -177,7 +176,7 @@ class ProductoDAO { /*extiende de la base*/
 
     public function obtenerUltimoIdProducto(): ?int {
         try {
-            $sql = "SELECT id FROM productos ORDER BY id DESC LIMIT 1";
+            $sql = "SELECT id FROM Productos ORDER BY id DESC LIMIT 1";
             $stmt = $this->db->query($sql);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             return $row ? (int)$row['id'] : null;
