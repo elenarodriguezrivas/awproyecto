@@ -12,8 +12,8 @@ class ProductoDAO { /*extiende de la base*/
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO Productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen) 
-                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen)";
+            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen, estado) 
+                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen, :estado)";
 
             $stmt = $this->db->prepare($sql);
 
@@ -24,6 +24,7 @@ class ProductoDAO { /*extiende de la base*/
             $categoria = $producto->getCategoriaProducto();
             $idVendedor = $producto->getIdVendedor();
             $rutaImagen = $producto->getRutaImagen();
+            $estado = $producto->getEstado();
 
             // Pasar las variables a bindParam
             $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
@@ -32,6 +33,7 @@ class ProductoDAO { /*extiende de la base*/
             $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
             $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_INT);
             $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
 
             $result = $stmt->execute();
             if (!$result) {
@@ -57,7 +59,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['precio'],
                     $row['categoriaProducto'],
                     $row['idVendedor'],
-                    $row['rutaImagen']
+                    $row['rutaImagen'],
+                    $row['estado']
                 );
             }
             return $productos;
@@ -85,7 +88,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    $row['idVendedor']
+                    $row['idVendedor'],
+                    $row['estado']
                 );
             }
             return $productos;
@@ -131,7 +135,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['precio'],
                     $row['categoriaProducto'],
                     $row['fechaRegistroProducto'],
-                    $row['idVendedor']
+                    $row['idVendedor'],
+                    $row['estado']
                 );
             }
             return null; // Si no se encuentra el producto, devolver null
@@ -163,7 +168,8 @@ class ProductoDAO { /*extiende de la base*/
                         $row['precio'],
                         $row['categoriaProducto'],
                         $row['fechaRegistroProducto'],
-                        $row['idVendedor']
+                        $row['idVendedor'],
+                        $row['estado']
                     );
                 }
             } catch (PDOException $e) {
