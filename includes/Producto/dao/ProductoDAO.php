@@ -12,7 +12,7 @@ class ProductoDAO { /*extiende de la base*/
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen, estado) 
+            $sql = "INSERT INTO Productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen, estado) 
                     VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen, :estado)";
 
             $stmt = $this->db->prepare($sql);
