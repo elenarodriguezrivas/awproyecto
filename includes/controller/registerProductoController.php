@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
 
-    $producto = new Producto($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $_SESSION['userid'], $rutaImagen, 'enventa');
+    $producto = new Producto(NULL,$nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $_SESSION['userid'], $rutaImagen, 'enventa');
     
     $productoSA = new registerProductoSA();
 

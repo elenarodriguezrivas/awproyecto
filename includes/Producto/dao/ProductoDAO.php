@@ -54,6 +54,7 @@ class ProductoDAO { /*extiende de la base*/
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $productos[] = new Producto(
+                    $row['id'],
                     $row['nombreProducto'],
                     $row['descripcionProducto'],
                     $row['precio'],
@@ -89,6 +90,7 @@ class ProductoDAO { /*extiende de la base*/
                     $row['precio'],
                     $row['categoriaProducto'],
                     $row['idVendedor'],
+                    $row['rutaImagen'],
                     $row['estado']
                 );
             }
@@ -134,8 +136,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['descripcionProducto'],
                     $row['precio'],
                     $row['categoriaProducto'],
-                    $row['fechaRegistroProducto'],
                     $row['idVendedor'],
+                    $row['rutaImagen'],
                     $row['estado']
                 );
             }
@@ -180,6 +182,20 @@ class ProductoDAO { /*extiende de la base*/
         return $productosCat;
     }
 
+    public function venta($id) : bool {
+        try {
+            $sql = "UPDATE Productos SET estado = 'vendido' WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $result = $stmt->execute();
+
+            return $result && $stmt->rowCount() > 0; // Devuelve true si se actualizó al menos una fila
+        } catch (PDOException $e) {
+            error_log("Error al actualizar el estado del producto a 'vendido': " . $e->getMessage());
+            return false;
+        }
+    }
+
     public function obtenerUltimoIdProducto(): ?int {
         try {
             $sql = "SELECT id FROM Productos ORDER BY id DESC LIMIT 1";
@@ -189,6 +205,39 @@ class ProductoDAO { /*extiende de la base*/
         } catch (PDOException $e) {
             error_log("Error al obtener el último ID del producto: " . $e->getMessage());
             return null;
+        }
+    }
+
+    public function actualizarProducto(Producto $producto): bool {
+        try {
+            $sql = "UPDATE Productos 
+                    SET nombreProducto = :nombreProducto, 
+                        descripcionProducto = :descripcionProducto, 
+                        precio = :precio, 
+                        categoriaProducto = :categoriaProducto, 
+                        idVendedor = :idVendedor, 
+                        rutaImagen = :rutaImagen, 
+                        estado = :estado 
+                    WHERE id = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+            // Asignar los valores del objeto Producto a los parámetros
+            $stmt->bindParam(':id', $producto->getId(), PDO::PARAM_INT);
+            $stmt->bindParam(':nombreProducto', $producto->getNombreProducto(), PDO::PARAM_STR);
+            $stmt->bindParam(':descripcionProducto', $producto->getDescripcionProducto(), PDO::PARAM_STR);
+            $stmt->bindParam(':precio', $producto->getPrecio(), PDO::PARAM_STR);
+            $stmt->bindParam(':categoriaProducto', $producto->getCategoriaProducto(), PDO::PARAM_STR);
+            $stmt->bindParam(':idVendedor', $producto->getIdVendedor(), PDO::PARAM_INT);
+            $stmt->bindParam(':rutaImagen', $producto->getRutaImagen(), PDO::PARAM_STR);
+            $stmt->bindParam(':estado', $producto->getEstado(), PDO::PARAM_STR);
+
+            $result = $stmt->execute();
+
+            return $result && $stmt->rowCount() > 0; // Devuelve true si se actualizó al menos una fila
+        } catch (PDOException $e) {
+            error_log("Error al actualizar el producto: " . $e->getMessage());
+            return false;
         }
     }
 }

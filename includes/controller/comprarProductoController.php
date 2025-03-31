@@ -1,46 +1,37 @@
 <?php
 session_start(); // Inicia la sesión
 
-require_once __DIR__ . '/../Ventas/model/Venta.php';
 require_once __DIR__ . '/../Ventas/sa/registrarVentaSA.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener datos del producto y comprador
-    $producto_id = $_POST['producto_id'];
-    $precio = $_POST['precio'];
-    
-    // Obtener la fecha de la venta desde la sesión (la fecha de la compra)
-    if (!isset($_SESSION['fechaVenta'])) {
-        $_SESSION['fechaVenta'] = date('Ymd');  // Si no existe, la asignamos
+    // Obtener el JSON enviado en el cuerpo de la solicitud
+    $jsonData = file_get_contents('php://input');
+    $data = json_decode($jsonData, true); // Decodificar el JSON a un array asociativo
+
+    // Validar que el ID del producto esté presente
+    if (empty($data['id'])) {
+        http_response_code(400); // Bad Request
+        echo "El ID del producto es obligatorio.";
+        exit;
     }
-    $fechaVenta = $_SESSION['fechaVenta'];  // Usamos la fecha de la venta desde la sesión
 
-    // Obtener el idVendedor desde el producto (esto debería venir de la base de datos)
-    require_once __DIR__ . '/../Productos/sa/obtenerProductoPorIdSA.php'; // Asegúrate de incluir la clase que obtiene los productos
-    $productoSA = new obtenerProductoPorIdSA();
-    $producto = $productoSA->obtenerProductoPorId($producto_id); // Este método debe devolver un producto con el idVendedor
-    $user_id = $producto['idVendedor']; // El idVendedor es el propietario del producto
+    $producto_id = $data['id']; // Obtener el ID del producto
 
-    // El comprador es el usuario que ha iniciado sesión
-    $comprador_id = $_SESSION['userid'];  // El usuario logueado
-
-    // Crear una instancia de la venta
-    $venta = new Venta($producto_id, $user_id, $fechaVenta, $comprador_id, $precio);
+    // Crear una instancia del servicio de aplicación para registrar la venta
     $ventaSA = new registrarVentaSA();
 
     try {
-        if ($ventaSA->registrarVentaSA($venta)) {
-            http_response_code(201); 
+        // Llamar al método para registrar la venta
+        if ($ventaSA->registrarVenta($producto_id)) {
+            http_response_code(200); // OK
             echo "Producto vendido con éxito.";
-            // Limpiar la fecha de venta después de la compra, si ya no es necesaria
-            unset($_SESSION['fechaVenta']);
         } else {
-            http_response_code(409); 
-            echo "El producto no se ha podido vender";
+            http_response_code(409); // Conflict
+            echo "No se pudo registrar la venta del producto.";
         }
     } catch (Exception $e) {
-        http_response_code(500); 
-        echo "Error al vender el producto: " . $e->getMessage();
+        http_response_code(500); // Internal Server Error
+        echo "Error al procesar la venta: " . $e->getMessage();
     }
     exit;
 }
