@@ -37,7 +37,7 @@ class VentaDAO{
             }
         } catch (PDOException $e) {
             error_log("Error al registrar la venta: " . $e->getMessage());
-            return false;
+            return $e;
         }
     }
 }

@@ -31,7 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Llamar al método para registrar la venta
-        if ($ventaSA->registrarVenta($producto_id, $username)) {
+        echo $username;
+        echo $producto_id;
+        $ex = $ventaSA->registrarVenta($producto_id, $username);
+        echo $ex;
+        if ($ex) {
             http_response_code(200); // OK
             echo "Producto vendido con éxito.";
         } else {

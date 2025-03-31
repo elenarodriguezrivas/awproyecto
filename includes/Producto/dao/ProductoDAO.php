@@ -71,7 +71,7 @@ class ProductoDAO { /*extiende de la base*/
         }
     }
 
-    public function obtenerVendedorPorProductoId(int $productoId): ?int {
+    public function obtenerVendedorPorProductoId(int $productoId) : string{
         try {
             $sql = "SELECT idVendedor FROM Productos WHERE id = :productoId";
             $stmt = $this->db->prepare($sql);
@@ -79,10 +79,10 @@ class ProductoDAO { /*extiende de la base*/
             $stmt->execute();
     
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $row ? (int)$row['idVendedor'] : null; // Devuelve el ID del vendedor o null si no se encuentra
+            return $row ? (string)$row['idVendedor'] : null; // Devuelve el ID del vendedor o null si no se encuentra
         } catch (PDOException $e) {
             error_log("Error al obtener el vendedor por ID de producto: " . $e->getMessage());
-            return null;
+            return "";
         }
     }
 
