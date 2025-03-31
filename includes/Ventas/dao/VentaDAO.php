@@ -26,9 +26,15 @@ class VentaDAO{
             // Pasar las variables a bindParam
             $stmt->bindParam(':producto_id', $producto_id, PDO::PARAM_INT);
             $stmt->bindParam(':vendedor_id', $vendedor_id, PDO::PARAM_STR);
-            $stmt->bindParam(':comprador_id', $comprador_id, PDO::PARAM_INT);
+            $stmt->bindParam(':comprador_id', $comprador_id, PDO::PARAM_STR);
 
-            return $stmt->execute();
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return true; // Venta registrada con éxito
+            } else {
+                error_log("Error al registrar la venta: No se pudo ejecutar la consulta.");
+                return false;
+            }
         } catch (PDOException $e) {
             error_log("Error al registrar la venta: " . $e->getMessage());
             return false;
