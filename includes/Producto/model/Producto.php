@@ -8,7 +8,7 @@ class Producto {
     private $categoriaProducto;
     private $idVendedor;
     private $rutaImagen;
-    private $estado
+    private $estado;
 
     public function __construct($nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor, $rutaImagen, $estado) {
         $this->nombreProducto = $nombreProducto;
