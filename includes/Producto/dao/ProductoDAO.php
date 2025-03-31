@@ -86,14 +86,12 @@ class ProductoDAO { /*extiende de la base*/
         }
     }
 
-    public function listarMisProductos(): array {/*listar todos mis productos*/
+    public function listarMisProductos(string $userid): array {
         try {
-            /*$sql = "SELECT * FROM productos";*/
-            $sql = "SELECT * FROM Productos WHERE idVendedor = {$_SESSION['userid']}";
-            //queremos que solo nos muestre en el catálogo los que no aparecen en la tabla de ventas
-            //es decir no han sido vendidos
-
-            $stmt = $this->db->query($sql);
+            $sql = "SELECT * FROM Productos WHERE idVendedor = :idVendedor";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':idVendedor', $userid, PDO::PARAM_STR);
+            $stmt->execute();
 
             $productos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -110,7 +108,7 @@ class ProductoDAO { /*extiende de la base*/
             }
             return $productos;
         } catch (PDOException $e) {
-            error_log("Error al listar mis productos: " . $e->getMessage());
+            error_log("Error al listar productos del usuario con ID $userid: " . $e->getMessage());
             return [];
         }
     }

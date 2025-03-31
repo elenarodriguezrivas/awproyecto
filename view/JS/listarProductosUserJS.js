@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p>${producto.descripcionProducto}</p>
                             <p>Precio: ${producto.precio}€</p>
                             <p>Categoría: ${producto.categoriaProducto}</p>
+                            <p>Vendedor: ${producto.vendedorId}</p>
+                            <p>Estado: ${producto.estado}</p>
                             <img src="../${producto.rutaImagen}" style="height: 200px;" />
                         </div>
                     `;
