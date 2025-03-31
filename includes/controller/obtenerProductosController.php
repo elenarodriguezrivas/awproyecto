@@ -8,11 +8,14 @@ $productos = $listarProductoSA->listarProductos();
 $productosArray = [];
 foreach ($productos as $producto) {
     $productosArray[] = [
+        'id' => $producto->getId(),
         'nombreProducto' => $producto->getNombreProducto(),
         'descripcionProducto' => $producto->getDescripcionProducto(),
         'precio' => $producto->getPrecio(),
         'categoriaProducto' => $producto->getcategoriaProducto(),
-        'rutaImagen' => $producto->getRutaImagen()
+        'vendedorId' => $producto->getIdVendedor(),
+        'rutaImagen' => $producto->getRutaImagen(),
+        'estado' => $producto->getEstado()
     ];
 }
 

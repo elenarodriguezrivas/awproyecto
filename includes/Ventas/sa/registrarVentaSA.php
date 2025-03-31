@@ -1,18 +1,24 @@
 <?php
+require_once __DIR__ . '/../../Producto/dao/ProductoDAO.php';
+require_once __DIR__ . '/../../Producto/model/Producto.php';
 require_once __DIR__ . '/../dao/VentaDAO.php';
-require_once __DIR__ . '/../model/Venta.php';
 
-class RegistroSA {
+class registrarVentaSA {
+    private $productoDAO;
     private $ventaDAO;
 
     public function __construct() {
-        $this->ventaDAO = new UsuarioDAO();
+        $this->productoDAO = new ProductoDAO();
+        $this->ventaDAO = new VentaDAO();
     }
 
-    public function registrarUsuario(Venta $venta): bool {
-        return $this->ventaDAO->agregarUsuario($venta);
+    public function registrarVenta($idProducto, $idComprador){
+        $idVendedor = $this->productoDAO->obtenerVendedorPorProductoId($idProducto);
+        $venta = new Venta($idProducto, $idComprador, $idVendedor);
+        if(!$this->productoDAO->venta($idProducto)) return false;
+        if(!$this->ventaDAO->registrarVenta($venta)) return false;
+        return true;
     }
-    
+
 }
-
 ?>
