@@ -22,14 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p>Categoría: ${producto.categoriaProducto}</p>
                             <p>Estado: ${producto.estado}</p>
                             <img src="../${producto.rutaImagen}" style="height: 200px;" />
-                            <!-- PARA LA PRACTICA 3 -->
-                            <!--
-                            <form action="../includes/controller/ComprarProductoController.php" method="POST">
-                                <input type="hidden" name="producto_id" value="${producto.id}">
-                                <input type="hidden" name="precio" value="${producto.precio}">
-                                <button type="submit" class="btn">Comprar</button>
-                            </form>
-                            -->
+                            ${producto.estado.toLowerCase() === 'enventa' ? `
+                                <button class="btn btn-green">Comprar</button>
+                            ` : ''}
                         </div>
                     `;
                 });
