@@ -5,10 +5,10 @@
 /**
  * Parámetros de conexión a la BD
  */
-define('BD_HOST', '192.168.1.150');
+define('BD_HOST', 'localhost');
 define('BD_NAME', 'awproyecto');
-define('BD_USER', 'root');
-define('BD_PASS', 'awproyecto');
+define('BD_USER', 'admin');
+define('BD_PASS', 'admin');
 
 /**
  * Parámetros de configuración utilizados para generar las URLs y las rutas a ficheros en la aplicación
