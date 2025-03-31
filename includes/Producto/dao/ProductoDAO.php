@@ -113,11 +113,11 @@ class ProductoDAO { /*extiende de la base*/
         }
     }
 
-    public function eliminarProducto(string $nombreProducto, string $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
+    public function eliminarProducto($idProducto, $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
         try {
-            $sql = "DELETE FROM Productos WHERE nombreProducto = :nombreProducto AND idVendedor = :idVendedor";
+            $sql = "DELETE FROM Productos WHERE id = :id AND idVendedor = :idVendedor";
             $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $idProducto, PDO::PARAM_INT);
             $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {

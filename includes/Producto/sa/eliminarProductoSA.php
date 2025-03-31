@@ -9,8 +9,8 @@ class eliminarProductoSA {
         $this->productoDAO = new ProductoDAO();
     }
 
-    public function eliminarProducto(string $nombreProducto, string $idVendedor) {
-        return $this->productoDAO->eliminarProducto($nombreProducto, $idVendedor);
+    public function eliminarProducto($idProducto, $idVendedor) {
+        return $this->productoDAO->eliminarProducto($idProducto, $idVendedor);
     }
     
 }

@@ -1,28 +1,35 @@
 <?php
-require_once __DIR__ . '/../Producto/sa/eliminarProductoSA.php';
-require_once __DIR__ . '/../Producto/model/Producto.php';
+session_start(); // Inicia la sesión
 
-session_start();
+require_once __DIR__ . '/../Producto/sa/eliminarProductoSA.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_SESSION['userid'])) {
-        http_response_code(403); // No autorizado
-        echo "Debes iniciar sesión.";
-        exit;
-    }
+    // Obtener el JSON enviado en el cuerpo de la solicitud
+    $jsonData = file_get_contents('php://input');
+    $data = json_decode($jsonData, true); // Decodificar el JSON a un array asociativo
 
-    $nombreProducto = htmlspecialchars(trim($_POST['nombreProducto']), ENT_QUOTES, 'UTF-8');
-
-    if (empty($nombreProducto)) {
+    // Validar que el ID del producto esté presente
+    if (empty($data['id'])) {
         http_response_code(400); // Bad Request
-        echo "El nombre del producto no puede estar vacío.";
+        echo "El ID del producto es obligatorio.";
         exit;
     }
+
+    $producto_id = $data['id']; // Obtener el ID del producto
+
+    // Obtener el nombre de usuario desde la sesión
+    if (empty($_SESSION['userid'])) {
+        http_response_code(401); // Unauthorized
+        echo "No se ha iniciado sesión.";
+        exit;
+    }
+
+    $username = $_SESSION['userid']; // Obtener el nombre de usuario desde la sesión
 
     $productoSA = new eliminarProductoSA();
 
     try {
-        $resultado = $productoSA->eliminarProducto($nombreProducto, $_SESSION['userid']);
+        $resultado = $productoSA->eliminarProducto($producto_id, $username);
 
         if ($resultado && $resultado->message === "Producto eliminado correctamente") {
             http_response_code(200); // OK
