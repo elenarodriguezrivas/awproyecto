@@ -47,7 +47,7 @@ function comprarProducto(productoId) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: productoId }), // Enviar solo el ID como JSON
+        body: JSON.stringify({ id: productoId }), // Enviar solo el ID del producto como JSON
     })
         .then(response => {
             if (!response.ok) {

@@ -17,12 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $producto_id = $data['id']; // Obtener el ID del producto
 
+    // Obtener el nombre de usuario desde la sesión
+    if (empty($_SESSION['userid'])) {
+        http_response_code(401); // Unauthorized
+        echo "No se ha iniciado sesión.";
+        exit;
+    }
+
+    $username = $_SESSION['userid']; // Obtener el nombre de usuario desde la sesión
+
     // Crear una instancia del servicio de aplicación para registrar la venta
     $ventaSA = new registrarVentaSA();
 
     try {
         // Llamar al método para registrar la venta
-        if ($ventaSA->registrarVenta($producto_id)) {
+        if ($ventaSA->registrarVenta($producto_id, $username)) {
             http_response_code(200); // OK
             echo "Producto vendido con éxito.";
         } else {
