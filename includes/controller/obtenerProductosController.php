@@ -13,6 +13,7 @@ foreach ($productos as $producto) {
         'descripcionProducto' => $producto->getDescripcionProducto(),
         'precio' => $producto->getPrecio(),
         'categoriaProducto' => $producto->getcategoriaProducto(),
+        'vendedorId' => $producto->getIdVendedor(),
         'rutaImagen' => $producto->getRutaImagen(),
         'estado' => $producto->getEstado()
     ];

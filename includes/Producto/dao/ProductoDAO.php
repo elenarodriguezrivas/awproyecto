@@ -31,7 +31,7 @@ class ProductoDAO { /*extiende de la base*/
             $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
             $stmt->bindParam(':precio', $precio, PDO::PARAM_INT);
             $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
-            $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_INT);
+            $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
             $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
 

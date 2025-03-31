@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p>ID: ${producto.id}</p>
                             <p>${producto.descripcionProducto}</p>
                             <p>Precio: ${producto.precio}€</p>
+                            <p>Vendedor: ${producto.vendedorId}</p>
                             <p>Categoría: ${producto.categoriaProducto}</p>
                             <img src="../${producto.rutaImagen}" style="height: 200px;" />
                             ${producto.estado.toLowerCase() === 'enventa' ? `

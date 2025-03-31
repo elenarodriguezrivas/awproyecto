@@ -11,7 +11,7 @@ class VentaDAO{
         $this->db = DB::getInstance()->getBD();
     }
 
-    public function registrarVenta(Venta $venta): bool {
+    public function registrarVenta(Venta $venta) {
         try {
             $sql = "INSERT INTO Ventas (producto_id, vendedor_id, comprador_id) 
                     VALUES (:producto_id, :vendedor_id, :comprador_id)";
