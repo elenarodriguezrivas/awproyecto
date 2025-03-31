@@ -13,8 +13,8 @@ class listarProductosSA {
         return $this->productoDAO->listarProductos();
     }
 
-    public function listarProductosUser(): array {
-        return $this->productoDAO->listarMisProductos();
+    public function listarProductosUser($userid): array {
+        return $this->productoDAO->listarMisProductos($userid);
     }
 }
 ?>

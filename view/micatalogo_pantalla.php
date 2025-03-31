@@ -14,8 +14,7 @@ $contenidoPrincipal=<<<EOS
             <a href="registerProducto_pantalla.php"><button class="btn">Añadir producto nuevo </button></a>
             <a href="eliminarProducto_pantalla.php"><button class="btn">Eliminar producto </button></a>
     </ul>
-    <div class="destacado">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div id="productos"></div>
     </div>
     </section>
     <script src="$rutaJS"></script>
