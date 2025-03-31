@@ -15,8 +15,9 @@ class registrarVentaSA {
     public function registrarVenta($idProducto, $idComprador){
         $idVendedor = $this->productoDAO->obtenerVendedorPorProductoId($idProducto);
         $venta = new Venta($idProducto, $idComprador, $idVendedor);
-        $this->productoDAO->venta($idProducto);
-        return $this->ventaDAO->registrarVenta($venta);
+        if(!$this->productoDAO->venta($idProducto)) return false;
+        if(!$this->ventaDAO->registrarVenta($venta)) return false;
+        return true;
     }
 
 }
