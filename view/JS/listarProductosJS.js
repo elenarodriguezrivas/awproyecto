@@ -17,9 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     productosHtml += `
                         <div class="producto" id="producto-${producto.id}">
                             <h3>${producto.nombreProducto}</h3>
-                            <p>ID: ${producto.id}</p>
+                            <h4>${producto.precio}€</h4>
                             <p>${producto.descripcionProducto}</p>
-                            <p>Precio: ${producto.precio}€</p>
                             <p>Categoría: ${producto.categoriaProducto}</p>
                             <img src="../${producto.rutaImagen}" style="height: 200px;" />
                             ${producto.estado.toLowerCase() === 'enventa' ? `

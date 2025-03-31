@@ -12,7 +12,6 @@ $contenidoPrincipal=<<<EOS
     <h2>Mi Catálogo de Productos</h2>
     <ul>
             <a href="registerProducto_pantalla.php"><button class="btn">Añadir producto nuevo </button></a>
-            <a href="eliminarProducto_pantalla.php"><button class="btn">Eliminar producto </button></a>
     </ul>
     <div id="productos"></div>
     </div>

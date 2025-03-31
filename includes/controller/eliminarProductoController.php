@@ -3,6 +3,11 @@ session_start(); // Inicia la sesión
 
 require_once __DIR__ . '/../Producto/sa/eliminarProductoSA.php';
 
+if (!isset($_SESSION['userid'])) {
+    header("Location: login_pantalla.php?error=Debes iniciar sesión para registrar un producto.");
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener el JSON enviado en el cuerpo de la solicitud
     $jsonData = file_get_contents('php://input');

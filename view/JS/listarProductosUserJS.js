@@ -17,11 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     productosHtml += `
                         <div class="producto" id="producto-${producto.id}">
                             <h3>${producto.nombreProducto}</h3>
+                            <h4>Precio: ${producto.precio}€</h4>
                             <p>${producto.descripcionProducto}</p>
-                            <p>Precio: ${producto.precio}€</p>
                             <p>Categoría: ${producto.categoriaProducto}</p>
-                            <p>Vendedor: ${producto.vendedorId}</p>
-                            <p>Estado: ${producto.estado}</p>
                             <img src="../${producto.rutaImagen}" style="height: 200px;" />
                             ${producto.estado.toLowerCase() === 'enventa' ? `
                                 <button class="btn btn-red" onclick='eliminarProducto(${producto.id})'>Eliminar</button>
