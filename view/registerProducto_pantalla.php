@@ -12,16 +12,20 @@ if (!isset($_SESSION['userid'])) {
     exit;
 }
 
+$rutaJS = RUTA_JS . '/registerProductoJS.js';
+
 $tituloPagina = 'Registro de un producto';
 
 // Crear instancia del formulario y gestionar su procesamiento
 $form = new FormularioProducto();
-$gestionFormulario = $form->gestiona();
+$gestionFormulario = $form->generaFormulario();
 
 // Construir la página con el formulario
 $contenidoPrincipal = <<<EOS
     <h2 class="form-title">Nuevo producto</h2>
     $gestionFormulario
+    <div id="message" class="message"></div>
+    <script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . "/../comun/plantilla.php";

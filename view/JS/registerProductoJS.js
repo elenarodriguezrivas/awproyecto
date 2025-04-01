@@ -1,4 +1,4 @@
-document.getElementById('registerForm').addEventListener('submit', function(event) {
+document.getElementById('productForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     var formData = new FormData(this);
@@ -20,7 +20,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('message').innerHTML = 'Error al registrar el usuario: ' + error.message;
+        document.getElementById('message').innerHTML = 'Error al registrar el producto: ' + error.message;
         document.getElementById('message').classList.add('error');
         document.getElementById('message').classList.remove('success');
     });

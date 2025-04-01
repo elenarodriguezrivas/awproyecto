@@ -14,31 +14,24 @@ class FormularioLogin extends Formulario
      */
     public function __construct()
     {
-        parent::__construct('formLogin', ['urlRedireccion' => RUTA_APP . '/view/perfil_pantalla.php']);
+        parent::__construct('loginForm', ['urlRedireccion' => RUTA_APP . '/view/perfil_pantalla.php']);
     }
 
     /**
      * Genera los campos del formulario.
      */
-    protected function generaCamposFormulario(&$datos)
+    protected function generaCamposFormulario()
     {
-        $userid = $datos['userid'] ?? '';
-
-        $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores, 'errores-generales');
-        $erroresCampos = self::generaErroresCampos(['userid', 'contrasena'], $this->errores, 'span', ['class' => 'error']);
 
         $html = <<<EOF
         <div class="form-group">
             <label for="userid">Usuario:</label>
-            <input id="userid" type="text" name="userid" value="$userid" required class="form-control">
-            {$erroresCampos['userid']}
+            <input id="userid" type="text" name="userid" required class="form-control">
         </div>
         <div class="form-group">
             <label for="contrasena">Contraseña:</label>
             <input id="contrasena" type="password" name="contrasena" required class="form-control">
-            {$erroresCampos['contrasena']}
         </div>
-        $htmlErroresGlobales
         <div class="form-group">
             <button type="submit" class="btn">Iniciar Sesión</button>
         </div>
@@ -51,7 +44,7 @@ class FormularioLogin extends Formulario
      */
     protected function procesaFormulario(&$datos)
     {
-        $this->errores = [];
+        /*$this->errores = [];
 
         // Validar usuario
         $userid = trim($datos['userid'] ?? '');
@@ -82,6 +75,6 @@ class FormularioLogin extends Formulario
             } else {
                 $this->errores[] = "El usuario o la contraseña no coinciden";
             }
-        }
+        }*/
     }
 }

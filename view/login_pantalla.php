@@ -13,7 +13,7 @@ $rutaJS = RUTA_JS . '/loginJS.js';
 
 // Crear una instancia del formulario de login
 $formularioLogin = new FormularioLogin();
-$htmlFormulario = $formularioLogin->gestiona();
+$htmlFormulario = $formularioLogin->generaFormulario();
 
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
