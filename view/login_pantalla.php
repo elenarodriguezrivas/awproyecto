@@ -1,8 +1,9 @@
 <?php
 
 require_once __DIR__.'/../includes/config.php';
+require_once __DIR__.'/../includes/formulario/FormularioLogin.php';
 
-//session_start();
+// Si el usuario ya está autenticado, redirigir al perfil
 if (isset($_SESSION['userid'])) {
     header("Location: perfil_pantalla.php");
     exit;
@@ -10,30 +11,21 @@ if (isset($_SESSION['userid'])) {
 
 $rutaJS = RUTA_JS . '/loginJS.js';
 
+// Crear una instancia del formulario de login
+$formularioLogin = new FormularioLogin();
+$htmlFormulario = $formularioLogin->gestiona();
+
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
-    <h2 class="form-title">Iniciar Sesión en MercaSwapp</h2>
-    <form id="loginForm" action="../includes/controller/loginUsuarioController.php" method="POST" class="form">
-        <div class="form-group">
-            <label for="userid">Usuario:</label>
-            <input type="text" id="userid" name="userid" required class="form-control"><br>
+    <section class="presentacion">
+        <h2 class="form-title">Iniciar Sesión en MercaSwapp</h2>
+        <div class="destacado">
+            $htmlFormulario
+            <div id="message" class="message"></div>
         </div>
-
-        <div class="form-group">
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required class="form-control"><br>
-        </div>
-
-        <div id="message" class="message"></div>
-
-        <input type="hidden" name="action" value="login">
-        <button type="submit" class="btn">Iniciar Sesión</button>
-    </form>
-
-    <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
-
+        <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
+    </section>
     <script src="$rutaJS"></script>
-    
 EOS;
 
 // Si hay un error, mostrarlo en la pantalla

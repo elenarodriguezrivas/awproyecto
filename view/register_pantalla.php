@@ -1,56 +1,38 @@
 <?php
 
 require_once __DIR__.'/../includes/config.php';
+require_once __DIR__.'/../includes/formulario/FormularioRegistro.php';
 
-$tituloPagina = "Registro de Usuario";
+// Si el usuario ya está autenticado, redirigir al perfil
+if (isset($_SESSION['userid'])) {
+    header("Location: perfil_pantalla.php");
+    exit;
+}
 
 $rutaJS = RUTA_JS . '/registerJS.js';
 
+// Crear una instancia del formulario de registro
+$formularioRegistro = new FormularioRegistro();
+$htmlFormulario = $formularioRegistro->gestiona();
+
+// Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
-    <h2 class="form-title">Regístrate en MercaSwapp</h2>
-    <form id="registerForm" action="../includes/controller/registerUsuarioController.php" method="POST" class="form">
-        <div class="form-group">
-            <label for="userid">User ID:</label>
-            <input type="text" id="userid" name="userid" required class="form-control"><br>
+    <section class="presentacion">
+        <h2 class="form-title">Regístrate en MercaSwapp</h2>
+        <div class="destacado">
+            $htmlFormulario
+            <div id="message" class="message"></div>
         </div>
-
-        <div class="form-group">
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required class="form-control"><br>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required class="form-control"><br>
-        </div>
-
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required class="form-control"><br>
-        </div>
-
-        <div class="form-group">
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos" required class="form-control"><br>
-        </div>
-
-        <div class="form-group">
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" name="edad" required min="1" class="form-control"><br>
-        </div>
-
-        <div id="message" class="message"></div>
-
-        <input type="hidden" name="action" value="register">
-        <button type="submit" class="btn">Registrarse</button>
-    </form>
-
-    <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
-
-     <script src="$rutaJS"></script>
-
-
+        <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
+    </section>
+    <script src="$rutaJS"></script>
 EOS;
 
-require_once __DIR__ . "/../comun/plantilla.php";
+// Si hay un error, mostrarlo en la pantalla
+if (isset($_GET['error'])) {
+    $contenidoPrincipal .= "<p style='color:red;'>⚠️ " . htmlspecialchars($_GET['error']) . "</p>";
+}
+
+// Incluir la plantilla para que se muestre correctamente
+require_once __DIR__ . '/../comun/plantilla.php';
 ?>
