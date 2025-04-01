@@ -6,13 +6,14 @@
     <meta name="description" content="Plataforma innovadora para compraventa sostenible de tecnología de segunda mano">
     <title>MercaSwapp - Tecnología Sostenible</title>
     <link rel="stylesheet" href="<?= RUTA_CSS ?>/bootstrap.css">
+    <link rel="stylesheet" href="<?= RUTA_CSS ?>/estilos.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"> </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div class ="container">
+    <div class ="container-fluid">
         <div class = "row">
             <div class = "col-12">
                 <?php require_once __DIR__ . "/cabecera.php"; ?>

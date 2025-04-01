@@ -1,0 +1,15 @@
+/* filepath: c:\xampp\htdocs\awproyecto\css\estilos.css */
+.space-between-elements {
+    margin-right: 20px; /* Ajusta el valor según el espacio que necesites */
+}
+.space-to-center-underheaderbar {
+    margin-right: 300px; /* Ajusta el valor según el espacio que necesites */
+}   
+
+.navbar-nav .nav-link {
+    color: white !important; /* Cambia el color de los enlaces a blanco */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa; /* Opcional: Cambia el color al pasar el mouse */
+}
