@@ -117,5 +117,29 @@ class UsuarioDAO{
             return false;
         }
     }
+    public function actualizarUsuario(Usuario $usuario): bool {
+        try {
+            $sql = "UPDATE Usuarios SET 
+                    contrasena = :contrasena, 
+                    email = :email, 
+                    nombre = :nombre, 
+                    apellidos = :apellidos, 
+                    edad = :edad 
+                    WHERE userid = :userid";
+            
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':userid', $usuario->getUserid(), PDO::PARAM_STR);
+            $stmt->bindValue(':contrasena', $usuario->getContrasena(), PDO::PARAM_STR);
+            $stmt->bindValue(':email', $usuario->getEmail(), PDO::PARAM_STR);
+            $stmt->bindValue(':nombre', $usuario->getNombre(), PDO::PARAM_STR);
+            $stmt->bindValue(':apellidos', $usuario->getApellidos(), PDO::PARAM_STR);
+            $stmt->bindValue(':edad', $usuario->getEdad(), PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error al actualizar usuario: " . $e->getMessage());
+            return false;
+        }
+    }
 }
 ?>

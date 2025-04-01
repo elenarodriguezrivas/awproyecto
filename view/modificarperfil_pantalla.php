@@ -1,52 +1,74 @@
 <?php
-
+session_start();
 require_once __DIR__.'/../includes/config.php';
+require_once __DIR__.'/../includes/Usuarios/sa/perfilSA.php';
 
-$tituloPagina = 'Perfil';
-
-$nombre = '';
-$apellido1 = '';
-$apellido2 = '';
-$edad = '';
-$correo = '';
-$contra = '';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST['nombre'];
-    $apellido1 = $_POST['apellido1'];
-    $apellido2 = $_POST['apellido2'];
-    $edad = $_POST['edad'];
-    $correo = $_POST['correo'];
-    $contra = $_POST['contra'];
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['userid'])) {
+    header("Location: login_pantalla.php?error=Debes iniciar sesión para modificar tu perfil.");
+    exit;
 }
 
-$contenidoPrincipal=<<<EOS
-    <section class="presentacion">
-    <h2>Mi Modificacion de Perfil</h2>
-            <div class="destacado">
-                <form method="post" action="">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" value="$nombre"><br><br>
-                    <label for="apellidos">1r Apellido:</label>
-                    <input type="text" id="apellido1" name="apellidos" value="$apellido1"><br><br>
-                    <label for="apellidos">2o Apellido:</label>
-                    <input type="text" id="apellido2" name="apellidos" value="$apellido2"><br><br>
-                    <label for="edad">Edad:</label>
-                    <input type="text" id="edad" name="edad" value="$edad"><br><br>
-                    <label for="correo">Correo:</label>
-                    <input type="text" id="correo" name="correo" value="$correo"><br><br>
-                    <label for="contra">Contraseña:</label>
-                    <input type="text" id="contra" name="contra" value="$contra"><br><br>
-                    <button type="submit">Guardar</button>
-                </form>
+$tituloPagina = 'Modificar Perfil';
+
+// Obtener datos del usuario actual
+$perfilSA = new PerfilSA();
+$usuario = $perfilSA->obtenerUsuarioPorId($_SESSION['userid']);
+
+// Inicializar variables con datos del usuario
+$userId = $usuario->getUserid();
+$nombre = $usuario->getNombre();
+$apellidos = $usuario->getApellidos();
+$email = $usuario->getEmail();
+$edad = $usuario->getEdad();
+
+$rutaJS = RUTA_JS . '/modificarPerfilJS.js';
+
+$contenidoPrincipal = <<<EOS
+<section class="presentacion">
+    <h2>Modificar mi Perfil</h2>
+    <div class="perfil-form destacado">
+        <form id="modificarPerfilForm" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="$nombre" class="form-control" required>
             </div>
-                            
-            <p class="descripcion-breve"><em>Plataforma segura</em> que combina innovación tecnológica con responsabilidad ambiental. 
-            Ofrecemos un espacio donde cada transacción contribuye a reducir residuos electrónicos mientras 
-            disfrutas de experiencias de compra únicas. <strong>¡Únete a la revolución circular!</strong></p>
-    </section>
+            
+            <div class="form-group">
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" value="$apellidos" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" value="$email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" value="$edad" min="1" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contrasena">Nueva contraseña (dejar en blanco para mantener la actual):</label>
+                <input type="password" id="contrasena" name="contrasena" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmarContrasena">Confirmar nueva contraseña:</label>
+                <input type="password" id="confirmarContrasena" name="confirmarContrasena" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-blue">Guardar cambios</button>
+                <a href="perfil_pantalla.php" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+        <div id="message" class="message"></div>
+    </div>
+</section>
+<script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';
-
 ?>
