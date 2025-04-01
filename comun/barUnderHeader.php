@@ -6,7 +6,8 @@
             <li><a href="<?= RUTA_APP ?>/index.php">Inicio</a></li>
             <li><a href="<?= RUTA_APP ?>/view/catalogo_pantalla.php">Productos</a></li>
             <li><a href="<?= RUTA_APP ?>/view/micatalogo_pantalla.php">Mis Productos</a></li>
-            <li><a href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Subastas</a></li>
+            <li><a href="<?= RUTA_APP ?>/view/catalogo_subasta.php">Subastas</a></li>
+            <li><a href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Mis Subastas</a></li>
             <li><a href="<?= RUTA_APP ?>/view/perfil_pantalla.php">Perfil</a></li>
         </div>
         <div class="right">
