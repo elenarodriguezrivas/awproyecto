@@ -76,7 +76,6 @@ EOF;
         $html .= "<option value=\"$valor\" $selected>$texto</option>";
     }
 
-    // estoooooooooooooooooooooooooooooooooooooooooooooo 
     $html .= <<<EOF
         </select>
         {$erroresCampos['categoriaProducto']}
@@ -130,88 +129,50 @@ EOF;
             $imagenProducto = $_FILES['imagenProducto'];
             $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
             $extension = strtolower(pathinfo($imagenProducto['name'], PATHINFO_EXTENSION));
-        
+
             if (!in_array($extension, $extensionesPermitidas)) {
                 $this->errores['imagenProducto'] = 'El formato de la imagen no es válido. Solo se permiten JPEG, PNG, GIF y WEBP.';
+            } else {
+                // Procesar la imagen
+                $nombreImagen = uniqid() . "_" . basename($imagenProducto['name']);
+                $directorioFotos = RAIZ_APP . '/../fotos/';
+
+                // Asegúrate de que el directorio existe
+                if (!is_dir($directorioFotos)) {
+                    if (!mkdir($directorioFotos, 0777, true)) {
+                        $this->errores['imagenProducto'] = 'No se pudo crear el directorio para guardar las imágenes.';
+                        return;
+                    }
+                    chmod($directorioFotos, 0777); // Asegura permisos de escritura
+                }
+
+                // Ruta completa del archivo
+                $rutaDestino = $directorioFotos . $nombreImagen;
+
+                if (!move_uploaded_file($imagenProducto['tmp_name'], $rutaDestino)) {
+                    $this->errores['imagenProducto'] = 'Error al subir la imagen al servidor.';
+                    return;
+                }
             }
         }
 
         // Si no hay errores, insertar en la base de datos
         if (count($this->errores) === 0) {
-            try {
-                // Procesar la imagen
-                $imagenProducto = $_FILES['imagenProducto'];
-                $nombreImagen = uniqid() . "_" . basename($imagenProducto['name']);
-                
-                // Define el directorio de uploads
-                // Usar RAIZ_APP para obtener la ruta base de la aplicación
-                $directorioUploads = RAIZ_APP . '/../uploads/';
-                
-                // Asegúrate de que el directorio existe
-                if (!is_dir($directorioUploads)) {
-                    if (!mkdir($directorioUploads, 0777, true)) {
-                        $this->errores['imagenProducto'] = 'Error al crear el directorio para subir imágenes';
-                        return;
-                    }
-                    chmod($directorioUploads, 0777); // Asegura permisos de escritura
-                }
-                
-                // Ruta completa del archivo
-                $rutaDestino = $directorioUploads . $nombreImagen;
-                
-                // Debug: registrar las rutas para verificar
-                error_log("Directorio uploads: " . $directorioUploads);
-                error_log("Ruta destino: " . $rutaDestino);
-                
-                // Intenta mover el archivo subido
-                if (!move_uploaded_file($imagenProducto['tmp_name'], $rutaDestino)) {
-                    $error = error_get_last();
-                    $this->errores['imagenProducto'] = 'Error al subir la imagen: ' . ($error['message'] ?? 'Error desconocido');
-                    return;
-                }
-                
-                // Asegúrate de que la sesión esté iniciada
-                if (session_status() == PHP_SESSION_NONE) {
-                    session_start();
-                }
-                
-                if (!isset($_SESSION['userid'])) {
-                    $this->errores[] = "No se ha iniciado sesión";
-                    return;
-                }
-                
-                // Obtén la instancia de ProductoDAO
-                $productoDAO = new ProductoDAO();
-                
-                // Obtén el último ID y añade 1 para el nuevo producto
-                $nuevoId = $productoDAO->obtenerUltimoIdProducto();
-                $nuevoId = $nuevoId ? $nuevoId + 1 : 1; // Si no hay productos, empezar con ID 1
-                
-                // Crear objeto Producto
-                $producto = new Producto(
-                    $nuevoId,
-                    $nombreProducto,
-                    $descripcionProducto,
-                    $precio,
-                    $categoriaProducto,
-                    $_SESSION['userid'],
-                    $nombreImagen,
-                    'enVenta' 
-                );
-                
-                // Usar el Service Application para agregar el producto
-                $registerProductoSA = new RegisterProductoSA();
-                $resultado = $registerProductoSA->agregarProducto($producto);
-                
-                if (!$resultado) {
-                    $this->errores[] = "Hubo un error al registrar el producto en la base de datos";
-                    // Eliminar la imagen subida ya que no se pudo registrar el producto
-                    if (file_exists($rutaDestino)) {
-                        unlink($rutaDestino);
-                    }
-                }
-            } catch (Exception $e) {
-                $this->errores[] = "Error al procesar el producto: " . $e->getMessage();
+            $rutaRelativa = 'fotos/' . $nombreImagen;
+            $producto = new Producto(
+                null,
+                $nombreProducto,
+                $descripcionProducto,
+                $precio,
+                $categoriaProducto,
+                $_SESSION['userid'],
+                $rutaRelativa,
+                'enVenta'
+            );
+
+            $registerProductoSA = new RegisterProductoSA();
+            if (!$registerProductoSA->agregarProducto($producto)) {
+                $this->errores[] = 'Error al registrar el producto en la base de datos.';
             }
         }
     }
