@@ -61,7 +61,6 @@ $contenidoPrincipal = <<<EOS
             
             <div class="form-group">
                 <button type="submit" class="btn btn-blue">Guardar cambios</button>
-                <a href="perfil_pantalla.php" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
         <div id="message" class="message"></div>
