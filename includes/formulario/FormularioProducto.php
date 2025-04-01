@@ -196,7 +196,7 @@ EOF;
                     $categoriaProducto,
                     $_SESSION['userid'],
                     $nombreImagen,
-                    'disponible' // Asegúrate de que este valor sea 'disponible'
+                    'enVenta' 
                 );
                 
                 // Usar el Service Application para agregar el producto
