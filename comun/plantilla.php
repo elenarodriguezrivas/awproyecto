@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class = "row aling-items-center">
-            <div class="col-lg-6"> 
+            <div class="col-12"> 
                 <main> <?= $contenidoPrincipal ?? "Contenido no disponible." ?> </main> 
 			</div>
         </div>

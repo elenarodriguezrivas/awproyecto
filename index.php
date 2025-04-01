@@ -7,8 +7,9 @@ $tituloPagina = 'Inicio';
 // Definir el contenido principal
 $contenidoPrincipal = <<<EOS
 
-    <section class="presentacion">
-        <h2>Transformando el mercado de segunda mano</h2>
+        <h2 style = "text-align: center">
+            <strong> Transformando el mercado de segunda mano </strong>
+        </h2>
         <p>MercaSwapp es una página web encargada del comercio de dispositivos y periféricos de segunda mano. 
             Navega por los productos disponibles. Añade los tuyos propios. Y oye, que si ya no lo quieres vender, puedes eliminarlo.
         </p>
@@ -26,7 +27,6 @@ $contenidoPrincipal = <<<EOS
         <p class="descripcion-breve"><em>Plataforma segura</em> que combina innovación tecnológica con responsabilidad ambiental.</p>
         Ofrecemos un espacio donde cada transacción contribuye a reducir residuos electrónicos mientras 
         disfrutas de experiencias de compra únicas. <strong>¡Únete a la revolución circular!</strong></p>
-    </section>
 EOS;
 
 require_once __DIR__ . "/comun/plantilla.php";
