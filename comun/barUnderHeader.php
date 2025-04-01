@@ -7,10 +7,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"> <a class="nav-link" href="index.php">Inicio</a></li>
-            <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/catalogo_pantalla.php">Productos</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                aria-haspopup="true" aria-expanded="false">Catalogo de Porductos</a>
+                aria-haspopup="true" aria-expanded="false">Catalogo de Productos</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_pantalla.php">Productos</a>
                     <a class="dropdown-item" href="<?= RUTA_APP ?>/view/micatalogo_pantalla.php">Mis Productos</a>
@@ -19,7 +18,7 @@
             <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Subasta</a></li>
             <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/perfil_pantalla.php">Perfil</a></li>
             <?php if (isset($_SESSION['login'])): ?> <!--Si hay una sesión iniciada se muestra la posibilidad de cerrar sesión-->
-                <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/contacto_pantalla.php">Cerrar sesión</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/logout_pantalla.php">Cerrar sesión</a></li>
             <?php else: ?><!--Si no hay una sesión iniciada se muestra la posibilidad de login o inicio de sesión-->
                 <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/login_pantalla.php">Login</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= RUTA_APP ?>/view/register_pantalla.php">Registrarse</a></li>
