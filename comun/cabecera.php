@@ -12,7 +12,9 @@
 ?>
 
 <header>
-    <h1>MercaSwapp</h1>
-    <p class="tagline">Tecnología Circular • Subastas Dinámicas • Trueque Inteligente</p>
-    <img src="<?= RUTA_IMGS ?>/logo-mercaswapp.png" alt="Logo MercaSwapp" class="logo">
+    <div class = "row">
+        <div class = "col-md-4"> <h1>MercaSwapp</h1> </div>
+        <div class = "col-md-5"> Tecnología Circular • Subastas Dinámicas • Trueque Inteligente </div> 
+        <div class = "col-md-4"><img src="<?= RUTA_IMGS ?>/logo-mercaswapp.png" alt="Logo MercaSwapp" class="logo"> </div>
+    </div>
 </header>
