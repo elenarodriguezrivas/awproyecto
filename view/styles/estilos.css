@@ -1,4 +1,4 @@
-/* filepath: c:\xampp\htdocs\awproyecto\css\estilos.css */
+/*PARA LOS NAVBARS*/
 .space-between-elements {
     margin-right: 20px; /* Ajusta el valor según el espacio que necesites */
 }
@@ -31,6 +31,7 @@
         font-size: 2rem; /* Tamaño más grande en pantallas xs */
     }
 }
+/*PARA LOS CONTENIDOS*/
 .bloque-titulo {
     text-align: center; /* Centra el título */
     padding: 20px;
