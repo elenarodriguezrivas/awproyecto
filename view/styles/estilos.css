@@ -31,3 +31,17 @@
         font-size: 2rem; /* Tamaño más grande en pantallas xs */
     }
 }
+.bloque-titulo {
+    padding: 20px;
+    background-color: #ddb07c; /* Fondo claro */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 0px; /* Espaciado inferior */
+}
+.bloque-contenido {
+    padding: 20px;
+    background-color: #e0bc93; /* Fondo claro */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 0px; /* Espaciado inferior */
+}
