@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let productosHtml = '';
                 data.forEach(producto => {
                     productosHtml += `
-                        <div class="custom-container producto" id="producto-${producto.id}">
+                        <div class="custon-container producto" id="producto-${producto.id}">
                             <h3>${producto.nombreProducto}</h3>
                             <h4>${producto.precio}€</h4>
                             <p>${producto.descripcionProducto}</p>

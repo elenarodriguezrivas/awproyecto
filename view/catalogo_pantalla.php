@@ -10,10 +10,27 @@ $contenidoPrincipal = <<<EOS
         <h2>Catálogo de Productos</h2>
         <p>¡Bienvenido a nuestro catálogo de productos! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles. ¡No te lo pierdas!</p>
-            <div id="perfil">
-                <!-- Aquí se mostrarán los productos -->
-                <div id="productos"></div>
+       <div class="row">
+            <div class="col-sm-2 d-none d-sm-block">
+                <div class = "bloque-categorias-filtro">
+                    <p>CATEGORÍAS</p>
+                </div>
             </div>
+            <div class="col-sm-8 mx-auto">
+                <div class="bloque-productos">
+                    <div class= "custom-container">
+                        <div id="productos">
+                            <!-- Aquí se mostrarán los productos -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 d-none d-sm-block">
+                <div class = "bloque-anuncios">
+                    <p>FOTOS</p>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="$rutaJS"></script>
 EOS;
