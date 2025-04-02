@@ -32,6 +32,7 @@
     }
 }
 .bloque-titulo {
+    text-align: center; /* Centra el título */
     padding: 20px;
     background-color: #ddb07c; /* Fondo claro */
     border: 1px solid #ddd; /* Borde gris claro */
@@ -39,9 +40,22 @@
     margin-bottom: 0px; /* Espaciado inferior */
 }
 .bloque-contenido {
+    text-align: center; /* Centra el título */
     padding: 20px;
     background-color: #e0bc93; /* Fondo claro */
     border: 1px solid #ddd; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 0px; /* Espaciado inferior */
+}
+
+.lista-centrada {
+    list-style-position: inside; /* Asegura que los puntos estén dentro del contenedor */
+    text-align: center; /* Centra el texto y los puntos */
+    padding: 0; /* Elimina el padding por defecto */
+}
+
+.lista-centrada li {
+    display: inline-block; /* Hace que los elementos de la lista se comporten como bloques en línea */
+    text-align: left; /* Alinea el texto dentro de cada elemento */
+    margin-bottom: 10px; /* Espaciado entre los elementos */
 }
