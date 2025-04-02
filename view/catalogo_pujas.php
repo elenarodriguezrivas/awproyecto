@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../includes/config.php';
 
-$tituloPagina = 'Catalogo Subastas';
-$rutaJS = RUTA_JS . "/listarSubastasUserJS.js";
-//Aquí se muestra las subastas que yo he puesto de mis productos
+$tituloPagina = 'Pujas';
+$rutaJS = RUTA_JS . "/listarPujasUserJS.js";
+//Aquí se muestra las pujas que yo he puesto en otros productos que están subastados
 
 $contenidoPrincipal = <<<EOS
     <section class="presentacion">
-        <h2>Catálogo de Productos en Subasta</h2>
-        <p>¡Bienvenido a tu catálogo de productos en subasta! Aquí podrás encontrar tus productos subastados o en proceso de subasta.</p>
+        <h2>Pujas realizadas en Productos</h2>
+        <p>Aquí podrás encontrar todas tus pujas realizadas para adquirir productos de segunda mano que han sido subastados o se encuentran en proceso de subasta.</p>
         <div class="destacado">
             <div id="perfil">
                 <!-- Aquí se mostrarán los productos -->
