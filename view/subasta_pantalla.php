@@ -10,7 +10,7 @@ $contenidoPrincipal=<<<EOS
             <div class="destacado">
                 <ul>
                     <div class="destacado">
-                    <p>PREVIEW PARA LA PRÁCTICA 3 :) Aquí desarrollaremos la funcionalidad de las pujas</p>
+                    <p>PREVIEW PARA LA PRÁCTICA 4 :) Aquí desarrollaremos la funcionalidad de las pujas</p>
                 </ul>
             </div>
     </section>
