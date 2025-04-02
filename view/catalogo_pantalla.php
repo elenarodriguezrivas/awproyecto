@@ -6,17 +6,15 @@ $tituloPagina = 'Catalogo';
 $rutaJS = RUTA_JS . "/listarProductosJS.js";
 
 $contenidoPrincipal = <<<EOS
-    <section class="presentacion">
+    <div class="bloque-contenido">
         <h2>Catálogo de Productos</h2>
         <p>¡Bienvenido a nuestro catálogo de productos! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles. ¡No te lo pierdas!</p>
-        <div class="destacado">
             <div id="perfil">
                 <!-- Aquí se mostrarán los productos -->
                 <div id="productos"></div>
             </div>
-        </div>
-    </section>
+    </div>
     <script src="$rutaJS"></script>
 EOS;
 
