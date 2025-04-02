@@ -10,10 +10,8 @@ if (!isset($_SESSION['userid'])) {
 }
 
 $contenidoPrincipal=<<<EOS
-    <div class="bloque-titulo">
-        <h2><strong>Modificar mi Perfil</strong></h2>
-    </div>
     <div class="bloque-contenido">
+        <h2><strong>Modificar mi Perfil</strong></h2>
         <form method="post" action="">
             <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="$nombre"><br><br>
