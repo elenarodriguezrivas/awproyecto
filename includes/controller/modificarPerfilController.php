@@ -4,7 +4,6 @@ require_once __DIR__.'/../config.php';
 require_once __DIR__.'/../Usuarios/dao/UsuarioDAO.php';
 require_once __DIR__.'/../Usuarios/model/Usuario.php';
 
-// Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['userid'])) {
     http_response_code(401);
     echo "No se ha iniciado sesión.";
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $edad = filter_input(INPUT_POST, 'edad', FILTER_VALIDATE_INT);
     $contrasena = $_POST['contrasena'];
 
-    // Validaciones básicas en el servidor
+    // Validaciones
     if (!$nombre || empty($nombre)) {
         http_response_code(400);
         echo "El nombre no puede estar vacío.";
@@ -66,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Hashear la nueva contraseña
-        $nuevaContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
+        $nuevaContrasena = password_hash($contrasena, PASSWORD_BCRYPT);
     }
     
     // Crear objeto usuario con los datos actualizados
@@ -80,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuarioActual->getRol()
     );
     
-    // Agregar método actualizarUsuario al UsuarioDAO si no existe
+    // Agregar método actualizarUsuario al UsuarioDAO
     if ($usuarioDAO->actualizarUsuario($usuarioActualizado)) {
         // Actualizar datos de la sesión
         $_SESSION['nombre'] = $nombre;
