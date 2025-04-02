@@ -7,8 +7,8 @@
  */
 define('BD_HOST', '192.168.1.150');
 define('BD_NAME', 'awproyecto');
-define('BD_USER', 'root');
-define('BD_PASS', 'awproyecto');
+define('BD_USER', 'admin');
+define('BD_PASS', 'admin');
 
 /**
  * Detectar automáticamente la ruta base de la aplicación
