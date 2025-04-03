@@ -13,7 +13,7 @@ $contenidoPrincipal = <<<EOS
         <div class="destacado">
             <!-- Selector de categoría -->
             <label for="selectorCategoria">Filtrar por categoría:</label>
-            <select id="selectorCategoria" class="form-control">
+            <select id="selectorCategoria" class="form-control" onchange="listarPorCategoriaProducto(this.value)">
                 <option value="">Todas las categorías</option>
                 <option value="computadora">Computadora</option>
                 <option value="auriculares">Auriculares</option>

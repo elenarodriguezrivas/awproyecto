@@ -3,15 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let categoria = selectorCategoria.value;
     console.log(categoria);
-    let url;
-
-    if (categoria && categoria !== "") {
-        url = `../includes/controller/obtenerPorCategoriaController.php?categoria=${encodeURIComponent(categoria)}`;
-    } else {
-        url = `../includes/controller/obtenerProductosController.php`;
-    }
     
-    fetch(url)
+    fetch('../includes/controller/obtenerProductosController.php', {
+        method: 'POST',
+        body: categoria
+    })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los productos');
@@ -85,3 +81,48 @@ function comprarProducto(productoId) {
             mensajeElemento.classList.add('error'); // Agregar clase para estilos
         });
 }
+
+function listarPorCategoriaProducto(categoria) {
+    console.log("Listar por categoria:", categoria);
+
+    // Enviar la categoría como un parámetro GET
+    fetch(`../includes/controller/obtenerProductosController.php?categoria=${encodeURIComponent(categoria)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener los productos');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const productosContainer = document.getElementById('productos');
+
+            // Vaciar el contenedor antes de mostrar nuevos productos
+            productosContainer.innerHTML = '';
+
+            if (data.length === 0) {
+                productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
+            } else {
+                let productosHtml = '';
+                data.forEach(producto => {
+                    productosHtml += `
+                        <div class="producto" id="producto-${producto.id}">
+                            <h3>${producto.nombreProducto}</h3>
+                            <h4>${producto.precio}€</h4>
+                            <p>${producto.descripcionProducto}</p>
+                            <p>Categoría: ${producto.categoriaProducto}</p>
+                            <img src="../${producto.rutaImagen}" style="height: 200px;" />
+                            ${producto.estado.toLowerCase() === 'enventa' ? `
+                                <button class="btn btn-green" onclick='comprarProducto(${producto.id})'>Comprar</button>
+                                <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
+                            ` : `
+                                <div class="vendido">Vendido</div>
+                            `}
+                        </div>
+                    `;
+                });
+                productosContainer.innerHTML = productosHtml;
+            }
+        })
+        .catch(error => console.error('Error al obtener los productos:', error));
+}
+
