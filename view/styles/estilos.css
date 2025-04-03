@@ -18,7 +18,6 @@
     display: flex; /* Asegura que el contenido se alinee correctamente */
     align-items: center; /* Centra verticalmente el contenido */
 }
-
 .text-white-custom {
     color: white !important; /* Cambia el color del texto a blanco */
 }
