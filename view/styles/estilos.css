@@ -26,12 +26,6 @@
     font-size: 1rem; /* Tamaño por defecto */
 }
 
-@media (max-width: 576px) {
-    .navbar-brand {
-        font-size: 2rem; /* Tamaño más grande en pantallas xs */
-    }
-}
-
 /*PARA LOS CONTENIDOS*/
 .bloque-contenido {
     text-align: center; /* Centra el título */

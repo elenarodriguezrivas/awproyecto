@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">MercaSwapp</a>
+    <a class="navbar-brand d-block d-sm-none" href="#">MercaSwapp</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item space-to-center-underheaderbar"></li>
             <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/index.php">Inicio</a></li>
