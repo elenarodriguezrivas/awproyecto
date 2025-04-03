@@ -30,7 +30,7 @@
 .bloque-contenido {
     text-align: center; /* Centra el título */
     padding: 20px;
-    background-color: #e0bc93; /* Fondo claro */
+    background-color: #ffffff; /* Fondo claro */
     border: 1px solid #ddd; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 0px; /* Espaciado inferior */
@@ -65,7 +65,7 @@
 
 .contacto-contenido {
     text-align: center; /* Centra el título */
-    background-color: #e0bc93; /* Fondo claro */
+    background-color: #ffffff; /* Fondo claro */
     border: 1px solid #ddd; /* Borde gris claro */
     display: flex; /* Activa Flexbox */
     flex-wrap: wrap; /* Permite que los elementos se ajusten a la siguiente fila si no caben */
@@ -78,7 +78,7 @@
     width: 300px; /* Ancho fijo para cada contenedor */
     padding: 15px; /* Espaciado interno */
     margin: 10px; /* Espaciado entre contenedores */
-    background-color: #ffffff; /* Fondo blanco */
+    background-color: #929292; /* Fondo */
     border: 1px solid #ccc; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     text-align: center; /* Centra el contenido dentro del contenedor */
@@ -126,7 +126,7 @@
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */
-    background-color: #ecee76;
+    background-color: #ffffff;
 }
 
 /*PARA CATEGORIAS*/
@@ -134,7 +134,7 @@
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */
-    background-color: #97eaf0;
+    background-color: #ffffff;
 }
 
 /*PARA FOTOS/ANUNCIOS*/
@@ -142,5 +142,11 @@
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */
-    background-color: #e197f0;
+    background-color: #ffffff;
+}
+
+/*PARA TEXTFIELD*/
+.form-control{
+    width: 60%;
+    margin: 0 auto; /* Centra el campo de texto */
 }
