@@ -231,24 +231,32 @@ class ProductoDAO { /*extiende de la base*/
                         rutaImagen = :rutaImagen, 
                         estado = :estado 
                     WHERE id = :id";
-
+    
             $stmt = $this->db->prepare($sql);
-
-            // Asignar los valores del objeto Producto a los parámetros
-            $stmt->bindParam(':id', $producto->getId(), PDO::PARAM_INT);
-            $stmt->bindParam(':nombreProducto', $producto->getNombreProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':descripcionProducto', $producto->getDescripcionProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':precio', $producto->getPrecio(), PDO::PARAM_STR);
-            $stmt->bindParam(':categoriaProducto', $producto->getCategoriaProducto(), PDO::PARAM_STR);
-            $stmt->bindParam(':idVendedor', $producto->getIdVendedor(), PDO::PARAM_INT);
-            $stmt->bindParam(':rutaImagen', $producto->getRutaImagen(), PDO::PARAM_STR);
-            $stmt->bindParam(':estado', $producto->getEstado(), PDO::PARAM_STR);
-
+    
+            $id = $producto->getId();
+            $nombreProducto = $producto->getNombreProducto();
+            $descripcionProducto = $producto->getDescripcionProducto();
+            $precio = $producto->getPrecio();
+            $categoriaProducto = $producto->getCategoriaProducto();
+            $idVendedor = $producto->getIdVendedor();
+            $rutaImagen = $producto->getRutaImagen();
+            $estado = $producto->getEstado();
+    
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
+            $stmt->bindValue(':descripcionProducto', $descripcionProducto, PDO::PARAM_STR);
+            $stmt->bindValue(':precio', $precio, PDO::PARAM_STR);
+            $stmt->bindValue(':categoriaProducto', $categoriaProducto, PDO::PARAM_STR);
+            $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
+            $stmt->bindValue(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
+            $stmt->bindValue(':estado', $estado, PDO::PARAM_STR);
+    
             $result = $stmt->execute();
-
+    
             return $result && $stmt->rowCount() > 0; // Devuelve true si se actualizó al menos una fila
         } catch (PDOException $e) {
-            error_log("Error al actualizar el producto: " . $e->getMessage());
+            error_log("Error al actualizar el producto/no ha hecho ninguna actualizacion: " . $e->getMessage());
             return false;
         }
     }

@@ -16,17 +16,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 data.forEach(producto => {
                     productosHtml += `
                         <div class="producto" id="producto-${producto.id}">
-                            <h3>${producto.nombreProducto}</h3>
-                            <h4>Precio: ${producto.precio}€</h4>
-                            <p>${producto.descripcionProducto}</p>
-                            <p>Categoría: ${producto.categoriaProducto}</p>
-                            <img src="../${producto.rutaImagen}" style="height: 200px;" />
-                            ${producto.estado.toLowerCase() === 'enventa' ? `
-                                <button class="btn btn-red" onclick='eliminarProducto(${producto.id})'>Eliminar</button>
-                                <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
-                            ` : `
-                                <div class="vendido">Vendido</div>
-                            `}
+                            <img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}" />
+                            <div class="producto-info">
+                                <h3>${producto.nombreProducto}</h3>
+                                <h4>${producto.precio}€</h4>
+                                <span class="producto-categoria">${producto.categoriaProducto}</span>
+                                <p>${producto.descripcionProducto}</p>
+                                
+                                <div class="producto-actions">
+                                    ${producto.estado.toLowerCase() === 'enventa' ? `
+                                        <div class="form-group">
+                                            <a href="modificarproducto_pantalla.php?id=${producto.id}" class="btn btn-blue">Modificar</a>
+                                            <button class="btn btn-red" onclick='eliminarProducto(${producto.id})'>Eliminar</button>
+                                        </div>
+                                        <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
+                                    ` : `
+                                        <div class="vendido">Vendido</div>
+                                    `}
+                                </div>
+                            </div>
                         </div>
                     `;
                 });
