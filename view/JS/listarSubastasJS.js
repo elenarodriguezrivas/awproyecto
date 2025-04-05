@@ -15,16 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 let subastasHtml = '';
                 data.forEach(subasta => {
+                    const fechaActual = new Date(Date.now()); // Obtener la fecha actual precisa
+                    const fechaFinSubasta = new Date(subasta.fechaFin);
+
                     subastasHtml += `
                         <div class="subasta" id="subasta-${subasta.id}">
                             <h3>id Producto: ${subasta.idProducto}</h3>
                             <h4>precio: ${subasta.precio}€</h4>
-                            <p>id Comprador: ${subasta.descripcionProducto}</p>
-                            <p>Categoría: ${producto.categoriaProducto}</p>
-                            <img src="../${producto.rutaImagen}" style="height: 200px;" />
-                            ${producto.estado.toLowerCase() === 'ensubasta' ? `
-                                <button class="btn btn-green" onclick='pujarProducto(${producto.id})'>Añadir puja</button>
-                                <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
+                            <p>id Comprador: ${subasta.idComprador}</p>
+                            <p>Fecha fin de subasta: ${subasta.fechaFin}</p>
+                            ${fechaFinSubasta > fechaActual ? `
+                                <button class="btn btn-green" onclick='pujarProducto(${subasta.idProducto})'>Añadir puja</button>
+                                <p class="mensaje-compra" id="mensaje-${subasta.idProducto}"></p>
                             ` : `
                                 <div class="subastado">Subasta terminada</div>
                             `}
