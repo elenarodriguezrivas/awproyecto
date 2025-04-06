@@ -4,7 +4,7 @@
 }
 .space-to-center-underheaderbar {
     margin-right: 300px; /* Ajusta el valor según el espacio que necesites */
-}   
+}  
 
 .navbar-nav .nav-link {
     color: white !important; /* Cambia el color de los enlaces a blanco */
@@ -74,14 +74,17 @@
 }
 
 .custom-container {
-    width: 300px; /* Ancho fijo para cada contenedor */
+    width: 80%; /* Ocupa todo el ancho del contenedor padre */
     padding: 15px; /* Espaciado interno */
-    margin: 10px; /* Espaciado entre contenedores */
+    margin: 0 auto; /* Centra el contenedor si es necesario */
     background-color: #929292; /* Fondo */
     border: 1px solid #ccc; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     text-align: center; /* Centra el contenido dentro del contenedor */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    overflow: hidden; /* Evita que el contenido desborde */
+    word-wrap: break-word; /* Permite que las palabras largas se ajusten */
+    height: auto; /* Permite que el contenedor crezca dinámicamente */
 }
 
 .custom-container img {
@@ -127,17 +130,39 @@
     padding: 20px; /* Espaciado interno del contenedor */
     background-color: #ffffff;
 }
+.producto img {
+    width: 250px; /* Ancho fijo */
+    height: 300px; /* Alto fijo */
+    object-fit: cover; /* Ajusta la imagen para que se recorte y llene el contenedor */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+    margin-bottom: 15px; /* Espaciado debajo de la imagen */
+}
 
-/*PARA CATEGORIAS*/
-.bloque-izquierda {
+
+/*PARA FILTROS*/
+.bloque-filtros {
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */
     background-color: #ffffff;
 }
+#selectorCategoria {
+    width: 75%; /* Hace que el ancho sea la mitad del contenedor padre */
+    color: rgb(0, 0, 0); 
+    border: 1px solid #0056b3; /* Borde azul oscuro */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+#selectorCategoria:focus {
+    outline: none; /* Elimina el contorno predeterminado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Añade un efecto de enfoque */
+}
 
 /*PARA FOTOS/ANUNCIOS*/
-.bloque-derecha {
+.bloque-anuncios {
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */

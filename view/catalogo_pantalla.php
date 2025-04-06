@@ -12,13 +12,29 @@ $contenidoPrincipal = <<<EOS
         </h2>
         <p>¡Bienvenido a nuestro catálogo de productos! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles. ¡No te lo pierdas!</p>
-       <div class="row">
-            <div class="col-sm-2 d-none d-sm-block">
-                <div class = "bloque-izquierda">
-                    <p>CATEGORÍAS</p>
+        <div class = "row">
+            <div class="col-12">
+                <div class = "bloque-filtros">
+                    <!-- Selector de categoría -->
+                    <div class = "col-4 text-right"> <label for="selectorCategoria">Filtrar por categoría:</label> </div>
+                    <div class = "col-8 text-left">
+                        <select id="selectorCategoria" class="form-control" onchange="listarPorCategoriaProducto(this.value)">
+                            <option value="">Todas las categorías</option>
+                            <option value="computadora">Computadora</option>
+                            <option value="auriculares">Auriculares</option>
+                            <option value="juegos">Juegos</option>
+                            <option value="ratón">Ratón</option>
+                            <option value="teclado">Teclado</option>
+                            <option value="pantalla">Pantalla</option>
+                            <option value="impresora">Impresora</option>
+                            <option value="altavoces">Altavoces</option>
+                        </select>	
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-8 mx-auto">
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-8 mx-auto">
                 <div class="bloque-productos">
                     <div class= "custom-container">
                         <div id="productos">
@@ -27,8 +43,11 @@ $contenidoPrincipal = <<<EOS
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2 d-none d-sm-block">
-                <div class = "bloque-derecha">
+            <div class="col-12 col-sm-4">
+                <div class = "bloque-anuncios">
+                    <!-- NO SE PORQUE NO VA -->
+                    <img src="<?= RUTA_IMGS ?>dafi.jpg" alt="Imagen Dafi" class="img-fluid" style="max-width: 100%; height: auto;">
+
                     <p>FOTOS</p>
                 </div>
             </div>
