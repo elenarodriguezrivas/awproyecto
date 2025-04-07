@@ -31,10 +31,7 @@ $contenidoPrincipal = <<<EOS
             </div>
         </div>
     </section>
-    <script
-     src="$rutaJS">
-    
-     </script>
+    <script src="$rutaJS"></script>
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';
