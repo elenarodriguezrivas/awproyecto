@@ -7,16 +7,13 @@ $tituloPagina = 'Perfil de Usuario';
 $rutaJS = RUTA_JS . '/perfilJS.js';
 
 $contenidoPrincipal = <<<EOS
-    <div id="perfil">
-        <h1>Perfil de Usuario</h1>
-        <p class="perfil-item">Nombre: <span id="nombre" class="perfil-dato"></span></p>
-        <p class="perfil-item">Apellidos: <span id="apellidos" class="perfil-dato"></span></p>
-        <p class="perfil-item">Edad: <span id="edad" class="perfil-dato"></span></p>
-        <p class="perfil-item">Correo: <span id="correo" class="perfil-dato"></span></p>
-        <a href="modificarperfil_pantalla.php"><button>Modificar perfil</button></a>
-
+    <div class="bloque-contenido">
+        <h2><strong>Bienvenido a tu perfil, <span id="nombre" class="perfil-dato"></span></strong></h2>
+        <h5><strong>Apellidos</strong>: <span id="apellidos" class="perfil-dato"></span></h5>
+        <h5><strong>Edad</strong>: <span id="edad" class="perfil-dato"></span></h5>
+        <h5><strong>Correo</strong>: <span id="correo" class="perfil-dato"></span></h5>
+        <a href="modificarperfil_pantalla.php"><button class ="btn">Modificar perfil</button></a>
     </div>
-
     <script src="$rutaJS"></script>
 
 EOS;

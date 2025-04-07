@@ -5,22 +5,26 @@ $ruta_img1 = RUTA_IMGS . '/fechas_planificacion.png';
 $ruta_img2 = RUTA_IMGS . '/ganttd.png';
 
 $contenidoPrincipal = <<<EOS
-    <section class="presentacion">
-        <h2>Planificación del proyecto</h2>
-        <p class="diapositivas-ucm"> <em>El trabajo en grupo requiere esfuerzo de todos los miembros del equipo. En las prácticas y en el proyecto 
-            final todos los miembros del equipo evalúan el trabajo hecho por sus compañeros. El profesor siempre puede evaluar de forma 
-            individual los conocimientos de cada miembro del equipo</em></p>
-        <h3>Entregas a realizar</h3>
+    <div class="bloque-contenido">
+        <h2><strong>Planificación del proyecto</strong></h2>
+        <p class="descripcion-breve">El proyecto se ha realizado en grupo, por lo que se ha tenido que planificar el trabajo a realizar. 
+            A continuación se muestra la planificación del proyecto y las herramientas utilizadas para su desarrollo.</p>
+        <h3><strong>Entregas a realizar</strong></h3>
         <p class="descripcion-breve">En la planificación interna del proyecto, se tuvo en cuentas las fechas de entrega propuestas por el 
-            profesor de la asignatura <em>Humberto Javier</em>. Se muestran a continuación todas ellas, incluidas las fechas de los ejercicios en pareja.</p>
-        <planimg><img src="$ruta_img1" alt="fechas" ></planimg>
-        <h3>Herramientas utilizadas para la elaboración del proyecto</h3>
-        <p class="descripcion-breve">Se va a hacer uso de herramientas como <em>GitHub Desktop</em> para agilizar el desarrollo de las prácticas y poder hacer un registro del control de cambios...</p>
-        <h3>Diagrama de Gantt</h3>
-        <p>Se hace uso del siguiente diagrama de Gantt como herramienta de gestión de proyectos</p>
-        <planimg><img src="$ruta_img2" alt="gantt"> </planimg>
+        profesor de la asignatura <em>Humberto Javier</em>. Se muestran a continuación todas ellas, incluidas las fechas de los ejercicios en pareja.</p>
+        <div class = "row align-items-center justify-content-center">
+            <div class="col-12">
+                <img src="$ruta_img1" alt="fechas" class="img-fluid" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        <h3><strong>Diagrama de Gantt</strong></h3>
+         <div class = "row align-items-center justify-content-center">
+            <div class="col-12">
+                <img src="$ruta_img2" alt="gantt" class="img-fluid" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
         <p>En este caso, las entregas no se solapan porque primero terminamos una y empezamos la siguiente. La entrega 2 depende de la terminación de la entrega 1. </p>
-    </section>
+    </div>
 EOS;
 
     // Incluir la plantilla común
