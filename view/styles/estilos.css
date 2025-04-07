@@ -1,28 +1,17 @@
-/* ESTILO GENERAL */
-body {
-    font-family: Arial, sans-serif; 
-    margin: 20px; 
-    background-color: #f4f4f4; /*color de fondo*/
-    color: #333; /* Color de texto */
+/* filepath: c:\xampp\htdocs\awproyecto\css\estilos.css */
+.space-between-elements {
+    margin-right: 20px; /* Ajusta el valor según el espacio que necesites */
 }
-/* HEADER */
-header {
-    display: flex; /* flexbox para organizar los elementos, dice que así esta mejor estructurado segun internet*/
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 15px 30px; /* Espaciado entre medias*/
-    background: linear-gradient(90deg, #000000, #2c2c2c, #4f4f4f); /* Degradado negro a gris*/
-    color: white; /* Texto en blanco */
-    border-radius: 5px; /* Bordes redondeados */
-}
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.space-to-center-underheaderbar {
+    margin-right: 300px; /* Ajusta el valor según el espacio que necesites */
+}   
+
+.navbar-nav .nav-link {
+    color: white !important; /* Cambia el color de los enlaces a blanco */
 }
 
-.header-left {
-    flex-grow: 1;
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa; /* Opcional: Cambia el color al pasar el mouse */
 }
 
 .header-right {
