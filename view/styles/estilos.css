@@ -417,14 +417,6 @@ footer {
 }
 
 /*PARA LOS CONTENIDOS*/
-.bloque-titulo {
-    text-align: center; /* Centra el título */
-    padding: 20px;
-    background-color: #ddb07c; /* Fondo claro */
-    border: 1px solid #ddd; /* Borde gris claro */
-    border-radius: 8px; /* Bordes redondeados */
-    margin-bottom: 0px; /* Espaciado inferior */
-}
 .bloque-contenido {
     text-align: center; /* Centra el título */
     padding: 20px;
