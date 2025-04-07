@@ -410,12 +410,6 @@ footer {
   box-shadow: 0 6px 16px rgba(106, 108, 116, 0.3);
 }
 
-@media (max-width: 576px) {
-    .navbar-brand {
-        font-size: 2rem; /* Tamaño más grande en pantallas xs */
-    }
-}
-
 /*PARA LOS CONTENIDOS*/
 .bloque-contenido {
     text-align: center; /* Centra el título */
