@@ -7,3 +7,5 @@ CREATE TABLE Pujas (
     FOREIGN KEY (idProducto) REFERENCES Productos(id) ON DELETE CASCADE, 
     FOREIGN KEY (idPujador) REFERENCES Usuarios(userid) ON DELETE CASCADE
 );
+
+
