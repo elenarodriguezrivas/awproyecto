@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Plataforma innovadora para compraventa sostenible de tecnología de segunda mano">
     <title>MercaSwapp - Tecnología Sostenible</title>
+    <link rel="stylesheet" href="<?= RUTA_CSS ?>/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"> </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -24,7 +25,7 @@
         </div>
         <div class = "row aling-items-center">
             <div class="col-lg-6"> 
-                <main> <?= $contenidoPrincipal ?? "Contenido no disponible." ?> </main>
+                <main> <?= $contenidoPrincipal ?? "Contenido no disponible." ?> </main> 
 			</div>
         </div>
         <div class = "row">
