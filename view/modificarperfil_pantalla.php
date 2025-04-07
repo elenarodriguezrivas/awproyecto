@@ -19,12 +19,12 @@ $htmlFormulario = $form->generaFormulario(); // Llamar a generaFormulario, no a 
 
 // Construir la página con el formulario
 $contenidoPrincipal = <<<EOS
-    <section class="presentacion">
-        <h2>Modificar mi Perfil</h2>
+    <div class="bloque-contenido">
+        <h2><strong>Modificar mi Perfil</strong></h2>
         <div class="destacado perfil-form">
             $htmlFormulario
         </div>
-    </section>
+    </div>
     <script src="$rutaJS"></script>
 EOS;
 

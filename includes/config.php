@@ -6,7 +6,7 @@
  * Parámetros de conexión a la BD
  */
 define('BD_HOST', 'localhost');
-define('BD_NAME', 'awproyecto');
+define('BD_NAME', 'awproyect');
 define('BD_USER', 'admin');
 define('BD_PASS', 'admin');
 
