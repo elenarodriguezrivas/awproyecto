@@ -23,18 +23,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 let productosHtml = '';
                 data.forEach(producto => {
                     productosHtml += `
-                        <div class="custon-container producto" id="producto-${producto.id}">
-                            <h3>${producto.nombreProducto}</h3>
-                            <h4>${producto.precio}€</h4>
+                        <div class="producto" id="producto-${producto.id}">
+                            <h2>${producto.nombreProducto}</h2>
+                            <h3>Precio del producto: ${producto.precio}€</h3>
                             <p>${producto.descripcionProducto}</p>
                             <p>Categoría: ${producto.categoriaProducto}</p>
-                            <img src="../${producto.rutaImagen}" style="height: 200px;" />
+                            <img src="../${producto.rutaImagen}" style="height: 200px;"/>
+                            <p>
                             ${producto.estado.toLowerCase() === 'enventa' ? `
                                 <button class="btn btn-green" onclick='comprarProducto(${producto.id})'>Comprar</button>
                                 <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
                             ` : `
                                 <div class="vendido">Vendido</div>
                             `}
+                            </p>
                         </div>
                     `;
                 });
