@@ -1,5 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('../includes/controller/obtenerProductosController.php')
+    const selectorCategoria = document.getElementById("selectorCategoria");
+
+    let categoria = selectorCategoria.value;
+    console.log(categoria);
+    let url;
+
+    if (categoria && categoria !== "") {
+        url = `../includes/controller/obtenerPorCategoriaController.php?categoria=${encodeURIComponent(categoria)}`;
+    } else {
+        url = `../includes/controller/obtenerProductosController.php`;
+    }
+    
+    fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los productos');

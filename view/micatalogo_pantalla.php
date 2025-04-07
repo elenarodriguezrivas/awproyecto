@@ -10,7 +10,8 @@ $rutaJS = RUTA_JS . '/listarProductosUserJS.js';
 $contenidoPrincipal=<<<EOS
     <section class="presentacion">
     <h2>Mi Catálogo de Productos</h2>
-    <ul>
+    <div class="destacado">
+        <ul>
             <a href="registerProducto_pantalla.php"><button class="btn">Añadir producto nuevo </button></a>
     </ul>
     <div id="productos"></div>
