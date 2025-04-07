@@ -4,8 +4,10 @@ require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Catalogo';
 $rutaJS = RUTA_JS . "/listarProductosJS.js";
-$rutaIMG = RUTA_IMGS . "elena.jpeg";
-$rutaA2 = RUTA_IMGS . "fdi.png";
+$rutaA1 = RUTA_IMGS . "/anuncio1.png";
+$rutaA2 = RUTA_IMGS . "/anuncio2.png";
+$rutaA3 = RUTA_IMGS . "/anuncio3.jpeg";
+$rutaA4 = RUTA_IMGS . "/anuncio4.jpeg";
 
 $contenidoPrincipal = <<<EOS
     <div class="bloque-contenido">
@@ -36,7 +38,7 @@ $contenidoPrincipal = <<<EOS
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-8 mx-auto">
+            <div class="col-12 col-md-8 mx-auto">
                 <div class="bloque-productos">
                     <div class= "custom-container">
                         <div id="productos">
@@ -45,16 +47,32 @@ $contenidoPrincipal = <<<EOS
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class = "bloque-anuncios">
-                    <div class="row">
-                        <div class="col">
-                            <a href="#" target="_blank"><img src="<?= $rutaIMG ?>" class="img-fluid"></a>
+                    <div class = "custom-container">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><strong>¡NVIDIA 5090 - Compra la nueva grafica de NVIDIA!</strong></p>
+                                <img src="$rutaA1" class="img-fluid">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <a href="#" target="_blank"><img src="<?= $rutaA2 ?>"class="img-fluid"></a>
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>¡IPHONE 16 - El MEJOR del mercado actual!</strong></p>
+                                <img src="$rutaA2"class="img-fluid">
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-12">
+                                <p><strong>¡NINTENDO SWITCH2 - Novedad de la temporada!</strong></p>
+                                <img src="$rutaA3" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>¡PLAY5 - Sigue arrasando!</strong></p>
+                                <img src="$rutaA4"class="img-fluid">
+                            </div>
                         </div>
                     </div>
                 </div>

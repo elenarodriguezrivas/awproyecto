@@ -168,6 +168,14 @@
     padding: 20px; /* Espaciado interno del contenedor */
     background-color: #ffffff;
 }
+.bloque-anuncios img {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    max-width: 300px; /* Ancho máximo para las imágenes */
+    height: 200px; /* Altura fija para todas las imágenes */
+    object-fit: contain; /* Asegura que la imagen se ajuste sin recortarse */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+    margin-bottom: 15px; /* Espaciado debajo de la imagen */
+}
 
 /*PARA TEXTFIELD*/
 .form-control{
