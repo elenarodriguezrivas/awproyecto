@@ -12,12 +12,12 @@
 ?>
 
 <header>
-    <div class = "row">
-        <div class = "col-md-4"> <h1>MercaSwapp</h1> </div>
-        <div class = "col-md-5"> Tecnología Circular • Subastas Dinámicas • Trueque Inteligente </div> 
-        <div class = "col-md-4"><img src="<?= RUTA_IMGS ?>/logo-mercaswapp.png" alt="Logo MercaSwapp"  class="img-fluid" width="30%"> </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class = "row align-items-center">
+        <div class = "col-md-2 text-left"><h1>MercaSwapp </h1></div>
+        <!--EN DISPOSITIVOS MOVILES DESAPARECEN-->
+        <div class = "col-md-8 text-center d-none d-sm-block"><h3> Tecnología Circular • Subastas Dinámicas • Trueque Inteligente </h3></div> 
+        <div class = "col-md-2 text-right d-none d-sm-block"><img src="<?= RUTA_IMGS ?>/logo-mercaswapp.png" alt="Logo MercaSwapp"  class="img-fluid" width="30%"> </div>
     </div>
-    <div class = "row">
-        <div class = "col-md-8"> <h2>Plataforma innovadora para compraventa sostenible de tecnología de segunda mano</h2> 
-    </div>
+</nav>
 </header>
