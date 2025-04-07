@@ -181,8 +181,8 @@ class ProductoDAO { /*extiende de la base*/
                         $row['descripcionProducto'],
                         $row['precio'],
                         $row['categoriaProducto'],
-                        $row['fechaRegistroProducto'],
                         $row['idVendedor'],
+                        $row['rutaImagen'],
                         $row['estado']
                     );
                 }
