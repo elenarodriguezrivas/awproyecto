@@ -4,6 +4,8 @@ require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Catalogo';
 $rutaJS = RUTA_JS . "/listarProductosJS.js";
+$rutaIMG = RUTA_IMGS . "elena.jpeg";
+$rutaA2 = RUTA_IMGS . "fdi.png";
 
 $contenidoPrincipal = <<<EOS
     <div class="bloque-contenido">
@@ -45,10 +47,16 @@ $contenidoPrincipal = <<<EOS
             </div>
             <div class="col-12 col-sm-4">
                 <div class = "bloque-anuncios">
-                    <!-- NO SE PORQUE NO VA -->
-                    <img src="<?= RUTA_IMGS ?>dafi.jpg" alt="Imagen Dafi" class="img-fluid" style="max-width: 100%; height: auto;">
-
-                    <p>FOTOS</p>
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" target="_blank"><img src="<?= $rutaIMG ?>" class="img-fluid"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" target="_blank"><img src="<?= $rutaA2 ?>"class="img-fluid"></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
