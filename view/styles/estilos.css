@@ -18,13 +18,8 @@
     display: flex;
     justify-content: flex-end;
 }
-
-/* Estilos para la imagen del logo */
-header img {
-    max-width: 100%;  /* Asegura que nunca supere el tamaño del header */
-    height: auto;      /* Mantiene la proporción */
-    max-height: 80px;  /* Ajusta la altura máxima */
-    object-fit: contain; /* Asegura que la imagen se vea bien */
+.text-white-custom {
+    color: white !important; /* Cambia el color del texto a blanco */
 }
 .logo {
     max-width: 100%;  /* Asegura que nunca supere el tamaño del contenedor */
