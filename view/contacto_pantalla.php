@@ -19,15 +19,17 @@ ob_start(); // Iniciar buffer de salida
 
 <center>
     <div class = "contacto-contenido">
-        <h3>¿Necesitas ayuda? No dudes en escribirnos</h3>
-        <?php foreach ($miembros as $miembro) : ?>
-            <div class="custom-container">
-                <h4><?= htmlspecialchars($miembro['nombre']) ?></h4>
-                <img src="<?= htmlspecialchars($miembro['imagen']) ?>" alt="Imagen de <?= htmlspecialchars($miembro['nombre']) ?>" width="100" height="100">
-                <p><strong>Correo:</strong> <?= htmlspecialchars($miembro['correo']) ?></p>
-                <p><strong>Descripción:</strong> <?= htmlspecialchars($miembro['descripcion']) ?></p>
-            </div>
-        <?php endforeach; ?>
+        <div class="row">   <h3>¿Necesitas ayuda? No dudes en escribirnos</h3> </div>
+        <div class="row justify-content-center">
+            <?php foreach ($miembros as $miembro) : ?>
+                <div class="custom-container">
+                    <h4><?= htmlspecialchars($miembro['nombre']) ?></h4>
+                    <img src="<?= htmlspecialchars($miembro['imagen']) ?>" alt="Imagen de <?= htmlspecialchars($miembro['nombre']) ?>" width="100" height="100">
+                    <p><strong>Correo:</strong> <?= htmlspecialchars($miembro['correo']) ?></p>
+                    <p><strong>Descripción:</strong> <?= htmlspecialchars($miembro['descripcion']) ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
    </div> 
 
 </center>
