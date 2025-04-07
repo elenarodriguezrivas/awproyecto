@@ -419,6 +419,21 @@ footer {
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 0px; /* Espaciado inferior */
 }
+.bloque-contenido .btn {
+    background-color: #007bff; /* Color de fondo (azul por defecto) */
+    color: white; /* Color del texto */
+    border: none; /* Elimina el borde */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    font-size: 16px; /* Tamaño de fuente */
+    text-align: center; /* Centra el texto */
+    transition: background-color 0.3s ease; /* Animación suave al pasar el mouse */
+}
+
+.bloque-contenido .btn:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+}
 
 .lista-centrada {
     list-style-position: inside; /* Asegura que los puntos estén dentro del contenedor */
@@ -490,33 +505,6 @@ footer {
     margin-top: 10px; /* Espaciado superior */
 }
 
-/*PARA CONTACTOS*/
-.tabla-scroll {
-    display: block; /* Convierte el contenedor en un bloque */
-    overflow-x: auto; /* Habilita el scroll horizontal */
-    white-space: nowrap; /* Evita que las celdas se envuelvan */
-    max-width: 100%; /* Asegura que el ancho no exceda el de la pantalla */
-    border: 1px solid #ddd; /* Opcional: Añade un borde alrededor del contenedor */
-    margin: 20px auto; /* Centra el contenedor horizontalmente */
-}
-
-.tabla-scroll table {
-    width: max-content; /* Asegura que la tabla ocupe solo el espacio necesario */
-    border-collapse: collapse; /* Elimina los espacios entre bordes */
-}
-
-.tabla-scroll th, .tabla-scroll td {
-    padding: 10px; /* Espaciado interno */
-    text-align: center; /* Centra el contenido */
-    border: 1px solid #ccc; /* Bordes de las celdas */
-}
-
-.form-control{
-    width:50%;
-    margin: 0 auto; /* Centra el campo de entrada */
-    display: block; /* Asegura que el campo ocupe el ancho completo del contenedor */
-}
-
 /*PARA PRODUCTOS*/
 .bloque-productos {
     display: flex; /* Activa Flexbox */
@@ -526,7 +514,7 @@ footer {
 }
 
 /*PARA CATEGORIAS*/
-.bloque-categorias-filtro {
+.bloque-izquierda {
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */
@@ -534,7 +522,7 @@ footer {
 }
 
 /*PARA FOTOS/ANUNCIOS*/
-.bloque-anuncios {
+.bloque-derecha {
     display: flex; /* Activa Flexbox */
     justify-content: center; /* Centra horizontalmente el contenido */
     padding: 20px; /* Espaciado interno del contenedor */

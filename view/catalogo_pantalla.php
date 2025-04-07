@@ -7,7 +7,9 @@ $rutaJS = RUTA_JS . "/listarProductosJS.js";
 
 $contenidoPrincipal = <<<EOS
     <div class="bloque-contenido">
-        <h2>Catálogo de Productos</h2>
+        <h2 style = "text-align: center">
+            <strong>Catálogo de Productos</strong>
+        </h2>
         <p>¡Bienvenido a nuestro catálogo de productos! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles. ¡No te lo pierdas!</p>
         <div class="destacado">
@@ -39,7 +41,7 @@ $contenidoPrincipal = <<<EOS
                 </div>
             </div>
             <div class="col-sm-2 d-none d-sm-block">
-                <div class = "bloque-anuncios">
+                <div class = "bloque-derecha">
                     <p>FOTOS</p>
                 </div>
             </div>
