@@ -18,35 +18,23 @@ ob_start(); // Iniciar buffer de salida
 ?>
 
 <center>
-    <table border="1">
-        <tr><th colspan="6"><h2>¿Necesitas ayuda? No dudes en escribirnos</h2></th></tr>
-        <tr>
-            <th>Detalles</th>
+    <div class = "contacto-contenido">
+        <div class="row">   <h3>¿Necesitas ayuda? No dudes en escribirnos</h3> </div>
+        <div class="row justify-content-center">
             <?php foreach ($miembros as $miembro) : ?>
-                <th><?= htmlspecialchars($miembro['nombre']) ?></th>
+                <div class="custom-container">
+                    <h4><?= htmlspecialchars($miembro['nombre']) ?></h4>
+                    <img src="<?= htmlspecialchars($miembro['imagen']) ?>" alt="Imagen de <?= htmlspecialchars($miembro['nombre']) ?>" width="100" height="100">
+                    <p><strong>Correo:</strong> <?= htmlspecialchars($miembro['correo']) ?></p>
+                    <p><strong>Descripción:</strong> <?= htmlspecialchars($miembro['descripcion']) ?></p>
+                </div>
             <?php endforeach; ?>
-        </tr>
-        <tr>
-            <th>Foto</th>
-            <?php foreach ($miembros as $miembro) : ?>
-                <td align="center"><img src="<?= htmlspecialchars($miembro['imagen']) ?>" width="100" height="100"></td>
-            <?php endforeach; ?>
-        </tr>
-        <tr>
-            <th>Correo</th>
-            <?php foreach ($miembros as $miembro) : ?>
-                <td align="center"><?= htmlspecialchars($miembro['correo']) ?></td>
-            <?php endforeach; ?>
-        </tr>
-        <tr>
-            <th>Descripción</th>
-            <?php foreach ($miembros as $miembro) : ?>
-                <td align="center"><?= htmlspecialchars($miembro['descripcion']) ?></td>
-            <?php endforeach; ?>
-        </tr>
-    </table>
+        </div>
+   </div> 
+
 </center>
 
 <?php
 $contenidoPrincipal = ob_get_clean(); // Captura el contenido en el buffer
 require_once __DIR__ . '/../comun/plantilla.php';
+?>

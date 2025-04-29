@@ -22,9 +22,13 @@ $gestionFormulario = $form->generaFormulario();
 
 // Construir la página con el formulario
 $contenidoPrincipal = <<<EOS
-    <h2 class="form-title">Nuevo producto</h2>
-    $gestionFormulario
-    <div id="message" class="message"></div>
+    <div class="bloque-contenido">
+        <h2><strong>Registro de un producto</strong></h2>
+        <p> A continuación se podra añadir un nuevo producto a la venta.</p>
+        <h3><strong>Nuevo producto</strong></h3>
+        $gestionFormulario
+        <div id="message" class="message"></div>
+    </div>
     <script src="$rutaJS"></script>
 EOS;
 

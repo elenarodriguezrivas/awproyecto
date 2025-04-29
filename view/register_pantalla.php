@@ -17,14 +17,12 @@ $htmlFormulario = $formularioRegistro->generaFormulario();
 
 // Definir el contenido principal que se mostrará en la plantilla
 $contenidoPrincipal = <<<EOS
-    <section class="presentacion">
-        <h2 class="form-title">Regístrate en MercaSwapp</h2>
-        <div class="destacado">
-            $htmlFormulario
-            <div id="message" class="message"></div>
-        </div>
+    <div class="bloque-contenido">
+        <h2><strong>Regístrate en MercaSwapp</strong></h2>
+        $htmlFormulario
+        <div id="message" class="message"></div>
         <p>¿Ya tienes cuenta? <a href="login_pantalla.php">Inicia sesión aquí</a></p>
-    </section>
+    </div>
     <script src="$rutaJS"></script>
 EOS;
 

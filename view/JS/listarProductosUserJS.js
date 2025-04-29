@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 data.forEach(producto => {
                     productosHtml += `
                         <div class="producto" id="producto-${producto.id}">
-                            <img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}" />
                             <div class="producto-info">
-                                <h3>${producto.nombreProducto}</h3>
-                                <h4>${producto.precio}€</h4>
-                                <span class="producto-categoria">${producto.categoriaProducto}</span>
+                                <h2>${producto.nombreProducto}</h2>
+                                <h3>Precio del producto: ${producto.precio}€</h3>
                                 <p>${producto.descripcionProducto}</p>
-                                
+                                <span class="producto-categoria">Categoría: ${producto.categoriaProducto}</span>
+                                <p><img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}" /></p>
+                                <p>
                                 <div class="producto-actions">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
                                         <div class="form-group">
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <div class="vendido">Vendido</div>
                                     `}
                                 </div>
+                                </p>
                             </div>
                         </div>
                     `;
