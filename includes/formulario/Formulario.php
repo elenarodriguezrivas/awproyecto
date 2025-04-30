@@ -44,18 +44,23 @@ abstract class Formulario
     {
         $this->formId = $formId;
 
-        $opcionesPorDefecto = array(
-            'action' => htmlspecialchars($_SERVER['REQUEST_URI']),
-            'method' => 'POST',
-            'class' => null,
-            'enctype' => null
-        );
+        $opcionesPorDefecto = $this->initialize(); // Inicializar opciones por defecto
         $opciones = array_merge($opcionesPorDefecto, $opciones);
 
         $this->action = $opciones['action'];
         $this->method = $opciones['method'];
         $this->classAtt = $opciones['class'];
         $this->enctype = $opciones['enctype'];
+    }
+
+    private function initialize(){
+        $opcionesPorDefecto = array(
+            'action' => htmlspecialchars($_SERVER['REQUEST_URI']),
+            'method' => 'POST',
+            'class' => null,
+            'enctype' => null
+        );
+        return $opcionesPorDefecto;
     }
 
     /**

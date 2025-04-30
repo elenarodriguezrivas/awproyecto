@@ -12,12 +12,12 @@ class FormularioModificarProducto extends Formulario
     { //CONSTRUCTORA 
         parent::__construct('formModificarProducto');
         
+        $productoDAO = new ProductoDAO();
         $this->initialize(new Producto(), $productoId); // Inicializar el producto
         $this->producerVerification($this->producto); // Verificar el productor
     }
 
-    private function initialize(Producto $producto, string $productoId){ //inicialización
-        $productoDAO = new ProductoDAO();
+    private function initialize(Producto $producto, string $productoId, ProductoDAO $productoDAO){ //inicialización
         $this->producto = $productoDAO->obtenerProductoPorId($productoId);
         
         if (!$this->producto) {

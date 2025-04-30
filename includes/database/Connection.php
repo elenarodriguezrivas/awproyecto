@@ -8,17 +8,14 @@ class DB {
 
     // Constructor privado para evitar instanciación directa
     private function __construct() {
-        $this->cargar_config(); // Cargar configuración desde config.php
-        $this->initialize(); // Inicializar la conexión a la base de datos
-        $this->shutdown(); // Registrar el cierre de la conexión
-    }
-
-    private function cargar_config(){
         // Cargar configuración desde config.php
         $host = BD_HOST;
         $dbname = BD_NAME;
         $username = BD_USER;
         $password = BD_PASS;
+
+        $this->initialize(); // Inicializar la conexión a la base de datos
+        $this->shutdown(); // Registrar el cierre de la conexión
     }
     private function initialize(){ //aislar la inicialización
         try {
