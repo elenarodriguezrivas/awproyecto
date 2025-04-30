@@ -17,7 +17,7 @@ class DB {
         $this->initialize(); // Inicializar la conexión a la base de datos
         $this->shutdown(); // Registrar el cierre de la conexión
     }
-    private function initialize(){ //aislar la inicialización
+    private function initialize($host, $dbname, $username, $password){ //aislar la inicialización
         try {
             $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
             $this->db = new PDO($dsn, $username, $password);
