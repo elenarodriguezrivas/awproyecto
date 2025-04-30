@@ -157,4 +157,175 @@ $contenidoPrincipal = <<<EOS
         
         <!-- Contenedor de simulación de RedSys -->
         <div id="redsys-container" style="display: none;">
-            <div class="card mx-auto" style="max-width: 600px
+            <div class="card mx-auto" style="max-width: 600px;">
+                <div class="card-header bg-dark text-white text-center">
+                    <img src="../includes/img/redsys-logo.png" alt="RedSys" style="height: 40px;">
+                    <h5 class="mt-2 mb-0">Pasarela de Pago Seguro</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info text-center">
+                        <small>Estás en un entorno de simulación. En una implementación real, serías redirigido a la pasarela de pago del banco.</small>
+                    </div>
+                    
+                    <div class="mb-4 text-center">
+                        <p>Confirma el pago de:</p>
+                        <h3 class="text-primary"><span id="redsys-total">0.00</span>€</h3>
+                        <p>Para <strong>MercaSwapp S.L.</strong></p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="progress" style="height: 25px;">
+                            <div id="redsys-progress" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <p id="redsys-status" class="text-center mt-2">Conectando con el servidor de pago...</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button id="redsys-cancelar" class="btn btn-outline-danger w-100">Cancelar</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="redsys-confirmar" class="btn btn-success w-100">Confirmar pago</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted">Transacción protegida por SSL/TLS - Redsys © 2025</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mensaje de confirmación -->
+        <div id="confirmacion-container" style="display: none;">
+            <div class="text-center my-5">
+                <div class="mb-4">
+                    <i class="bi bi-check-circle text-success" style="font-size: 5rem;"></i>
+                </div>
+                <h3>¡Pago completado con éxito!</h3>
+                <p class="text-muted">Hemos recibido tu pago correctamente.</p>
+                <p>Número de pedido: <strong><span id="numero-pedido">SW-00000</span></strong></p>
+                <p>Se ha enviado un correo de confirmación a tu dirección de email.</p>
+                
+                <div class="mt-4">
+                    <a href="mis_pedidos_pantalla.php" class="btn btn-primary me-2">
+                        <i class="bi bi-bag-check"></i> Ver mis pedidos
+                    </a>
+                    <a href="index_pantalla.php" class="btn btn-outline-secondary">
+                        <i class="bi bi-house"></i> Volver al inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+EOS;
+
+// Incluir la plantilla general
+require_once RUTA_PLANTILLAS . '/plantilla.php';
+
+// Función para procesar el pago (esta se activaría por AJAX desde pagoJS.js)
+if (isset($_POST['accion']) && $_POST['accion'] === 'procesarPago') {
+    // Validar CSRF token (debería implementarse)
+    
+    // Recuperar datos del POST
+    $metodoPago = isset($_POST['metodoPago']) ? htmlspecialchars($_POST['metodoPago']) : '';
+    $totalCompra = isset($_POST['totalCompra']) ? floatval($_POST['totalCompra']) : 0;
+    
+    // Verificar que los datos son válidos
+    if (empty($metodoPago) || $totalCompra <= 0) {
+        echo json_encode(['exito' => false, 'mensaje' => 'Datos de pago inválidos']);
+        exit;
+    }
+    
+    // Recuperar información del carrito desde la sesión
+    $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+    
+    if (empty($carrito)) {
+        echo json_encode(['exito' => false, 'mensaje' => 'No hay productos en el carrito']);
+        exit;
+    }
+    
+    // Conectar a la base de datos
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    
+    if ($conn->connect_error) {
+        echo json_encode(['exito' => false, 'mensaje' => 'Error de conexión a la base de datos']);
+        exit;
+    }
+    
+    // Iniciar transacción
+    $conn->begin_transaction();
+    
+    try {
+        // Crear el pedido en la tabla 'pedidos'
+        $userId = $_SESSION['userid'];
+        $fechaActual = date('Y-m-d H:i:s');
+        $estado = ($metodoPago === 'transferencia') ? 'pendiente' : 'pagado';
+        
+        $sqlPedido = "INSERT INTO pedidos (usuario_id, fecha_pedido, metodo_pago, total, estado) 
+                      VALUES (?, ?, ?, ?, ?)";
+        
+        $stmtPedido = $conn->prepare($sqlPedido);
+        $stmtPedido->bind_param("issds", $userId, $fechaActual, $metodoPago, $totalCompra, $estado);
+        $stmtPedido->execute();
+        
+        // Obtener el ID del pedido insertado
+        $pedidoId = $conn->insert_id;
+        
+        // Insertar los detalles del pedido en 'detalles_pedido'
+        $sqlDetalle = "INSERT INTO detalles_pedido (pedido_id, producto_id, cantidad, precio_unitario) 
+                       VALUES (?, ?, ?, ?)";
+        
+        $stmtDetalle = $conn->prepare($sqlDetalle);
+        
+        foreach ($carrito as $productoId => $item) {
+            $cantidad = $item['cantidad'];
+            $precioUnitario = $item['precio'];
+            
+            $stmtDetalle->bind_param("iiid", $pedidoId, $productoId, $cantidad, $precioUnitario);
+            $stmtDetalle->execute();
+            
+            // Actualizar el stock del producto
+            $sqlStock = "UPDATE productos SET stock = stock - ? WHERE id = ?";
+            $stmtStock = $conn->prepare($sqlStock);
+            $stmtStock->bind_param("ii", $cantidad, $productoId);
+            $stmtStock->execute();
+        }
+        
+        // Confirmar la transacción
+        $conn->commit();
+        
+        // Limpiar el carrito en la sesión
+        $_SESSION['carrito'] = [];
+        
+        // Generar número de referencia para el pedido
+        $referenciaPedido = "SW-" . $userId . "-" . $pedidoId;
+        
+        // Devolver respuesta exitosa
+        echo json_encode([
+            'exito' => true, 
+            'mensaje' => 'Pago procesado correctamente', 
+            'pedidoId' => $pedidoId,
+            'referencia' => $referenciaPedido
+        ]);
+        
+    } catch (Exception $e) {
+        // Revertir la transacción en caso de error
+        $conn->rollback();
+        
+        echo json_encode([
+            'exito' => false, 
+            'mensaje' => 'Error al procesar el pago: ' . $e->getMessage()
+        ]);
+    }
+    
+    // Cerrar conexión y statements
+    $stmtPedido->close();
+    $stmtDetalle->close();
+    if (isset($stmtStock)) {
+        $stmtStock->close();
+    }
+    $conn->close();
+    
+    exit;
+}
+?>
