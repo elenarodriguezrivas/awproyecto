@@ -17,6 +17,7 @@ document.getElementById('productForm').addEventListener('submit', function(event
         document.getElementById('message').innerHTML = data;
         document.getElementById('message').classList.add('success');
         document.getElementById('message').classList.remove('error');
+        window.location.href = 'micatalogo_pantalla.php';
     })
     .catch(error => {
         console.error('Error:', error);

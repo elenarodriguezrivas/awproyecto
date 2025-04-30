@@ -42,7 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 productosContainer.innerHTML = productosHtml;
             }
         })
-        .catch(error => console.error('Error al obtener los productos:', error));
+        .catch((error) => {
+            console.error('Error al obtener los productos:', error);
+            window.location.href = 'login_pantalla.php';
+        });
 });
 
 /**
