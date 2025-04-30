@@ -9,9 +9,14 @@ class FormularioModificarPerfil extends Formulario
     private $usuario;
 
     public function __construct($userId)
-    {
+    { //CONSTRUCTORA 
         parent::__construct('formModificarPerfil');
         
+        $this->initialize(new Usuario(), $userId); // Inicializar el usuario
+    }
+
+    private function initialize(Usuario $usuario, string $userId)
+    {
         $usuarioDAO = new UsuarioDAO();
         $this->usuario = $usuarioDAO->obtenerUsuario($userId);
         

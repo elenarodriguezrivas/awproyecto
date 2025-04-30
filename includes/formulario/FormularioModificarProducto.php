@@ -9,7 +9,7 @@ class FormularioModificarProducto extends Formulario
     private $producto;
 
     public function __construct($productoId)
-    {
+    { //CONSTRUCTORA 
         parent::__construct('formModificarProducto');
         
         $this->initialize(new Producto(), $productoId); // Inicializar el producto
