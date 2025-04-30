@@ -6,5 +6,6 @@ CREATE TABLE Productos (
     categoriaProducto VARCHAR(100) NOT NULL,
     idVendedor VARCHAR(50) NOT NULL,
     rutaImagen VARCHAR(255) NOT NULL,
-    estado VARCHAR(255) NOT NULL
+    estado VARCHAR(255) NOT NULL,
+    FOREIGN KEY (categoriaProducto) REFERENCES Categorias(nombre)
 );
