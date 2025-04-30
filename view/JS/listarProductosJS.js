@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
                                 <h3 class="producto-descripcion">Descripcion:</h3>
                                 <p class="producto-descripcion-valor">${producto.descripcionProducto}</p>
-                                <img src="../${producto.rutaImagen}" class="producto-imagen" />
-                                <div class="acciones-producto text-center">
+                                <div class="imagen-contenedor text-center"> <img src="../${producto.rutaImagen}" /> </div>
+                                <div class="text-center">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
                                         <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
                                         <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
