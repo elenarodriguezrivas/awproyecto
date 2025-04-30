@@ -7,23 +7,43 @@ require_once __DIR__.'/../Usuarios/model/Usuario.php';
 class FormularioModificarPerfil extends Formulario
 {
     private $usuario;
+    private $userId;
 
     public function __construct($userId)
     {
         parent::__construct('formModificarPerfil');
-        
+        // Solo inicializamos atributos básicos
+        $this->userId = $userId;
+        $this->usuario = null;
+    }
+
+    /**
+     * Inicializa el formulario cargando los datos del usuario
+     * y verificando su existencia
+     * 
+     * @return $this Para permitir encadenamiento de métodos
+     */
+    public function initialize()
+    {
         $usuarioDAO = new UsuarioDAO();
-        $this->usuario = $usuarioDAO->obtenerUsuario($userId);
+        $this->usuario = $usuarioDAO->obtenerUsuario($this->userId);
         
         if (!$this->usuario) {
             header("Location: login_pantalla.php?error=Usuario no encontrado");
             exit;
         }
+        
+        return $this;
     }
 
     // Implementación correcta sin parámetro $datos
     protected function generaCamposFormulario()
     {
+        // Verificar que el usuario ha sido inicializado
+        if (!$this->usuario) {
+            $this->initialize();
+        }
+        
         // Obtener datos directamente del usuario
         $nombre = $this->usuario->getNombre();
         $apellidos = $this->usuario->getApellidos();

@@ -25,9 +25,10 @@ if (!$productoId) {
 $tituloPagina = 'Modificar Producto';
 $rutaJS = RUTA_JS . '/modificarProductoJS.js';
 
-// Crear instancia del formulario
+// Crear instancia del formulario y llamar a initialize
 $form = new FormularioModificarProducto($productoId);
-$htmlFormulario = $form->generaFormulario();
+$form->initialize(); // Inicializar el formulario (carga los datos del producto)
+$htmlFormulario = $form->generaFormulario(); // Generar el HTML del formulario
 
 // Construir la página con el formulario
 $contenidoPrincipal = <<<EOS

@@ -13,9 +13,10 @@ if (!isset($_SESSION['userid'])) {
 $tituloPagina = 'Modificar Perfil';
 $rutaJS = RUTA_JS . '/modificarPerfilJS.js';
 
-// Crear instancia del formulario
+// Crear instancia del formulario y llamar a initialize
 $form = new FormularioModificarPerfil($_SESSION['userid']);
-$htmlFormulario = $form->generaFormulario(); // Llamar a generaFormulario, no a gestiona
+$form->initialize(); // Inicializar el formulario (carga los datos del usuario)
+$htmlFormulario = $form->generaFormulario(); // Generar el HTML del formulario
 
 // Construir la página con el formulario
 $contenidoPrincipal = <<<EOS

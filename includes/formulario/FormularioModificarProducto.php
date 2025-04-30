@@ -7,13 +7,26 @@ require_once __DIR__.'/../Producto/model/Producto.php';
 class FormularioModificarProducto extends Formulario
 {
     private $producto;
+    private $productoId;
 
     public function __construct($productoId)
     {
         parent::__construct('formModificarProducto');
-        
+        // Solo inicializamos atributos básicos
+        $this->productoId = $productoId;
+        $this->producto = null;
+    }
+
+    /**
+     * Inicializa el formulario cargando los datos del producto
+     * y verificando permisos de usuario
+     * 
+     * @return $this Para permitir encadenamiento de métodos
+     */
+    public function initialize()
+    {
         $productoDAO = new ProductoDAO();
-        $this->producto = $productoDAO->obtenerProductoPorId($productoId);
+        $this->producto = $productoDAO->obtenerProductoPorId($this->productoId);
         
         if (!$this->producto) {
             header("Location: micatalogo_pantalla.php?error=Producto no encontrado");
@@ -25,10 +38,17 @@ class FormularioModificarProducto extends Formulario
             header("Location: micatalogo_pantalla.php?error=No tienes permiso para modificar este producto");
             exit;
         }
+        
+        return $this;
     }
 
     protected function generaCamposFormulario()
     {
+        // Verificar que el producto ha sido inicializado
+        if (!$this->producto) {
+            $this->initialize();
+        }
+        
         // Obtener datos directamente del producto
         $id = $this->producto->getId();
         $nombreProducto = $this->producto->getNombreProducto();
