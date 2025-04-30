@@ -5,6 +5,10 @@ require_once __DIR__ . '/../config.php';
 class DB {
     private static ?DB $instance = null; // Almacena la única instancia de la clase
     private ?PDO $db = null;
+    private $host = null;
+    private $dbname = null;
+    private $username = null;
+    private $password = null;
 
     // Constructor privado para evitar instanciación directa
     private function __construct() {
@@ -17,7 +21,7 @@ class DB {
         $this->initialize(); // Inicializar la conexión a la base de datos
         $this->shutdown(); // Registrar el cierre de la conexión
     }
-    private function initialize($host, $dbname, $username, $password){ //aislar la inicialización
+    private function initialize(){ //aislar la inicialización
         try {
             $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
             $this->db = new PDO($dsn, $username, $password);
