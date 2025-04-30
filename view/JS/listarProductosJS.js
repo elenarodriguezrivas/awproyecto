@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(data => {
             const productosContainer = document.getElementById('productos');
+            productosContainer.classList.add('productos-grid'); // Añade la clase para aplicar estilos
 
             if (data.length === 0) {
                 productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
@@ -23,13 +24,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 let productosHtml = '';
                 data.forEach(producto => {
                     productosHtml += `
-                        <div class="producto card mb-4" id="producto-${producto.id}">
+                        <div class="producto card mb-4" id="productos-${producto.id}">
                             <div class="card-body">
-                                <h2 class="card-title">${producto.nombreProducto}</h2>
-                                <h3 class="card-subtitle mb-2 text-muted">Precio del producto: ${producto.precio}€</h3>
-                                <p class="card-text">${producto.descripcionProducto}</p>
+                                <h2 class="producto-titulo">Nombre Producto </h2>
+                                <h2 class="producto-titulo-valor">${producto.nombreProducto} </h2>
+                                <h3 class="producto-precio">Precio del producto</h3>
+                                <h3 class="producto-precio-valor">${producto.precio}€</h3>
                                 <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
-                                <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
+                                <h3 class="producto-descripcion">Descripcion:</h3>
+                                <p class="producto-descripcion-valor">${producto.descripcionProducto}</p>
+                                <img src="../${producto.rutaImagen}" class="producto-imagen" />
                                 <div class="acciones-producto text-center">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
                                         <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>

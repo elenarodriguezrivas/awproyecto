@@ -41,13 +41,13 @@ $contenidoPrincipal = <<<EOS
             <div class="col-12 col-md-8 mx-auto">
                 <div class="bloque-productos">
                     <div class= "custom-container">
-                        <div id="productos">
-                            <!-- Aquí se mostrarán los productos -->
+                        <div id="productos" class="productos-grid">
+                            <!-- Aquí se cargarán los productos mediante AJAX -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="d-none  d-md-block col-md-4">
                 <div class = "bloque-anuncios">
                     <div class = "custom-container">
                         <div class="row">
