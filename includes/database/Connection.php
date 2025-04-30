@@ -8,12 +8,19 @@ class DB {
 
     // Constructor privado para evitar instanciación directa
     private function __construct() {
+        $this->cargar_config(); // Cargar configuración desde config.php
+        $this->initialize(); // Inicializar la conexión a la base de datos
+        $this->shutdown(); // Registrar el cierre de la conexión
+    }
+
+    private function cargar_config(){
         // Cargar configuración desde config.php
         $host = BD_HOST;
         $dbname = BD_NAME;
         $username = BD_USER;
         $password = BD_PASS;
-
+    }
+    private function initialize(){ //aislar la inicialización
         try {
             $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
             $this->db = new PDO($dsn, $username, $password);
@@ -21,8 +28,8 @@ class DB {
         } catch (PDOException $e) {
             die("Error de conexión: " . $e->getMessage());
         }
-
-        // Registrar el cierre de la conexión al finalizar el script
+    }
+    private function shutdown(){ //aislar el cierre de la conexión al finalizar el script
         register_shutdown_function([$this, 'closeConnection']);
     }
 
