@@ -1,24 +1,25 @@
+//listar productos en subasta en general
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('../includes/controller/obtenerProductosController.php')
+    fetch('../includes/controller/obtenerSubastasController.php')
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error al obtener los productos');
+                throw new Error('Error al obtener las subastas');
             }
             return response.json();
         })
         .then(data => {
-            const productosContainer = document.getElementById('productos');
+            const subastasContainer = document.getElementById('subastas');
 
             if (data.length === 0) {
-                productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
+                subastasContainer.innerHTML = '<p>No hay subastas disponibles.</p>';
             } else {
-                let productosHtml = '';
-                data.forEach(producto => {
-                    productosHtml += `
-                        <div class="producto" id="producto-${producto.id}">
-                            <h3>${producto.nombreProducto}</h3>
-                            <h4>${producto.precio}€</h4>
-                            <p>${producto.descripcionProducto}</p>
+                let subastasHtml = '';
+                data.forEach(subasta => {
+                    subastasHtml += `
+                        <div class="subasta" id="subasta-${subasta.id}">
+                            <h3>id Producto: ${subasta.idProducto}</h3>
+                            <h4>precio: ${subasta.precio}€</h4>
+                            <p>id Comprador: ${subasta.descripcionProducto}</p>
                             <p>Categoría: ${producto.categoriaProducto}</p>
                             <img src="../${producto.rutaImagen}" style="height: 200px;" />
                             ${producto.estado.toLowerCase() === 'ensubasta' ? `
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     `;
                 });
-                productosContainer.innerHTML = productosHtml;
+                subastasContainer.innerHTML = subastasHtml;
             }
         })
         .catch(error => console.error('Error al obtener los productos:', error));
@@ -60,7 +61,7 @@ function pujarProducto(productoId) {
             mensajeElemento.textContent = data;
             mensajeElemento.classList.add('success'); // Agregar clase para estilos
 
-            // Cambiar el botón a "Vendido" si la compra fue exitosa
+            // Cambiar el botón a "Puja hecha" si la puja fue exitosa
             const productoElemento = document.getElementById(`producto-${productoId}`);
             productoElemento.querySelector('.btn').remove(); // Eliminar el botón
             const vendidoHtml = `<div class="pujado">Puja Hecha</div>`;

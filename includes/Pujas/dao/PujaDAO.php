@@ -33,14 +33,14 @@ class PujaDAO { /*extiende de la base*/
             }
             return $result;
         } catch (PDOException $e) {
-            error_log("Error al agregar producto: " . $e->getMessage());
+            error_log("Error al agregar puja: " . $e->getMessage());
             return false;
         }
     }
 
-    public function listarProductos(): array {
+    public function listarPujas(): array { //listar todas los productos que tienen la categoria de ensubasta o pujado
         try {
-            $sql = "SELECT * FROM Productos";
+            $sql = "SELECT * FROM Productos WHERE estado = 'ensubasta' OR estado = 'subastado'";
             $stmt = $this->db->query($sql);
 
             $productos = [];
@@ -58,29 +58,14 @@ class PujaDAO { /*extiende de la base*/
             }
             return $productos;
         } catch (PDOException $e) {
-            error_log("Error al listar productos: " . $e->getMessage());
+            error_log("Error al listar pujas: " . $e->getMessage());
             return [];
         }
     }
 
-    public function obtenerVendedorPorProductoId(int $productoId) : string{
+    public function listarMisSubastas(string $userid): array { //listas todos los productos subastados por un vendedor
         try {
-            $sql = "SELECT idVendedor FROM Productos WHERE id = :productoId";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':productoId', $productoId, PDO::PARAM_INT);
-            $stmt->execute();
-    
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $row ? (string)$row['idVendedor'] : null; // Devuelve el ID del vendedor o null si no se encuentra
-        } catch (PDOException $e) {
-            error_log("Error al obtener el vendedor por ID de producto: " . $e->getMessage());
-            return "";
-        }
-    }
-
-    public function listarMisProductos(string $userid): array {
-        try {
-            $sql = "SELECT * FROM Productos WHERE idVendedor = :idVendedor";
+            $sql = "SELECT * FROM Productos WHERE idVendedor = :idVendedor AND (estado = 'ensubasta' OR estado = 'subastado')";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':idVendedor', $userid, PDO::PARAM_STR);
             $stmt->execute();
@@ -105,7 +90,7 @@ class PujaDAO { /*extiende de la base*/
         }
     }
 
-    public function eliminarProducto($idProducto, $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
+    public function eliminarPuja($idProducto, $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
         try {
             $sql = "DELETE FROM Productos WHERE id = :id AND idVendedor = :idVendedor";
             $stmt = $this->db->prepare($sql);
