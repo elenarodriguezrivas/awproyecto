@@ -12,8 +12,8 @@ class ProductoDAO { /*extiende de la base*/
     
     public function agregarProducto(Producto $producto) : bool { /*Agregar un nuevo producto*/
         try {
-            $sql = "INSERT INTO Productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen, estado) 
-                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen, :estado)";
+            $sql = "INSERT INTO Productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen, estado, cantidad) 
+                    VALUES (:nombre, :descripcion, :precio, :categoria, :idVendedor, :rutaImagen, :estado, :cantidad)";
 
             $stmt = $this->db->prepare($sql);
 
@@ -25,6 +25,7 @@ class ProductoDAO { /*extiende de la base*/
             $idVendedor = $producto->getIdVendedor();
             $rutaImagen = $producto->getRutaImagen();
             $estado = $producto->getEstado();
+            $cantidad = $producto->getCantidad(); 
 
             // Pasar las variables a bindParam
             $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
@@ -34,6 +35,7 @@ class ProductoDAO { /*extiende de la base*/
             $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
             $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
+            $stmt->bindParam(':cantidad', $cantidad, PDO::PARAM_INT); 
 
             $result = $stmt->execute();
             if (!$result) {
@@ -61,7 +63,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['categoriaProducto'],
                     $row['idVendedor'],
                     $row['rutaImagen'],
-                    $row['estado']
+                    $row['estado'],
+                    $row['cantidad'] 
                 );
             }
             return $productos;
@@ -103,7 +106,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['categoriaProducto'],
                     $row['idVendedor'],
                     $row['rutaImagen'],
-                    $row['estado']
+                    $row['estado'],
+                    $row['cantidad']
                 );
             }
             return $productos;
@@ -150,7 +154,8 @@ class ProductoDAO { /*extiende de la base*/
                     $row['categoriaProducto'],
                     $row['idVendedor'],
                     $row['rutaImagen'],
-                    $row['estado']
+                    $row['estado'],
+                    $row['cantidad'] 
                 );
             }
             return null; // Si no se encuentra el producto, devolver null
@@ -183,7 +188,8 @@ class ProductoDAO { /*extiende de la base*/
                         $row['categoriaProducto'],
                         $row['idVendedor'],
                         $row['rutaImagen'],
-                        $row['estado']
+                        $row['estado'],
+                        $row['cantidad']
                     );
                 }
             } catch (PDOException $e) {
@@ -229,7 +235,8 @@ class ProductoDAO { /*extiende de la base*/
                         categoriaProducto = :categoriaProducto, 
                         idVendedor = :idVendedor, 
                         rutaImagen = :rutaImagen, 
-                        estado = :estado 
+                        estado = :estado ,
+                        cantidad = :cantidad
                     WHERE id = :id";
     
             $stmt = $this->db->prepare($sql);
@@ -242,6 +249,7 @@ class ProductoDAO { /*extiende de la base*/
             $idVendedor = $producto->getIdVendedor();
             $rutaImagen = $producto->getRutaImagen();
             $estado = $producto->getEstado();
+            $cantidad = $producto->getCantidad();
     
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $stmt->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
@@ -251,6 +259,7 @@ class ProductoDAO { /*extiende de la base*/
             $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->bindValue(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
             $stmt->bindValue(':estado', $estado, PDO::PARAM_STR);
+            $stmt->bindValue(':cantidad', $cantidad, PDO::PARAM_INT);
     
             $result = $stmt->execute();
     
