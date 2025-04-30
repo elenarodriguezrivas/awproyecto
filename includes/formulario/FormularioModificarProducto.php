@@ -12,6 +12,11 @@ class FormularioModificarProducto extends Formulario
     {
         parent::__construct('formModificarProducto');
         
+        $this->initialize(new Producto(), $productoId); // Inicializar el producto
+        $this->producerVerification($this->producto); // Verificar el productor
+    }
+
+    private function initialize(Producto $producto, string $productoId){ //inicialización
         $productoDAO = new ProductoDAO();
         $this->producto = $productoDAO->obtenerProductoPorId($productoId);
         
@@ -19,7 +24,9 @@ class FormularioModificarProducto extends Formulario
             header("Location: micatalogo_pantalla.php?error=Producto no encontrado");
             exit;
         }
-        
+    }
+
+    private function producerVerification(Producto $producto){ //verificación del productor
         // Verificar que el usuario actual es el propietario del producto
         if ($this->producto->getIdVendedor() !== $_SESSION['userid']) {
             header("Location: micatalogo_pantalla.php?error=No tienes permiso para modificar este producto");
