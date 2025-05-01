@@ -20,60 +20,68 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * Función para cargar el resumen de la compra
+ * Función para cargar el resumen de la compra desde la base de datos
  */
 function cargarResumenCompra() {
     const resumenContainer = document.getElementById('resumen-compra');
     const totalElement = document.getElementById('total-pago');
-    
-    // Obtener la cesta del localStorage
-    const cesta = JSON.parse(localStorage.getItem('cesta')) || [];
-    
-    // Si la cesta está vacía, redirigir a la página de la cesta
-    if (cesta.length === 0) {
-        window.location.href = 'cesta_pantalla.php';
-        return;
-    }
-    
-    // Mostrar cada producto en el resumen
-    let resumenHTML = '';
-    let total = 0;
-    
-    cesta.forEach(producto => {
-        const subtotal = producto.precio * producto.cantidad;
-        total += subtotal;
-        
-        resumenHTML += `
-            <div class="d-flex justify-content-between mb-2">
-                <span>${producto.nombre} x ${producto.cantidad}</span>
-                <span>${subtotal.toFixed(2)}€</span>
-            </div>
-        `;
-    });
-    
-    // Agregar gastos de envío (ejemplo: 4.99€)
-    const gastosEnvio = 4.99;
-    total += gastosEnvio;
-    
-    resumenHTML += `
-        <hr>
-        <div class="d-flex justify-content-between mb-2">
-            <span>Gastos de envío</span>
-            <span>${gastosEnvio.toFixed(2)}€</span>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-between">
-            <strong>Total</strong>
-            <strong>${total.toFixed(2)}€</strong>
-        </div>
-    `;
-    
-    // Actualizar el HTML del resumen
-    resumenContainer.innerHTML = resumenHTML;
-    totalElement.textContent = total.toFixed(2);
-    
-    // Guardar el total en un campo oculto para el formulario
-    document.getElementById('totalCompra').value = total.toFixed(2);
+
+    // Obtener los productos seleccionados desde el servidor
+    fetch('../includes/controller/obtenerProductosCestaController.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener los productos');
+            }
+            return response.json();
+        })
+        .then(productos => {
+            if (productos.length === 0) {
+                window.location.href = 'cesta_pantalla.php';
+                return;
+            }
+
+            let resumenHTML = '';
+            let total = 0;
+
+            productos.forEach(producto => {
+                const subtotal = producto.precio * (producto.cantidad || 1); // Ajusta según la cantidad
+                total += subtotal;
+
+                resumenHTML += `
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>${producto.nombre} x ${producto.cantidad || 1}</span>
+                        <span>${subtotal.toFixed(2)}€</span>
+                    </div>
+                `;
+            });
+
+            // Agregar gastos de envío (ejemplo: 4.99€)
+            const gastosEnvio = 4.99;
+            total += gastosEnvio;
+
+            resumenHTML += `
+                <hr>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Gastos de envío</span>
+                    <span>${gastosEnvio.toFixed(2)}€</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <strong>Total</strong>
+                    <strong>${total.toFixed(2)}€</strong>
+                </div>
+            `;
+
+            // Actualizar el HTML del resumen
+            resumenContainer.innerHTML = resumenHTML;
+            totalElement.textContent = total.toFixed(2);
+
+            // Guardar el total en un campo oculto para el formulario
+            document.getElementById('totalCompra').value = total.toFixed(2);
+        })
+        .catch(error => {
+            console.error('Error al cargar el resumen de la compra:', error);
+        });
 }
 
 /**
