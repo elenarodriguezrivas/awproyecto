@@ -112,3 +112,21 @@ function procederPago() {
             alert('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
         });
 }
+
+function vaciarCesta() {
+    fetch('../includes/controller/vaciarCestaController.php', {
+        method: 'POST'
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Refrescar la lista de productos automáticamente
+                cargarProductos();
+            } else {
+                console.error('Error al vaciar la cesta:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al vaciar la cesta:', error);
+        });
+}
