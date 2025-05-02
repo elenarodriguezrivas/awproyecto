@@ -2,7 +2,7 @@
 require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Cesta de Compra';
-$rutaJS = RUTA_JS . "/cestaCompraJS.js";
+$rutaJS = RUTA_JS . "/cestaJS.js";
 
 $contenidoPrincipal = <<<EOS
     <div class="bloque-contenido">
@@ -16,7 +16,7 @@ $contenidoPrincipal = <<<EOS
         <div class="row">
             <div class="col-md-8">
                 <!-- Contenido de la cesta -->
-                <div id="cesta-contenido" class="mb-4">
+                <div id="productos" class="mb-4">
                     <!-- Aquí se cargarán los productos dinámicamente con JavaScript -->
                 </div>
             </div>
