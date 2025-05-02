@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
                                 <div class="acciones-producto text-center">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
+                                        <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
                                         <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
                                         <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
                                     ` : `
@@ -118,6 +119,7 @@ function listarPorCategoriaProducto(categoria) {
                                 <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
                                 <div class="acciones-producto text-center">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
+                                        <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
                                         <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
                                         <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
                                     ` : `
@@ -132,5 +134,30 @@ function listarPorCategoriaProducto(categoria) {
             }
         })
         .catch(error => console.error('Error al obtener los productos:', error));
+}
+
+function agregarProductoACesta(productoId) {
+    fetch('../includes/controller/agregarProductoCestaController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            productoId: productoId
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text); });
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Producto agregado a la cesta:', data);
+            // Opcional: Actualizar la interfaz o mostrar un mensaje de éxito
+        })
+        .catch(error => {
+            console.error('Error al agregar el producto a la cesta:', error);
+        });
 }
 
