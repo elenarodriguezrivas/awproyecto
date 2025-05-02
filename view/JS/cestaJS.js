@@ -87,6 +87,7 @@ function procederPago() {
             }
         })
         .catch(error => {
+            console.log(error.message);
             console.error('Error al procesar el pago:', error);
             alert('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
         });

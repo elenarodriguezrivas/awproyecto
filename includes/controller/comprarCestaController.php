@@ -34,7 +34,7 @@ $errores = [];
 
 // Procesar la compra de cada producto
 foreach ($productos as $producto) {
-    $resultado = $productoSA->registrarVenta($userId, $producto->getId());
+    $resultado = $productoSA->registrarVenta($producto->getId(), $userId);
     if (!$resultado) {
         $errores[] = "No se pudo comprar el producto con ID: " . $producto->getId();
     }
