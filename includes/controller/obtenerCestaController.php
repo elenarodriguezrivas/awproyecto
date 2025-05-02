@@ -38,7 +38,7 @@ try {
     } else {
         echo json_encode([
             'success' => false,
-            'message' => 'No se encontró la cesta para el usuario proporcionado.'
+            'message' => 'No hay productos disponibles.'
         ]);
     }
 } catch (Exception $e) {

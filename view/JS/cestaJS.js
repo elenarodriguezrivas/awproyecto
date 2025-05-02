@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function cargarProductos() {
     fetch('../includes/controller/obtenerCestaController.php')
         .then(response => {
             if (!response.ok) {
@@ -23,12 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p><strong>Vendedor ID:</strong> ${producto.vendedorId}</p>
                             <p><strong>Estado:</strong> ${producto.estado}</p>
                         </div>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${producto.id})" style="margin-left: auto;">Eliminar</button>
                     </div>
                 `;
                 });
                 productosContainer.innerHTML = productosHtml;
             } else {
-                productosContainer.innerHTML = `<p>Error: ${data.message}</p>`;
+                productosContainer.innerHTML = `<p>${data.message}</p>`;
             }
         })
         .catch(error => {
@@ -39,4 +40,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p><strong>Error técnico:</strong> ${error.message}</p>
             `;
         });
-});
+}
+
+document.addEventListener("DOMContentLoaded", cargarProductos);
+
+function eliminarProducto(productoId) {
+    fetch('../includes/controller/borrarProductoCestaController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            productoId: productoId
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Refrescar la lista de productos
+                cargarProductos();
+            } else {
+                console.error('Error al eliminar el producto:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al eliminar el producto:', error);
+        });
+}
