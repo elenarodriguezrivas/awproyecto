@@ -2,7 +2,7 @@
 
 class Cesta{
     private string $userId;
-    private string $productosCesta;
+    private $productosCesta;
 
     public function __construct($userId, $productosCesta){
         $this->userId = $userId;
