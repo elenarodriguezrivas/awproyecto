@@ -8,10 +8,19 @@ function cargarProductos() {
         })
         .then(data => {
             const productosContainer = document.getElementById('productos');
+            const totalPrecioContainer = document.getElementById('total-precio');
+
+            if (!productosContainer || !totalPrecioContainer) {
+                console.error('Elementos del DOM no encontrados.');
+                return;
+            }
 
             if (data.success) {
                 let productosHtml = '';
+                let total = 0; // Inicializar el total
+
                 data.productos.forEach(producto => {
+                    total += parseFloat(producto.precio); // Sumar el precio del producto al total
                     productosHtml += `
                     <div class="card producto d-flex align-items-center" id="producto-${producto.id}" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 15px; border-radius: 8px; display: flex; flex-direction: row; gap: 15px;">
                         <img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}" style="width: 150px; height: auto; border-radius: 8px;">
@@ -27,18 +36,29 @@ function cargarProductos() {
                     </div>
                 `;
                 });
+
                 productosContainer.innerHTML = productosHtml;
+                totalPrecioContainer.textContent = total.toFixed(2); // Actualizar el precio total con 2 decimales
             } else {
                 productosContainer.innerHTML = `<p>${data.message}</p>`;
+                totalPrecioContainer.textContent = '0.00'; // Mostrar total como 0 si no hay productos
             }
         })
         .catch(error => {
             console.error('Error al obtener los productos:', error);
             const productosContainer = document.getElementById('productos');
-            productosContainer.innerHTML = `
-                <p>Ocurrió un error al cargar los productos. Inténtalo de nuevo más tarde.</p>
-                <p><strong>Error técnico:</strong> ${error.message}</p>
-            `;
+            const totalPrecioContainer = document.getElementById('total-precio');
+
+            if (productosContainer) {
+                productosContainer.innerHTML = `
+                    <p>Ocurrió un error al cargar los productos. Inténtalo de nuevo más tarde.</p>
+                    <p><strong>Error técnico:</strong> ${error.message}</p>
+                `;
+            }
+
+            if (totalPrecioContainer) {
+                totalPrecioContainer.textContent = '0.00'; // Mostrar total como 0 en caso de error
+            }
         });
 }
 
