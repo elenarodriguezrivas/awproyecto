@@ -67,3 +67,27 @@ function eliminarProducto(productoId) {
             console.error('Error al eliminar el producto:', error);
         });
 }
+
+function procederPago() {
+    fetch('../includes/controller/comprarCestaController.php', {
+        method: 'POST',
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+
+                alert(data.message);
+
+                cargarProductos();
+            } else {
+                alert(data.message);
+                if (data.errores) {
+                    console.error('Errores:', data.errores);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error al procesar el pago:', error);
+            alert('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
+        });
+}

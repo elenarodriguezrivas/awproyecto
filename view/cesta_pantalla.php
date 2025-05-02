@@ -33,7 +33,7 @@ $contenidoPrincipal = <<<EOS
                             <h5><span id="total-precio">0.00</span>€</h5>
                         </div>
                         <div class="d-grid gap-2">
-                            <button id="procederPago" class="btn btn-success btn-lg">Proceder al pago</button>
+                            <button id="procederPago" class="btn btn-success btn-lg" onclick="procederPago()">Proceder al pago</button>
                             <button onclick="vaciarCesta()" class="btn btn-outline-danger">Vaciar cesta</button>
                         </div>
                     </div>

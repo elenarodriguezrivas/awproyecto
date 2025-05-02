@@ -53,5 +53,20 @@ class CestaDAO {
     
         return $stmt->rowCount() > 0;
     }
+
+    public function agregarProductoACesta($userId, $productoId) {
+        $query = "INSERT INTO Cestas (userId, productoId) VALUES (:userId, :productoId)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $stmt->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+    
+        try {
+            $stmt->execute();
+            return $stmt->rowCount() > 0; // Devuelve true si se insertó correctamente
+        } catch (PDOException $e) {
+            error_log("Error al agregar producto a la cesta: " . $e->getMessage());
+            return false; // Devuelve false si ocurrió un error
+        }
+    }
     
 }
