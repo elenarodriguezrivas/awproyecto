@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/Formulario.php';
 require_once __DIR__.'/../config.php';
-require_once __DIR__.'/../Cesta/sa/obtenerCestaSA.php';
+require_once __DIR__.'/../Cestas/sa/obtenerCestaSA.php';
 
 class FormularioPagoCesta extends Formulario
 {
@@ -11,7 +11,9 @@ class FormularioPagoCesta extends Formulario
     public function __construct($userId)
     {
         parent::__construct('formPagoCesta', [
-            'action' => '', // URL de procesamiento (ej: 'procesar_pago_cesta.php')
+            //Es la URL a la que se enviarán los datos del formulario cuando se haga clic en el botón de envío.
+            //En este caso, está vacío (''), lo que significa que los datos se enviarán a la misma página en la que se encuentra el formulario.
+            'action' => '', 
             'method' => 'POST',
             'class' => 'form-pago',
         ]);

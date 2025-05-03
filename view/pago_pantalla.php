@@ -117,8 +117,8 @@ $contenidoPrincipal = <<<EOS
                 <p>Total: <strong>{$total} €</strong></p>
             </div>
             <div class="modal-footer">
-                <a href="mis_pedidos_pantalla.php" class="btn btn-primary">Ver mis pedidos</a>
-                <a href="index_pantalla.php" class="btn btn-secondary">Volver al inicio</a>
+                <a href="cesta_pantalla.php" class="btn btn-primary">Ver mis pedidos</a>
+                <a href="index.php" class="btn btn-secondary">Volver al inicio</a>
             </div>
         </div>
     </div>

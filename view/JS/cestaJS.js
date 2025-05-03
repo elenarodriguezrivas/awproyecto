@@ -1,3 +1,95 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // Asignar evento al botón de vaciar cesta
+    const vaciarCestaBtn = document.getElementById('vaciar-cesta');
+    if (vaciarCestaBtn) {
+        vaciarCestaBtn.addEventListener('click', vaciarCesta);
+    }
+});
+
+// Función para eliminar un producto específico de la cesta
+function eliminarDeCesta(productoId) {
+    fetch('../includes/controller/borrarProductoCestaController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            productoId: productoId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Mostrar mensaje de éxito
+            const mensajeElement = document.getElementById('mensaje-accion');
+            mensajeElement.className = 'alert alert-success';
+            mensajeElement.textContent = 'Producto eliminado correctamente';
+            mensajeElement.style.display = 'block';
+            
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(function() {
+                mensajeElement.style.display = 'none';
+            }, 3000);
+            
+            // Recargar la página para actualizar la cesta
+            location.reload();
+        } else {
+            console.error('Error al eliminar el producto:', data.message);
+            // Mostrar mensaje de error
+            const mensajeElement = document.getElementById('mensaje-accion');
+            mensajeElement.className = 'alert alert-danger';
+            mensajeElement.textContent = 'Error al eliminar el producto: ' + data.message;
+            mensajeElement.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error al eliminar el producto:', error);
+        // Mostrar mensaje de error
+        const mensajeElement = document.getElementById('mensaje-accion');
+        mensajeElement.className = 'alert alert-danger';
+        mensajeElement.textContent = 'Error al comunicarse con el servidor';
+        mensajeElement.style.display = 'block';
+    });
+}
+
+// Función para vaciar la cesta completa
+function vaciarCesta() {
+    if (confirm('¿Estás seguro de que deseas vaciar toda la cesta?')) {
+        fetch('../includes/controller/vaciarCestaController.php', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Mostrar mensaje de éxito
+                const mensajeElement = document.getElementById('mensaje-accion');
+                mensajeElement.className = 'alert alert-success';
+                mensajeElement.textContent = 'Cesta vaciada correctamente';
+                mensajeElement.style.display = 'block';
+                
+                // Recargar la página para actualizar la cesta
+                location.reload();
+            } else {
+                console.error('Error al vaciar la cesta:', data.message);
+                // Mostrar mensaje de error
+                const mensajeElement = document.getElementById('mensaje-accion');
+                mensajeElement.className = 'alert alert-danger';
+                mensajeElement.textContent = 'Error al vaciar la cesta: ' + data.message;
+                mensajeElement.style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Error al vaciar la cesta:', error);
+            // Mostrar mensaje de error
+            const mensajeElement = document.getElementById('mensaje-accion');
+            mensajeElement.className = 'alert alert-danger';
+            mensajeElement.textContent = 'Error al comunicarse con el servidor';
+            mensajeElement.style.display = 'block';
+        });
+    }
+}
+
+// Mantener las funciones existentes que puedas necesitar
 function cargarProductos() {
     fetch('../includes/controller/obtenerCestaController.php')
         .then(response => {
@@ -32,7 +124,7 @@ function cargarProductos() {
                             <p><strong>Vendedor ID:</strong> ${producto.vendedorId}</p>
                             <p><strong>Estado:</strong> ${producto.estado}</p>
                         </div>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${producto.id})" style="margin-left: auto;">Eliminar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarDeCesta(${producto.id})" style="margin-left: auto;">Eliminar</button>
                     </div>
                 `;
                 });
@@ -62,32 +154,6 @@ function cargarProductos() {
         });
 }
 
-document.addEventListener("DOMContentLoaded", cargarProductos);
-
-function eliminarProducto(productoId) {
-    fetch('../includes/controller/borrarProductoCestaController.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            productoId: productoId
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Refrescar la lista de productos
-                cargarProductos();
-            } else {
-                console.error('Error al eliminar el producto:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error al eliminar el producto:', error);
-        });
-}
-
 function procederPago() {
     fetch('../includes/controller/comprarCestaController.php', {
         method: 'POST',
@@ -95,9 +161,7 @@ function procederPago() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-
                 alert(data.message);
-
                 cargarProductos();
             } else {
                 alert(data.message);
@@ -110,23 +174,5 @@ function procederPago() {
             console.log(error.message);
             console.error('Error al procesar el pago:', error);
             alert('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
-        });
-}
-
-function vaciarCesta() {
-    fetch('../includes/controller/vaciarCestaController.php', {
-        method: 'POST'
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Refrescar la lista de productos automáticamente
-                cargarProductos();
-            } else {
-                console.error('Error al vaciar la cesta:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error al vaciar la cesta:', error);
         });
 }
