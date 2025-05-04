@@ -2,16 +2,16 @@
 class Subasta {
     private $id;
     private $idProducto;
-    private $fechaInicio;
-    private $fechaFin;
-    private $precioInicial;
+    private $fechaSubasta;
+    private $estado;
+    private $precio;
 
-    public function __construct($idProducto, $fechaInicio, $fechaFin, $precioInicial, $id = null) {
+    public function __construct($id, $idProducto, $fechaSubasta, $estado, $precio) {
         $this->id = $id;
         $this->idProducto = $idProducto;
-        $this->fechaInicio = $fechaInicio;
-        $this->fechaFin = $fechaFin;
-        $this->precioInicial = $precioInicial; //se me ha olvidado incluir el precio en la base de datos
+        $this->fechaSubasta = $fechaSubasta;
+        $this->estado = $estado;
+        $this->precio = $precio; 
     }
 
     // Getters
@@ -21,14 +21,14 @@ class Subasta {
     public function getIdProducto() {
         return $this->idProducto;
     }
-    public function getFechaInicio() {
-        return $this->fechaInicio;
+    public function getfechaSubasta() {
+        return $this->fechaSubasta;
     }
-    public function getFechaFin() {
-        return $this->fechaFin;
+    public function getEstado() {
+        return $this->estado;
     }
-    public function getPrecioInicial() {
-        return $this->precioInicial;
+    public function getPrecio() {
+        return $this->precio;
     }
 }
 ?>

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $precio = filter_input(INPUT_POST, 'precio', FILTER_VALIDATE_FLOAT);
     $categoriaProducto = htmlspecialchars($_POST['categoriaProducto'], ENT_QUOTES, 'UTF-8');
 
-    if (!$nombreProducto || !$descripcionProducto || !$precio || !$categoriaProducto) {
+    if (!$nombreProducto || !$descripcionProducto || !is_numeric($precio) || $precio < 0 || !$precio || !$categoriaProducto) {
         http_response_code(400); 
         echo "Error: Datos inválidos.";
         exit;
