@@ -3,112 +3,30 @@ require_once '../../database/Connection.php';
 require_once '../model/Puja.php';
 
 class PujaDAO {
-    private $connection;
+    private $db;
 
     public function __construct() {
-        $this->connection = Connection::getInstance();
+        $this->db = DB::getInstance()->getBD();
     }
 
-    // Inserta una nueva puja en la base de datos
-    public function create(Puja $puja) {
-        $stmt = $this->connection->prepare("INSERT INTO pujas (idSubasta, idUsuario, cantidad, fecha) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([
-            $puja->getIdSubasta(),
-            $puja->getIdUsuario(),
-            $puja->getCantidad(),
-            $puja->getFecha()
-        ]);
+    public static function insertarPuja($idProducto, $idPujador, $precio) {
+        $sql = "INSERT INTO Pujas (idProducto, idPujador, precio) VALUES (?, ?, ?)";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute([$idProducto, $idPujador, $precio]);
     }
 
-    // Devuelve todas las pujas asociadas a una subasta
-    public function findBySubasta($idSubasta) {
-        $stmt = $this->connection->prepare("SELECT * FROM pujas WHERE idSubasta = ? ORDER BY cantidad DESC");
-        $stmt->execute([$idSubasta]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $pujas = [];
-        foreach ($results as $row) {
-            $pujas[] = new Puja(
-                $row['idSubasta'], 
-                $row['idUsuario'], 
-                $row['cantidad'], 
-                $row['fecha'], 
-                $row['id']
-            );
-        }
-        return $pujas;
-    }
-    public function delete($idPuja) {
-        $stmt = $this->connection->prepare("DELETE FROM pujas WHERE id = ?");
-        return $stmt->execute([$idPuja]);
+    public static function eliminarPuja($idProducto, $idPujador, $precio) {
+        $sql = "DELETE FROM Pujas WHERE idProducto = ? AND idPujador = ? AND precio = ?";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute([$idProducto, $idPujador, $precio]);
     }
 
-    public function findByUser($idUsuario) {
-        $stmt = $this->connection->prepare("SELECT * FROM pujas WHERE idUsuario = ? ORDER BY fecha DESC");
-        $stmt->execute([$idUsuario]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $pujas = [];
-        foreach ($results as $row) {
-            $pujas[] = new Puja(
-                $row['idSubasta'],
-                $row['idUsuario'],
-                $row['cantidad'],
-                $row['fecha'],
-                $row['id']
-            );
-        }
-        return $pujas;
+    public static function obtenerPujasUsuario($idPujador) {
+        $sql = "SELECT * FROM Pujas WHERE idPujador = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$idPujador]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // Inserta una nueva puja en la base de datos
-    public function create(Puja $puja) {
-        $stmt = $this->connection->prepare("INSERT INTO pujas (idSubasta, idUsuario, cantidad, fecha) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([
-            $puja->getIdSubasta(),
-            $puja->getIdUsuario(),
-            $puja->getCantidad(),
-            $puja->getFecha()
-        ]);
-    }
-
-    // Devuelve todas las pujas asociadas a una subasta
-    public function findBySubasta($idSubasta) {
-        $stmt = $this->connection->prepare("SELECT * FROM pujas WHERE idSubasta = ? ORDER BY cantidad DESC");
-        $stmt->execute([$idSubasta]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $pujas = [];
-        foreach ($results as $row) {
-            $pujas[] = new Puja(
-                $row['idSubasta'], 
-                $row['idUsuario'], 
-                $row['cantidad'], 
-                $row['fecha'], 
-                $row['id']
-            );
-        }
-        return $pujas;
-    }
-    public function delete($idPuja) {
-        $stmt = $this->connection->prepare("DELETE FROM pujas WHERE id = ?");
-        return $stmt->execute([$idPuja]);
-    }
-
-    public function findByUser($idUsuario) {
-        $stmt = $this->connection->prepare("SELECT * FROM pujas WHERE idUsuario = ? ORDER BY fecha DESC");
-        $stmt->execute([$idUsuario]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $pujas = [];
-        foreach ($results as $row) {
-            $pujas[] = new Puja(
-                $row['idSubasta'],
-                $row['idUsuario'],
-                $row['cantidad'],
-                $row['fecha'],
-                $row['id']
-            );
-        }
-        return $pujas;
-    }
-    
     
     
 }

@@ -20,8 +20,8 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
                 aria-haspopup="true" aria-expanded="false">Subastas & Pujas</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_subasta.php">Subastas</a>
-                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Mis Subastas</a>
+                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Subastas</a>
+                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_subasta.php">Mis Subastas</a>
                     <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_pujas.php">Mis Pujas</a>
                 </div>
             </li>

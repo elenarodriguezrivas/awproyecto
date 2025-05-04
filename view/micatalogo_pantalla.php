@@ -1,6 +1,6 @@
 <?php
 
-//hola
+
 require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Mi Catalogo de Productos';

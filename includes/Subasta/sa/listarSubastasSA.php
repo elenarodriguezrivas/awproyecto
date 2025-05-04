@@ -1,5 +1,5 @@
 <?php
-require_once '../../Subasta/dao/SubastaDAO.php';
+require_once '../../Subasta/dao/subastaDAO.php';
 
 class ListarSubastasSA {
     private $subastaDAO;

@@ -74,8 +74,41 @@ $opciones = [
         <input id="imagenProducto" type="file" name="imagenProducto" required class="form-control">
     </div>
     <div class="form-group">
+        <label for="estado">Tipo de producto:</label>
+        <select name="estado" id="estado" required>
+            <option value="enventa">Venta normal</option>
+            <option value="en_subasta">Subasta</option>
+        </select>
+
+        <div id="fechaSubastaContainer" style="display: none;">
+            <label for="fechaSubasta">Fecha de subasta:</label>
+            <input type="date" name="fechaSubasta" id="fechaSubasta">
+        </div>
+    </div>
+
+    <div class="form-group">
         <button type="submit" class="btn">Registrar Producto</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const estadoSelect = document.getElementById('estado');
+            const fechaContainer = document.getElementById('fechaSubastaContainer');
+
+            estadoSelect.addEventListener('change', function () {
+                if (this.value === 'en_subasta') {
+                    fechaContainer.style.display = 'block';
+                } else {
+                    fechaContainer.style.display = 'none';
+                }
+            });
+
+            // Mostrar fecha si ya está seleccionada por defecto
+            if (estadoSelect.value === 'en_subasta') {
+                fechaContainer.style.display = 'block';
+            }
+        });
+    </script>
 EOF;
 
     return $html;
