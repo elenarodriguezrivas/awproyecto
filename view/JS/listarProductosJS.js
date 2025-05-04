@@ -51,7 +51,7 @@ function actualizarPaginacion(paginaActual, totalPaginas) {
     }
 }
 
-// Nuevo: Cambiar el número de productos por página
+
 function cambiarProductosPorPagina(nuevoLimite) {
     if (nuevoLimite > 0 && nuevoLimite <= 20) {
         productosPorPagina = nuevoLimite;
