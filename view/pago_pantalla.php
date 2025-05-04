@@ -2,6 +2,7 @@
 require_once __DIR__.'/../includes/config.php';
 require_once __DIR__.'/../includes/Cestas/sa/obtenerCestaSA.php';
 require_once __DIR__.'/../includes/redsys/apiRedsys.php';
+require_once __DIR__.'/../includes/database/Connection.php'; // Agregar la inclusión de la clase DB
 
 session_start();
 if (!isset($_SESSION['userid'])) {
@@ -32,6 +33,9 @@ $trans = "0";       // Tipo de transacción: 0 = Autorización
 $amount = intval($total * 100); // RedSys usa céntimos, así que multiplicamos por 100
 $orderId = strtoupper(uniqid()); // ID único de pedido
 
+// Guardar la información del pedido en la base de datos
+guardarPedido($orderId, $_SESSION['userid'], $total);
+
 $SECRET_KEY = "sq7HjrUOBfKmC576ILgskD5srU870gJ7"; // Clave secreta de pruebas (debe ser la misma que en el panel de RedSys)
 
 // URLS de notificación y redirección tras pago
@@ -41,6 +45,11 @@ $SECRET_KEY = "sq7HjrUOBfKmC576ILgskD5srU870gJ7"; // Clave secreta de pruebas (d
 $urlNotificacion = "http://localhost/awproyecto/view/notificacion_pago.php";
 $urlOK = "http://localhost/awproyecto/view/pago_ok.php";
 $urlKO = "http://localhost/awproyecto/view/pago_ko.php";
+
+// URLs de notificación y redirección tras pago
+//$urlNotificacion = RUTA_APP . "/view/notificacion_pago.php";
+//$urlOK = RUTA_APP . "/view/pago_ok.php";
+//$urlKO = RUTA_APP . "/view/pago_ko.php";
 
 
 // Crear instancia del objeto RedsysAPI
@@ -129,6 +138,31 @@ $contenidoPrincipal = <<<EOS
     </div>
 </div>
 EOS;
+
+// Función para guardar la información del pedido
+function guardarPedido($orderId, $userId, $total) {
+    // Obtener la instancia de la conexión a través de la clase DB
+    $db = DB::getInstance();
+    
+    try {
+        // Crear tabla Pedidos si no existe
+        $db->query("CREATE TABLE IF NOT EXISTS Pedidos (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            orderId VARCHAR(50) NOT NULL UNIQUE,
+            userId VARCHAR(50) NOT NULL,
+            total DECIMAL(10,2) NOT NULL,
+            fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            estado VARCHAR(20) DEFAULT 'pendiente'
+        )");
+        
+        // Guardar el pedido
+        $db->query("INSERT INTO Pedidos (orderId, userId, total) VALUES (?, ?, ?)", [$orderId, $userId, $total]);
+        
+    } catch (Exception $e) {
+        // Log del error
+        file_put_contents('error_pedidos.log', "[".date('Y-m-d H:i:s')."] Error al guardar pedido: " . $e->getMessage() . "\n", FILE_APPEND);
+    }
+}
 
 require_once __DIR__ . '/../comun/plantilla.php';
 ?>
