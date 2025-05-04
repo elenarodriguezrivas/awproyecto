@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($estado === 'en_subasta') { //si el producto es para subastar, además se tiene que añadir en la tabla subastas
                 //necesitamos el id del producto
                 $idProducto = $productoSA->getIdProducto();
-                $subasta = new Subasta(NULL, $idProducto, $fechaSubasta, 'en_subasta');
+                $subasta = new Subasta(NULL, $idProducto, $fechaSubasta, 'en_subasta', $precio);
                 $subastaSA = new registerSubastaSA();
 
                 $subastaSA->agregarSubasta($subasta);

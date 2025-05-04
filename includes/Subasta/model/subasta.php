@@ -11,7 +11,7 @@ class Subasta {
         $this->idProducto = $idProducto;
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
-        $this->precioInicial = $precioInicial;
+        $this->precioInicial = $precioInicial; //se me ha olvidado incluir el precio en la base de datos
     }
 
     // Getters
