@@ -27,7 +27,7 @@ class DB {
         try {
             // Usa siempre $this->propiedad en lugar de variables locales
             //$dsn = "mysql:host={$this->host};port=3307;dbname={$this->dbname};charset=utf8mb4";
-            $dsn = "mysql:host={$this->host};port=3307;dbname={$this->dbname};charset=utf8mb4";
+            $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
             $this->db = new PDO(
                 $dsn,
                 $this->username,
