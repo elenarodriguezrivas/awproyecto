@@ -35,8 +35,13 @@ $orderId = strtoupper(uniqid()); // ID único de pedido
 $SECRET_KEY = "sq7HjrUOBfKmC576ILgskD5srU870gJ7"; // Clave secreta de pruebas (debe ser la misma que en el panel de RedSys)
 
 // URLS de notificación y redirección tras pago
-$urlNotificacion = ""; // pondre aqui la notificacion_pago.php pero hay que probar 
-$urlOKKO = "http://localhost/ApiPhpRedsys/ApiRedireccion/redsysHMAC256_API_PHP_7.0.0/ejemploRecepcionaPet.php";
+//$urlNotificacion = ""; // pondre aqui la notificacion_pago.php pero hay que probar 
+//$urlOKKO = "http://localhost/ApiPhpRedsys/ApiRedireccion/redsysHMAC256_API_PHP_7.0.0/ejemploRecepcionaPet.php";
+
+$urlNotificacion = "http://localhost/awproyecto/view/notificacion_pago.php";
+$urlOK = "http://localhost/awproyecto/view/pago_ok.php";
+$urlKO = "http://localhost/awproyecto/view/pago_ko.php";
+
 
 // Crear instancia del objeto RedsysAPI
 $redsys = new RedsysAPI;
@@ -51,8 +56,8 @@ $redsys->setParameter("DS_MERCHANT_TERMINAL", $terminal);
 
 // Establecer URLs de retorno
 $redsys->setParameter("DS_MERCHANT_MERCHANTURL", $urlNotificacion); // Notificación (POST desde Redsys)
-$redsys->setParameter("DS_MERCHANT_URLOK", $urlOKKO); // Redirección al pagar OK
-$redsys->setParameter("DS_MERCHANT_URLKO", $urlOKKO); // Redirección al cancelar o fallar
+$redsys->setParameter("DS_MERCHANT_URLOK", $urlOK); // Redirección al pagar OK
+$redsys->setParameter("DS_MERCHANT_URLKO", $urlKO); // Redirección al cancelar o fallar
 
 // Generar los datos para el formulario
 $version = "HMAC_SHA256_V1";
