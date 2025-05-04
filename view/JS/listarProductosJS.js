@@ -35,7 +35,31 @@ function cargarProductos(pagina = 1) {
 
             actualizarPaginacion(data.paginaActual, data.totalPaginas);
         })
-        .catch(error => console.error('Error al obtener los productos:', error));
+        .catch(error => console.error('Error al cargar los productos:', error));
+}
+
+function actualizarPaginacion(paginaActual, totalPaginas) {
+    const paginacionContainer = document.getElementById('paginacion');
+    paginacionContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        paginacionContainer.innerHTML += `
+            <button class="btn ${i === paginaActual ? 'btn-primary' : 'btn-secondary'}" onclick="cargarProductos(${i})">
+                ${i}
+            </button>
+        `;
+    }
+}
+
+function cambiarProductosPorPagina(nuevoLimite) {
+    if (nuevoLimite > 0 && nuevoLimite <= 20) {
+        productosPorPagina = nuevoLimite;
+        cargarProductos(1); // Reiniciar a la primera página
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarProductos();
 });
 
 /**
