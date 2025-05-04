@@ -1,13 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const selectorCategoria = document.getElementById("selectorCategoria");
+let paginaActual = 1;
+let productosPorPagina = 1; // Valor inicial, se puede cambiar dinámicamente
 
-    let categoria = selectorCategoria.value;
-    console.log(categoria);
-    
-    fetch('../includes/controller/obtenerProductosController.php', {
-        method: 'POST',
-        body: categoria
-    })
+function cargarProductos(pagina = 1) {
+    fetch(`../includes/controller/obtenerProductosController.php?page=${pagina}&limit=${productosPorPagina}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los productos');
@@ -16,36 +11,55 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(data => {
             const productosContainer = document.getElementById('productos');
+            productosContainer.innerHTML = '';
 
-            if (data.length === 0) {
+            if (data.productos.length === 0) {
                 productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
-            } else {
-                let productosHtml = '';
-                data.forEach(producto => {
-                    productosHtml += `
-                        <div class="producto card mb-4" id="producto-${producto.id}">
-                            <div class="card-body">
-                                <h2 class="card-title">${producto.nombreProducto}</h2>
-                                <h3 class="card-subtitle mb-2 text-muted">Precio del producto: ${producto.precio}€</h3>
-                                <p class="card-text">${producto.descripcionProducto}</p>
-                                <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
-                                <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
-                                <div class="acciones-producto text-center">
-                                    ${producto.estado.toLowerCase() === 'enventa' ? `
-                                        <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
-                                        <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
-                                    ` : `
-                                        <div class="alert alert-secondary">Vendido</div>
-                                    `}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                productosContainer.innerHTML = productosHtml;
+                return;
             }
+
+            let productosHtml = '';
+            data.productos.forEach(producto => {
+                productosHtml += `
+                    <div class="producto card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">${producto.nombreProducto}</h2>
+                            <p class="card-text">${producto.descripcionProducto}</p>
+                            <p><strong>Precio:</strong> ${producto.precio}€</p>
+                            <img src="../${producto.rutaImagen}" class="img-fluid" />
+                        </div>
+                    </div>
+                `;
+            });
+            productosContainer.innerHTML = productosHtml;
+
+            actualizarPaginacion(data.paginaActual, data.totalPaginas);
         })
-        .catch(error => console.error('Error al obtener los productos:', error));
+        .catch(error => console.error('Error al cargar los productos:', error));
+}
+
+function actualizarPaginacion(paginaActual, totalPaginas) {
+    const paginacionContainer = document.getElementById('paginacion');
+    paginacionContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        paginacionContainer.innerHTML += `
+            <button class="btn ${i === paginaActual ? 'btn-primary' : 'btn-secondary'}" onclick="cargarProductos(${i})">
+                ${i}
+            </button>
+        `;
+    }
+}
+
+function cambiarProductosPorPagina(nuevoLimite) {
+    if (nuevoLimite > 0 && nuevoLimite <= 20) {
+        productosPorPagina = nuevoLimite;
+        cargarProductos(1); // Reiniciar a la primera página
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarProductos();
 });
 
 /**
@@ -118,6 +132,7 @@ function listarPorCategoriaProducto(categoria) {
                                 <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
                                 <div class="acciones-producto text-center">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
+                                        <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
                                         <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
                                         <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
                                     ` : `
@@ -132,5 +147,30 @@ function listarPorCategoriaProducto(categoria) {
             }
         })
         .catch(error => console.error('Error al obtener los productos:', error));
+}
+
+function agregarProductoACesta(productoId) {
+    fetch('../includes/controller/agregarProductoCestaController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            productoId: productoId
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text); });
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Producto agregado a la cesta:', data);
+            // Opcional: Actualizar la interfaz o mostrar un mensaje de éxito
+        })
+        .catch(error => {
+            console.error('Error al agregar el producto a la cesta:', error);
+        });
 }
 

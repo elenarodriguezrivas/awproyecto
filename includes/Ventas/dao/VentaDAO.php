@@ -40,5 +40,23 @@ class VentaDAO{
             return $e;
         }
     }
+
+    public function obtenerComprasPorUsuario($userid) {
+    try {
+        $sql = "SELECT v.producto_id, p.nombreProducto, p.precio, p.categoriaProducto, p.rutaImagen 
+                FROM Ventas v
+                JOIN Productos p ON v.producto_id = p.id
+                WHERE v.comprador_id = :userid";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error al obtener compras del usuario: " . $e->getMessage());
+        return [];
+    }
+    }
 }
 ?>

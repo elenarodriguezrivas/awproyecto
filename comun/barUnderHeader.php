@@ -21,6 +21,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['login'])): ?>
+                <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/cesta_pantalla.php">Cesta de Compra</a></li>
                 <li class="nav-item space-between-elementsa"> <a class="nav-link" href="<?= RUTA_APP ?>/view/logout_pantalla.php">Cerrar sesión</a></li>
             <?php else: ?>
                 <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/login_pantalla.php">Login</a></li>

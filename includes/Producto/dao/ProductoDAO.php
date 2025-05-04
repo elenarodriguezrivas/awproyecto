@@ -260,5 +260,45 @@ class ProductoDAO { /*extiende de la base*/
             return false;
         }
     }
+
+    public function listarProductosPaginados(int $offset, int $limit): array {
+        try {
+            $sql = "SELECT * FROM Productos LIMIT :offset, :limit";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $productos = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $productos[] = new Producto(
+                    $row['id'],
+                    $row['nombreProducto'],
+                    $row['descripcionProducto'],
+                    $row['precio'],
+                    $row['categoriaProducto'],
+                    $row['idVendedor'],
+                    $row['rutaImagen'],
+                    $row['estado']
+                );
+            }
+            return $productos;
+        } catch (PDOException $e) {
+            error_log("Error al listar productos paginados: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function contarProductos(): int {
+        try {
+            $sql = "SELECT COUNT(*) as total FROM Productos";
+            $stmt = $this->db->query($sql);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? intval($row['total']) : 0;
+        } catch (PDOException $e) {
+            error_log("Error al contar productos: " . $e->getMessage());
+            return 0;
+        }
+    }
 }
 ?>
