@@ -5,18 +5,19 @@ require_once __DIR__ . '/../config.php';
 class DB {
     private static ?DB $instance = null; // Almacena la única instancia de la clase
     private ?PDO $db = null;
-    private $host = null;
-    private $dbname = null;
-    private $username = null;
-    private $password = null;
+    private $host;
+    private $dbname;
+    private $username;
+    private $password;
 
     // Constructor privado para evitar instanciación directa
     private function __construct() {
         // Cargar configuración desde config.php
-        $host = BD_HOST;
-        $dbname = BD_NAME;
-        $username = BD_USER;
-        $password = BD_PASS;
+        $this->host     = BD_HOST;
+        $this->dbname   = BD_NAME;
+        $this->username = BD_USER;
+        $this->password = BD_PASS;
+
 
         $this->initialize(); // Inicializar la conexión a la base de datos
         $this->shutdown(); // Registrar el cierre de la conexión
