@@ -16,5 +16,13 @@ class listarProductosSA {
     public function listarProductosUser($userid): array {
         return $this->productoDAO->listarMisProductos($userid);
     }
+
+    public function listarProductosPaginados(int $offset, int $limit): array {
+        return $this->productoDAO->listarProductosPaginados($offset, $limit);
+    }
+
+    public function contarProductos(): int {
+        return $this->productoDAO->contarProductos();
+    }
 }
 ?>
