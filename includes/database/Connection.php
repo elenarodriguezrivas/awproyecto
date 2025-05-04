@@ -13,8 +13,8 @@ class DB {
     // Constructor privado para evitar instanciación directa
     private function __construct() {
         // Cargar configuración desde config.php
-        $this->host     = BD_HOST;
-        $this->dbname   = BD_NAME;
+        $this->host = BD_HOST;
+        $this->dbname = BD_NAME;
         $this->username = BD_USER;
         $this->password = BD_PASS;
 
@@ -22,15 +22,23 @@ class DB {
         $this->initialize(); // Inicializar la conexión a la base de datos
         $this->shutdown(); // Registrar el cierre de la conexión
     }
-    private function initialize(){ //aislar la inicialización
+    
+    private function initialize() { 
         try {
-            $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
-            $this->db = new PDO($dsn, $username, $password);
+            // Usa siempre $this->propiedad en lugar de variables locales
+            //$dsn = "mysql:host={$this->host};port=3307;dbname={$this->dbname};charset=utf8mb4";
+            $dsn = "mysql:host={$this->host};port=3307;dbname={$this->dbname};charset=utf8mb4";
+            $this->db = new PDO(
+                $dsn,
+                $this->username,
+                $this->password
+            );
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die("Error de conexión: " . $e->getMessage());
         }
     }
+    
     private function shutdown(){ //aislar el cierre de la conexión al finalizar el script
         register_shutdown_function([$this, 'closeConnection']);
     }
