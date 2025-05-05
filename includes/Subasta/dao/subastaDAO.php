@@ -57,5 +57,33 @@ class SubastaDAO {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function obtenerProductosEnSubasta () {
+        try {
+            $sql = "SELECT 
+                        s.id AS idSubasta,
+                        s.idProducto,
+                        s.fechaSubasta,
+                        s.estado AS estadoSubasta,
+                        s.precio AS precioSubasta,
+                        p.nombre,
+                        p.descripcion,
+                        p.imagen,
+                        p.categoria,
+                        p.idUsuario
+                    FROM 
+                        Subastas s
+                    INNER JOIN 
+                        Productos p ON s.idProducto = p.id";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error al obtener subastas con información de productos: " . $e->getMessage());
+            return false;
+        }
+    }
+}
 }
 ?>

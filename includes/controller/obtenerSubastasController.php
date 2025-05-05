@@ -1,23 +1,10 @@
 <?php
-// Se requiere el DAO de subastas para obtener aquellas creadas por un usuario.
-// Asegúrate de que en SubastaDAO se implemente el método findByUser($idUsuario)
-require_once '../Subasta/dao/SubastaDAO.php';
+//session_start();
+require_once __DIR__ . '/../Subasta/sa/listarSubastasSA.php';
 
-class ObtenerSubastasUserController {
-    private $subastaDAO;
+$listarSubastasSA = new listarSubastasSA();
+$subastas = $listarSubastasSA->obtenerProductosSubastados();
 
-    public function __construct() {
-        $this->subastaDAO = new SubastaDAO();
-    }
-
-    /**
-     * Obtiene todas las subastas creadas por un usuario.
-     *
-     * @param int $idUsuario Identificador del usuario.
-     * @return array Lista de objetos Subasta.
-     */
-    public function obtenerSubastasPorUsuario($idUsuario) {
-        return $this->subastaDAO->findByUser($idUsuario);
-    }
-}
+header('Content-Type: application/json');
+echo json_encode($productosEnSubasta);
 ?>
