@@ -4,8 +4,6 @@ require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Subastas';
 $rutaJS = RUTA_JS . "/listarSubastasJS.js";
-//Aqui se muestra todas las subastas que hay en la tabla subasta
-
 $contenidoPrincipal = <<<EOS
     <section class="presentacion">
         <h2>Mis productos en Subasta</h2>

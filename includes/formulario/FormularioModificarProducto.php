@@ -62,7 +62,7 @@ class FormularioModificarProducto extends Formulario
             <label for="categoriaProducto">Categoría del Producto:</label>
             <select id="categoriaProducto" name="categoriaProducto" required class="form-control">
                 <option value="">Seleccione una categoría</option>
-EOF;
+    EOF;
 
         // opciones de categoría
         $opciones = [
@@ -98,7 +98,7 @@ EOF;
             <button type="button" onclick="window.location.href='micatalogo_pantalla.php'" class="btn btn-secondary">Cancelar</button>
         </div>
         <div id="message" class="message"></div>
-EOF;
+    EOF;
         return $html;
     }
 }

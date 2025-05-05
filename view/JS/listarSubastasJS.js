@@ -32,4 +32,5 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             document.getElementById('productos').innerHTML = `<p>Error al cargar las subastas: ${error}</p>`;
         });
-});
+
+w});
