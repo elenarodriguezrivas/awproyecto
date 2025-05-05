@@ -2,8 +2,6 @@
 session_start();
 require_once __DIR__ . '/../Producto/sa/registerProductoSA.php';
 require_once __DIR__ . '/../Producto/model/Producto.php';
-//require_once __DIR__ . '/../Subasta/sa/registerSubastaSA.php';
-//require_once __DIR__ . '/../Subasta/model/subasta.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombreProducto = htmlspecialchars($_POST['nombreProducto'], ENT_QUOTES, 'UTF-8');
@@ -17,20 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $estado = $_POST['estado'] ?? 'enventa';
-    $fechaSubasta = $_POST['fechaSubasta'] ?? null;
-
-    // Validar si es subasta que la fecha sea válida
-    if ($estado === 'en_subasta') {
-        $fechaSubasta = $_POST['fechaSubasta'];
-    
-        if (!$fechaSubasta || $fechaSubasta < date('Y-m-d')) {
-            http_response_code(400);
-            echo "Error: La fecha de subasta debe ser hoy o posterior.";
-            exit;
-        }
-    }
-    
+    $estado = $_POST['estado'] ?? 'enventa';    
 
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
         $extension = pathinfo($_FILES['imagenProducto']['name'], PATHINFO_EXTENSION);
@@ -64,14 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if ($productoSA->agregarProducto($producto)) {
-            if ($estado === 'en_subasta') { //si el producto es para subastar, además se tiene que añadir en la tabla subastas
-                //necesitamos el id del producto
-                $idProducto = $productoSA->getIdProducto();
-                $subasta = new Subasta(NULL, $idProducto, $fechaSubasta, 'en_subasta', $precio);
-                $subastaSA = new registerSubastaSA();
-
-                $subastaSA->agregarSubasta($subasta);
-            }
             http_response_code(201); 
             echo "Producto registrado con éxito.";
         } else {
