@@ -2,86 +2,62 @@
 require_once __DIR__.'/Formulario.php';
 require_once __DIR__.'/../config.php';
 require_once __DIR__.'/../Subasta/dao/SubastaDAO.php';
-require_once __DIR__.'/../Subasta/model/Producto.php';
+require_once __DIR__.'/../Subasta/model/Subasta.php';
 
-class FormularioModificarProducto extends Formulario
+class FormularioModificarSubasta extends Formulario
 {
-    private $producto;
+    private $subasta;
 
-    public function __construct($productoId)
+    public function __construct($subastaId)
     { //CONSTRUCTORA 
         parent::__construct('formModificarSubasta');
         
-        $productoDAO = new ProductoDAO();
-        $this->initialize(new Producto(), $productoId); // Inicializar el producto
-        $this->producerVerification($this->producto); // Verificar el productor
+        $subastaDAO = new SubastaDAO();
+        $this->initialize(new Subasta(), $subastaId); // Inicializar la subasta
+        $this->producerVerification($this->subasta); // Verificar la subasta
     }
 
-    private function initialize(Producto $producto, string $productoId, ProductoDAO $productoDAO){ //inicialización
-        $this->producto = $productoDAO->obtenerProductoPorId($productoId);
+    private function initialize(Subasta $subasta, string $subastaId, SubastaDAO $subastaDAO){ //inicialización
+        $this->subasta = $subastaDAO->obtenerSubastaPorId($subastaId);
         
-        if (!$this->producto) {
-            header("Location: micatalogo_pantalla.php?error=Producto no encontrado");
+        if (!$this->subasta) {
+            header("Location: catalogo_subasta.php?error=Subasta no encontrada");
             exit;
         }
     }
 
-    private function producerVerification(Producto $producto){ //verificación del productor
-        // Verificar que el usuario actual es el propietario del producto
-        if ($this->producto->getIdVendedor() !== $_SESSION['userid']) {
-            header("Location: micatalogo_pantalla.php?error=No tienes permiso para modificar este producto");
+    private function producerVerification(Subasta $subasta){ //verificación del productor
+        // Verificar que el usuario actual es el propietario de la subasta
+        if ($this->subasta->getIdVendedor() !== $_SESSION['userid']) {
+            header("Location: catalogo_subasta.php?error=No tienes permiso para modificar esta subasta");
             exit;
         }
     }
 
     protected function generaCamposFormulario()
     {
-        // Obtener datos directamente del producto
-        $id = $this->producto->getId();
-        $nombreProducto = $this->producto->getNombreProducto();
-        $descripcionProducto = $this->producto->getDescripcionProducto();
-        $precio = $this->producto->getPrecio();
-        $categoriaProducto = $this->producto->getCategoriaProducto();
-        $rutaImagen = $this->producto->getRutaImagen();
+        // Obtener datos directamente de la subasta
+        $id = $this->subasta->getId();
+        $nombreSubasta = $this->subasta->getNombreSubasta();
+        $descripcionSubasta = $this->subasta->getDescripcionSubasta();
+        $precio_original = $this->subasta->getPrecio_original();
+        $rutaImagen = $this->subasta->getRutaImagen();
 
         $html = <<<EOF
         <div class="form-group">
             <input type="hidden" name="id" value="$id">
-            <label for="nombreProducto">Nombre del Producto:</label>
-            <input id="nombreProducto" type="text" name="nombreProducto" value="$nombreProducto" required class="form-control">
+            <label for="nombreSubasta">Nombre de la Subasta:</label>
+            <input id="nombreSubasta" type="text" name="nombreSubasta" value="$nombreSubasta" required class="form-control">
         </div>
         <div class="form-group">
-            <label for="descripcionProducto">Descripción del Producto:</label>
-            <input id="descripcionProducto" type="text" name="descripcionProducto" value="$descripcionProducto" required class="form-control">
+            <label for="descripcionSubasta">Descripción de la Subasta:</label>
+            <input id="descripcionSubasta" type="text" name="descripcionSubasta" value="$descripcionSubasta" required class="form-control">
         </div>
         <div class="form-group">
-            <label for="precio">Precio:</label>
-            <input id="precio" type="number" step="0.01" name="precio" value="$precio" required class="form-control">
+            <label for="precio_original">Precio original de la subasta:</label>
+            <input id="precio_original" type="number" step="0.01" name="precio_original" value="$precio_original" required class="form-control">
         </div>
-        <div class="form-group">
-            <label for="categoriaProducto">Categoría del Producto:</label>
-            <select id="categoriaProducto" name="categoriaProducto" required class="form-control">
-                <option value="">Seleccione una categoría</option>
     EOF;
-
-        // opciones de categoría
-        $opciones = [
-            'computadora' => 'Computadora',
-            'auriculares' => 'Auriculares',
-            'juegos' => 'Juegos',
-            'ratón' => 'Ratón',
-            'teclado' => 'Teclado',
-            'pantalla' => 'Pantalla',
-            'impresora' => 'Impresora',
-            'altavoces' => 'Altavoces'
-        ];
-
-        // Generar las opciones con la opción seleccionada
-        foreach ($opciones as $valor => $texto) {
-            $selected = ($categoriaProducto == $valor) ? 'selected' : '';
-            $html .= "<option value=\"$valor\" $selected>$texto</option>";
-        }
-
         $html .= <<<EOF
             </select>
         </div>
@@ -90,12 +66,12 @@ class FormularioModificarProducto extends Formulario
             <img src="../$rutaImagen" alt="Imagen actual" style="max-width: 200px; max-height: 200px; display: block; margin-bottom: 10px;">
         </div>
         <div class="form-group">
-            <label for="imagenProducto">Nueva imagen (opcional):</label>
-            <input id="imagenProducto" type="file" name="imagenProducto" class="form-control">
+            <label for="imagenSubasta">Nueva imagen (opcional):</label>
+            <input id="imagenSubasta" type="file" name="imagenSubasta" class="form-control">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-blue">Guardar Cambios</button>
-            <button type="button" onclick="window.location.href='micatalogo_pantalla.php'" class="btn btn-secondary">Cancelar</button>
+            <button type="button" onclick="window.location.href='catalogo_subasta.php'" class="btn btn-secondary">Cancelar</button>
         </div>
         <div id="message" class="message"></div>
     EOF;

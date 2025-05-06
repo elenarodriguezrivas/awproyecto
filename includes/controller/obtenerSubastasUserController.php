@@ -1,24 +1,25 @@
 <?php
 session_start();
-require_once __DIR__ . '/../Producto/sa/listarProductosSA.php';
+require_once __DIR__ . '/../Subasta/sa/listarSubastasSA.php';
 
-$listarProductoSA = new listarProductosSA();
-$productos = $listarProductoSA->listarProductosUser($_SESSION['userid']);
+$listarSubastaSA = new listarSubastasSA();
+$subastas = $listarSubastaSA->listarSubastasUser($_SESSION['userid']);
 
-$productosArray = [];
+$subastasArray = [];
 foreach ($productos as $producto) {
-    $productosArray[] = [
-        'id' => $producto->getId(),
-        'nombreProducto' => $producto->getNombreProducto(),
-        'descripcionProducto' => $producto->getDescripcionProducto(),
-        'precio' => $producto->getPrecio(),
-        'categoriaProducto' => $producto->getcategoriaProducto(),
-        'vendedorId' => $producto->getIdVendedor(),
-        'rutaImagen' => $producto->getRutaImagen(),
-        'estado' => $producto->getEstado()
+    $subastasArray[] = [
+        'nombreSubasta' = $subasta->getNombreSubasta(),
+        'descripcionSubasta' = $subasta->getDescripcionSubasta(),
+        'precio_original' = $subasta->getPrecio_original(),
+        'precio_actual' = $subasta->getPrecio_actual(),
+        'idVendedor' = $subasta->getIdVendedor(),
+        'rutaImagen' = $subasta->getRutaImagen(),
+        'estado' = $subasta->getEstado(),
+        'fechaSubasta' = $subasta->getFechaSubasta(),
+        'horaSubasta' = $subasta->getHoraSubasta()
     ];
 }
 
 header('Content-Type: application/json');
-echo json_encode($productosArray);
+echo json_encode($subastasArray);
 ?>
