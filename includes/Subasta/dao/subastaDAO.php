@@ -1,8 +1,9 @@
 <?php
+
 require_once __DIR__ . '/../model/Subasta.php';
 require_once __DIR__ . '/../../database/Connection.php';
 
-class SubastaDAO { /*extiende de la base*/
+class SubastaDAO {
 
     private $db;
 
@@ -10,18 +11,18 @@ class SubastaDAO { /*extiende de la base*/
         $this->db = DB::getInstance()->getBD();
     }
     
-    public function agregarSubasta(Subasta $subasta) : bool { /*Agregar una nueva subasta*/
+    public function agregarSubasta(Subasta $subasta) : bool {
         try {
-            $sql = "INSERT INTO Subastas (nombre, descripcion, precio_original, precio_actual, idVendedor, rutaImagen, estado, fechaSubasta, horaSubasta) 
-                    VALUES (:nombre, :descripcion, :precio_original, :precio_actual, :idVendedor, :rutaImagen, :estado, :fechaSubasta, :horaSubasta)";
+            $sql = "INSERT INTO Subastas (nombreSubasta, descripcionSubasta, precio_original, precio_actual, idVendedor, rutaImagen, estado, fechaSubasta, horaSubasta) 
+                    VALUES (:nombreSubasta, :descripcionSubasta, :precio_original, :precio_actual, :idVendedor, :rutaImagen, :estado, :fechaSubasta, :horaSubasta)";
 
             $stmt = $this->db->prepare($sql);
 
             // Asignar los valores a variables
-            $nombre = $subasta->getNombreSubasta();
-            $descripcion = $subasta->getDescripcionSubasta();
+            $nombreSubasta = $subasta->getNombreSubasta();
+            $descripcionSubasta= $subasta->getDescripcionSubasta();
             $precio_original = $subasta->getPrecio_original();
-            $precio_actual= $subasta->getPrecio_actual();
+            $precio_actual = $subasta->getPrecio_actual();
             $idVendedor = $subasta->getIdVendedor();
             $rutaImagen = $subasta->getRutaImagen();
             $estado = $subasta->getEstado();
@@ -29,10 +30,10 @@ class SubastaDAO { /*extiende de la base*/
             $horaSubasta = $subasta->getHoraSubasta();
 
             // Pasar las variables a bindParam
-            $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-            $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
-            $stmt->bindParam(':precio_original', $precio_original, PDO::PARAM_INT);
-            $stmt->bindParam(':precio_actual', $precio_actual, PDO::PARAM_INT);
+            $stmt->bindParam(':nombreSubasta', $nombreSubasta, PDO::PARAM_STR);
+            $stmt->bindParam(':descripcionSubasta', $descripcionSubasta, PDO::PARAM_STR);
+            $stmt->bindParam(':precio_original', $precio_original, PDO::PARAM_STR);
+            $stmt->bindParam(':precio_actual', $precio_actual, PDO::PARAM_STR);
             $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
             $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
@@ -58,16 +59,16 @@ class SubastaDAO { /*extiende de la base*/
             $subastas = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $subastas[] = new Subasta(
-                    $row['id'],
-                    $row['nombre'],
-                    $row['descripcion'],
-                    $row['precio_original'],
-                    $row['precio_actual'],
-                    $row['idVendedor'],
-                    $row['rutaImagen'],
-                    $row['estado'],
-                    $row['fechaSubasta'],
-                    $row['horaSubasta']
+                    $row['id'],                 
+                    $row['nombreSubasta'],      
+                    $row['descripcionSubasta'], 
+                    $row['precio_original'],    
+                    $row['precio_actual'],      
+                    $row['idVendedor'],         
+                    $row['rutaImagen'],         
+                    $row['estado'],             
+                    $row['fechaSubasta'],       
+                    $row['horaSubasta']         
                 );
             }
             return $subastas;
@@ -77,7 +78,7 @@ class SubastaDAO { /*extiende de la base*/
         }
     }
 
-    public function obtenerVendedorPorSubastaId(int $subastaId) : string{
+    public function obtenerVendedorPorSubastaId(int $subastaId) : ?string {
         try {
             $sql = "SELECT idVendedor FROM Subastas WHERE id = :subastaId";
             $stmt = $this->db->prepare($sql);
@@ -85,10 +86,10 @@ class SubastaDAO { /*extiende de la base*/
             $stmt->execute();
     
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $row ? (string)$row['idVendedor'] : null; // Devuelve el ID del vendedor o null si no se encuentra
+            return $row ? (string)$row['idVendedor'] : null;
         } catch (PDOException $e) {
             error_log("Error al obtener el vendedor por ID de subasta: " . $e->getMessage());
-            return "";
+            return null;
         }
     }
 
@@ -102,16 +103,16 @@ class SubastaDAO { /*extiende de la base*/
             $subastas = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $subastas[] = new Subasta(
-                    $row['id'],
-                    $row['nombre'],
-                    $row['descripcion'],
-                    $row['precio_original'],
-                    $row['precio_actual'],
-                    $row['idVendedor'],
-                    $row['rutaImagen'],
-                    $row['estado'],
-                    $row['fechaSubasta'],
-                    $row['horaSubasta']
+                    $row['id'],                 
+                    $row['nombreSubasta'],      
+                    $row['descripcionSubasta'], 
+                    $row['precio_original'],    
+                    $row['precio_actual'],      
+                    $row['idVendedor'],         
+                    $row['rutaImagen'],         
+                    $row['estado'],             
+                    $row['fechaSubasta'],       
+                    $row['horaSubasta']         
                 );
             }
             return $subastas;
@@ -121,67 +122,48 @@ class SubastaDAO { /*extiende de la base*/
         }
     }
 
-    public function eliminarSubasta($idSubasta, $idVendedor) {//eliminamos el producto con el nombre indicado solo si lo elimina el vendedor
+    public function eliminarSubasta($idSubasta, $idVendedor): bool {
         try {
             $sql = "DELETE FROM Subastas WHERE id = :id AND idVendedor = :idVendedor";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':id', $idSubasta, PDO::PARAM_INT);
             $stmt->bindValue(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                return (object) ['message' => 'Subasta eliminada correctamente'];
-            } else {
-                return (object) ['message' => 'No se ha encontrado la subasta'];
-            }
+            return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             error_log("Error al eliminar subasta: " . $e->getMessage());
-            return $e;
+            return false;
         }
     }
 
-    public function obtenerSubastaPorId(string $id): ?Producto {/*buscar una subasta en concreto por su id*/
+    public function obtenerSubastaPorId(int $id): ?Subasta {
         try {
             $sql = "SELECT * FROM Subastas WHERE id = :id";
             $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
     
-            // Si la subasta se encuentra, crear y devolver el objeto subasta
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($row) {
                 return new Subasta(
-                    $row['id'],
-                    $row['nombre'],
-                    $row['descripcion'],
-                    $row['precio_original'],
-                    $row['precio_actual'],
-                    $row['idVendedor'],
-                    $row['rutaImagen'],
-                    $row['estado'],
-                    $row['fechaSubasta'],
-                    $row['horaSubasta']
+                    $row['id'],                 
+                    $row['nombreSubasta'],      
+                    $row['descripcionSubasta'], 
+                    $row['precio_original'],    
+                    $row['precio_actual'],      
+                    $row['idVendedor'],         
+                    $row['rutaImagen'],         
+                    $row['estado'],             
+                    $row['fechaSubasta'],       
+                    $row['horaSubasta']         
                 );
             }
-            return null; // Si no se encuentra la subasta, devolver null
+            return null;
         } catch (PDOException $e) {
             error_log("Error al obtener subasta por id: " . $e->getMessage());
             return null;
         }
     }
-
-    /*public function venta($id) : bool {
-        try {
-            $sql = "UPDATE Productos SET estado = 'vendido' WHERE id = :id";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $result = $stmt->execute();
-
-            return $result && $stmt->rowCount() > 0; // Devuelve true si se actualizó al menos una fila
-        } catch (PDOException $e) {
-            error_log("Error al actualizar el estado del producto a 'vendido': " . $e->getMessage());
-            return false;
-        }
-    }*/
 
     public function obtenerUltimoIdSubasta(): ?int {
         try {
@@ -198,10 +180,10 @@ class SubastaDAO { /*extiende de la base*/
     public function actualizarSubasta(Subasta $subasta): bool {
         try {
             $sql = "UPDATE Subastas 
-                    SET nombre = :nombre, 
-                        descripcion = :descripcion, 
+                    SET nombreSubasta = :nombreSubasta, 
+                        descripcionSubasta = :descripcionSubasta, 
                         precio_original = :precio_original,
-                        precio_actual = :precio_actual, 
+                        precio_actual  = :precio_actual, 
                         idVendedor = :idVendedor, 
                         rutaImagen = :rutaImagen, 
                         estado = :estado,
@@ -215,29 +197,31 @@ class SubastaDAO { /*extiende de la base*/
             $nombreSubasta = $subasta->getNombreSubasta();
             $descripcionSubasta = $subasta->getDescripcionSubasta();
             $precio_original = $subasta->getPrecio_original();
-            $precio_actual= $subasta->getPrecio_actual();
+            $precio_actual = $subasta->getPrecio_actual();
             $idVendedor = $subasta->getIdVendedor();
             $rutaImagen = $subasta->getRutaImagen();
             $estado = $subasta->getEstado();
             $fechaSubasta = $subasta->getFechaSubasta();
             $horaSubasta = $subasta->getHoraSubasta();
+            $id = $subasta->getId();
 
             // Pasar las variables a bindParam
-            $stmt->bindParam(':nombre', $nombreSubasta, PDO::PARAM_STR);
-            $stmt->bindParam(':descripcion', $descripcionSubasta, PDO::PARAM_STR);
-            $stmt->bindParam(':precio_original', $precio_original, PDO::PARAM_INT);
-            $stmt->bindParam(':precio_actual', $precio_actual, PDO::PARAM_INT);
+            $stmt->bindParam(':nombreSubasta', $nombreSubasta, PDO::PARAM_STR);
+            $stmt->bindParam(':descripcionSubasta', $descripcionSubasta, PDO::PARAM_STR);
+            $stmt->bindParam(':precio_original', $precio_original, PDO::PARAM_STR);
+            $stmt->bindParam(':precio_actual', $precio_actual, PDO::PARAM_STR);
             $stmt->bindParam(':idVendedor', $idVendedor, PDO::PARAM_STR);
             $stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
             $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
             $stmt->bindParam(':fechaSubasta', $fechaSubasta, PDO::PARAM_STR);
-            $stmt->bindParam(':horaSubasta', $horaSubasta, PDO::PARAM_STR);
+            $stmt->bindParam(':horaSubasta', $horaSubasta,PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     
             $result = $stmt->execute();
     
-            return $result && $stmt->rowCount() > 0; // Devuelve true si se actualizó al menos una fila
+            return $result && $stmt->rowCount() > 0;
         } catch (PDOException $e) {
-            error_log("Error al actualizar la subasta/no ha hecho ninguna actualizacion: " . $e->getMessage());
+            error_log("Error al actualizar la subasta: " . $e->getMessage());
             return false;
         }
     }
