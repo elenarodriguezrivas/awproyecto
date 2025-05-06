@@ -5,10 +5,10 @@
 /**
  * Parámetros de conexión a la BD
  */
-define('BD_HOST', '192.168.1.150');
+define('BD_HOST', 'localhost');
 define('BD_NAME', 'awproyecto');
-define('BD_USER', 'root');
-define('BD_PASS', 'awproyecto');
+define('BD_USER', 'admin');
+define('BD_PASS', 'admin');
 
 /**
  * Detectar automáticamente la ruta base de la aplicación
@@ -40,3 +40,4 @@ date_default_timezone_set('Europe/Madrid');
  * @see http://php.net/manual/en/function.register-shutdown-function.php
  * @see http://php.net/manual/en/language.types.callable.php
  */
+

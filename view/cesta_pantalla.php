@@ -1,67 +1,114 @@
 <?php
 require_once __DIR__.'/../includes/config.php';
+require_once __DIR__.'/../includes/Cestas/sa/obtenerCestaSA.php';
+
+session_start();
+if (!isset($_SESSION['userid'])) {
+    header("Location: login_pantalla.php");
+    exit;
+}
+
+// Obtener productos de la cesta
+$cestaSA = new obtenerCestaSA();
+$cesta = $cestaSA->obtenerCesta($_SESSION['userid']);
+$productos = $cesta ? $cesta->getProductosCesta() : [];
+
+// Calcular total
+$total = array_reduce($productos, fn($sum, $p) => $sum + $p->getPrecio(), 0);
 
 $tituloPagina = 'Cesta de Compra';
 $rutaJS = RUTA_JS . "/cestaJS.js";
 
-$contenidoPrincipal = <<<EOS
-    <div class="bloque-contenido">
-        <h2 style="text-align: center">
-            <strong>Mi Cesta de Compra</strong>
-        </h2>
-        
-        <!-- Mensajes de alerta -->
-        <div id="mensajes" class="mensajes-container mb-3"></div>
-        
-        <div class="row">
-            <div class="col-md-8">
-                <!-- Contenido de la cesta -->
-                <div id="productos" class="mb-4">
-                    <!-- Aquí se cargarán los productos dinámicamente con JavaScript -->
+// Generar lista de productos
+$htmlProductos = '';
+if (count($productos) > 0) {
+    foreach ($productos as $producto) {
+        $htmlProductos .= <<<EOS
+        <div class="producto-cesta mb-3 p-3 border rounded">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="../{$producto->getRutaImagen()}" alt="{$producto->getNombreProducto()}" class="img-fluid">
                 </div>
-            </div>
-            
-            <div class="col-md-4">
-                <!-- Resumen de la compra -->
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Resumen de la compra</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5>Total:</h5>
-                            <h5><span id="total-precio">0.00</span>€</h5>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button id="procederPago" class="btn btn-success btn-lg" onclick="procederPago()">Proceder al pago</button>
-                            <button onclick="vaciarCesta()" class="btn btn-outline-danger">Vaciar cesta</button>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <h5>{$producto->getNombreProducto()}</h5>
+                    <p>{$producto->getDescripcionProducto()}</p>
                 </div>
-                
-                <!-- Información adicional -->
-                <div class="card mt-3">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">Información</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><i class="bi bi-info-circle"></i> Los productos se reservarán hasta completar el pago.</p>
-                        <p><i class="bi bi-credit-card"></i> Aceptamos diversas formas de pago seguro.</p>
-                        <p><i class="bi bi-truck"></i> Gastos de envío: 4.99€ (se añadirán en el paso siguiente)</p>
-                    </div>
+                <div class="col-md-2 text-end">
+                    <p class="fw-bold">{$producto->getPrecio()} €</p>
+                </div>
+                <div class="col-md-2 text-end">
+                    <button class="btn btn-danger btn-sm" onclick="eliminarDeCesta({$producto->getId()})">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </button>
                 </div>
             </div>
         </div>
+        EOS;
+    }
+} else {
+    $htmlProductos = '<div class="alert alert-info">Tu cesta está vacía.</div>';
+}
+
+$botonesCompra = '';
+if (count($productos) > 0) {
+    $totalConEnvio = $total + 4.99;
+    $botonesCompra = <<<EOS
+    <p class="d-flex justify-content-between">
+        <span>Subtotal:</span>
+        <span>{$total} €</span>
+    </p>
+    <p class="d-flex justify-content-between">
+        <span>Envío:</span>
+        <span>4.99 €</span>
+    </p>
+    <hr>
+    <p class="d-flex justify-content-between fw-bold">
+        <span>Total:</span>
+        <span>{$totalConEnvio} €</span>
+    </p>
+    <a href="pago_pantalla.php" class="btn btn-success w-100 mt-3">
+        Proceder al pago
+    </a>
+    <button id="vaciar-cesta" class="btn btn-outline-danger w-100 mt-2">
+        Vaciar cesta completa
+    </button>
+    EOS;
+} else {
+    $botonesCompra = <<<EOS
+    <p>No hay productos en la cesta</p>
+    <a href="catalogo_pantalla.php" class="btn btn-primary w-100 mt-3">
+        Continuar comprando
+    </a>
+    EOS;
+}
+
+$contenidoPrincipal = <<<EOS
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Mi Cesta de Compra</h2>
+
+    <div id="mensaje-accion" class="alert" style="display: none;"></div>
+
+    <div class="row">
+        <!-- Lista de productos -->
+        <div class="col-md-8">
+            {$htmlProductos}
+        </div>
         
-        <!-- Botón para continuar comprando -->
-        <div class="text-center mt-4">
-            <a href="catalogo_pantalla.php" class="btn btn-outline-primary">
-                <i class="bi bi-arrow-left"></i> Continuar comprando
-            </a>
+        <!-- Resumen -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Resumen</h5>
+                </div>
+                <div class="card-body">
+                    {$botonesCompra}
+                </div>
+            </div>
         </div>
     </div>
-    
-    <script src="$rutaJS"></script>
+</div>
+
+<script src="{$rutaJS}"></script>
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';
