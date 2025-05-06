@@ -33,11 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Formato de fecha no válido.";
         exit;
     }
-    if (! $isHoraValida) {
-        http_response_code(400);
-        echo "Formato de hora no válido.";
-        exit;
-    }
 
     // Validar datos
     if (!$id) {
@@ -74,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Verificar que el usuario actual es el propietario del producto
+    // Verificar que el usuario actual es el propietario de la subasta
     if ($subastaActual->getIdVendedor() !== $_SESSION['userid']) {
         http_response_code(403);
         echo "No tienes permiso para modificar esta subasta.";
@@ -128,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subastaActual->getPrecio_actual(), 
         $_SESSION['userid'],
         $rutaImagen,
-        $productoActual->getEstado(),
+        $subastaActual->getEstado(),
         $fechaSubasta,
         $horaSubasta
     );

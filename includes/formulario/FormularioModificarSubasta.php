@@ -13,11 +13,11 @@ class FormularioModificarSubasta extends Formulario
         parent::__construct('formModificarSubasta');
         
         $subastaDAO = new SubastaDAO();
-        $this->initialize(new Subasta(), $subastaId, $subastaDAO); // Inicializar la subasta
-        $this->producerVerification($this->subasta); // Verificar la subasta
+        $this->initialize($subastaId, $subastaDAO); // Inicializar la subasta
+        $this->producerVerification(); // Verificar la subasta
     }
 
-    private function initialize(Subasta $subasta, string $subastaId, SubastaDAO $subastaDAO){ //inicialización
+    private function initialize(string $subastaId, SubastaDAO $subastaDAO){ //inicialización
         $this->subasta = $subastaDAO->obtenerSubastaPorId($subastaId);
         
         if (!$this->subasta) {
@@ -26,7 +26,7 @@ class FormularioModificarSubasta extends Formulario
         }
     }
 
-    private function producerVerification(Subasta $subasta){ //verificación del productor
+    private function producerVerification(){ //verificación del productor
         // Verificar que el usuario actual es el propietario de la subasta
         if ($this->subasta->getIdVendedor() !== $_SESSION['userid']) {
             header("Location: catalogo_subasta.php?error=No tienes permiso para modificar esta subasta");
@@ -70,12 +70,13 @@ class FormularioModificarSubasta extends Formulario
         </div>
         <div class="form-group">
             <label for="fechaSubasta">Fecha de subasta:</label>
-            <input type="date" id="fechaSubasta" name="fechaSubasta" value="$fechaSubasta" min="$fechaHoy" required class="form-control"> <!--Tiene que ser mayor a la fecha>
+            <input type="date" id="fechaSubasta" name="fechaSubasta" value="$fechaSubasta" min="$fechaHoy" required class="form-control"> 
         </div>
         <div class="form-group">
             <label for="horaSubasta">Hora de subasta:</label>
             <input type="time" id="horaSubasta" name="horaSubasta" value="{$horaSubasta}" required class="form-control">
         </div>
+        
         <div class="form-group">
             <button type="submit" class="btn btn-blue">Guardar Cambios</button>
             <button type="button" onclick="window.location.href='catalogo_subasta.php'" class="btn btn-secondary">Cancelar</button>

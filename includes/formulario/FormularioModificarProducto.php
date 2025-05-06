@@ -13,11 +13,11 @@ class FormularioModificarProducto extends Formulario
         parent::__construct('formModificarProducto');
         
         $productoDAO = new ProductoDAO();
-        $this->initialize(new Producto(), $productoId); // Inicializar el producto
-        $this->producerVerification($this->producto); // Verificar el productor
+        $this->initialize($productoId, $productoDAO); // Inicializar el producto
+        $this->producerVerification(); // Verificar el productor
     }
 
-    private function initialize(Producto $producto, string $productoId, ProductoDAO $productoDAO){ //inicialización
+    private function initialize(string $productoId, ProductoDAO $productoDAO){ //inicialización
         $this->producto = $productoDAO->obtenerProductoPorId($productoId);
         
         if (!$this->producto) {
@@ -26,7 +26,7 @@ class FormularioModificarProducto extends Formulario
         }
     }
 
-    private function producerVerification(Producto $producto){ //verificación del productor
+    private function producerVerification(){ //verificación del productor
         // Verificar que el usuario actual es el propietario del producto
         if ($this->producto->getIdVendedor() !== $_SESSION['userid']) {
             header("Location: micatalogo_pantalla.php?error=No tienes permiso para modificar este producto");
@@ -83,8 +83,6 @@ class FormularioModificarProducto extends Formulario
         }
 
         $html .= <<<EOF
-            </select>
-        </div>
         <div class="form-group">
             <label>Imagen actual:</label>
             <img src="../$rutaImagen" alt="Imagen actual" style="max-width: 200px; max-height: 200px; display: block; margin-bottom: 10px;">
