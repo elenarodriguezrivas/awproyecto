@@ -1,9 +1,9 @@
-document.getElementById('productForm').addEventListener('submit', function(event) {
+document.getElementById('subastaForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     var formData = new FormData(this);
 
-    fetch("../includes/controller/registerProductoController.php", {
+    fetch("../includes/controller/registerSubastaController.php", {
         method: 'POST',
         body: formData
     })
@@ -17,11 +17,11 @@ document.getElementById('productForm').addEventListener('submit', function(event
         document.getElementById('message').innerHTML = data;
         document.getElementById('message').classList.add('success');
         document.getElementById('message').classList.remove('error');
-        window.location.href = 'micatalogo_pantalla.php';
+        window.location.href = 'catalogo_subasta.php';
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('message').innerHTML = 'Error al registrar el producto: ' + error.message;
+        document.getElementById('message').innerHTML = 'Error al registrar la subasta: ' + error.message;
         document.getElementById('message').classList.add('error');
         document.getElementById('message').classList.remove('success');
     });

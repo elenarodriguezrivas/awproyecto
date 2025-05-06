@@ -1,6 +1,6 @@
 <?php
-require_once '../../Subasta/dao/subastaDAO.php';
-require_once '../../Subasta/model/subasta.php';
+require_once __DIR__ . '/../dao/SubastaDAO.php';
+require_once __DIR__ . '/../model/Subasta.php';
 
 class RegisterSubastaSA {
     private $subastaDAO;
@@ -12,4 +12,10 @@ class RegisterSubastaSA {
     public function agregarSubasta(Subasta $subasta): bool {
         return $this->subastaDAO->agregarSubasta($subasta);
     }
+    
+    public function getIdSubasta(Subasta $subasta): int{
+        return $this->subastaDAO->obtenerUltimoIdSubasta();
+    }
+}
+
 ?>

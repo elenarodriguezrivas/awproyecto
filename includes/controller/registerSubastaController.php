@@ -1,34 +1,54 @@
 <?php
 session_start();
 require_once __DIR__ . '/../Subasta/sa/registerSubastaSA.php';
-require_once __DIR__ . '/../Subasta/model/subasta.php';
+require_once __DIR__ . '/../Subasta/model/Subasta.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombreProducto = htmlspecialchars($_POST['nombreProducto'], ENT_QUOTES, 'UTF-8');
-    $descripcionProducto = htmlspecialchars($_POST['descripcionProducto'], ENT_QUOTES, 'UTF-8');
-    $precio = filter_input(INPUT_POST, 'precio', FILTER_VALIDATE_FLOAT);
-    $categoriaProducto = htmlspecialchars($_POST['categoriaProducto'], ENT_QUOTES, 'UTF-8');
+    $nombreSubasta = htmlspecialchars($_POST['nombreSubasta'], ENT_QUOTES, 'UTF-8');
+    $descripcionSubasta = htmlspecialchars($_POST['descripcionSubasta'], ENT_QUOTES, 'UTF-8');
+    $precio_original = filter_var($_POST['precio_original'], FILTER_VALIDATE_FLOAT);
+    //el precio actual no lo registra el vendedor
+    $fechaSubasta = $_POST['fechaSubasta']; // “YYYY-MM-DD”
+    $horaSubasta  = $_POST['horaSubasta'];  // “HH:MM”
 
-    if (!$nombreProducto || !$descripcionProducto || !$precio || !$categoriaProducto) {
-        http_response_code(400); 
-        echo "Error: Datos inválidos.";
+    // Validar fecha
+    $dtF = DateTime::createFromFormat('Y-m-d', $fechaSubasta);
+    $isFechaValida = $dtF && $dtF->format('Y-m-d') === $fechaSubasta;
+
+    // Validar hora
+    $dtH = DateTime::createFromFormat('H:i', $horaSubasta);
+    $isHoraValida = $dtH && $dtH->format('H:i') === $horaSubasta;
+
+    if (! $isFechaValida) {
+        http_response_code(400);
+        echo "Formato de fecha no válido.";
+        exit;
+    }
+    if (! $isHoraValida) {
+        http_response_code(400);
+        echo "Formato de hora no válido.";
         exit;
     }
 
-    $estado = $_POST['estado'] ?? 'enventa';
-    $fechaSubasta = $_POST['fechaSubasta'] ?? null;
-
-    // Validar si es subasta que la fecha sea válida
-    if ($estado === 'en_subasta') {
-        $fechaSubasta = $_POST['fechaSubasta'];
-    
-        if (!$fechaSubasta || $fechaSubasta < date('Y-m-d')) {
-            http_response_code(400);
-            echo "Error: La fecha de subasta debe ser hoy o posterior.";
-            exit;
-        }
+    if (!$nombreSubasta || empty($nombreSubasta)) {
+        http_response_code(400);
+        echo "El nombre de la subasta no puede estar vacío.";
+        exit;
     }
     
+    if (!$descripcionSubasta || empty($descripcionSubasta)) {
+        http_response_code(400);
+        echo "La descripción de la subasta no puede estar vacía.";
+        exit;
+    }
+    
+    if (!$precio_original || $precio_original <= 0) {
+        http_response_code(400);
+        echo "El precio debe ser mayor que cero.";
+        exit;
+    }
+
+    $estado = $_POST['estado'] ?? 'en_subasta';    
 
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
         $extension = pathinfo($_FILES['imagenProducto']['name'], PATHINFO_EXTENSION);
@@ -62,14 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if ($productoSA->agregarProducto($producto)) {
-            /*if ($estado === 'en_subasta') { //si el producto es para subastar, además se tiene que añadir en la tabla subastas
-                //necesitamos el id del producto
-                $idProducto = $productoSA->getIdProducto();
-                $subasta = new Subasta(NULL, $idProducto, $fechaSubasta, 'en_subasta', $precio);
-                $subastaSA = new registerSubastaSA();
-
-                $subastaSA->agregarSubasta($subasta);
-            }*/
             http_response_code(201); 
             echo "Producto registrado con éxito.";
         } else {
