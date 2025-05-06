@@ -8,5 +8,5 @@ CREATE TABLE Subastas (
     rutaImagen VARCHAR(255) NOT NULL,
     estado ENUM('en_subasta','anulada','finalizada') DEFAULT 'en_subasta',
     fechaSubasta DATE NOT NULL,
-    horaSubasta TIME NOT NULL,
+    horaSubasta TIME NOT NULL
 );

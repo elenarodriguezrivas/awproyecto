@@ -8,20 +8,20 @@ $rutaJS = RUTA_JS . "/listarSubastasUserJS.js";
 
 $contenidoPrincipal=<<<EOS
     <div class="bloque-contenido">
-        <h2>Mi Catálogo de Productos en Subasta</h2>
-        <p>¡Bienvenido a tu catálogo de productos en subasta! Aquí podrás encontrar tus productos subastados o en proceso de subasta.</p>
+        <h2>Mi Catálogo de Subastas</h2>
+        <p>¡Bienvenido a tu catálogo de subasta! Aquí podrás encontrar tus productos subastados o en proceso de subasta.</p>
         <div class="row">
             <div class = "col-sm-12 text-center ">
-                Pulsa el boton para añadir un nuevo producto a subastar:           
-                <a href="registerProducto_pantalla.php"><button class="btn">Añadir producto nuevo </button></a>
+                Pulsa el boton para añadir una nueva subasta:           
+                <a href="registerSubasta_pantalla.php"><button class="btn">Añadir subasta nueva </button></a>
             </div>
         </div>
         <div class="row">
             <div class="col-12 mx-auto">
-                <div class="bloque-productos">
+                <div class="bloque-subastas">
                     <div class= "custom-container">
-                        <div id="productos">
-                            <!-- Aquí se mostrarán los productos -->
+                        <div id="subastas">
+                            <!-- Aquí se mostrarán las subastas -->
                         </div>
                     </div>
                 </div>
