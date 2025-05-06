@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/../Producto/sa/registerProductoSA.php';
-require_once __DIR__ . '/../Producto/model/Producto.php';
+require_once __DIR__ . '/../Subasta/sa/registerSubastaSA.php';
+require_once __DIR__ . '/../Subasta/model/subasta.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombreProducto = htmlspecialchars($_POST['nombreProducto'], ENT_QUOTES, 'UTF-8');
