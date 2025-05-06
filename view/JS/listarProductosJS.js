@@ -21,12 +21,24 @@ function cargarProductos(pagina = 1) {
             let productosHtml = '';
             data.productos.forEach(producto => {
                 productosHtml += `
-                    <div class="producto card mb-4">
+                    <div class="producto card mb-4" id="producto-${producto.id}">
                         <div class="card-body">
                             <h2 class="card-title">${producto.nombreProducto}</h2>
+                            <h3 class="card-subtitle mb-2 text-muted">Precio del producto: ${producto.precio}€</h3>
                             <p class="card-text">${producto.descripcionProducto}</p>
-                            <p><strong>Precio:</strong> ${producto.precio}€</p>
-                            <img src="../${producto.rutaImagen}" class="img-fluid" />
+                            <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
+                            <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
+                            <div class="acciones-producto text-center">
+                                ${
+                                    producto.estado.toLowerCase() === 'enventa' ? `
+                                        <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
+                                        <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
+                                        <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
+                                    ` : `
+                                        <div class="alert alert-secondary">Vendido</div>
+                                    `
+                                }
+                            </div>
                         </div>
                     </div>
                 `;
@@ -131,13 +143,15 @@ function listarPorCategoriaProducto(categoria) {
                                 <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
                                 <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
                                 <div class="acciones-producto text-center">
-                                    ${producto.estado.toLowerCase() === 'enventa' ? `
-                                        <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
-                                        <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
-                                        <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
-                                    ` : `
-                                        <div class="alert alert-secondary">Vendido</div>
-                                    `}
+                                    ${
+                                        producto.estado.toLowerCase() === 'enventa' ? `
+                                            <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
+                                            <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
+                                            <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
+                                        ` : `
+                                            <div class="alert alert-secondary">Vendido</div>
+                                        `
+                                    }
                                 </div>
                             </div>
                         </div>
