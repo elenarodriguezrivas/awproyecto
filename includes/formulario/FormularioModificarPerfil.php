@@ -13,10 +13,10 @@ class FormularioModificarPerfil extends Formulario
         parent::__construct('formModificarPerfil');
         
         $usuarioDAO = new UsuarioDAO();
-        $this->initialize($usuario, $userId, $usuarioDAO); // Inicializar el usuario
+        $this->initialize($userId, $usuarioDAO); // Inicializar el usuario
     }
 
-    private function initialize(Usuario $usuario, string $userId, UsuarioDAO $usuarioDAO)
+    private function initialize(string $userId, UsuarioDAO $usuarioDAO)
     {
         $this->usuario = $usuarioDAO->obtenerUsuario($userId);
         
