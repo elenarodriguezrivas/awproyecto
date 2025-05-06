@@ -13,6 +13,7 @@ $subastas = $listarSubastaSA->listarSubastasUser($_SESSION['userid']);
 $subastasArray = [];
 foreach ($subastas as $subasta) {
     $subastasArray[] = [
+        'id' => $subasta->getId(),
         'nombreSubasta' => $subasta->getNombreSubasta(),
         'descripcionSubasta' => $subasta->getDescripcionSubasta(),
         'precio_original' => $subasta->getPrecio_original(),

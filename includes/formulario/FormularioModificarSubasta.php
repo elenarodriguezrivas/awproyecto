@@ -13,7 +13,7 @@ class FormularioModificarSubasta extends Formulario
         parent::__construct('formModificarSubasta');
         
         $subastaDAO = new SubastaDAO();
-        $this->initialize(new Subasta(), $subastaId); // Inicializar la subasta
+        $this->initialize(new Subasta(), $subastaId, $subastaDAO); // Inicializar la subasta
         $this->producerVerification($this->subasta); // Verificar la subasta
     }
 
