@@ -42,6 +42,9 @@ class FormularioModificarSubasta extends Formulario
         $descripcionSubasta = $this->subasta->getDescripcionSubasta();
         $precio_original = $this->subasta->getPrecio_original();
         $rutaImagen = $this->subasta->getRutaImagen();
+        $fechaSubasta = $this->subasta->getFechaSubasta();
+        $horaSubasta = $this->subasta->getHoraSubasta();
+        $fechaHoy = date('Y-m-d');
 
         $html = <<<EOF
         <div class="form-group">
@@ -57,10 +60,6 @@ class FormularioModificarSubasta extends Formulario
             <label for="precio_original">Precio original de la subasta:</label>
             <input id="precio_original" type="number" step="0.01" name="precio_original" value="$precio_original" required class="form-control">
         </div>
-    EOF;
-        $html .= <<<EOF
-            </select>
-        </div>
         <div class="form-group">
             <label>Imagen actual:</label>
             <img src="../$rutaImagen" alt="Imagen actual" style="max-width: 200px; max-height: 200px; display: block; margin-bottom: 10px;">
@@ -68,6 +67,14 @@ class FormularioModificarSubasta extends Formulario
         <div class="form-group">
             <label for="imagenSubasta">Nueva imagen (opcional):</label>
             <input id="imagenSubasta" type="file" name="imagenSubasta" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="fechaSubasta">Fecha de subasta:</label>
+            <input type="date" id="fechaSubasta" name="fechaSubasta" value="$fechaSubasta" min="$fechaHoy" required class="form-control"> <!--Tiene que ser mayor a la fecha>
+        </div>
+        <div class="form-group">
+            <label for="horaSubasta">Hora de subasta:</label>
+            <input type="time" id="horaSubasta" name="horaSubasta" value="{$horaSubasta}" required class="form-control">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-blue">Guardar Cambios</button>

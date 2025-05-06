@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $estado = $_POST['estado'] ?? 'en_subasta';    
 
-    if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
-        $extension = pathinfo($_FILES['imagenProducto']['name'], PATHINFO_EXTENSION);
+    if (isset($_FILES['imagenSubasta']) && $_FILES['imagenSubasta']['error'] === UPLOAD_ERR_OK) {
+        $extension = pathinfo($_FILES['imagenSubasta']['name'], PATHINFO_EXTENSION);
         $nombreArchivo = bin2hex(random_bytes(8)) . '.' . $extension;
         $directorioDestino = __DIR__ . '/../../fotos/';
         $rutaArchivo = $directorioDestino . $nombreArchivo;
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     
         // Mover el archivo subido al directorio de destino
-        if (move_uploaded_file($_FILES['imagenProducto']['tmp_name'], $rutaArchivo)) {
+        if (move_uploaded_file($_FILES['imagenSubasta']['tmp_name'], $rutaArchivo)) {
             $rutaImagen = '/fotos/' . $nombreArchivo;
             echo "Imagen guardada en: " . $rutaImagen;
         } else {
@@ -76,21 +76,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-    $producto = new Producto(NULL, $nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $_SESSION['userid'], $rutaImagen, $estado);
+    $subasta = new Subasta(NULL, $nombreSubasta, $descripcionSubasta, $precio_original, $precio_original, $_SESSION['userid'], $rutaImagen, $estado, $fechaSubasta, $horaSubasta);
 
-    $productoSA = new registerProductoSA();
+    $subastaSA = new registerSubastaSA();
 
     try {
-        if ($productoSA->agregarProducto($producto)) {
+        if ($subastaSA->agregarSubasta($subasta)) {
             http_response_code(201); 
-            echo "Producto registrado con éxito.";
+            echo "Subasta registrada con éxito.";
         } else {
             http_response_code(409); 
-            echo "El producto no se ha podido registrar";
+            echo "La subasta no se ha podido registrar";
         }
     } catch (Exception $e) {
         http_response_code(500); 
-        echo "Error al registrar el producto: " . $e->getMessage();
+        echo "Error al registrar la subasta: " . $e->getMessage();
     }
     exit;
 }

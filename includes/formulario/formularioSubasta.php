@@ -38,14 +38,12 @@ class FormularioSubasta extends Formulario
         <input id="imagenSubasta" type="file" name="imagenSubasta" required class="form-control">
     </div>
     <div class="form-group">
-        <div id="fechaSubastaContainer" style="display: none;">
             <label for="fechaSubasta">Fecha de subasta:</label>
             <input type="date" name="fechaSubasta" id="fechaSubasta">
-        </div>
-        <div id="horaSubastaContainer" style="display: none;">
+    </div>
+    <div class="form-group">
             <label for="horaSubasta">Hora subasta:</label>
-            <input type="hour" name="horaSubasta" id="horaSubasta">
-        </div>
+            <input type="time" name="horaSubasta" id="horaSubasta">
     </div>
 
     <div class="form-group">

@@ -1,5 +1,6 @@
 <?php
-require_once '../../Subasta/dao/subastaDAO.php';
+require_once __DIR__ . '/../dao/SubastaDAO.php';
+require_once __DIR__ . '/../model/Subasta.php';
 
 class listarSubastasSA {
     private $subastaDAO;
@@ -8,7 +9,12 @@ class listarSubastasSA {
         $this->subastaDAO = new SubastaDAO();
     }
 
-    public function obtenerProductosSubastados() {
-        return $this->subastaDAO->obtenerProductosEnSubasta();
+    public function listarSubastas(): array {
+        return $this->subastaDAO->listarSubastas();
     }
+
+    public function listarSubastasUser($userid): array {
+        return $this->subastaDAO->listarMisSubastas($userid);
+    }
+
 }
