@@ -15,31 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 const ahora = new Date();
                 let subastasHtml = '';
                 data.forEach(subasta => {
-                    /*subastasHtml += `
-                        <div class="subasta" id="subasta-${subasta.id}">
-                            <div class="subasta-info">
-                                <h2>${subasta.nombreSubasta}</h2>
-                                <h3>Precio actual de la subasta: ${subasta.precio_actual}€</h3>
-                                <h4>Precio original de la subasta: ${subasta.precio_original}€</h4>
-                                <p>${subasta.descripcionSubasta}</p>
-                                <p><img src="../${subasta.rutaImagen}" alt="${subasta.nombreSubasta}" /></p>
-                                <p>
-                                <div class="subasta-actions">
-                                    ${subasta.estado.toLowerCase() === 'en_subasta' ? `
-                                        <div class="form-group">
-                                            <a href="modificarsubasta_pantalla.php?id=${subasta.id}" class="btn btn-blue">Modificar</a>
-                                            <button class="btn btn-red" onclick='eliminarSubasta(${subasta.id})'>Eliminar</button>
-                                        </div>
-                                        <p class="mensaje-subasta" id="mensaje-${subasta.id}"></p>
-                                    ` : `
-                                        <div class="vendido">Vendido</div>
-                                    `}
-                                </div>
-                                </p>
-                            </div>
-                        </div>
-                    `;*/
-
                     const fechaSubasta = new Date(subasta.fechaSubasta + 'T' + subasta.horaSubasta);
                     let contenidoAcciones = '';
 

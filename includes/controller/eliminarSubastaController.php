@@ -34,18 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subastaSA = new eliminarSubastaSA();
 
     try {
+        // Ahora $ok es un boolean
         $resultado = $subastaSA->eliminarSubasta($subasta_id, $username);
-
-        if ($resultado && $resultado->message === "Subasta eliminada correctamente") {
-            http_response_code(200); // OK
-            echo $resultado->message;
+    
+        if ($resultado) {
+            http_response_code(200);
+            echo "Subasta eliminada correctamente.";
         } else {
-            http_response_code(409); // Conflict
-            echo $resultado ? $resultado->message : "No se ha podido eliminar la subasta.";
+            http_response_code(404);
+            echo "No se ha podido eliminar la subasta.";
         }
     } catch (Exception $e) {
-        http_response_code(500); // Internal Server Error
-        echo "Error al eliminar la subasta: " . $e->getMessage();
+        http_response_code(500);
+        echo "Error interno al eliminar la subasta.";
+        error_log("Error en eliminarSubastaController: " . $e->getMessage());
     }
     exit;
 }
