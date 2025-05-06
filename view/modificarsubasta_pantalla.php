@@ -26,13 +26,13 @@ $tituloPagina = 'Modificar Subasta';
 $rutaJS = RUTA_JS . '/modificarSubastaJS.js';
 
 // Crear instancia del formulario
-$form = new FormularioModificarProducto($subastaId);
+$form = new FormularioModificarSubasta($subastaId);
 $htmlFormulario = $form->generaFormulario();
 
 // Construir la página con el formulario
 $contenidoPrincipal = <<<EOS
     <section class="presentacion">
-        <h2>Modificar Producto</h2>
+        <h2>Modificar Subasta</h2>
         <div class="destacado">
             $htmlFormulario
         </div>

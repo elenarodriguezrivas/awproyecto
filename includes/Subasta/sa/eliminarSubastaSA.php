@@ -1,21 +1,18 @@
 <?php
-require_once '../../Subasta/dao/subastaDAO.php';
+require_once __DIR__ . '/../dao/SubastaDAO.php';
+require_once __DIR__ . '/../model/Subasta.php';
 
-class EliminarSubastaSA {
+class eliminarSubastaSA {
     private $subastaDAO;
 
     public function __construct() {
         $this->subastaDAO = new SubastaDAO();
     }
 
-    /**
-     * Elimina una subasta dado su identificador.
-     *
-     * @param int $idSubasta Identificador de la subasta a eliminar.
-     * @return bool Resultado de la operación de eliminación.
-     */
-    public function eliminarSubasta($idSubasta) {
-        return $this->subastaDAO->delete($idSubasta);
+    public function eliminarSubasta($idSubasta, $idVendedor) {
+        return $this->subastaDAO->eliminarSubasta($idSubasta, $idVendedor);
     }
+    
 }
+
 ?>

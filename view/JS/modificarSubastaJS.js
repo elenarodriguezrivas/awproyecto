@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(this);
 
         // Enviar los datos al controlador
-        fetch('../includes/controller/modificarProductoController.php', {
+        fetch('../includes/controller/modificarSubastaController.php', {
             method: 'POST',
             body: formData
         })
@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Redireccionar después de 2 segundos
             setTimeout(function() {
-                window.location.href = "micatalogo_pantalla.php";
+                window.location.href = "catalogo_subasta.php";
             }, 2000);
         })
         .catch(error => {
             console.error('Error:', error);
-            messageElement.textContent = 'Error al actualizar el producto: ' + error.message;
+            messageElement.textContent = 'Error al actualizar la subasta: ' + error.message;
             messageElement.classList.add('error');
         });
     });

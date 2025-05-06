@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__.'/Formulario.php';
 require_once __DIR__.'/../config.php';
-require_once __DIR__.'/../Producto/dao/ProductoDAO.php';
-require_once __DIR__.'/../Producto/model/Producto.php';
+require_once __DIR__.'/../Subasta/dao/SubastaDAO.php';
+require_once __DIR__.'/../Subasta/model/Producto.php';
 
 class FormularioModificarProducto extends Formulario
 {
