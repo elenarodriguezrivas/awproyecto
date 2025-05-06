@@ -39,18 +39,15 @@ guardarPedido($orderId, $_SESSION['userid'], $total);
 $SECRET_KEY = "sq7HjrUOBfKmC576ILgskD5srU870gJ7"; // Clave secreta de pruebas (debe ser la misma que en el panel de RedSys)
 
 // URLS de notificación y redirección tras pago
-//$urlNotificacion = ""; // pondre aqui la notificacion_pago.php pero hay que probar 
-//$urlOKKO = "http://localhost/ApiPhpRedsys/ApiRedireccion/redsysHMAC256_API_PHP_7.0.0/ejemploRecepcionaPet.php";
 
-$urlNotificacion = "http://localhost/awproyecto/view/notificacion_pago.php";
-$urlOK = "http://localhost/awproyecto/view/pago_ok.php";
-$urlKO = "http://localhost/awproyecto/view/pago_ko.php";
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://";
+$baseUrl = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 
-// URLs de notificación y redirección tras pago
-//$urlNotificacion = RUTA_APP . "/view/notificacion_pago.php";
-//$urlOK = RUTA_APP . "/view/pago_ok.php";
-//$urlKO = RUTA_APP . "/view/pago_ko.php";
+$urlOK = $baseUrl . "/pago_ok.php";
+$urlKO = $baseUrl . "/pago_ko.php";
 
+//$urlOK = "http://localhost/awproyecto/view/pago_ok.php";
+//$urlKO = "http://localhost/awproyecto/view/pago_ko.php";
 
 // Crear instancia del objeto RedsysAPI
 $redsys = new RedsysAPI;
@@ -64,7 +61,7 @@ $redsys->setParameter("DS_MERCHANT_TRANSACTIONTYPE", $trans);
 $redsys->setParameter("DS_MERCHANT_TERMINAL", $terminal);
 
 // Establecer URLs de retorno
-$redsys->setParameter("DS_MERCHANT_MERCHANTURL", $urlNotificacion); // Notificación (POST desde Redsys)
+$redsys->setParameter("DS_MERCHANT_MERCHANTURL", '');
 $redsys->setParameter("DS_MERCHANT_URLOK", $urlOK); // Redirección al pagar OK
 $redsys->setParameter("DS_MERCHANT_URLKO", $urlKO); // Redirección al cancelar o fallar
 
