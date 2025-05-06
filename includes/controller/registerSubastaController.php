@@ -19,6 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dtH = DateTime::createFromFormat('H:i', $horaSubasta);
     $isHoraValida = $dtH && $dtH->format('H:i') === $horaSubasta;
 
+    $hoy   = new DateTime('today'); //Comprobacion de que no se puede registrar una fecha de subasta anterior a hoy
+    if (!$dtF || $dtF < $hoy) {
+        http_response_code(400);
+        echo "Error: La fecha de subasta debe ser hoy o una fecha futura.";
+        exit;
+    }
+
     if (! $isFechaValida) {
         http_response_code(400);
         echo "Formato de fecha no válido.";
