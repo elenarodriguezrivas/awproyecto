@@ -235,5 +235,22 @@ class SubastaDAO {
         return $stmt->rowCount() > 0;
     }
 
+    public function obtenerVencidas(): array {
+        $sql = "
+          SELECT id, idVendedor
+            FROM Subastas
+           WHERE estado = 'en_subasta'
+             AND CONCAT(fechaSubasta, ' ', horaSubasta) <= NOW()
+        ";
+        return $this->db->query($sql, PDO::FETCH_ASSOC)->fetchAll();
+    }
+
+    public function actualizarEstado(int $id, string $nuevoEstado): bool {
+        $sql = "UPDATE Subastas SET estado = :estado WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':estado'=>$nuevoEstado, ':id'=>$idSubasta]);
+        return $stmt->rowCount() === 1;
+    }
+
 }
 ?>

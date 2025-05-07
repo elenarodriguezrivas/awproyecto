@@ -103,6 +103,20 @@ class PujaDAO { /*extiende de la base*/
             return false;
         }
     }
+
+    public function obtenerMaximaPorSubasta(int $idSubasta): ?array {
+        $sql = "
+          SELECT idPujador, precio
+            FROM Pujas
+           WHERE idSubasta = :idSubasta
+           ORDER BY precio DESC
+           LIMIT 1
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':idSubasta'=>$idSubasta]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
 }
 ?>
 

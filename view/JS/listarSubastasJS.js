@@ -17,30 +17,49 @@ function cargarSubastas() {
                 return;
             }
 
-            cont.innerHTML = data.map(s => `
-                <div class="subasta card mb-4" id="subasta-${s.id}">
-                  <div class="card-body">
-                    <h2>${s.nombreSubasta}</h2>
-                    <p>${s.descripcionSubasta}</p>
-                    <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
-                    <p>Fecha de subasta: ${s.fechaSubasta}</p>
-                    <p>Hora de subasta: ${s.horaSubasta}</p>
-                    <img src="../${s.rutaImagen}" class="img-fluid mb-3">
-                    <div class="form-inline mb-2">
-                      <input
-                        type="number"
-                        min="${s.precio_actual}"
-                        step="1.00"
-                        id="puja-${s.id}"
-                        placeholder="${s.precio_actual}€"
-                        class="form-control mr-2"
-                      />
-                      <button class="btn btn-success" onclick="pujar(${s.id})"> pujar!</button>
+            cont.innerHTML = data.map(s => {
+                const enCurso     = s.estado === 'en_subasta';
+                const esVendedor  = String(s.idVendedor) === String(CURRENT_USER_ID);
+
+                // Construye el bloque de acciones según caso
+                let accionesHTML = '';
+                if (enCurso && !esVendedor) {
+                    // Estás en subasta válida y no eres el vendedor
+                    accionesHTML = `
+                        <div class="form-inline mb-2">
+                          <input
+                            type="number"
+                            min="${s.precio_actual}"
+                            step="1.00"
+                            id="puja-${s.id}"
+                            placeholder="${s.precio_actual}€"
+                            class="form-control mr-2"
+                          />
+                          <button class="btn btn-success" onclick="pujar(${s.id})">
+                            ¡Pujar!
+                          </button>
+                        </div>
+                        <div id="mensaje-puja-${s.id}" class="text-muted"></div>
+                    `;
+                } else if (!enCurso) {
+                    // Subasta ya finalizada
+                    accionesHTML = `<p class="text-muted">Subasta finalizada.</p>`;
+                }
+                // Si eres el vendedor y aún está en curso, accionesHTML queda vacío
+
+                return `
+                  <div class="subasta card mb-4" id="subasta-${s.id}">
+                    <div class="card-body">
+                      <h2>${s.nombreSubasta}</h2>
+                      <p>${s.descripcionSubasta}</p>
+                      <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
+                      <p><em>Estado:</em> ${s.estado.replace('_',' ')}</p>
+                      <img src="../${s.rutaImagen}" class="img-fluid mb-3">
+                      ${accionesHTML}
                     </div>
-                    <div id="mensaje-puja-${s.id}" class="text-muted"></div>
                   </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         })
         .catch(err => {
             console.error(err);
@@ -48,6 +67,8 @@ function cargarSubastas() {
                 .innerHTML = '<p>Error cargando subastas.</p>';
         });
 }
+
+  
 
 function pujar(idSubasta) {
     const input = document.getElementById(`puja-${idSubasta}`);

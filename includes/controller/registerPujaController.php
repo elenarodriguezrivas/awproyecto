@@ -32,6 +32,12 @@ if ($subasta->getIdVendedor() === $_SESSION['userid']) {
     exit;
 }
 
+if ($subasta->getEstado() !== 'en_subasta') {
+    http_response_code(403);
+    echo "La subasta ya está finalizada.";
+    exit;
+}
+
 //Precio mínimo
 $minActual = $subasta->getPrecio_actual();
 if ($precio < $minActual) {
