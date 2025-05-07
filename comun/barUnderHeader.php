@@ -22,7 +22,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Subastas</a>
                     <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_subasta.php">Mis Subastas</a>
-                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_pujas.php">Mis Pujas</a>
                 </div>
             </li>
             <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/perfil_pantalla.php">Perfil</a></li>
