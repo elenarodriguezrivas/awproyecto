@@ -23,8 +23,9 @@ function cargarSubastas() {
                     <h2>${s.nombreSubasta}</h2>
                     <p>${s.descripcionSubasta}</p>
                     <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
+                    <p>Fecha de subasta: ${s.fechaSubasta}</p>
+                    <p>Hora de subasta: ${s.horaSubasta}</p>
                     <img src="../${s.rutaImagen}" class="img-fluid mb-3">
-
                     <div class="form-inline mb-2">
                       <input
                         type="number"
