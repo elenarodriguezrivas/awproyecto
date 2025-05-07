@@ -4,51 +4,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function cargarSubastas() {
     fetch('../includes/controller/obtenerSubastasController.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener las subastas');
-            }
-            return response.json();
+        .then(res => {
+            if (!res.ok) throw new Error('Error al obtener subastas');
+            return res.json();
         })
         .then(data => {
-            const subastasContainer = document.getElementById('subastas');
-            subastasContainer.innerHTML = '';
+            const cont = document.getElementById('subastas');
+            cont.innerHTML = '';
 
-            if (data.length === 0) {
-                subastasContainer.innerHTML = '<p>No hay subastas disponibles.</p>';
+            if (!data.length) {
+                cont.innerHTML = '<p>No hay subastas disponibles.</p>';
                 return;
             }
 
-            let subastasHtml = '';
-            data.forEach(subasta => {
-                subastasHtml += `
-                    <div class="subasta card mb-4" id="subasta-${subasta.id}">
-                        <div class="card-body">
-                            <h2 class="card-title">${subasta.nombreSubasta}</h2>
-                            <p class="card-text">${subasta.descripcionSubasta}</p>
-                            <p><strong>Precio original:</strong> ${subasta.precio_original}€</p>
-                            <img src="../${subasta.rutaImagen}" class="img-fluid mb-3" />
+            cont.innerHTML = data.map(s => `
+                <div class="subasta card mb-4" id="subasta-${s.id}">
+                  <div class="card-body">
+                    <h2>${s.nombreSubasta}</h2>
+                    <p>${s.descripcionSubasta}</p>
+                    <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
+                    <img src="../${s.rutaImagen}" class="img-fluid mb-3">
 
-                            <!-- Campo de puja -->
-                            <div class="form-inline mb-2">
-                                <input 
-                                    type="number" 
-                                    min="0.01" 
-                                    step="0.01" 
-                                    id="puja-${subasta.id}" 
-                                    placeholder="Tu puja (€)" 
-                                    class="form-control mr-2"
-                                />
-                                <button class="btn btn-success" onclick="pujar(${subasta.id})"> ¡Quiero pujar! </button>
-                            </div>
-                            <div id="mensaje-puja-${subasta.id}" class="text-muted"></div>
-                        </div>
+                    <div class="form-inline mb-2">
+                      <input
+                        type="number"
+                        min="${s.precio_actual}"
+                        step="1.00"
+                        id="puja-${s.id}"
+                        placeholder="${s.precio_actual}€"
+                        class="form-control mr-2"
+                      />
+                      <button class="btn btn-success" onclick="pujar(${s.id})"> pujar!</button>
                     </div>
-                `;
-            });
-            subastasContainer.innerHTML = subastasHtml;
+                    <div id="mensaje-puja-${s.id}" class="text-muted"></div>
+                  </div>
+                </div>
+            `).join('');
         })
-        .catch(error => console.error('Error al cargar las subastas:', error));
+        .catch(err => {
+            console.error(err);
+            document.getElementById('subastas')
+                .innerHTML = '<p>Error cargando subastas.</p>';
+        });
 }
 
 function pujar(idSubasta) {
@@ -65,20 +62,30 @@ function pujar(idSubasta) {
         return;
     }
 
+    // Enviar como form-urlencoded
+    const body = new URLSearchParams();
+    body.append('idSubasta', idSubasta);
+    body.append('precio', precio);
+
     fetch('../includes/controller/registerPujaController.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idSubasta, precio })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
     })
-    .then(response => response.json().then(json => ({ status: response.status, body: json })))
-    .then(({ status, body }) => {
-        mensajeEl.textContent = body.message;
-        mensajeEl.className = body.success ? 'text-success' : 'text-danger';
+    .then(res => res.text().then(txt => ({ status: res.status, text: txt })))
+    .then(({ status, text }) => {
+        // el controller devuelve directamente el mensaje
+        if (status === 201) {
+            mensajeEl.textContent = text;
+            mensajeEl.className = 'text-success';
+        } else {
+            mensajeEl.textContent = text;
+            mensajeEl.className = 'text-danger';
+        }
     })
     .catch(err => {
-        console.error('Error al registrar puja:', err);
-        mensajeEl.textContent = 'Error al enviar la puja.';
+        console.error(err);
+        mensajeEl.textContent = 'Error enviando la puja.';
         mensajeEl.className = 'text-danger';
     });
 }
-

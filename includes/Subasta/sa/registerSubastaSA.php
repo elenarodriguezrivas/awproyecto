@@ -16,6 +16,14 @@ class RegisterSubastaSA {
     public function getIdSubasta(Subasta $subasta): int{
         return $this->subastaDAO->obtenerUltimoIdSubasta();
     }
+
+    public function obtenerSubastaPorId(int $idSubasta) {
+        return $this->subastaDAO->obtenerSubastaPorId($idSubasta);
+    }
+
+    public function actualizarPrecioActual(int $idSubasta, float $nuevoPrecio){
+        return $this->subastaDAO->actualizarPrecioActual($idSubasta, $nuevoPrecio);
+    }
 }
 
 ?>

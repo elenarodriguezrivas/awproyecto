@@ -20,11 +20,11 @@ class PujaDAO { /*extiende de la base*/
             // Asignar los valores a variables
             $idSubasta = $puja->getIdSubasta();
             $idPujador = $puja->getIdPujador();
-            $precio = $producto->getPrecio();
+            $precio = $puja->getPrecio();
 
             // Pasar las variables a bindParam
-            $stmt->bindValue(':idSubasta', $id, PDO::PARAM_INT);
-            $stmt->bindValue(':idPujador', $id, PDO::PARAM_STR);
+            $stmt->bindValue(':idSubasta', $idSubasta, PDO::PARAM_INT);
+            $stmt->bindValue(':idPujador', $idPujador, PDO::PARAM_STR);
             $stmt->bindValue(':precio', $precio, PDO::PARAM_STR);
 
             $result = $stmt->execute();

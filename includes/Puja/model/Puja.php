@@ -5,7 +5,7 @@ class Puja {
     private $idPujador;
     private $precio;
 
-    public function __construct(int $idSubasta, int $idPujador, float $precio) {
+    public function __construct(int $idSubasta, string $idPujador, float $precio) {
         $this->idSubasta = $idSubasta;
         $this->idPujador = $idPujador;
         $this->precio = $precio;

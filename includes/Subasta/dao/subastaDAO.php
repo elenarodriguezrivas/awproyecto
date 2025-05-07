@@ -226,5 +226,14 @@ class SubastaDAO {
         }
     }
 
+    public function actualizarPrecioActual(int $idSubasta, float $nuevoPrecio): bool {
+        $sql = "UPDATE Subastas SET precio_actual = :precio WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':precio', $nuevoPrecio);
+        $stmt->bindValue(':id', $idSubasta, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
 }
 ?>
