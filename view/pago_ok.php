@@ -9,6 +9,12 @@ $userId = isset($_SESSION['userid']) ? $_SESSION['userid'] : null;
 // Llamar al controlador para procesar el pago
 $mensajePago = procesarPago($userId);
 
+if ($mensajePago['tipo'] === 'error') {
+    // Redirigir a pago_ko.php si hay un error
+    header("Location: /awproyecto/view/pago_ko.php");
+    exit;
+}
+
 $tituloPagina = "Pago realizado correctamente";
 $contenidoPrincipal = "";
 
