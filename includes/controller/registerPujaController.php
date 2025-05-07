@@ -1,27 +1,34 @@
 <?php
-require_once '../Puja/sa/registerPujaSA.php';
+session_start();
+require_once __DIR__ . '/../Puja/sa/registerPujaSA.php';
+require_once __DIR__ . '/../Puja/model/Puja.php';
 
-class RegisterPujaController {
-    private $registerPujaSA;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $idSubasta = filter_input(INPUT_POST, 'idSubasta', FILTER_VALIDATE_INT);
+    $precio = filter_input(INPUT_POST, 'precio', FILTER_VALIDATE_FLOAT);
 
-    public function __construct() {
-        $this->registerPujaSA = new RegisterPujaSA();
+    if (!$idSubasta || !$precio) {
+        http_response_code(400); 
+        echo "Error: Datos inválidos.";
+        exit;
+    }  
+    
+    $puja = new Puja($idSubasta, $_SESSION['userid'], $precio);
+
+    $pujaSA = new registerPujaSA();
+
+    try {
+        if ($pujaSA->agregarPuja($puja)) {
+            http_response_code(201); 
+            echo "Puja registrada con éxito.";
+        } else {
+            http_response_code(409); 
+            echo "La puja no se ha podido registrar";
+        }
+    } catch (Exception $e) {
+        http_response_code(500); 
+        echo "Error al registrar la puja: " . $e->getMessage();
     }
-
-    /**
-     * Registra una nueva puja a partir de los datos proporcionados.
-     *
-     * Se espera que $data contenga:
-     * - idSubasta
-     * - idUsuario
-     * - cantidad
-     * - fecha
-     *
-     * @param array $data Datos de la puja.
-     * @return bool Resultado de la operación.
-     */
-    public function registerPuja($data) {
-        return $this->registerPujaSA->registerPuja($data);
-    }
+    exit;
 }
 ?>
