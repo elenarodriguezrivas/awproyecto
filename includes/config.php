@@ -5,7 +5,7 @@
 /**
  * Parámetros de conexión a la BD
  */
-define('BD_HOST', '192.168.1.150');
+define('BD_HOST', '100.110.207.75');
 define('BD_NAME', 'awproyecto');
 define('BD_USER', 'root');
 define('BD_PASS', 'awproyecto');
