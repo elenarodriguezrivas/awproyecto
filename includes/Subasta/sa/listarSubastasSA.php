@@ -16,5 +16,5 @@ class listarSubastasSA {
     public function listarSubastasUser($userid): array {
         return $this->subastaDAO->listarMisSubastas($userid);
     }
-
 }
+?>

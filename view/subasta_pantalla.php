@@ -5,17 +5,24 @@ require_once __DIR__.'/../includes/config.php';
 $tituloPagina = 'Subastas';
 $rutaJS = RUTA_JS . "/listarSubastasJS.js";
 $contenidoPrincipal = <<<EOS
-    <section class="presentacion">
-        <h2>Mis productos en Subasta</h2>
+    <div class="bloque-contenido">
+        <h2 style="text-align: center">
+            <strong>Subastas</strong>
+        </h2>
         <p>¡Bienvenido a nuestra sección de productos en subasta! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles que han sido subastados o se encuentran en proceso de subasta.</p>
-        <div class="destacado">
-            <div id="perfil">
-                <!-- Aquí se mostrarán los productos -->
-                <div id="productos"></div>
+        <div class="row">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="bloque-subastas">
+                    <div class="custom-container">
+                        <div id="subastas">
+                            <!-- Aquí se mostrarán las subastas -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
     <script src="$rutaJS"></script>
 EOS;
 

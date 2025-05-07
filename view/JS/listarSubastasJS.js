@@ -1,36 +1,35 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // URL del backend donde se obtendrán las subastas
-    const url = '../Subasta/controller/obtenerSubastasController.php';
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                // Si hay un error, mostrarlo
-                document.getElementById('productos').innerHTML = `<p>Error: ${data.error}</p>`;
-            } else {
-                // Si hay subastas, mostrar los productos
-                const productosDiv = document.getElementById('productos');
-                productosDiv.innerHTML = ''; // Limpiar el div antes de mostrar los productos
-
-                data.forEach(subasta => {
-                    // Crear un contenedor para cada subasta con su producto
-                    const productoHTML = `
-                        <div class="producto-subasta">
-                            <h3>${subasta.nombreProducto}</h3>
-                            <img src="${subasta.rutaImagen}" alt="${subasta.nombreProducto}" />
-                            <p>${subasta.descripcionProducto}</p>
-                            <p>Precio inicial: $${subasta.precio}</p>
-                            <p>Fecha de subasta: ${subasta.fechaSubasta}</p>
-                            <p>Estado: ${subasta.estado}</p>
-                        </div>
-                    `;
-                    productosDiv.innerHTML += productoHTML;
-                });
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('../includes/controller/obtenerSubastasController.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener las subastas');
             }
+            return response.json();
         })
-        .catch(error => {
-            document.getElementById('productos').innerHTML = `<p>Error al cargar las subastas: ${error}</p>`;
-        });
+        .then(data => {
+            const subastasContainer = document.getElementById('subastas');
+            subastasContainer.innerHTML = '';
 
-w});
+            if (data.length === 0) {
+                subastasContainer.innerHTML = '<p>No hay subastas disponibles.</p>';
+                return;
+            }
+
+            let subastasHtml = '';
+            data.forEach(subasta => {
+                subastasHtml += `
+                    <div class="subasta card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">${subasta.nombreSubasta}</h2>
+                            <p class="card-text">${subasta.descripcionSubasta}</p>
+                            <p><strong>Precio original:</strong> ${subasta.precio_original}€</p>
+                            <img src="../${subasta.rutaImagen}" class="img-fluid" />
+                        </div>
+                    </div>
+                `;
+            });
+            subastasContainer.innerHTML = subastasHtml;
+        })
+        .catch(error => console.error('Error al cargar las subastas:', error));
+});
+

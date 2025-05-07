@@ -225,5 +225,6 @@ class SubastaDAO {
             return false;
         }
     }
+
 }
 ?>
