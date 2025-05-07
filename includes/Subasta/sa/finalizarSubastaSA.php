@@ -1,56 +1,47 @@
 <?php
-require_once __DIR__.'/../../Connection.php'; 
-
 require_once __DIR__.'/../../Subasta/dao/SubastaDAO.php';
 require_once __DIR__.'/../../Puja/dao/PujaDAO.php';
 require_once __DIR__.'/../../Ventas/dao/VentaDAO.php';
 
-class CloseSubastasSA {
-    private PDO $db;
-    private SubastaDAO $subastaDAO;
-    private PujaDAO    $pujaDAO;
-    private VentaDAO   $ventaDAO;
+class finalizarSubastaSA {
+    private $subastaDAO;
+    private $pujaDAO;
+    private $ventaDAO;
 
     public function __construct() {
-        $this->db         = Connection::getInstance();
-        $this->subastaDAO = new SubastaDAO($this->db);
-        $this->pujaDAO    = new PujaDAO($this->db);
-        $this->ventaDAO   = new VentaDAO($this->db);
+        $this->subastaDAO = new SubastaDAO(); //para cambiar el estado de la subasta a finalizada
+        $this->pujaDAO    = new PujaDAO(); //para coger el id del usuario de la puja ganadora
+        $this->ventaDAO   = new VentaDAO(); //registrar la venta
     }
 
-    /**
-     * Cierra todas las subastas vencidas:
-     * - Cambia a estado 'finalizada'.
-     * - Si hubo puja, registra venta.
-     */
-    public function cerrarVencidas(): void {
-        $vencidas = $this->subastaDAO->obtenerVencidas();
-
+    public function cerrarVencidas(): void { // Cierra las subastas vencidas
+        $vencidas = $this->subastaDAO->obtenerVencidas(); //cojo las subastas vencidas
+        if (empty($vencidas)) {
+            return; // No hay subastas vencidas
+        }
+        
         foreach ($vencidas as $s) {
-            $this->db->beginTransaction();
             try {
-                $idSub = (int)$s['id'];
+                $idSubasta = (int)$s['id'];
                 $vend  = $s['idVendedor'];
 
-                // 1) Obtener la puja más alta
-                $max = $this->pujaDAO->obtenerMaximaPorSubasta($idSub);
+                // 1) Obtener la puja más alta. Esto todavía no esta bien, porque obtener maxima puja devuelve otra cosa
+                $maxPuja = $this->pujaDAO->obtenerMaximaPorSubasta($idSubasta);
 
                 // 2) Marcar subasta como finalizada
-                if (!$this->subastaDAO->actualizarEstado($idSub, 'finalizada')) {
-                    throw new Exception("Error actualizando estado de subasta $idSub");
+                if (!$this->subastaDAO->actualizarEstado($idSubasta, 'finalizada')) {
+                    throw new Exception("Error actualizando estado de subasta $idSubasta");
                 }
 
                 // 3) Registrar venta si existe puja ganadora
-                if ($max !== null) {
-                    $comp = $max['idPujador'];
-                    if (!$this->ventaDAO->insertar($idSub, $vend, $comp)) {
-                        throw new Exception("Error insertando venta de subasta $idSub");
+                if ($maxPuja !== null) {
+                    $comp = $maxPuja['idPujador'];
+                    $venta = new Venta($idSubasta, $comp, $vend); // Crear objeto Venta
+                    if (!$this->ventaDAO->registrarVenta($venta)) {
+                        throw new Exception("Error insertando venta de subasta $idSubasta");
                     }
                 }
-
-                $this->db->commit();
             } catch (Exception $e) {
-                $this->db->rollBack();
                 error_log($e->getMessage());
             }
         }

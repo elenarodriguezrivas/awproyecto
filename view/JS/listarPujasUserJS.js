@@ -1,52 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //Listar las pujas hechas por el usuario
-    fetch('../includes/controller/obtenerPujasUserController.php') 
+    fetch('../includes/controller/obtenerPujasUserController.php')
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error al obtener las pujas realizadas por el usuario');
+                throw new Error('Error al obtener las pujas');
             }
             return response.json();
         })
         .then(data => {
             const pujasContainer = document.getElementById('pujas');
+            pujasContainer.innerHTML = '';
 
             if (data.length === 0) {
                 pujasContainer.innerHTML = '<p>No hay pujas disponibles.</p>';
-            } else {
-                let pujasHtml = '';
-                data.forEach(puja => {
-                    //de momento solo muestra el id del producto pujado y el precio pero en el futuro se puede añadir
-                    //el estado de la puja: si ya se ha subastado o no, y la imagen
-                    pujasHtml += `
-                        <div class="puja" id="puja-${puja.id}">
-                            <h3>Id Producto pujado: ${puja.idProducto}</h3>
-                            <h4>Precio: ${puja.precio}€</h4>
-                            <button class="btn btn-red" onclick='eliminarPuja(${puja.id})'>Eliminar Puja</button>
-                            <p class="mensaje-puja" id="mensaje-${puja.id}"></p>
-                        </div>
-                    `;
-                });
-                pujasContainer.innerHTML = pujasHtml;
+                return;
             }
+
+            let pujasHtml = '';
+
+            data.forEach(puja => {
+                let contenidoAcciones = '';
+
+                pujasHtml += `
+                    <div class="card mb-4" id="subasta-${subasta.id}">
+                        <div class="card-header bg-light text-dark">
+                            <h5 class="mb-0">${subasta.nombreSubasta}</h5>
+                        </div>
+                        <div class="card-body d-flex">
+                            <div style="flex: 1;">
+                                <p><strong>Precio actual:</strong> ${subasta.precio_actual}€</p>
+                                <p><strong>Precio original:</strong> ${subasta.precio_original}€</p>
+                                <p><strong>Fecha:</strong> ${subasta.fechaSubasta}</p>
+                                <p><strong>Hora:</strong> ${subasta.horaSubasta}</p>
+                                <p>${subasta.descripcionSubasta}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            ${contenidoAcciones}
+                        </div>
+                    </div>
+                `;
+            });
+
+            subastasContainer.innerHTML = subastasHtml;
         })
-        .catch(error => console.error('Error al obtener las pujas:', error));
+        .catch((error) => {
+            console.error('Error al obtener las subastas:', error);
+            window.location.href = 'login_pantalla.php';
+        });
 });
 
-/**
- * Función para eliminar una puja.
- * @param {number} pujaId - El ID de la puja a eliminar.
- */
-function eliminarPuja(pujaId) {
-    if (!confirm("¿Estás seguro de que deseas eliminar esta puja?")) {
-        return; // Si el usuario cancela, no se realiza ninguna acción
-    }
+function eliminarSubasta(subastaId) {
+    if (!confirm("¿Estás seguro de que deseas eliminar esta subasta?")) return;
 
-    fetch('../includes/controller/eliminarPujaController.php', {
+    fetch('../includes/controller/eliminarSubastaController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: pujaId }), // Enviar el ID del puja como JSON
+        body: JSON.stringify({ id: subastaId }),
     })
         .then(response => {
             if (!response.ok) {
@@ -55,15 +66,12 @@ function eliminarPuja(pujaId) {
             return response.text();
         })
         .then(data => {
-            alert(data); // Mostrar el mensaje del servidor
-            // Eliminar la puja del DOM
-            const pujaElemento = document.getElementById(`puja-${pujaId}`);
-            if (pujaElemento) {
-                pujaElemento.remove();
-            }
+            alert(data);
+            const subastaElemento = document.getElementById(`subasta-${subastaId}`);
+            if (subastaElemento) subastaElemento.remove();
         })
         .catch(error => {
-            console.error('Error al eliminar la puja:', error);
-            alert('Error al eliminar la puja: ' + error.message);
+            console.error('Error al eliminar la subasta:', error);
+            alert('Error al eliminar la subasta: ' + error.message);
         });
 }

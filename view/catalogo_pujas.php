@@ -2,21 +2,25 @@
 
 require_once __DIR__.'/../includes/config.php';
 
-$tituloPagina = 'Pujas';
+$tituloPagina = 'Mis Pujas';
 $rutaJS = RUTA_JS . "/listarPujasUserJS.js";
-//Aquí se muestra las pujas que yo he puesto en otros productos que están subastados
 
-$contenidoPrincipal = <<<EOS
-    <section class="presentacion">
-        <h2>Pujas realizadas en Productos</h2>
-        <p>Aquí podrás encontrar todas tus pujas realizadas para adquirir productos de segunda mano que han sido subastados o se encuentran en proceso de subasta.</p>
-        <div class="destacado">
-            <div id="perfil">
-                <!-- Aquí se mostrarán los productos -->
-                <div id="productos"></div>
+$contenidoPrincipal=<<<EOS
+    <div class="bloque-contenido">
+        <h2>Mis Pujas</h2>
+        <p> Aquí podrás encontrar tus pujas realizadas en productos subastados o en proceso de subasta.</p>
+        <div class="row">
+            <div class="col-12 mx-auto">
+                <div class="bloque-pujas">
+                    <div class= "custom-container">
+                        <div id="pujas">
+                            <!-- Aquí se mostrarán las pujas -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
     <script src="$rutaJS"></script>
 EOS;
 

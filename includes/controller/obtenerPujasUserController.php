@@ -1,23 +1,31 @@
 <?php
-// Se requiere el DAO para poder filtrar pujas por usuario.
-// Asegúrate de que en PujaDAO se implemente el método findByUser($idUsuario)
-require_once '../Puja/dao/PujaDAO.php';
-
-class ObtenerPujaUserController {
-    private $pujaDAO;
-
-    public function __construct() {
-        $this->pujaDAO = new PujaDAO();
-    }
-
-    /**
-     * Obtiene todas las pujas realizadas por un usuario.
-     *
-     * @param int $idUsuario Identificador del usuario.
-     * @return array Lista de objetos Puja.
-     */
-    public function obtenerPujasPorUsuario($idUsuario) {
-        return $this->pujaDAO->findByUser($idUsuario);
-    }
+session_start();
+if (!isset($_SESSION['userid'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'No ha iniciado sesión']);
+    exit;
 }
+require_once __DIR__ . '/../Subasta/sa/listarSubastasSA.php';
+
+$listarSubastaSA = new listarSubastasSA();
+$subastas = $listarSubastaSA->listarSubastasUser($_SESSION['userid']);
+
+$subastasArray = [];
+foreach ($subastas as $subasta) {
+    $subastasArray[] = [
+        'id' => $subasta->getId(),
+        'nombreSubasta' => $subasta->getNombreSubasta(),
+        'descripcionSubasta' => $subasta->getDescripcionSubasta(),
+        'precio_original' => $subasta->getPrecio_original(),
+        'precio_actual' => $subasta->getPrecio_actual(),
+        'idVendedor' => $subasta->getIdVendedor(),
+        'rutaImagen' => $subasta->getRutaImagen(),
+        'estado' => $subasta->getEstado(),
+        'fechaSubasta' => $subasta->getFechaSubasta(),
+        'horaSubasta' => $subasta->getHoraSubasta()
+    ];
+}
+
+header('Content-Type: application/json');
+echo json_encode($subastasArray);
 ?>
