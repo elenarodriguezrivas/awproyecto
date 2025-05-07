@@ -52,8 +52,12 @@ $contenidoPrincipal = <<<EOS
                     <div class = "custom-container">
                         <div class="row">
                             <div class="col-12">
-                                <p><strong>¡NVIDIA 5090 - Compra la nueva grafica de NVIDIA!</strong></p>
-                                <img src="$rutaA1" class="img-fluid">
+                                <div class = "bloque-anuncios-titulo">
+                                    <strong>¡NVIDIA 5090 - Compra la nueva grafica de NVIDIA!</strong>
+                                </div>
+                                <div class = "bloque-anuncios-imagen">
+                                    <img src="$rutaA1" class="img-fluid">
+                                </div>
                             </div>
                         </div>
                         <div class="row">
