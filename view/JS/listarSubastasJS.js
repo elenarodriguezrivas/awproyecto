@@ -4,71 +4,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function cargarSubastas() {
     fetch('../includes/controller/obtenerSubastasController.php')
-        .then(res => {
-            if (!res.ok) throw new Error('Error al obtener subastas');
-            return res.json();
-        })
-        .then(data => {
-            const cont = document.getElementById('subastas');
-            cont.innerHTML = '';
-
-            if (!data.length) {
-                cont.innerHTML = '<p>No hay subastas disponibles.</p>';
-                return;
-            }
-
-            cont.innerHTML = data.map(s => {
-                const enCurso     = s.estado === 'en_subasta';
-                const esVendedor  = String(s.idVendedor) === String(CURRENT_USER_ID);
-
-                // Construye el bloque de acciones según caso
-                let accionesHTML = '';
-                if (enCurso && !esVendedor) {
-                    // Estás en subasta válida y no eres el vendedor
-                    accionesHTML = `
-                        <div class="form-inline mb-2">
-                          <input
-                            type="number"
-                            min="${s.precio_actual}"
-                            step="1.00"
-                            id="puja-${s.id}"
-                            placeholder="${s.precio_actual}€"
-                            class="form-control mr-2"
-                          />
-                          <button class="btn btn-success" onclick="pujar(${s.id})">
-                            ¡Pujar!
-                          </button>
-                        </div>
-                        <div id="mensaje-puja-${s.id}" class="text-muted"></div>
-                    `;
-                } else if (!enCurso) {
-                    // Subasta ya finalizada
-                    accionesHTML = `<p class="text-muted">Subasta finalizada.</p>`;
-                }
-                // Si eres el vendedor y aún está en curso, accionesHTML queda vacío
-
-                return `
-                  <div class="subasta card mb-4" id="subasta-${s.id}">
-                    <div class="card-body">
-                      <h2>${s.nombreSubasta}</h2>
-                      <p>${s.descripcionSubasta}</p>
-                      <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
-                      <p><em>Estado:</em> ${s.estado.replace('_',' ')}</p>
-                      <img src="../${s.rutaImagen}" class="img-fluid mb-3">
-                      ${accionesHTML}
-                    </div>
-                  </div>
-                `;
-            }).join('');
-        })
-        .catch(err => {
-            console.error(err);
-            document.getElementById('subastas')
-                .innerHTML = '<p>Error cargando subastas.</p>';
-        });
-}
-
+      .then(res => {
+        if (!res.ok) throw new Error('Error al obtener subastas');
+        return res.json();
+      })
+      .then(data => {
+        const cont = document.getElementById('subastas');
+        cont.innerHTML = '';
   
+        if (!data.length) {
+          cont.innerHTML = '<p>No hay subastas disponibles.</p>';
+          return;
+        }
+  
+        cont.innerHTML = data.map(s => `
+          <div class="subasta card mb-4" id="subasta-${s.id}">
+            <div class="card-header bg-secondary text-white">
+              <h5 class="mb-0">${s.nombreSubasta}</h5>
+            </div>
+            <div class="card-body d-flex">
+              <div class="mr-4" style="flex: 0 0 200px;">
+                <img src="../${s.rutaImagen}"
+                     alt="${s.nombreSubasta}"
+                     class="img-fluid rounded">
+              </div>
+              <div style="flex: 1;">
+                <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
+                <p><strong>Fecha:</strong> ${s.fechaSubasta}</p>
+                <p><strong>Hora:</strong> ${s.horaSubasta}</p>
+                <p>${s.descripcionSubasta}</p>
+                <div class="mt-3">
+                  <input type="number"
+                         min="${s.precio_actual}"
+                         step="1.00"
+                         id="puja-${s.id}"
+                         placeholder="${s.precio_actual}€"
+                         class="form-control d-inline-block"
+                         style="width: 120px;">
+                  <button class="btn btn-success ml-2"
+                          onclick="pujar(${s.id})">
+                    ¡Pujar!
+                  </button>
+                  <div id="mensaje-puja-${s.id}" class="text-muted mt-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              Estado: ${s.estado.replace('_',' ')}
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('subastas')
+          .innerHTML = `<p class="text-danger">Error cargando subastas:<br>${err.message}</p>`;
+      });
+}
 
 function pujar(idSubasta) {
     const input = document.getElementById(`puja-${idSubasta}`);
@@ -84,7 +76,6 @@ function pujar(idSubasta) {
         return;
     }
 
-    // Enviar como form-urlencoded
     const body = new URLSearchParams();
     body.append('idSubasta', idSubasta);
     body.append('precio', precio);
@@ -96,7 +87,6 @@ function pujar(idSubasta) {
     })
     .then(res => res.text().then(txt => ({ status: res.status, text: txt })))
     .then(({ status, text }) => {
-        // el controller devuelve directamente el mensaje
         if (status === 201) {
             mensajeEl.textContent = text;
             mensajeEl.className = 'text-success';

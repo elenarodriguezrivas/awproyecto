@@ -1,8 +1,5 @@
 <?php
 session_start();
-require_once __DIR__ . '/../Subasta/sa/finalizarSubastaSA.php';
-$finSubastaSA = new finalizarSubastaSA();
-$finSubastaSA->cerrarVencidas();
 
 require_once __DIR__ . '/../Subasta/sa/listarSubastasSA.php';
 
