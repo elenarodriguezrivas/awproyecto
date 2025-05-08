@@ -10,4 +10,4 @@ CREATE TABLE Subastas (
     fechaSubasta DATE NOT NULL,
     horaSubasta TIME NOT NULL,
     FOREIGN KEY (idVendedor) REFERENCES Usuarios(userid)
-);
+) AUTO_INCREMENT = 10000;
