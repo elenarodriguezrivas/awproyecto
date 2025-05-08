@@ -15,23 +15,23 @@ class finalizarSubastaSA {
     }
 
     public function cerrarVencidas(): void { // Cierra las subastas vencidas
-        // 1) Obtener subastas en curso ya vencidas
+        // subastas en curso ya vencidas
         $vencidas = $this->subastaDAO->obtenerVencidas();
-        if (empty($vencidas)) {
+        if (empty($vencidas)) { //si no hay, no hacemos nada
             return;
         }
 
-        foreach ($vencidas as $s) {
+        foreach ($vencidas as $s) { //por cada subasta vencida
             $idSubasta = (int) $s['id'];
             $vendedor  = $s['idVendedor'];
 
-            // 2) Obtener la puja más alta (si existe)
+            //Obtener la puja más alta (si existe)
             $maxPuja = $this->pujaDAO->obtenerMaximaPorSubasta($idSubasta);
 
-            // 3) Marcar subasta como finalizada
+            //Marcar subasta como finalizada
             $this->subastaDAO->actualizarEstado($idSubasta, 'finalizada');
 
-            // 4) Registrar la venta si hubo puja ganadora
+            //Registrar la venta si hubo puja ganadora
             if ($maxPuja !== null) {
                 $compradorId = $maxPuja['idPujador'];
                 $venta = new Venta($idSubasta, $compradorId, $vendedor);
