@@ -248,7 +248,7 @@ class SubastaDAO {
     public function actualizarEstado(int $id, string $nuevoEstado): bool {
         $sql = "UPDATE Subastas SET estado = :estado WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':estado'=>$nuevoEstado, ':id'=>$idSubasta]);
+        $stmt->execute([':estado'=>$nuevoEstado, ':id'=>$id]);
         return $stmt->rowCount() === 1;
     }
 
