@@ -33,6 +33,7 @@
     border: 1px solid #ddd; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 0px; /* Espaciado inferior */
+    min-height: 750px; /* Altura mínima para el bloque */
 }
 .bloque-contenido .btn {
     background-color: #007bff; /* Color de fondo (azul por defecto) */
@@ -212,7 +213,7 @@
     font-size: 1rem; /* Ajusta el tamaño de la fuente (opcional) */
 }
 .producto-descripcion-valor {
-    margin-bottom: 20px; /* Añade un margen inferior de 10 píxeles */
+    margin-bottom: 20px; /* Añade un margen inferior de 20 píxeles */
 }
     /*IMAGEN*/
 .imagen-contenedor {
@@ -249,7 +250,6 @@
     font-size: 16px; /* Tamaño de fuente */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
-
 #selectorCategoria:focus {
     outline: none; /* Elimina el contorno predeterminado */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Añade un efecto de enfoque */
@@ -262,6 +262,15 @@
     padding: 20px; /* Espaciado interno del contenedor */
     background-color: #ffffff;
 }
+.bloque-anuncios-titulo {
+    display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    padding: 20px; /* Espaciado interno del contenedor */
+    text-align: center; /* Centra el texto */
+    min-height: 100px; /* Altura mínima para el bloque */
+    height: auto; /* Permite que el bloque crezca dinámicamente */
+}
 .bloque-anuncios img {
     width: 100%; /* Ajusta el ancho al 100% del contenedor */
     max-width: 300px; /* Ancho máximo para las imágenes */
@@ -270,7 +279,6 @@
     border-radius: 8px; /* Bordes redondeados opcionales */
     margin-bottom: 15px; /* Espaciado debajo de la imagen */
 }
-
 /*PARA TEXTFIELD*/
 .form-control{
     width: 60%;
