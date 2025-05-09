@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(data => {
             const productosContainer = document.getElementById('productos');
+            productosContainer.classList.add('productos-grid'); // Añade la clase para aplicar estilos
 
             if (data.length === 0) {
                 productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
@@ -15,13 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 let productosHtml = '';
                 data.forEach(producto => {
                     productosHtml += `
-                        <div class="producto" id="producto-${producto.id}">
-                            <div class="producto-info">
-                                <h2>${producto.nombreProducto}</h2>
-                                <h3>Precio del producto: ${producto.precio}€</h3>
-                                <p>${producto.descripcionProducto}</p>
-                                <span class="producto-categoria">Categoría: ${producto.categoriaProducto}</span>
-                                <p><img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}" /></p>
+                        <div class="producto" id="productos-${producto.id}">
+                            <div class="card-body">
+                                <h2 class="producto-titulo">Nombre Producto </h2>
+                                <h2 class="producto-titulo-valor">${producto.nombreProducto} </h2>
+                                <h3 class="producto-precio">Precio del producto</h3>
+                                <h3 class="producto-precio-valor">${producto.precio}€</h3>
+                                <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
+                                <h3 class="producto-descripcion">Descripcion:</h3>
+                                <p class="producto-descripcion-valor">${producto.descripcionProducto}</p>
+                                <div class="imagen-contenedor text-center"> <img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}"/> </div>
+
                                 <p>
                                 <div class="producto-actions">
                                     ${producto.estado.toLowerCase() === 'enventa' ? `
