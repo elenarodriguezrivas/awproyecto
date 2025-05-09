@@ -62,7 +62,7 @@ class FormularioModificarProducto extends Formulario
             <label for="categoriaProducto">Categoría del Producto:</label>
             <select id="categoriaProducto" name="categoriaProducto" required class="form-control">
                 <option value="">Seleccione una categoría</option>
-    EOF;
+EOF;
 
         // opciones de categoría
         $opciones = [
@@ -82,6 +82,11 @@ class FormularioModificarProducto extends Formulario
             $html .= "<option value=\"$valor\" $selected>$texto</option>";
         }
 
+        // Cerrar el select correctamente
+        $html .= "</select>";
+        $html .= "</div>";
+
+        // Añadir la sección de imagen dentro de la estructura del formulario
         $html .= <<<EOF
         <div class="form-group">
             <label>Imagen actual:</label>
@@ -96,7 +101,7 @@ class FormularioModificarProducto extends Formulario
             <button type="button" onclick="window.location.href='micatalogo_pantalla.php'" class="btn btn-secondary">Cancelar</button>
         </div>
         <div id="message" class="message"></div>
-    EOF;
+EOF;
         return $html;
     }
 }
