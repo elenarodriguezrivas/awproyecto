@@ -5,12 +5,15 @@ require_once __DIR__.'/../database/Connection.php';
 require_once __DIR__.'/../Producto/model/Producto.php'; 
 require_once __DIR__.'/../Producto/sa/registerProductoSA.php';
 require_once __DIR__.'/../Producto/dao/ProductoDAO.php';
+require_once __DIR__ . '/../Categorias/sa/listarCategoriasSA.php';
 
 /**
  * Formulario para registrar un producto.
  */
 class FormularioProducto extends Formulario
 {
+    private $categorias = [];
+
     /**
      * Construye el formulario.
      */
@@ -19,6 +22,9 @@ class FormularioProducto extends Formulario
         parent::__construct('productForm', [
             'urlRedireccion' => RUTA_APP . '/view/perfil_pantalla.php'
         ]);
+
+        $categoriaSA = new listarCategoriasSA();
+        $this->categorias = $categoriaSA->listarCategorias();
     }
 
     /**
@@ -47,28 +53,10 @@ class FormularioProducto extends Formulario
             <option value="">Seleccione una categoría</option>
 EOF;
 
-
-    // Obtener conexión
-    $conn = Connection::getInstance()->getConexion();
-
-    // Consultar todas las categorías desde la BD
-    $query = "SELECT nombre FROM Categorias";
-    $result = $conn->query($query);
-
-    if ($result) {
-        while ($row = $result->fetch_assoc()) {
-            $nombreCategoria = htmlspecialchars($row['nombre']);
-            $html .= "<option value=\"$nombreCategoria\">$nombreCategoria</option>";
-        }
-    } else {
-        $html .= "<option value=\"\">Error al cargar categorías</option>";
-    }
-    
-    // Generar las opciones con la lógica de selección fuera de la cadena heredoc
-    foreach ($result as $valor => $texto) {
-        $selected = $valor ? 'selected' : '';
-        $html .= "<option value=\"$valor\" $selected>$texto</option>";
-    }
+    foreach ($this->categorias as $categoria) {
+        $nombre = htmlspecialchars($categoria->getCategoria());
+        $html .= "<option value=\"$nombre\">$nombre</option>";
+    }    
     
     $html .= <<<EOF
         </select>

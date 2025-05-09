@@ -1,14 +1,12 @@
 <?php
 require_once __DIR__.'/Formulario.php';
 require_once __DIR__.'/../config.php';
-require_once __DIR__.'/../Producto/dao/ProductoDAO.php';
-require_once __DIR__.'/../Producto/model/Producto.php';
-require_once __DIR__ . '/../Categorias/sa/listarCategoriasSA.php';
+require_once __DIR__.'/../Categorias/dao/CategoriaDAO.php';
+require_once __DIR__.'/../Categorias/model/Categoria.php';
 
-class FormularioModificarProducto extends Formulario
+class FormularioCategorias extends Formulario
 {
-    private $categorias = [];
-    private $producto;
+    private $categoria;
 
     public function __construct($productoId)
     {
@@ -27,25 +25,15 @@ class FormularioModificarProducto extends Formulario
             header("Location: micatalogo_pantalla.php?error=No tienes permiso para modificar este producto");
             exit;
         }
-
-        // Obtener todas las categorías
-        $categoriaSA = new listarCategoriasSA();
-        $this->categorias = $categoriaSA->listarCategorias();
     }
 
     protected function generaCamposFormulario()
     {
         // Obtener datos directamente del producto
-        $id = $this->producto->getId();
-        $nombreProducto = $this->producto->getNombreProducto();
-        $descripcionProducto = $this->producto->getDescripcionProducto();
-        $precio = $this->producto->getPrecio();
-        $categoriaProducto = $this->producto->getCategoriaProducto();
-        $rutaImagen = $this->producto->getRutaImagen();
+        $nombreCategoria = $this->categoria->getCategoria();
 
         $html = <<<EOF
         <div class="form-group">
-            <input type="hidden" name="id" value="$id">
             <label for="nombreProducto">Nombre del Producto:</label>
             <input id="nombreProducto" type="text" name="nombreProducto" value="$nombreProducto" required class="form-control">
         </div>
@@ -63,10 +51,27 @@ class FormularioModificarProducto extends Formulario
                 <option value="">Seleccione una categoría</option>
 EOF;
 
-        foreach ($this->categorias as $categoria) {
-        $nombre = htmlspecialchars($categoria->getCategoria());
-        $html .= "<option value=\"$nombre\">$nombre</option>";
-    } 
+        // Obtener conexión
+        $conn = DB::getInstance()->getBD();
+
+        // Consultar todas las categorías desde la BD
+        $query = "SELECT nombre FROM Categorias";
+        $result = $conn->query($query);
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $nombreCategoria = htmlspecialchars($row['nombre']);
+                $html .= "<option value=\"$nombreCategoria\">$nombreCategoria</option>";
+            }
+        } else {
+            $html .= "<option value=\"\">Error al cargar categorías</option>";
+        }
+
+        // Generar las opciones con la opción seleccionada
+        foreach ($result as $valor => $texto) {
+            $selected = ($categoriaProducto == $valor) ? 'selected' : '';
+            $html .= "<option value=\"$valor\" $selected>$texto</option>";
+        }
 
         $html .= <<<EOF
             </select>
