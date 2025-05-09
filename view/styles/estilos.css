@@ -143,7 +143,7 @@
 .productos-grid {
     display: flex; /* Activa Flexbox */
     flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea si no hay espacio */
-    justify-content: flex-start; /* Alinea los elementos al inicio de la fila */
+    justify-content: center; /* Alinea los elementos al inicio de la fila */
     gap: 30px; /* Espaciado entre los productos */
 }
 .producto {
