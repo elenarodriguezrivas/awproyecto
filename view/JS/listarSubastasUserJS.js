@@ -57,7 +57,40 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 `;
             });
-
+            /*
+<div class="subasta card mb-4" id="subasta-${s.id}">
+            <div class="card-header bg-secondary text-white">
+              <h2 class="producto-titulo">${s.nombreSubasta} </h2>
+            </div>
+            <div class="card-body d-flex">
+              <div class="imagen-contenedor text-center"> <img src="../${s.rutaImagen}" alt="${s.nombreSubasta}"/> </div>
+              <hr class="linea-gris"> <!-- Línea horizontal gris -->
+              <div style="flex: 1;">
+                <h3 class="producto-precio-hora">Tiempo restante: ${s.horaSubasta}</h3>
+                <h3 class="producto-precio-fecha">Fecha: ${s.fechaSubasta}</h3>
+                <h3 class="producto-precio-valor">Precio actual: ${s.precio_actual}€</h3>
+                <p class="producto-descripcion-valor">${s.descripcionSubasta}</p>
+                <div class="mt-3">
+                  <input type="number"
+                         min="${s.precio_actual}"
+                         step="1.00"
+                         id="puja-${s.id}"
+                         placeholder="${s.precio_actual}€"
+                         class="form-control d-inline-block"
+                         style="width: 120px;">
+                  <button class="btn btn-success ml-2"
+                          onclick="pujar(${s.id})">
+                    ¡Pujar!
+                  </button>
+                  <div id="mensaje-puja-${s.id}" class="text-muted mt-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              Estado: ${s.estado.replace('_',' ')}
+            </div>
+          </div>
+            */
             subastasContainer.innerHTML = subastasHtml;
         })
         .catch((error) => {

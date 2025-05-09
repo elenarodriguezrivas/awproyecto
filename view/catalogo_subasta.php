@@ -11,10 +11,8 @@ $contenidoPrincipal=<<<EOS
         <h2>Mi Catálogo de Subastas</h2>
         <p>¡Bienvenido a tu catálogo de subasta! Aquí podrás encontrar tus productos subastados o en proceso de subasta.</p>
         <div class="row">
-            <div class = "col-sm-6 text-right ">
-                Pulsa el boton para añadir una nueva subasta:           
-            </div>
-            <div class = "col-sm-6 text-left ">       
+            <div class = "col-sm-12 text-center ">
+                Pulsa el boton para añadir una nueva subasta:   
                 <a href="registerSubasta_pantalla.php"><button class="btn">Añadir subasta nueva </button></a>
             </div>
         </div>
