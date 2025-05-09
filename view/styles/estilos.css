@@ -142,10 +142,9 @@
 .productos-grid {
     display: flex; /* Activa Flexbox */
     flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea si no hay espacio */
-    gap: 20px; /* Espaciado entre los elementos */
     justify-content: flex-start; /* Alinea los elementos al inicio de la fila */
+    gap: 10px; /* Espaciado entre los productos */
 }
-
 .producto {
     flex: 1 1 100%; /* Por defecto, ocupa todo el ancho (1 producto por fila) */
     max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
@@ -213,28 +212,24 @@
     margin-bottom: 20px; /* Añade un margen inferior de 10 píxeles */
 }
     /*IMAGEN*/
-.producto-imagen {
-    margin-top: 10px; /* Añade un margen de 10px alrededor de la imagen */
-    border: 1px solid rgb(73, 73, 73);
-    border-radius: 2px; /* Opcional: Bordes redondeados */
-    display: block; /* Asegura que la imagen se comporte como un bloque */
-    max-width: 100%; /* Mantiene el comportamiento de img-fluid */
+.imagen-contenedor {
+    display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    height: auto; /* Ajusta la altura automáticamente */
+    padding: 10px; /* Opcional: Añade un poco de espacio interno */
+    box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+.imagen-contenedor img {
+    width: 90%; /* La imagen ocupará el 100% del ancho del contenedor */
     height: auto; /* Mantiene la proporción de la imagen */
-    object-fit: contain; /* Asegura que la imagen completa se ajuste dentro del contenedor */
+    max-height: 70%; /* Asegura que la imagen no exceda la altura del contenedor */
+    object-fit: contain; /* Asegura que la imagen completa se ajuste dentro del contenedor sin recortarse */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    display: block; /* Asegura que la imagen se comporte como un bloque */
 }
-    /*BOTON*/
-.producto-boton {
-    margin-top: auto; /* Empuja el botón hacia el margen inferior del bloque */
-    border: 1px solid rgb(73, 73, 73); /* Borde gris oscuro */
-    border-radius: 2px; /* Bordes redondeados */
-    display: block; /* Asegura que el botón se comporte como un bloque */
-    max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    background-color: #007bff; /* Color de fondo azul */
-    color: white; /* Color del texto */
-    text-align: center; /* Centra el texto dentro del botón */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
-}
+
 
 /*PARA FILTROS*/
 .bloque-filtros {
