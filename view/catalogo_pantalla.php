@@ -37,18 +37,6 @@ $contenidoPrincipal = <<<EOS
                 </div>
             </div>
         </div>
-        <div class="row mb-3">
-            <div class="col-12 text-right">
-                <label for="productosPorPaginaSelector">Productos por página:</label>
-                <select id="productosPorPaginaSelector" class="form-control d-inline-block w-auto" onchange="cambiarProductosPorPagina(this.value)">
-                    <option value="1">1</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select>
-            </div>
-        </div>
         <div class="row">
             <div class="col-12 col-md-8 mx-auto">
                 <div class="bloque-productos">
@@ -56,6 +44,18 @@ $contenidoPrincipal = <<<EOS
                         <div id="productos" class="productos-grid">
                             <!-- Aquí se cargarán los productos mediante AJAX -->
                         </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 text-center">
+                        <label for="productosPorPaginaSelector">Productos por página:</label>
+                        <select id="productosPorPaginaSelector" class="form-control d-inline-block w-auto" onchange="cambiarProductosPorPagina(this.value)">
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
                     </div>
                 </div>
             </div>
