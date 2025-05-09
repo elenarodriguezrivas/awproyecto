@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    $estado = $_POST['estado'] ?? 'enventa';    
+
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
         $extension = pathinfo($_FILES['imagenProducto']['name'], PATHINFO_EXTENSION);
         $nombreArchivo = bin2hex(random_bytes(8)) . '.' . $extension;
@@ -41,9 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
+    $producto = new Producto(NULL, $nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $_SESSION['userid'], $rutaImagen, $estado);
 
-    $producto = new Producto(NULL,$nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $_SESSION['userid'], $rutaImagen, 'enventa');
-    
     $productoSA = new registerProductoSA();
 
     try {

@@ -16,7 +16,14 @@
                     <a class="dropdown-item" href="<?= RUTA_APP ?>/view/micatalogo_pantalla.php">Mis Productos</a>
                 </div>
             </li>
-            <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Subasta</a></li>
+            <li class="nav-item dropdown space-between-elements">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                aria-haspopup="true" aria-expanded="false">Subastas & Pujas</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/subasta_pantalla.php">Subastas</a>
+                    <a class="dropdown-item" href="<?= RUTA_APP ?>/view/catalogo_subasta.php">Mis Subastas</a>
+                </div>
+            </li>
             <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/perfil_pantalla.php">Perfil</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">

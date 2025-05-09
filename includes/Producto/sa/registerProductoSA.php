@@ -13,6 +13,9 @@ class RegisterProductoSA {
         return $this->productoDAO->agregarProducto($producto);
     }
     
+    public function getIdProducto(Producto $producto): int{
+        return $this->productoDAO->obtenerUltimoIdProducto();
+    }
 }
 
 ?>
