@@ -33,6 +33,7 @@
     border: 1px solid #ddd; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 0px; /* Espaciado inferior */
+    min-height: 750px; /* Altura mínima para el bloque */
 }
 .bloque-contenido .btn {
     background-color: #007bff; /* Color de fondo (azul por defecto) */
@@ -138,6 +139,100 @@
     margin-bottom: 15px; /* Espaciado debajo de la imagen */
 }
 
+/*NUEVOS ESTILOS PARA PRODUCTOS*/
+.productos-grid {
+    display: flex; /* Activa Flexbox */
+    flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea si no hay espacio */
+    justify-content: flex-start; /* Alinea los elementos al inicio de la fila */
+    gap: 10px; /* Espaciado entre los productos */
+}
+.producto {
+    flex: 1 1 100%; /* Por defecto, ocupa todo el ancho (1 producto por fila) */
+    max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
+    box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+}
+
+
+/* Para pantallas medianas (md, >= 768px) */
+@media (min-width: 768px) {
+    .producto {
+        flex: 1 1 calc(50% - 20px); /* Ocupa la mitad del ancho del contenedor menos el espacio del gap */
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* Para pantallas grandes (lg, >= 1200px) */
+@media (min-width: 1200px) {
+    .producto {
+        flex: 1 1 calc(33.333% - 20px); /* Ocupa un tercio del ancho del contenedor menos el espacio del gap */
+        max-width: calc(33.333% - 20px);
+    }
+}
+/*PARA CADA CARD DE LOS PRODUCTOS*/
+.card-body {
+    display: flex; /* Activa Flexbox */
+    flex-direction: column; /* Organiza los elementos en columna */
+    justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura disponible */
+    padding: 15px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye el padding en el tamaño total */
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+    /*TITULO*/
+.producto-titulo {
+    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente (opcional) */
+    font-weight: bold; /* Hace el texto más destacado (opcional) */
+}
+.producto-titulo-valor {
+    font-size: 1.2rem; /* Ajusta el tamaño de la fuente (opcional) */
+}
+    /*PRECIO*/
+.producto-precio {
+    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente (opcional) */
+    font-weight: bold; /* Hace el texto más destacado (opcional) */
+}
+.producto-precio-valor {
+    font-size: 1.0rem; /* Ajusta el tamaño de la fuente (opcional) */
+}
+    /*CATEGORIA*/
+.producto-categoria {
+    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente (opcional) */
+    color: rgb(66, 57, 57);
+}
+.producto-categoria-valor {
+    font-size: 1.0rem; /* Ajusta el tamaño de la fuente (opcional) */
+}
+    /*DESCRIPCION*/
+.producto-descripcion {
+    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
+    font-size: 1rem; /* Ajusta el tamaño de la fuente (opcional) */
+}
+.producto-descripcion-valor {
+    margin-bottom: 20px; /* Añade un margen inferior de 20 píxeles */
+}
+    /*IMAGEN*/
+.imagen-contenedor {
+    display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    height: auto; /* Ajusta la altura automáticamente */
+    padding: 10px; /* Opcional: Añade un poco de espacio interno */
+    box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+.imagen-contenedor img {
+    width: 90%; /* La imagen ocupará el 100% del ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 70%; /* Asegura que la imagen no exceda la altura del contenedor */
+    object-fit: contain; /* Asegura que la imagen completa se ajuste dentro del contenedor sin recortarse */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+}
 
 /*PARA FILTROS*/
 .bloque-filtros {
@@ -155,7 +250,6 @@
     font-size: 16px; /* Tamaño de fuente */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
-
 #selectorCategoria:focus {
     outline: none; /* Elimina el contorno predeterminado */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Añade un efecto de enfoque */
@@ -168,6 +262,15 @@
     padding: 20px; /* Espaciado interno del contenedor */
     background-color: #ffffff;
 }
+.bloque-anuncios-titulo {
+    display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    padding: 20px; /* Espaciado interno del contenedor */
+    text-align: center; /* Centra el texto */
+    min-height: 100px; /* Altura mínima para el bloque */
+    height: auto; /* Permite que el bloque crezca dinámicamente */
+}
 .bloque-anuncios img {
     width: 100%; /* Ajusta el ancho al 100% del contenedor */
     max-width: 300px; /* Ancho máximo para las imágenes */
@@ -176,7 +279,6 @@
     border-radius: 8px; /* Bordes redondeados opcionales */
     margin-bottom: 15px; /* Espaciado debajo de la imagen */
 }
-
 /*PARA TEXTFIELD*/
 .form-control{
     width: 60%;

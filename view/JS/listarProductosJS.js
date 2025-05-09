@@ -11,7 +11,7 @@ function cargarProductos(pagina = 1) {
         })
         .then(data => {
             const productosContainer = document.getElementById('productos');
-            productosContainer.innerHTML = '';
+            productosContainer.classList.add('productos-grid'); // Añade la clase para aplicar estilos
 
             if (data.productos.length === 0) {
                 productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';

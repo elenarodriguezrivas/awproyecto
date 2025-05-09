@@ -19,9 +19,11 @@ $htmlFormulario = $formularioLogin->generaFormulario();
 $contenidoPrincipal = <<<EOS
     <div class="bloque-contenido">
         <h2><strong>Iniciar Sesión en MercaSwapp</strong></h2>
-        $htmlFormulario
-        <div id="message" class="message"></div>
-        <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
+        <div class="bloque-contenido2">
+            $htmlFormulario
+            <div id="message" class="message"></div>
+            <p>¿No tienes cuenta? <a href="register_pantalla.php">Regístrate aquí</a></p>
+        </div>
     </div>
     <script src="$rutaJS"></script>
 EOS;
