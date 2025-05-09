@@ -44,6 +44,9 @@ $contenidoPrincipal = <<<EOS
                         <div id="productos" class="productos-grid">
                             <!-- Aquí se cargarán los productos mediante AJAX -->
                         </div>
+                        <div id="paginacion" class="text-center mt-4">
+                            <!-- Aquí se cargarán los enlaces de paginación -->
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-3">
