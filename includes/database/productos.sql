@@ -17,6 +17,6 @@ VALUES
 ('Teclado Mecánico', 'Teclado mecánico rosa.', 89.99, 'Teclado', 'vendedor3', '/fotos/producto6.jpg', 'enventa'),
 ('Monitor Samsung', 'Monitor Full HD de 24 pulgadas.', 149.99, 'Pantalla', 'vendedor1', '/fotos/producto2.jpg', 'enventa'),
 ('Ratón', 'Ratón inalámbrico color negro. ', 79.99, 'Ratón', 'vendedor3', '/fotos/producto5.jpg', 'enventa'),
-('Teclado Mecánico', 'Teclado mecánico negro.', 89.99, 'Teclado', 'vendedor3', '/fotos/producto4.jpg', 'enventa');
+('Teclado Mecánico', 'Teclado mecánico negro.', 89.99, 'Teclado', 'vendedor3', '/fotos/producto4.jpg', 'enventa'),
 ('Impresora', 'Impresora Canon blanco.', 10.99, 'Impresora', 'vendedor3', '/fotos/producto1.jpg', 'enventa');
 
