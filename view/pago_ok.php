@@ -2,8 +2,6 @@
 require_once __DIR__.'/../includes/config.php';
 require_once __DIR__.'/../includes/controller/procesarPagoController.php';
 
-session_start();
-
 $userId = isset($_SESSION['userid']) ? $_SESSION['userid'] : null;
 
 // Llamar al controlador para procesar el pago
