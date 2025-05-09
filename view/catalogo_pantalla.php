@@ -52,9 +52,9 @@ $contenidoPrincipal = <<<EOS
         <div class="row">
             <div class="col-12 col-md-8 mx-auto">
                 <div class="bloque-productos">
-                    <div class="custom-container">
-                        <div id="productos">
-                            <!-- Aquí se mostrarán los productos -->
+                    <div class= "custom-container">
+                        <div id="productos" class="productos-grid">
+                            <!-- Aquí se cargarán los productos mediante AJAX -->
                         </div>
                         <div id="paginacion" class="text-center mt-4">
                             <!-- Aquí se generarán los botones de paginación dinámicamente -->
@@ -62,9 +62,9 @@ $contenidoPrincipal = <<<EOS
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4">
-                <div class="bloque-anuncios">
-                    <div class="custom-container">
+            <div class="d-none  d-md-block col-md-4">
+                <div class = "bloque-anuncios">
+                    <div class = "custom-container">
                         <div class="row">
                             <div class="col-12">
                                 <p><strong>¡NVIDIA 5090 - Compra la nueva gráfica de NVIDIA!</strong></p>
