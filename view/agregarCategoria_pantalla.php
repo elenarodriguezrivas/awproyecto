@@ -2,12 +2,6 @@
 
 require_once __DIR__.'/../includes/config.php';
 
-// Si el usuario no es un admin
-/*if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') { //Debe ser un admin
-    header("Location: index.php?error=Acceso restringido.");
-    exit;
-}*/
-
 $rutaJS = RUTA_JS . '/agregarCategoriaJS.js';
 
 // Definir el contenido principal que se mostrará en la plantilla
