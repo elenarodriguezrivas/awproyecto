@@ -52,5 +52,6 @@ class Producto {
     public function getEstado(){
         return $this->estado;
     }
+
 }
 ?>

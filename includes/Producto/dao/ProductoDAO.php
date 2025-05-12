@@ -229,7 +229,7 @@ class ProductoDAO { /*extiende de la base*/
                         categoriaProducto = :categoriaProducto, 
                         idVendedor = :idVendedor, 
                         rutaImagen = :rutaImagen, 
-                        estado = :estado 
+                        estado = :estado
                     WHERE id = :id";
     
             $stmt = $this->db->prepare($sql);
