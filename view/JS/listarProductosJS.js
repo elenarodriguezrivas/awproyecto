@@ -1,5 +1,5 @@
 let paginaActual = 1;
-let productosPorPagina = 1; // Valor inicial, se puede cambiar dinámicamente
+let productosPorPagina = 10; // Valor inicial, se puede cambiar dinámicamente
 let categoriaActual = ''; // Categoría seleccionada (vacío significa "todas las categorías")
 
 /**
