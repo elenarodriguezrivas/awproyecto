@@ -24,6 +24,27 @@ function cargarProductos(pagina = 1) {
         })
         .catch(error => console.error('Error al obtener las categorías:', error));
 
+    // Cargar las categorías desde el servidor
+    fetch('../includes/controller/obtenerCategoriasController.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener las categorías');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Vaciar el selector de categorías y añadir las nuevas opciones
+            selectorCategoria.innerHTML = '<option value="">Todas las categorías</option>';
+
+            data.forEach(categoria => {
+                const option = document.createElement('option');
+                option.value = categoria.nombreCategoria;
+                option.textContent = categoria.nombreCategoria;
+                selectorCategoria.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error al obtener las categorías:', error));
+
     let categoria = selectorCategoria.value;
     console.log(categoria);
     
