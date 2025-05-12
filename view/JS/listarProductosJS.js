@@ -10,15 +10,11 @@ function cargarProductos(pagina = 1) {
     const productosContainer = document.getElementById('productos');
     productosContainer.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevos productos
 
-    fetch('../includes/controller/obtenerProductosController.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            page: pagina,
-            limit: productosPorPagina,
-        }),
+    // Construir la URL con los parámetros
+    const url = `../includes/controller/obtenerProductosController.php?page=${pagina}&limit=${productosPorPagina}`;
+
+    fetch(url, {
+        method: 'GET', // Cambiar a GET
     })
         .then(response => {
             if (!response.ok) {
@@ -127,7 +123,7 @@ function listarPorCategoriaProducto(categoria = '') {
  * @param {number} nuevoLimite - Nuevo límite de productos por página.
  */
 function cambiarProductosPorPagina(nuevoLimite) {
-    productosPorPagina = parseInt(nuevoLimite, 10);
+    productosPorPagina = parseInt(nuevoLimite, 10); // Actualizar el límite de productos por página
     cargarProductos(1); // Reiniciar a la primera página con el nuevo límite
 }
 
@@ -135,4 +131,11 @@ function cambiarProductosPorPagina(nuevoLimite) {
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductos(); // Cargar todos los productos por defecto
     cargarCategorias(); // Cargar las categorías en el desplegable
+
+    // Configurar el selector de productos por página
+    const productosPorPaginaSelector = document.getElementById('productosPorPaginaSelector');
+    productosPorPaginaSelector.value = productosPorPagina; // Establecer el valor inicial
+    productosPorPaginaSelector.addEventListener('change', (event) => {
+        cambiarProductosPorPagina(event.target.value);
+    });
 });
