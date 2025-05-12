@@ -53,7 +53,28 @@ class CategoriaDAO { /*extiende de la base*/
         }
     }
 
+    // Método para comprobar si una categoría está asociada a algún producto
+    public function tieneProductosAsociados($nombreCategoria) {
+        try {
+            $sql = "SELECT COUNT(*) FROM Productos WHERE categoriaProducto = :nombre";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':nombre', $nombreCategoria, PDO::PARAM_STR);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();  // Devuelve el número de productos asociados
+            return $count > 0;  // Si hay más de 0 productos, devuelve true
+        } catch (PDOException $e) {
+            error_log("Error al verificar productos asociados a la categoría: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public function eliminarCategoria($nombreCategoria) { //eliminamos la categoria con el nombre indicado 
+
+        // Comprobar si hay productos asociados a la categoría
+        if ($this->tieneProductosAsociados($nombreCategoria)) {
+            return (object) ['message' => 'No se puede eliminar la categoría porque está asociada a productos.'];
+        }
+
         try {
             $sql = "DELETE FROM Categorias WHERE nombre = :nombre";
             $stmt = $this->db->prepare($sql);

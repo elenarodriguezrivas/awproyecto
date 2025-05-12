@@ -49,12 +49,18 @@ function eliminarCategoria(nombre) {
         return response.text();
     })
     .then(data => {
-        alert(data);
-        // Eliminar la categoría del DOM sin recargar
-        const categoriaElemento = document.getElementById(`categoria-${nombre}`);
-        if (categoriaElemento) {
-            categoriaElemento.remove();
-            
+        // Verificamos si el mensaje del servidor incluye el error de productos asignados
+        if (data.includes("No puedes eliminar esta categoría")) {
+            // Si la respuesta incluye el mensaje de error, mostramos el mensaje
+            alert(data);  // Muestra el mensaje de error de que la categoría tiene productos
+        } else {
+            alert(data);  // Muestra el mensaje de éxito
+            // Eliminar la categoría del DOM sin recargar
+            const categoriaElemento = document.getElementById(`categoria-${nombre}`);
+            if (categoriaElemento) {
+                categoriaElemento.remove();
+            }
+
             // Mostrar mensaje si no quedan categorías
             if (document.querySelectorAll('.categoria').length === 0) {
                 document.getElementById('categorias').innerHTML = '<p>No hay categorías agregadas.</p>';
