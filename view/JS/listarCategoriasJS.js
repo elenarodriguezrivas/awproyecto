@@ -16,9 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 let categoriasHtml = '';
                 data.forEach(categoria => {
                     categoriasHtml += `
-                        <div class="categoria" id="categoria-${categoria.nombreCategoria}">
-                            <h3>${categoria.nombreCategoria}</h3>
-                            <p><button class="btn btn-red" onclick='eliminarCategoria("${categoria.nombreCategoria}")'>Eliminar</button></p>
+                        <div class="col-12 mb-3 categoria" id="categoria-${categoria.nombreCategoria}">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h3 class="card-title">${categoria.nombreCategoria}</h3>
+                                    <p><button class="btn btn-danger" onclick='eliminarCategoria("${categoria.nombreCategoria}")'>Eliminar</button></p>
+                                </div>
+                            </div>
                         </div>
                     `;
                 });

@@ -2,7 +2,11 @@
 
 require_once __DIR__.'/../includes/config.php';
 
-//falta verificar que el usuario es admin
+// Si el usuario no es un admin
+/*if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') { //Debe ser un admin
+    header("Location: index.php?error=Acceso restringido.");
+    exit;
+}*/
 
 $tituloPagina = 'Pantalla de administrador';
 
