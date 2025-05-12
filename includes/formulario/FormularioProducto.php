@@ -48,20 +48,24 @@ class FormularioProducto extends Formulario
 EOF;
 
 
-// Definir las opciones de categoría
-$opciones = [
-    'computadora' => 'Computadora',
-    'auriculares' => 'Auriculares',
-    'juegos' => 'Juegos',
-        'ratón' => 'Ratón',
-        'teclado' => 'Teclado',
-        'pantalla' => 'Pantalla',
-        'impresora' => 'Impresora',
-        'altavoces' => 'Altavoces'
-    ];
+    // Obtener conexión
+    $conn = Connection::getInstance()->getConexion();
+
+    // Consultar todas las categorías desde la BD
+    $query = "SELECT nombre FROM Categorias";
+    $result = $conn->query($query);
+
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $nombreCategoria = htmlspecialchars($row['nombre']);
+            $html .= "<option value=\"$nombreCategoria\">$nombreCategoria</option>";
+        }
+    } else {
+        $html .= "<option value=\"\">Error al cargar categorías</option>";
+    }
     
     // Generar las opciones con la lógica de selección fuera de la cadena heredoc
-    foreach ($opciones as $valor => $texto) {
+    foreach ($result as $valor => $texto) {
         $selected = $valor ? 'selected' : '';
         $html .= "<option value=\"$valor\" $selected>$texto</option>";
     }

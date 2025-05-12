@@ -7,7 +7,8 @@ CREATE TABLE Productos (
     idVendedor VARCHAR(50) NOT NULL,
     rutaImagen VARCHAR(255) NOT NULL,
     estado ENUM('enventa', 'vendido') DEFAULT 'enventa',
-    FOREIGN KEY (idVendedor) REFERENCES Usuarios(userid)
+    FOREIGN KEY (idVendedor) REFERENCES Usuarios(userid),
+    FOREIGN KEY (categoriaProducto) REFERENCES Categorias(nombre)
 );
 
 INSERT INTO Productos (nombreProducto, descripcionProducto, precio, categoriaProducto, idVendedor, rutaImagen, estado) 
