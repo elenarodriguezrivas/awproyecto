@@ -24,15 +24,8 @@ $contenidoPrincipal = <<<EOS
                     <div class="col-8 text-left">
                         <select id="selectorCategoria" class="form-control" onchange="listarPorCategoriaProducto(this.value)">
                             <option value="">Todas las categorías</option>
-                            <option value="computadora">Computadora</option>
-                            <option value="auriculares">Auriculares</option>
-                            <option value="juegos">Juegos</option>
-                            <option value="ratón">Ratón</option>
-                            <option value="teclado">Teclado</option>
-                            <option value="pantalla">Pantalla</option>
-                            <option value="impresora">Impresora</option>
-                            <option value="altavoces">Altavoces</option>
-                        </select>	
+                            <!-- Opciones se cargarán desde JS -->
+                        </select>
                     </div>
                 </div>
             </div>
