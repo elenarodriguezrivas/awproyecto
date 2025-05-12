@@ -43,6 +43,7 @@ class FormularioModificarProducto extends Formulario
         $precio = $this->producto->getPrecio();
         $categoriaProducto = $this->producto->getCategoriaProducto();
         $rutaImagen = $this->producto->getRutaImagen();
+        $cantidad = $this->producto->getCantidad();
 
         $html = <<<EOF
         <div class="form-group">
@@ -64,20 +65,24 @@ class FormularioModificarProducto extends Formulario
                 <option value="">Seleccione una categoría</option>
 EOF;
 
-        // opciones de categoría
-        $opciones = [
-            'computadora' => 'Computadora',
-            'auriculares' => 'Auriculares',
-            'juegos' => 'Juegos',
-            'ratón' => 'Ratón',
-            'teclado' => 'Teclado',
-            'pantalla' => 'Pantalla',
-            'impresora' => 'Impresora',
-            'altavoces' => 'Altavoces'
-        ];
+        // Obtener conexión
+        $conn = Connection::getInstance()->getConexion();
+
+        // Consultar todas las categorías desde la BD
+        $query = "SELECT nombre FROM Categorias";
+        $result = $conn->query($query);
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $nombreCategoria = htmlspecialchars($row['nombre']);
+                $html .= "<option value=\"$nombreCategoria\">$nombreCategoria</option>";
+            }
+        } else {
+            $html .= "<option value=\"\">Error al cargar categorías</option>";
+        }
 
         // Generar las opciones con la opción seleccionada
-        foreach ($opciones as $valor => $texto) {
+        foreach ($result as $valor => $texto) {
             $selected = ($categoriaProducto == $valor) ? 'selected' : '';
             $html .= "<option value=\"$valor\" $selected>$texto</option>";
         }
@@ -95,6 +100,10 @@ EOF;
         <div class="form-group">
             <label for="imagenProducto">Nueva imagen (opcional):</label>
             <input id="imagenProducto" type="file" name="imagenProducto" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input id="cantidad" type="number" step="0.01" name="cantidad" value="$cantidad" required class="form-control">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-blue">Guardar Cambios</button>

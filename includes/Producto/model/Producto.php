@@ -9,8 +9,9 @@ class Producto {
     private $idVendedor;
     private $rutaImagen;
     private $estado;
+    private $cantidad;
 
-    public function __construct($id,$nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor, $rutaImagen, $estado) {
+    public function __construct($id,$nombreProducto, $descripcionProducto, $precio, $categoriaProducto, $idVendedor, $rutaImagen, $estado, $cantidad) {
         $this->id = $id;
         $this->nombreProducto = $nombreProducto;
         $this->descripcionProducto = $descripcionProducto;
@@ -19,6 +20,7 @@ class Producto {
         $this->idVendedor = $idVendedor;
         $this->rutaImagen = $rutaImagen;
         $this->estado = $estado;
+        $this->cantidad = $cantidad; 
     }
 
     public function getId(){
@@ -51,6 +53,10 @@ class Producto {
 
     public function getEstado(){
         return $this->estado;
+    }
+
+    public function getCantidad(){
+        return $this->cantidad;
     }
 }
 ?>
