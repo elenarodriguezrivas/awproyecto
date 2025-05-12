@@ -1,56 +1,24 @@
 let paginaActual = 1;
 let productosPorPagina = 1; // Valor inicial, se puede cambiar dinámicamente
+let categoriaActual = ''; // Categoría seleccionada (vacío significa "todas las categorías")
 
+/**
+ * Función para cargar productos con o sin categoría.
+ * @param {number} pagina - Número de página a cargar.
+ */
 function cargarProductos(pagina = 1) {
-    fetch(`../includes/controller/obtenerProductosController.php?page=${pagina}&limit=${productosPorPagina}`)
-    // Cargar las categorías desde el servidor
-    fetch('../includes/controller/obtenerCategoriasController.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener las categorías');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Vaciar el selector de categorías y añadir las nuevas opciones
-            selectorCategoria.innerHTML = '<option value="">Todas las categorías</option>';
+    const productosContainer = document.getElementById('productos');
+    productosContainer.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevos productos
 
-            data.forEach(categoria => {
-                const option = document.createElement('option');
-                option.value = categoria.nombreCategoria;
-                option.textContent = categoria.nombreCategoria;
-                selectorCategoria.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error al obtener las categorías:', error));
-
-    // Cargar las categorías desde el servidor
-    fetch('../includes/controller/obtenerCategoriasController.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener las categorías');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Vaciar el selector de categorías y añadir las nuevas opciones
-            selectorCategoria.innerHTML = '<option value="">Todas las categorías</option>';
-
-            data.forEach(categoria => {
-                const option = document.createElement('option');
-                option.value = categoria.nombreCategoria;
-                option.textContent = categoria.nombreCategoria;
-                selectorCategoria.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error al obtener las categorías:', error));
-
-    let categoria = selectorCategoria.value;
-    console.log(categoria);
-    
     fetch('../includes/controller/obtenerProductosController.php', {
         method: 'POST',
-        body: categoria
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            page: pagina,
+            limit: productosPorPagina,
+        }),
     })
         .then(response => {
             if (!response.ok) {
@@ -59,16 +27,20 @@ function cargarProductos(pagina = 1) {
             return response.json();
         })
         .then(data => {
-            const productosContainer = document.getElementById('productos');
             productosContainer.classList.add('productos-grid'); // Añade la clase para aplicar estilos
 
-            if (data.productos.length === 0) {
-                productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
+            // Filtrar los productos según la categoría seleccionada
+            const productosFiltrados = categoriaActual
+                ? data.productos.filter(producto => producto.categoriaProducto === categoriaActual)
+                : data.productos;
+
+            if (productosFiltrados.length === 0) {
+                productosContainer.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
                 return;
             }
 
             let productosHtml = '';
-            data.productos.forEach(producto => {
+            productosFiltrados.forEach(producto => {
                 productosHtml += `
                     <div class="producto card mb-4" id="producto-${producto.id}">
                         <div class="card-body">
@@ -99,8 +71,13 @@ function cargarProductos(pagina = 1) {
         .catch(error => console.error('Error al cargar los productos:', error));
 }
 
+/**
+ * Función para actualizar la paginación.
+ * @param {number} paginaActual - Página actual.
+ * @param {number} totalPaginas - Número total de páginas.
+ */
 function actualizarPaginacion(paginaActual, totalPaginas) {
-    const paginacionContainer = document.getElementById('paginacion');
+    const paginacionContainer = document.getElementById('paginacion'); // Asegúrate de que este ID exista en el HTML
     paginacionContainer.innerHTML = '';
 
     for (let i = 1; i <= totalPaginas; i++) {
@@ -112,128 +89,50 @@ function actualizarPaginacion(paginaActual, totalPaginas) {
     }
 }
 
-function cambiarProductosPorPagina(nuevoLimite) {
-    if (nuevoLimite > 0 && nuevoLimite <= 20) {
-        productosPorPagina = nuevoLimite;
-        cargarProductos(1); // Reiniciar a la primera página
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    cargarProductos();
-});
-
 /**
- * Función para enviar el ID del producto al controlador de compra.
- * @param {number} productoId - El ID del producto a comprar.
+ * Función para cargar las categorías en el desplegable.
  */
-function comprarProducto(productoId) {
-    fetch('../includes/controller/comprarProductoController.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id: productoId }), // Enviar solo el ID del producto como JSON
-    })
+function cargarCategorias() {
+    fetch('../includes/controller/obtenerCategoriasController.php')
         .then(response => {
             if (!response.ok) {
-                return response.text().then(text => { throw new Error(text); });
-            }
-            return response.text();
-        })
-        .then(data => {
-            // Mostrar el mensaje del servidor debajo del botón
-            const mensajeElemento = document.getElementById(`mensaje-${productoId}`);
-            mensajeElemento.textContent = data;
-            mensajeElemento.classList.add('success'); // Agregar clase para estilos
-
-            // Cambiar el botón a "Vendido" si la compra fue exitosa
-            const productoElemento = document.getElementById(`producto-${productoId}`);
-            productoElemento.querySelector('.btn').remove(); // Eliminar el botón
-            const vendidoHtml = `<div class="vendido">Vendido</div>`;
-            productoElemento.insertAdjacentHTML('beforeend', vendidoHtml);
-        })
-        .catch(error => {
-            console.error('Error al realizar la compra:', error);
-            const mensajeElemento = document.getElementById(`mensaje-${productoId}`);
-            mensajeElemento.textContent = 'Error al realizar la compra: ' + error.message;
-            mensajeElemento.classList.add('error'); // Agregar clase para estilos
-        });
-}
-
-function listarPorCategoriaProducto(categoria) {
-    console.log("Listar por categoria:", categoria);
-
-    // Enviar la categoría como un parámetro GET
-    fetch(`../includes/controller/obtenerProductosController.php?categoria=${encodeURIComponent(categoria)}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener los productos');
+                throw new Error('Error al obtener las categorías');
             }
             return response.json();
         })
         .then(data => {
-            const productosContainer = document.getElementById('productos');
+            const categoriasSelect = document.getElementById('selectorCategoria');
+            categoriasSelect.innerHTML = '<option value="">Todas las categorías</option>'; // Opción por defecto
 
-            // Vaciar el contenedor antes de mostrar nuevos productos
-            productosContainer.innerHTML = '';
-
-            if (data.length === 0) {
-                productosContainer.innerHTML = '<p>No hay productos disponibles.</p>';
-            } else {
-                let productosHtml = '';
-                data.forEach(producto => {
-                    productosHtml += `
-                        <div class="producto card mb-4" id="producto-${producto.id}">
-                            <div class="card-body">
-                                <h2 class="card-title">${producto.nombreProducto}</h2>
-                                <h3 class="card-subtitle mb-2 text-muted">Precio del producto: ${producto.precio}€</h3>
-                                <p class="card-text">${producto.descripcionProducto}</p>
-                                <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
-                                <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
-                                <div class="acciones-producto text-center">
-                                    ${
-                                        producto.estado.toLowerCase() === 'enventa' ? `
-                                            <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
-                                            <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
-                                            <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
-                                        ` : `
-                                            <div class="alert alert-secondary">Vendido</div>
-                                        `
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                productosContainer.innerHTML = productosHtml;
-            }
+            data.forEach(categoria => {
+                categoriasSelect.innerHTML += `
+                    <option value="${categoria.nombreCategoria}">${categoria.nombreCategoria}</option>
+                `;
+            });
         })
-        .catch(error => console.error('Error al obtener los productos:', error));
+        .catch(error => console.error('Error al cargar las categorías:', error));
 }
 
-function agregarProductoACesta(productoId) {
-    fetch('../includes/controller/agregarProductoCestaController.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            productoId: productoId
-        })
-    })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(text => { throw new Error(text); });
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log('Producto agregado a la cesta:', data);
-            // Opcional: Actualizar la interfaz o mostrar un mensaje de éxito
-        })
-        .catch(error => {
-            console.error('Error al agregar el producto a la cesta:', error);
-        });
+/**
+ * Función para manejar el cambio de categoría desde el desplegable.
+ * @param {string} categoria - Categoría seleccionada.
+ */
+function listarPorCategoriaProducto(categoria = '') {
+    categoriaActual = categoria; // Actualizar la categoría actual
+    cargarProductos(1); // Reiniciar a la primera página con la categoría seleccionada
 }
 
+/**
+ * Función para cambiar el número de productos por página.
+ * @param {number} nuevoLimite - Nuevo límite de productos por página.
+ */
+function cambiarProductosPorPagina(nuevoLimite) {
+    productosPorPagina = parseInt(nuevoLimite, 10);
+    cargarProductos(1); // Reiniciar a la primera página con el nuevo límite
+}
+
+// Inicializar al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    cargarProductos(); // Cargar todos los productos por defecto
+    cargarCategorias(); // Cargar las categorías en el desplegable
+});

@@ -13,7 +13,6 @@ $rutaJS = RUTA_JS . '/registerJS.js';
 
 // Crear una instancia del formulario de registro
 $formularioRegistro = new FormularioRegistro();
-$formularioRegistro->inizialize(); // cargar categorías
 $htmlFormulario = $formularioRegistro->generaFormulario();
 
 // Definir el contenido principal que se mostrará en la plantilla
