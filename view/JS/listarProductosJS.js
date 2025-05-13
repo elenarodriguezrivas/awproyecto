@@ -69,6 +69,24 @@ function cargarProductos(pagina = 1) {
 }
 
 /**
+ * Función para actualizar la paginación.
+ * @param {number} paginaActual - Página actual.
+ * @param {number} totalPaginas - Número total de páginas.
+ */
+function actualizarPaginacion(paginaActual, totalPaginas) {
+    const paginacionContainer = document.getElementById('paginacion'); // Asegúrate de que este ID exista en el HTML
+    paginacionContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        paginacionContainer.innerHTML += `
+            <button class="btn ${i === paginaActual ? 'btn-primary' : 'btn-secondary'}" onclick="cargarProductos(${i})">
+                ${i}
+            </button>
+        `;
+    }
+}
+
+/**
  * Función para cargar las categorías en el desplegable.
  */
 function cargarCategorias() {
