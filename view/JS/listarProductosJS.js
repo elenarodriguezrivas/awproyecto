@@ -38,24 +38,30 @@ function cargarProductos(pagina = 1) {
             let productosHtml = '';
             productosFiltrados.forEach(producto => {
                 productosHtml += `
-                    <div class="producto card mb-4" id="producto-${producto.id}">
+                    <div class="producto" id="productos-${producto.id}">
                         <div class="card-body">
-                            <h2 class="card-title">${producto.nombreProducto}</h2>
-                            <h3 class="card-subtitle mb-2 text-muted">Precio del producto: ${producto.precio}€</h3>
-                            <p class="card-text">${producto.descripcionProducto}</p>
+                            <h2 class="producto-titulo">Nombre Producto </h2>
+                            <h2 class="producto-titulo-valor">${producto.nombreProducto} </h2>
+                            <h3 class="producto-precio">Precio del producto</h3>
+                            <h3 class="producto-precio-valor">${producto.precio}€</h3>
                             <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
-                            <img src="../${producto.rutaImagen}" class="img-fluid mb-3" style="height: 200px;" />
-                            <div class="acciones-producto text-center">
-                                ${
-                                    producto.estado.toLowerCase() === 'enventa' ? `
-                                        <button class="btn btn-primary btn-block mb-2" onclick='agregarProductoACesta(${producto.id})'>Añadir al carrito</button>
-                                        <button class="btn btn-success btn-block" onclick='comprarProducto(${producto.id})'>Comprar</button>
-                                        <p class="mensaje-compra mt-2" id="mensaje-${producto.id}"></p>
+                            <h3 class="producto-descripcion">Descripcion:</h3>
+                            <p class="producto-descripcion-valor">${producto.descripcionProducto}</p>
+                            <div class="imagen-contenedor text-center"> <img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}"/> </div>
+
+                            <p>
+                                <div class="producto-actions">
+                                    ${producto.estado.toLowerCase() === 'enventa' ? `
+                                        <div class="form-group">
+                                            <a href="modificarproducto_pantalla.php?id=${producto.id}" class="btn btn-blue">Modificar</a>
+                                            <button class="btn btn-red" onclick='eliminarProducto(${producto.id})'>Eliminar</button>
+                                        </div>
+                                        <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
                                     ` : `
-                                        <div class="alert alert-secondary">Vendido</div>
-                                    `
-                                }
-                            </div>
+                                        <div class="vendido">Vendido</div>
+                                    `}
+                                </div>
+                            </p>
                         </div>
                     </div>
                 `;

@@ -139,12 +139,20 @@
     margin-bottom: 15px; /* Espaciado debajo de la imagen */
 }
 
+/*PARA SUBASTAS*/
+.bloque-subastas {
+    display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    padding: 20px; /* Espaciado interno del contenedor */
+    background-color: #ffffff;
+}
+
 /*NUEVOS ESTILOS PARA PRODUCTOS*/
 .productos-grid {
     display: flex; /* Activa Flexbox */
     flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea si no hay espacio */
-    justify-content: flex-start; /* Alinea los elementos al inicio de la fila */
-    gap: 10px; /* Espaciado entre los productos */
+    justify-content: center; /* Alinea los elementos al inicio de la fila */
+    gap: 30px; /* Espaciado entre los productos */
 }
 .producto {
     flex: 1 1 100%; /* Por defecto, ocupa todo el ancho (1 producto por fila) */
@@ -152,7 +160,14 @@
     box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
 }
 
-
+/*PARA SUBASTAS*/
+.bloque-subastas {
+   display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    padding: 20px; /* Espaciado interno del contenedor */
+    background-color: #ffffff;
+    margin-top: 10px; /* Añade un margen superior de 10px */
+}
 /* Para pantallas medianas (md, >= 768px) */
 @media (min-width: 768px) {
     .producto {
@@ -182,7 +197,6 @@
 }
     /*TITULO*/
 .producto-titulo {
-    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
     font-size: 1.5rem; /* Ajusta el tamaño de la fuente (opcional) */
     font-weight: bold; /* Hace el texto más destacado (opcional) */
 }
@@ -197,6 +211,18 @@
 }
 .producto-precio-valor {
     font-size: 1.0rem; /* Ajusta el tamaño de la fuente (opcional) */
+}
+    /*FECHA*/
+.producto-fecha {
+    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente (opcional) */
+    font-weight: bold; /* Hace el texto más destacado (opcional) */
+}
+    /*HORA*/
+.producto-hora {
+    margin-bottom: 10px; /* Añade un margen inferior de 10 píxeles */
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente (opcional) */
+    font-weight: bold; /* Hace el texto más destacado (opcional) */
 }
     /*CATEGORIA*/
 .producto-categoria {
@@ -226,12 +252,20 @@
     box-sizing: border-box; /* Incluye el padding en el tamaño total */
 }
 .imagen-contenedor img {
-    width: 90%; /* La imagen ocupará el 100% del ancho del contenedor */
+    width: 70%; /* La imagen ocupará todo el ancho del contenedor */
     height: auto; /* Mantiene la proporción de la imagen */
-    max-height: 70%; /* Asegura que la imagen no exceda la altura del contenedor */
-    object-fit: contain; /* Asegura que la imagen completa se ajuste dentro del contenedor sin recortarse */
+    max-height: 90%; /* Asegura que la imagen no exceda la altura del contenedor */
+    object-fit: contain; /* Ajusta la imagen para que se muestre completa sin recortarse */
     margin: 0 auto; /* Centra la imagen horizontalmente */
     display: block; /* Asegura que la imagen se comporte como un bloque */
+    image-rendering: auto; /* Asegura la mejor calidad de renderizado */
+    -webkit-backface-visibility: hidden; /* Mejora el renderizado en navegadores WebKit */
+    -webkit-transform: translateZ(0); /* Soluciona problemas de renderizado en algunos navegadores */
+}
+.linea-gris {
+    border: none; /* Elimina el borde predeterminado */
+    border-top: 1px solid #ccc; /* Línea gris */
+    margin: 10px 0; /* Espaciado superior e inferior */
 }
 
 /*PARA FILTROS*/

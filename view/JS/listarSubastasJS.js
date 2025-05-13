@@ -20,19 +20,16 @@ function cargarSubastas() {
         cont.innerHTML = data.map(s => `
           <div class="subasta card mb-4" id="subasta-${s.id}">
             <div class="card-header bg-secondary text-white">
-              <h5 class="mb-0">${s.nombreSubasta}</h5>
+              <h2 class="producto-titulo">${s.nombreSubasta} </h2>
             </div>
             <div class="card-body d-flex">
-              <div class="mr-4" style="flex: 0 0 200px;">
-                <img src="../${s.rutaImagen}"
-                     alt="${s.nombreSubasta}"
-                     class="img-fluid rounded">
-              </div>
+              <div class="imagen-contenedor text-center"> <img src="../${s.rutaImagen}" alt="${s.nombreSubasta}"/> </div>
+              <hr class="linea-gris"> <!-- Línea horizontal gris -->
               <div style="flex: 1;">
-                <p><strong>Precio actual:</strong> ${s.precio_actual}€</p>
-                <p><strong>Fecha:</strong> ${s.fechaSubasta}</p>
-                <p><strong>Hora:</strong> ${s.horaSubasta}</p>
-                <p>${s.descripcionSubasta}</p>
+                <h3 class="producto-precio-hora">Tiempo restante: ${s.horaSubasta}</h3>
+                <h3 class="producto-precio-fecha">Fecha: ${s.fechaSubasta}</h3>
+                <h3 class="producto-precio-valor">Precio actual: ${s.precio_actual}€</h3>
+                <p class="producto-descripcion-valor">${s.descripcionSubasta}</p>
                 <div class="mt-3">
                   <input type="number"
                          min="${s.precio_actual}"
@@ -54,6 +51,31 @@ function cargarSubastas() {
             </div>
           </div>
         `).join('');
+        /*
+                    <div class="producto" id="productos-${producto.id}">
+                        <div class="card-body">
+                            <h3 class="producto-precio">Precio del producto</h3>
+                            <h3 class="producto-precio-valor">${producto.precio}€</h3>
+                            <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
+                            <h3 class="producto-descripcion">Descripcion:</h3>
+                            <p class="producto-descripcion-valor">${producto.descripcionProducto}</p>
+                            <p>
+                                <div class="producto-actions">
+                                    ${producto.estado.toLowerCase() === 'enventa' ? `
+                                        <div class="form-group">
+                                            <a href="modificarproducto_pantalla.php?id=${producto.id}" class="btn btn-blue">Modificar</a>
+                                            <button class="btn btn-red" onclick='eliminarProducto(${producto.id})'>Eliminar</button>
+                                        </div>
+                                        <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
+                                    ` : `
+                                        <div class="vendido">Vendido</div>
+                                    `}
+                                </div>
+                            </p>
+                          </div>
+                      </div>
+
+        */
       })
       .catch(err => {
         console.error(err);
