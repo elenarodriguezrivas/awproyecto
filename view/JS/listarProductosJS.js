@@ -40,9 +40,7 @@ function cargarProductos(pagina = 1) {
                 productosHtml += `
                     <div class="producto" id="productos-${producto.id}">
                         <div class="card-body">
-                            <h2 class="producto-titulo">Nombre Producto </h2>
-                            <h2 class="producto-titulo-valor">${producto.nombreProducto} </h2>
-                            <h3 class="producto-precio">Precio del producto</h3>
+                            <h2 class="producto-titulo">${producto.nombreProducto} </h2>
                             <h3 class="producto-precio-valor">${producto.precio}€</h3>
                             <p class="card-text"><strong>Categoría:</strong> ${producto.categoriaProducto}</p>
                             <h3 class="producto-descripcion">Descripcion:</h3>
