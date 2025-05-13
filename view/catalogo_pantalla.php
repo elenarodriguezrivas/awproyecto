@@ -3,7 +3,8 @@
 require_once __DIR__.'/../includes/config.php';
 
 $tituloPagina = 'Catalogo';
-$rutaJS = RUTA_JS . "/listarProductosJS.js";
+$rutaJS1 = RUTA_JS . "/listarProductosJS.js";
+$rutaJS2 = RUTA_JS . "/agregarACestaJS.js"; // Incluimos el nuevo script
 $rutaA1 = RUTA_IMGS . "/anuncio1.png";
 $rutaA2 = RUTA_IMGS . "/anuncio2.png";
 $rutaA3 = RUTA_IMGS . "/anuncio3.jpeg";
@@ -16,6 +17,10 @@ $contenidoPrincipal = <<<EOS
         </h2>
         <p>¡Bienvenido a nuestro catálogo de productos! Aquí podrás encontrar una amplia variedad de productos de segunda mano 
         a precios muy asequibles. ¡No te lo pierdas!</p>
+        
+        <!-- Mensaje para mostrar las notificaciones -->
+        <div id="mensaje-accion" class="alert" style="display: none;"></div>
+        
         <div class="row">
             <div class="col-12">
                 <div class="bloque-filtros">
@@ -37,7 +42,7 @@ $contenidoPrincipal = <<<EOS
                         <div id="productos" class="productos-grid">
                             <!-- Aquí se cargarán los productos mediante AJAX -->
                         </div>
-                        <div id="paginacion" class="text-center mt-4">
+                        <div id="paginacion" class="text-center mt-4">
                             <!-- Aquí se cargarán los enlaces de paginación -->
                         </div>
                     </div>
@@ -95,7 +100,9 @@ $contenidoPrincipal = <<<EOS
             </div>
         </div>
     </div>
-    <script src="$rutaJS"></script>
+    <!-- Añadir ambos scripts -->
+    <script src="$rutaJS1"></script>
+    <script src="$rutaJS2"></script>
 EOS;
 
 require_once __DIR__ . '/../comun/plantilla.php';

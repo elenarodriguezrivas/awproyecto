@@ -38,3 +38,4 @@ if ($resultado) {
         'message' => 'No se pudo agregar el producto de la cesta.'
     ]);
 }
+

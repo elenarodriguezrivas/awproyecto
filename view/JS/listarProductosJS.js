@@ -14,7 +14,7 @@ function cargarProductos(pagina = 1) {
     const url = `../includes/controller/obtenerProductosController.php?page=${pagina}&limit=${productosPorPagina}`;
 
     fetch(url, {
-        method: 'GET', // Cambiar a GET
+        method: 'GET',
     })
         .then(response => {
             if (!response.ok) {
@@ -38,7 +38,7 @@ function cargarProductos(pagina = 1) {
             let productosHtml = '';
             productosFiltrados.forEach(producto => {
                 productosHtml += `
-                    <div class="producto" id="productos-${producto.id}">
+                    <div class="producto" id="producto-${producto.id}">
                         <div class="card-body">
                             <h2 class="producto-titulo">${producto.nombreProducto} </h2>
                             <h3 class="producto-precio-valor">${producto.precio}€</h3>
@@ -47,19 +47,16 @@ function cargarProductos(pagina = 1) {
                             <p class="producto-descripcion-valor">${producto.descripcionProducto}</p>
                             <div class="imagen-contenedor text-center"> <img src="../${producto.rutaImagen}" alt="${producto.nombreProducto}"/> </div>
 
-                            <p>
-                                <div class="producto-actions">
-                                    ${producto.estado.toLowerCase() === 'enventa' ? `
-                                        <div class="form-group">
-                                            <a href="modificarproducto_pantalla.php?id=${producto.id}" class="btn btn-blue">Modificar</a>
-                                            <button class="btn btn-red" onclick='eliminarProducto(${producto.id})'>Eliminar</button>
-                                        </div>
-                                        <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
-                                    ` : `
-                                        <div class="vendido">Vendido</div>
-                                    `}
-                                </div>
-                            </p>
+                            <div class="producto-actions">
+                                ${producto.estado.toLowerCase() === 'enventa' ? `
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" onclick="agregarACesta(${producto.id})">Añadir a la cesta</button>
+                                    </div>
+                                    <p class="mensaje-compra" id="mensaje-${producto.id}"></p>
+                                ` : `
+                                    <div class="vendido">Vendido</div>
+                                `}
+                            </div>
                         </div>
                     </div>
                 `;
@@ -69,24 +66,6 @@ function cargarProductos(pagina = 1) {
             actualizarPaginacion(data.paginaActual, data.totalPaginas);
         })
         .catch(error => console.error('Error al cargar los productos:', error));
-}
-
-/**
- * Función para actualizar la paginación.
- * @param {number} paginaActual - Página actual.
- * @param {number} totalPaginas - Número total de páginas.
- */
-function actualizarPaginacion(paginaActual, totalPaginas) {
-    const paginacionContainer = document.getElementById('paginacion'); // Asegúrate de que este ID exista en el HTML
-    paginacionContainer.innerHTML = '';
-
-    for (let i = 1; i <= totalPaginas; i++) {
-        paginacionContainer.innerHTML += `
-            <button class="btn ${i === paginaActual ? 'btn-primary' : 'btn-secondary'}" onclick="cargarProductos(${i})">
-                ${i}
-            </button>
-        `;
-    }
 }
 
 /**
