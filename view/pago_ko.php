@@ -11,7 +11,7 @@ $contenidoPrincipal = <<<HTML
         <p>Por favor, inténtalo de nuevo más tarde o contacta con soporte.</p>
     </div>
     <div class="mt-4">
-        <a href="/awproyecto/index.php" class="btn btn-primary">Volver a la tienda</a>
+        <a href="/index.php" class="btn btn-primary">Volver a la tienda</a>
     </div>
 </div>
 HTML;
