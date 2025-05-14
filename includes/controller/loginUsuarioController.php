@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $perfilSA->obtenerUsuarioPorId($userid);
 
         // Verificar si el usuario es administrador
-        if ($usuario && $usuario['rol'] === 'admin') { // Suponiendo que el rol de administrador es 1
+        if ($usuario && $usuario->getRol() === 'admin') { // Suponiendo que el rol de administrador es 1
             $_SESSION['rol'] = 'admin';
         }
 

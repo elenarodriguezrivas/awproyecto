@@ -27,10 +27,12 @@
             <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/perfil_pantalla.php">Perfil</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item space-between-elements"> 
-                <a class="nav-link btn btn-primary" href="<?= RUTA_APP ?>/view/administrador_pantalla.php">Crear Categoría</a>
-            </li>
             <?php if (isset($_SESSION['login'])): ?>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                    <li class="nav-item space-between-elements"> 
+                        <a class="nav-link btn btn-primary" href="<?= RUTA_APP ?>/view/administrador_pantalla.php">Crear Categoría</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item space-between-elements"> <a class="nav-link" href="<?= RUTA_APP ?>/view/cesta_pantalla.php">Cesta de Compra</a></li>
                 <li class="nav-item space-between-elementsa"> <a class="nav-link" href="<?= RUTA_APP ?>/view/logout_pantalla.php">Cerrar sesión</a></li>
             <?php else: ?>
