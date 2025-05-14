@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../../Subasta/dao/subastaDAO.php';
+require_once __DIR__.'/../../Subasta/dao/SubastaDAO.php';
 require_once __DIR__.'/../../Puja/dao/PujaDAO.php';
 require_once __DIR__.'/../../Ventas/dao/VentaDAO.php';
 

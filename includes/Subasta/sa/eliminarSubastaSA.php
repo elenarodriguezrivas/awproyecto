@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../dao/subastaDAO.php';
+require_once __DIR__ . '/../dao/SubastaDAO.php';
 require_once __DIR__ . '/../model/Subasta.php';
 
 class eliminarSubastaSA {
