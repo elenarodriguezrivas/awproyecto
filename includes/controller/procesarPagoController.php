@@ -31,18 +31,6 @@ function procesarPago($userId) {
         $db = DB::getInstance();
         $db->getBD()->beginTransaction();
 
-        // Obtener el último pedido del usuario
-        $stmt = $db->query(
-            "SELECT orderId FROM Pedidos WHERE userId = ? ORDER BY fecha DESC LIMIT 1",
-            [$userId]
-        );
-        $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($pedido) {
-            $orderId = $pedido['orderId'];
-            $db->query("UPDATE Pedidos SET estado = 'completado' WHERE orderId = ?", [$orderId]);
-        }
-
         // Marcar los productos como vendidos
         foreach ($productos as $producto) {
             $productoId = $producto->getId();
