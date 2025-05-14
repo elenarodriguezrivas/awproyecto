@@ -9,8 +9,9 @@ CREATE TABLE Usuarios (
 );
 
 
---la contraseña: vendedor1, vendedor2, vendedor3
+--la contraseña: admin, vendedor1, vendedor2, vendedor3
 INSERT INTO `usuarios` (`userid`, `contrasena`, `email`, `nombre`, `apellidos`, `edad`, `rol`) VALUES
+('admin', '$2y$10$F.e6WmG08YuecLpXx6c7/eI2fgTxVj66BMI0QzF2GnJqLoEHhpakm', 'admin@admin.com', 'admin', 'admin', 99, 'admin'),
 ('elena2', '$2y$10$.LLx5znSjQUISauimdECd.pSmuxyAZQ5kDOybY7vBniWxeTzICqqC', 'elena.rr212@gmail.com', 'elena', 'rodriguez', 23, 'usuario'),
 ('usuarioA', '$2y$10$6w26wQWlW6XecjYYAbeEl.7O3nwEyGdelS3w6RESZoViz9gI5WCq2', 'usuarioA@gmail.com', 'usuarioA', 'testeoA', 23, 'usuario'),
 ('usuarioB', '$2y$10$wrx2uiWlXdTncECdcgQSFOBEixizDO48CKkxWFbTuPmtquoE.g4Ze', 'usuarioB@gmail.com', 'usuarioB', 'testeoB', 23, 'usuario'),
