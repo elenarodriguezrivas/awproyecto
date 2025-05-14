@@ -24,7 +24,7 @@ if ($mensajePago) {
             <h1 class="display-4">{$mensajePago['mensaje']}</h1>
         </div>
         <div class="mt-4">
-            <a href="/awproyecto/index.php" class="btn btn-primary">Volver a la tienda</a>
+            <a href="/index.php" class="btn btn-primary">Volver a la tienda</a>
         </div>
     </div>
     HTML;
