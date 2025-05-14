@@ -36,7 +36,7 @@ if ($mensajePago) {
             <p>Es posible que hayas accedido a esta página de forma incorrecta.</p>
         </div>
         <div class="mt-4">
-            <a href="/awproyecto/index.php" class="btn btn-primary">Volver a la tienda</a>
+            <a href="/index.php" class="btn btn-primary">Volver a la tienda</a>
         </div>
     </div>
     HTML;
